@@ -1,0 +1,8 @@
+Justfile
+result*
+repl.nix
+secrets
+
+.*
+!.gitignore
+!.nixd.json

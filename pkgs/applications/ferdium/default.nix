@@ -1,0 +1,196 @@
+{ lib
+, stdenv
+, stdenvNoCC
+
+, fetchFromGitHub
+
+, copyDesktopItems
+, makeWrapper
+
+, cacert
+, electron
+, gitMinimal
+, jq
+, moreutils
+, nodePackages
+}: let
+  fixupPackageJson = {
+    pnpmPatch = builtins.toJSON {
+      pnpm.supportedArchitectures = {
+        os = [ "linux" ];
+        cpu = [ "x64" "arm64" ];
+      };
+      engines = {
+        node = nodePackages.nodejs.version;
+        pnpm = nodePackages.pnpm.version;
+        electron = electron.version;
+      };
+    };
+
+    patch = ''
+      mv package.json package.json.orig
+      jq --raw-output ". * $pnpmPatch" package.json.orig > package.json
+    '';
+  };
+
+  mkPnpmDeps = {
+    pname,
+    hash,
+    ...
+  } @ args: stdenvNoCC.mkDerivation ({
+    pname = "${pname}-pnpm-deps";
+
+    nativeBuildInputs = [
+      cacert
+      jq
+      moreutils
+      nodePackages.pnpm
+    ];
+
+    dontBuild = true;
+    dontFixup = true;
+
+    inherit (fixupPackageJson) pnpmPatch;
+    postPatch = fixupPackageJson.patch;
+
+    installPhase = ''
+      export HOME=$(mktemp -d)
+
+      pnpm config set store-dir $out
+      pnpm install --frozen-lockfile --ignore-script
+
+      rm -rf $out/v3/tmp
+      for f in $(find $out -name "*.json"); do
+        sed -i -E -e 's/"checkedAt":[0-9]+,//g' $f
+        jq --sort-keys . $f | sponge $f
+      done
+    '';
+
+    outputHashMode = "recursive";
+    outputHash = hash;
+  } // builtins.removeAttrs args [ "pname" "hash" ]);
+in stdenv.mkDerivation (final: {
+  pname = "ferdium";
+  version = "6.7.2";
+
+  src = fetchFromGitHub {
+    owner = "ferdium";
+    repo = "ferdium-app";
+    rev = "v${final.version}";
+    hash = "sha256-jzgUJ9VOlaay/8oQ/37w3pOCxGFBr8w4tjEppaV8Y60=";
+  };
+
+  recipes = stdenv.mkDerivation (recipesFinal: {
+    pname = "${final.pname}-recipes";
+    inherit (final) version;
+
+    src = fetchFromGitHub {
+      owner = "ferdium";
+      repo = "ferdium-recipes";
+      rev = "0337750c523f319d3ddbfc6f34245a8c60e73c57";
+      hash = "sha256-j5PkI+U4wXdSC9d6iozhNtV7B5FTHhUgFqpbrWEjeCU=";
+    };
+
+    pnpmDeps = mkPnpmDeps {
+      inherit (recipesFinal) pname version src;
+      hash = "sha256-atEfRhrfJ+aWFgJMetcJzw0JwTdJJBFkS/GEplEuNAM=";
+    };
+
+    inherit (fixupPackageJson) pnpmPatch;
+    postPatch = fixupPackageJson.patch;
+
+    nativeBuildInputs = [
+      jq
+      nodePackages.pnpm
+      nodePackages.nodejs
+      gitMinimal
+    ];
+
+    preBuild = ''
+      export HOME=$(mktemp -d)
+      export STORE_PATH=$(mktemp -d)
+
+      cp -Tr "$pnpmDeps" "$STORE_PATH"
+      chmod -R +w "$STORE_PATH"
+
+      pnpm config set store-dir "$STORE_PATH"
+      pnpm install --offline --frozen-lockfile --ignore-script
+      patchShebangs node_modules/{*,.*}
+    '';
+
+    postBuild = ''
+      pnpm run package
+    '';
+
+    installPhase = ''
+      runHook preInstall
+
+      mkdir $out
+      cp -T all.json $out/all.json
+      cp -Tr archives $out/archives
+
+      runHook postInstall
+    '';
+  });
+
+  pnpmDeps = mkPnpmDeps {
+    inherit (final) pname version src ELECTRON_SKIP_BINARY_DOWNLOAD;
+    hash = "sha256-zfTEJkEVVQpIl1GhjbQQFmakqn/ixgDrD9kVuMqD1SM=";
+  };
+
+  nativeBuildInputs = [
+    copyDesktopItems
+    nodePackages.pnpm
+    nodePackages.nodejs
+    makeWrapper
+  ];
+
+  ELECTRON_SKIP_BINARY_DOWNLOAD = 1;
+
+  postPatch = ''
+    cat > src/electron/ipc-api/dnd.ts <<"EOF"
+    import { ipcMain } from 'electron';
+    export default async () => {
+      ipcMain.handle('get-dnd', async () => {
+        return false;
+      });
+    };
+    EOF
+  '';
+
+  preBuild = ''
+    export HOME=$(mktemp -d)
+    export STORE_PATH=$(mktemp -d)
+
+    cp -Tr "$pnpmDeps" "$STORE_PATH"
+    chmod -R +w "$STORE_PATH"
+
+    pnpm config set store-dir "$STORE_PATH"
+    pnpm install --offline --frozen-lockfile --ignore-script
+    patchShebangs node_modules/{*,.*}
+
+    cp -Tr "$recipes" recipes
+  '';
+
+  postBuild = ''
+    pnpm typecheck
+    pnpm lint:fix
+    pnpm manage-translations
+
+    pnpm exec preval-build-info-cli
+    node esbuild.mjs
+
+    cp -Tr node_modules build/node_modules
+
+    pnpm exec electron-builder \
+      --dir \
+      -c.electronDist=${electron}/libexec/electron \
+      -c.electronVersion=${electron.version}
+  '';
+
+  meta = {
+    broken = true;
+    license = with lib; licenses.asl20;
+    mainProgram = "ferdium";
+  };
+})

@@ -1,0 +1,253 @@
+From bbae03816c8e8e7882ec3e864c0173f688c8a129 Mon Sep 17 00:00:00 2001
+From: KokaKiwi <kokakiwi+git@kokakiwi.net>
+Date: Fri, 19 Apr 2024 13:14:25 +0200
+Subject: [PATCH 2/3] chore: update lockfiles #112
+MIME-Version: 1.0
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
+
+Squashed commit of the following:
+
+commit 35940722d4691356ef702ddc73348b2e824965a8
+Author: github-actions[bot] <github-actions[bot]@users.noreply.github.com>
+Date:   Fri Apr 19 01:11:52 2024 +0000
+
+    Update
+    neovim: aebe43db9cb26e1c70fc5b2fd4158169c405e720 → a1439ad7c584efb3d0ce14ccb835967f030450fe
+    tmux: 5ed4e8a6a20c928688da268dfcdf460ac9c3cb49 → b26eb2fa6d2dd524ceaf68a4751c1d1285d809df
+    bat: b19bea35a85a32294ac4732cad5b0dc6495bed32 → b8134f01b0ac176f1cf2a7043a5abf5a1a29457b
+    alacritty: 071d73effddac392d5b9b8cd5b4b527a6cf289f9 → 94800165c13998b600a9da9d29c330de9f28618e
+
+commit baec912b50a42466c3afb12fe0a88b2d5be0fde2
+Author: github-actions[bot] <github-actions[bot]@users.noreply.github.com>
+Date:   Fri Apr 19 01:11:32 2024 +0000
+
+    chore: update dev flake inputs
+
+    Flake lock file updates:
+
+    • Updated input 'home-manager':
+        'github:nix-community/home-manager/b787726a8413e11b074cde42704b4af32d95545c' (2024-04-06)
+      → 'github:nix-community/home-manager/ff1c3646541316258b1ca64e9b25d4c9cca8e587' (2024-04-18)
+    • Updated input 'nixpkgs':
+        'github:NixOS/nixpkgs/ff0dbd94265ac470dda06a657d5fe49de93b4599' (2024-04-06)
+      → 'github:NixOS/nixpkgs/66adc1e47f8784803f2deb6cacd5e07264ec2d5c' (2024-04-16)
+---
+ _sources/generated.json | 32 ++++++++++++++++----------------
+ _sources/generated.nix  | 32 ++++++++++++++++----------------
+ dev/flake.lock          | 12 ++++++------
+ 3 files changed, 38 insertions(+), 38 deletions(-)
+
+diff --git a/_sources/generated.json b/_sources/generated.json
+index 332a3ac..400eb3c 100644
+--- a/_sources/generated.json
++++ b/_sources/generated.json
+@@ -1,7 +1,7 @@
+ {
+     "alacritty": {
+         "cargoLocks": null,
+-        "date": "2024-02-26",
++        "date": "2024-04-09",
+         "extract": null,
+         "name": "alacritty",
+         "passthru": null,
+@@ -13,15 +13,15 @@
+             "name": null,
+             "owner": "catppuccin",
+             "repo": "alacritty",
+-            "rev": "071d73effddac392d5b9b8cd5b4b527a6cf289f9",
+-            "sha256": "sha256-HiIYxTlif5Lbl9BAvPsnXp8WAexL8YuohMDd/eCJVQ8=",
++            "rev": "94800165c13998b600a9da9d29c330de9f28618e",
++            "sha256": "sha256-Pi1Hicv3wPALGgqurdTzXEzJNx7vVh+8B9tlqhRpR2Y=",
+             "type": "github"
+         },
+-        "version": "071d73effddac392d5b9b8cd5b4b527a6cf289f9"
++        "version": "94800165c13998b600a9da9d29c330de9f28618e"
+     },
+     "bat": {
+         "cargoLocks": null,
+-        "date": "2024-03-14",
++        "date": "2024-04-09",
+         "extract": null,
+         "name": "bat",
+         "passthru": null,
+@@ -33,11 +33,11 @@
+             "name": null,
+             "owner": "catppuccin",
+             "repo": "bat",
+-            "rev": "b19bea35a85a32294ac4732cad5b0dc6495bed32",
+-            "sha256": "sha256-POoW2sEM6jiymbb+W/9DKIjDM1Buu1HAmrNP0yC2JPg=",
++            "rev": "b8134f01b0ac176f1cf2a7043a5abf5a1a29457b",
++            "sha256": "sha256-gzf0/Ltw8mGMsEFBTUuN33MSFtUP4xhdxfoZFntaycQ=",
+             "type": "github"
+         },
+-        "version": "b19bea35a85a32294ac4732cad5b0dc6495bed32"
++        "version": "b8134f01b0ac176f1cf2a7043a5abf5a1a29457b"
+     },
+     "bottom": {
+         "cargoLocks": null,
+@@ -461,7 +461,7 @@
+     },
+     "neovim": {
+         "cargoLocks": null,
+-        "date": "2024-03-29",
++        "date": "2024-04-14",
+         "extract": null,
+         "name": "neovim",
+         "passthru": null,
+@@ -473,11 +473,11 @@
+             "name": null,
+             "owner": "catppuccin",
+             "repo": "nvim",
+-            "rev": "aebe43db9cb26e1c70fc5b2fd4158169c405e720",
+-            "sha256": "sha256-GQjxE8lQj52pheJtHCS+9v2lsJY7wMj2IXVCoNRmQSQ=",
++            "rev": "a1439ad7c584efb3d0ce14ccb835967f030450fe",
++            "sha256": "sha256-yTVou/WArEWygBBs2NFPI9Dm9iSGfwVftKFbOAGl8tk=",
+             "type": "github"
+         },
+-        "version": "aebe43db9cb26e1c70fc5b2fd4158169c405e720"
++        "version": "a1439ad7c584efb3d0ce14ccb835967f030450fe"
+     },
+     "palette": {
+         "cargoLocks": null,
+@@ -621,7 +621,7 @@
+     },
+     "tmux": {
+         "cargoLocks": null,
+-        "date": "2024-03-30",
++        "date": "2024-04-17",
+         "extract": null,
+         "name": "tmux",
+         "passthru": null,
+@@ -633,11 +633,11 @@
+             "name": null,
+             "owner": "catppuccin",
+             "repo": "tmux",
+-            "rev": "5ed4e8a6a20c928688da268dfcdf460ac9c3cb49",
+-            "sha256": "sha256-k9Ihfk8C1jYkGUvOcgLwS4UdXR8d/4Nu/Dyh03FpDZc=",
++            "rev": "b26eb2fa6d2dd524ceaf68a4751c1d1285d809df",
++            "sha256": "sha256-DTCh0KwnXxu5Uz8MuQmWI29fs3rgg+BfuxttdwBb1a8=",
+             "type": "github"
+         },
+-        "version": "5ed4e8a6a20c928688da268dfcdf460ac9c3cb49"
++        "version": "b26eb2fa6d2dd524ceaf68a4751c1d1285d809df"
+     },
+     "yazi": {
+         "cargoLocks": null,
+diff --git a/_sources/generated.nix b/_sources/generated.nix
+index b3cbcb4..965d9c0 100644
+--- a/_sources/generated.nix
++++ b/_sources/generated.nix
+@@ -3,27 +3,27 @@
+ {
+   alacritty = {
+     pname = "alacritty";
+-    version = "071d73effddac392d5b9b8cd5b4b527a6cf289f9";
++    version = "94800165c13998b600a9da9d29c330de9f28618e";
+     src = fetchFromGitHub {
+       owner = "catppuccin";
+       repo = "alacritty";
+-      rev = "071d73effddac392d5b9b8cd5b4b527a6cf289f9";
++      rev = "94800165c13998b600a9da9d29c330de9f28618e";
+       fetchSubmodules = false;
+-      sha256 = "sha256-HiIYxTlif5Lbl9BAvPsnXp8WAexL8YuohMDd/eCJVQ8=";
++      sha256 = "sha256-Pi1Hicv3wPALGgqurdTzXEzJNx7vVh+8B9tlqhRpR2Y=";
+     };
+-    date = "2024-02-26";
++    date = "2024-04-09";
+   };
+   bat = {
+     pname = "bat";
+-    version = "b19bea35a85a32294ac4732cad5b0dc6495bed32";
++    version = "b8134f01b0ac176f1cf2a7043a5abf5a1a29457b";
+     src = fetchFromGitHub {
+       owner = "catppuccin";
+       repo = "bat";
+-      rev = "b19bea35a85a32294ac4732cad5b0dc6495bed32";
++      rev = "b8134f01b0ac176f1cf2a7043a5abf5a1a29457b";
+       fetchSubmodules = false;
+-      sha256 = "sha256-POoW2sEM6jiymbb+W/9DKIjDM1Buu1HAmrNP0yC2JPg=";
++      sha256 = "sha256-gzf0/Ltw8mGMsEFBTUuN33MSFtUP4xhdxfoZFntaycQ=";
+     };
+-    date = "2024-03-14";
++    date = "2024-04-09";
+   };
+   bottom = {
+     pname = "bottom";
+@@ -279,15 +279,15 @@
+   };
+   neovim = {
+     pname = "neovim";
+-    version = "aebe43db9cb26e1c70fc5b2fd4158169c405e720";
++    version = "a1439ad7c584efb3d0ce14ccb835967f030450fe";
+     src = fetchFromGitHub {
+       owner = "catppuccin";
+       repo = "nvim";
+-      rev = "aebe43db9cb26e1c70fc5b2fd4158169c405e720";
++      rev = "a1439ad7c584efb3d0ce14ccb835967f030450fe";
+       fetchSubmodules = false;
+-      sha256 = "sha256-GQjxE8lQj52pheJtHCS+9v2lsJY7wMj2IXVCoNRmQSQ=";
++      sha256 = "sha256-yTVou/WArEWygBBs2NFPI9Dm9iSGfwVftKFbOAGl8tk=";
+     };
+-    date = "2024-03-29";
++    date = "2024-04-14";
+   };
+   palette = {
+     pname = "palette";
+@@ -375,15 +375,15 @@
+   };
+   tmux = {
+     pname = "tmux";
+-    version = "5ed4e8a6a20c928688da268dfcdf460ac9c3cb49";
++    version = "b26eb2fa6d2dd524ceaf68a4751c1d1285d809df";
+     src = fetchFromGitHub {
+       owner = "catppuccin";
+       repo = "tmux";
+-      rev = "5ed4e8a6a20c928688da268dfcdf460ac9c3cb49";
++      rev = "b26eb2fa6d2dd524ceaf68a4751c1d1285d809df";
+       fetchSubmodules = false;
+-      sha256 = "sha256-k9Ihfk8C1jYkGUvOcgLwS4UdXR8d/4Nu/Dyh03FpDZc=";
++      sha256 = "sha256-DTCh0KwnXxu5Uz8MuQmWI29fs3rgg+BfuxttdwBb1a8=";
+     };
+-    date = "2024-03-30";
++    date = "2024-04-17";
+   };
+   yazi = {
+     pname = "yazi";
+diff --git a/dev/flake.lock b/dev/flake.lock
+index 66a0809..03cf2c3 100644
+--- a/dev/flake.lock
++++ b/dev/flake.lock
+@@ -22,11 +22,11 @@
+         ]
+       },
+       "locked": {
+-        "lastModified": 1712390667,
+-        "narHash": "sha256-ebq+fJZfobqpsAdGDGpxNWSySbQejRwW9cdiil6krCo=",
++        "lastModified": 1713479280,
++        "narHash": "sha256-e8+ZgayVccw6h8ay15jM9hXh+sjZDc1XdBGLn3pdYdc=",
+         "owner": "nix-community",
+         "repo": "home-manager",
+-        "rev": "b787726a8413e11b074cde42704b4af32d95545c",
++        "rev": "ff1c3646541316258b1ca64e9b25d4c9cca8e587",
+         "type": "github"
+       },
+       "original": {
+@@ -37,11 +37,11 @@
+     },
+     "nixpkgs": {
+       "locked": {
+-        "lastModified": 1712439257,
+-        "narHash": "sha256-aSpiNepFOMk9932HOax0XwNxbA38GOUVOiXfUVPOrck=",
++        "lastModified": 1713297878,
++        "narHash": "sha256-hOkzkhLT59wR8VaMbh1ESjtZLbGi+XNaBN6h49SPqEc=",
+         "owner": "NixOS",
+         "repo": "nixpkgs",
+-        "rev": "ff0dbd94265ac470dda06a657d5fe49de93b4599",
++        "rev": "66adc1e47f8784803f2deb6cacd5e07264ec2d5c",
+         "type": "github"
+       },
+       "original": {
+-- 
+2.44.0
+

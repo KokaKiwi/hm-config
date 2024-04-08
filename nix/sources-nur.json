@@ -1,0 +1,14 @@
+{
+    "nur": {
+        "branch": "master",
+        "description": "Nix User Repository: User contributed nix packages [maintainer=@Mic92]",
+        "homepage": "https://nur.nix-community.org/",
+        "owner": "nix-community",
+        "repo": "nur",
+        "rev": "d503d88d5029ad94b6ed8832efcd38f5332279b8",
+        "sha256": "072ziji3nyq0axknjli2y3ybdfr6xgyb5h6ndqlvifmy45grj02g",
+        "type": "tarball",
+        "url": "https://github.com/nix-community/nur/archive/d503d88d5029ad94b6ed8832efcd38f5332279b8.tar.gz",
+        "url_template": "https://github.com/<owner>/<repo>/archive/<rev>.tar.gz"
+    }
+}
