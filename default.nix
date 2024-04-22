@@ -3,7 +3,7 @@ let
   sources = import ./nix;
 
   pkgs = import sources.nixpkgs {};
-  env = import "${sources.home-manager}/modules" {
+  module = import "${sources.home-manager}/modules" {
     configuration = ./home.nix;
 
     inherit pkgs;
@@ -13,6 +13,7 @@ let
       inherit sources;
     };
   };
-in {
-  inherit (env) activationPackage config;
+in module.activationPackage // {
+  inherit module;
+  inherit (module) config options pkgs;
 }
