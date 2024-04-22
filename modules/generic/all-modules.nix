@@ -7,6 +7,7 @@
     ./programs/element.nix
     ./programs/ferdium.nix
     ./programs/fish.nix
+    ./programs/glab.nix
     ./programs/glow.nix
     ./programs/hub.nix
     ./programs/kitty.nix

@@ -4,6 +4,7 @@
   cargo-shell = callPackage ./cargo-shell {
     rustPlatform = pkgs.fenixStableRustPlatform;
   };
+  glab = callPackage ./glab {};
   mise = callPackage ./mise {
     rustPlatform = pkgs.fenixStableRustPlatform;
   };

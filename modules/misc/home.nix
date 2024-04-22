@@ -6,7 +6,7 @@ let
     "hub" "kitty" "mise" "mux" "ncmpcpp"
     "ssh" "starship" "tmux" "taplo"
     "paru" "zoxide" "yazi" "git" "gpg"
-    "nix-index" "discord" "glow"
+    "nix-index" "discord" "glow" "glab"
     "password-store" "pgcli" "yt-dlp"
     "nvchecker" "element" "ferdium"
   ];

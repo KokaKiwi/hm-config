@@ -20,6 +20,7 @@
     ./programs/fish.nix
     ./programs/gh.nix
     ./programs/git.nix
+    ./programs/glab.nix
     ./programs/gpg.nix
     ./programs/kitty.nix
     ./programs/mise.nix
