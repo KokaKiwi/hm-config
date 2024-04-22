@@ -21,11 +21,6 @@ in {
         maxJobs = 8;
         speedFactor = 5;
       };
-      nix-glados = {
-        uri = "ssh://nix-glados";
-        maxJobs = 8;
-        speedFactor = 3;
-      };
       nix-alyx = {
         enable = false;
         uri = "ssh://nix-alyx";
