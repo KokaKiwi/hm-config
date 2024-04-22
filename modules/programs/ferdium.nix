@@ -4,7 +4,9 @@ let
   cfg = config.programs.ferdium;
 in {
   programs.ferdium = {
-    package = config.lib.opengl.wrapPackage pkgs.ferdium-electron {};
+    package = pkgs.writeShellScriptBin "ferdium" ''
+      ELECTRON_IS_DEV=0 exec /usr/bin/electron ${pkgs.ferdium-app}/share/ferdium "$@"
+    '';
   };
 
   xdg.localDesktopEntries = mkIf cfg.enable {
@@ -17,6 +19,8 @@ in {
       mimeTypes = [ "x-scheme-handler/ferdium" ];
       categories = [ "Network" "InstantMessaging" ];
       startupWMClass = "Ferdium";
+
+      autostart = true;
     };
   };
 }

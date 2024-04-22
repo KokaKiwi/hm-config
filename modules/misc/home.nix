@@ -8,7 +8,7 @@ let
     "paru" "zoxide" "yazi" "git" "gpg"
     "nix-index" "discord" "glow"
     "password-store" "pgcli" "yt-dlp"
-    "nvchecker" "element"
+    "nvchecker" "element" "ferdium"
   ];
   enabledServices = [
     "gpg-agent" "mopidy" "pueue"

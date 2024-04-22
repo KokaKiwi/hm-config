@@ -31,7 +31,7 @@ in pkgs.mkShell {
     buildPackage() {
       local name="$1"
 
-      nom-build -A "pkgs.$name"
+      NIXPKGS_ALLOW_BROKEN=1 nom-build -A "pkgs.$name"
     }
   '';
 }

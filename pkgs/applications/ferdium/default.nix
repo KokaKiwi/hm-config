@@ -4,8 +4,8 @@
 
 , fetchFromGitHub
 
-, copyDesktopItems
 , makeWrapper
+, wrapGAppsHook
 
 , cacert
 , electron
@@ -134,19 +134,22 @@ in stdenv.mkDerivation (final: {
   });
 
   pnpmDeps = mkPnpmDeps {
-    inherit (final) pname version src ELECTRON_SKIP_BINARY_DOWNLOAD;
-    hash = "sha256-zfTEJkEVVQpIl1GhjbQQFmakqn/ixgDrD9kVuMqD1SM=";
+    inherit (final) pname version src;
+    hash = "sha256-0ereEoVqp1X9wnt3iY3lvWCt/xIO5EGuZTGmLpPoBEA=";
   };
 
   nativeBuildInputs = [
-    copyDesktopItems
     nodePackages.pnpm
     nodePackages.nodejs
     makeWrapper
+    jq
+    wrapGAppsHook
   ];
 
-  ELECTRON_SKIP_BINARY_DOWNLOAD = 1;
+  dontPatchShebangs = true;
+  dontPatchELF = true;
 
+  inherit (fixupPackageJson) pnpmPatch;
   postPatch = ''
     cat > src/electron/ipc-api/dnd.ts <<"EOF"
     import { ipcMain } from 'electron';
@@ -156,7 +159,7 @@ in stdenv.mkDerivation (final: {
       });
     };
     EOF
-  '';
+  '' + fixupPackageJson.patch;
 
   preBuild = ''
     export HOME=$(mktemp -d)
@@ -173,23 +176,28 @@ in stdenv.mkDerivation (final: {
   '';
 
   postBuild = ''
-    pnpm typecheck
-    pnpm lint:fix
     pnpm manage-translations
-
-    pnpm exec preval-build-info-cli
     node esbuild.mjs
 
     cp -Tr node_modules build/node_modules
+  '';
 
-    pnpm exec electron-builder \
-      --dir \
-      -c.electronDist=${electron}/libexec/electron \
-      -c.electronVersion=${electron.version}
+  installPhase = ''
+    runHook preInstall
+
+    mkdir -p $out/share
+
+    cp -Tr build $out/share/ferdium
+    cp -Tr node_modules $out/share/ferdium/node_modules
+
+    makeWrapper ${electron}/bin/electron $out/bin/ferdium \
+      --set ELECTRON_IS_DEV 0 \
+      --add-flags $out/share/ferdium
+
+    runHook postInstall
   '';
 
   meta = {
-    broken = true;
     license = with lib; licenses.asl20;
     mainProgram = "ferdium";
   };
