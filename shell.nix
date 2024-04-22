@@ -27,5 +27,11 @@ in pkgs.mkShell {
       nom-build --out-link "$generationDir" && \
         "$generationDir/activate"
     }
+
+    buildPackage() {
+      local name="$1"
+
+      nom-build -A "pkgs.$name"
+    }
   '';
 }
