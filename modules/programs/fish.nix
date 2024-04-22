@@ -13,8 +13,6 @@ in {
 
     plugins = map mkPlugin plugins;
 
-    catppuccin.enable = true;
-
     functions = {
       copy = ''
         if test (count $argv) -ge 1

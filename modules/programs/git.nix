@@ -22,7 +22,6 @@ with lib;
 
     delta = {
       enable = true;
-      catppuccin.enable = true;
       options = {
         light = false;
         line-numbers = true;

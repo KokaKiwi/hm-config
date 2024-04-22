@@ -51,8 +51,6 @@ in {
       "map kitty_mod+page_up" = "previous_tab";
       "map kitty_mod+page_down" = "next_tab";
     };
-
-    catppuccin.enable = true;
   };
 
   xdg.localDesktopEntries = mkIf cfg.enable {

@@ -29,7 +29,5 @@ in {
       })
       batman
     ];
-
-    catppuccin.enable = true;
   };
 }

@@ -1,4 +1,4 @@
-From bbae03816c8e8e7882ec3e864c0173f688c8a129 Mon Sep 17 00:00:00 2001
+From 8a80f3ab87637cb4d31422e4ab5d248a957e494f Mon Sep 17 00:00:00 2001
 From: KokaKiwi <kokakiwi+git@kokakiwi.net>
 Date: Fri, 19 Apr 2024 13:14:25 +0200
 Subject: [PATCH 2/3] chore: update lockfiles #112
@@ -215,10 +215,10 @@ index b3cbcb4..965d9c0 100644
    yazi = {
      pname = "yazi";
 diff --git a/dev/flake.lock b/dev/flake.lock
-index 66a0809..03cf2c3 100644
+index 654e45d..427dcd8 100644
 --- a/dev/flake.lock
 +++ b/dev/flake.lock
-@@ -22,11 +22,11 @@
+@@ -7,11 +7,11 @@
          ]
        },
        "locked": {
@@ -233,7 +233,7 @@ index 66a0809..03cf2c3 100644
          "type": "github"
        },
        "original": {
-@@ -37,11 +37,11 @@
+@@ -22,11 +22,11 @@
      },
      "nixpkgs": {
        "locked": {

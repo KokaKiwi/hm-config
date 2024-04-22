@@ -16,8 +16,6 @@ in {
       };
     };
 
-    catppuccin.enable = true;
-
     transience = {
       enable = true;
     };

@@ -1,4 +1,4 @@
-From 768383f8493146c8b39cbfffc292b05c582c1521 Mon Sep 17 00:00:00 2001
+From c7c217822c5c3b65c0ec8c4f5af6ce06b8b864e7 Mon Sep 17 00:00:00 2001
 From: KokaKiwi <kokakiwi+git@kokakiwi.net>
 Date: Fri, 19 Apr 2024 00:40:03 +0200
 Subject: [PATCH 1/3] Expose sources and lib.ctp
@@ -8,16 +8,16 @@ Subject: [PATCH 1/3] Expose sources and lib.ctp
  1 file changed, 12 insertions(+), 1 deletion(-)
 
 diff --git a/modules/home-manager/globals.nix b/modules/home-manager/globals.nix
-index 259cd99..cfe0b9c 100644
+index f39367a..e0031ef 100644
 --- a/modules/home-manager/globals.nix
 +++ b/modules/home-manager/globals.nix
 @@ -1,4 +1,4 @@
 -{ lib, ... }: {
 +{ lib, sources, ... }: {
    options.catppuccin = {
-     flavour = lib.mkOption {
-       type = lib.ctp.types.flavourOption;
-@@ -11,5 +11,16 @@
+     enable = lib.mkEnableOption "Catppuccin globally";
+ 
+@@ -13,5 +13,16 @@
        default = "teal";
        description = "Global Catppuccin accent";
      };

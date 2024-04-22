@@ -20,8 +20,6 @@
     ./programs/fish.nix
     ./programs/gh.nix
     ./programs/git.nix
-    ./programs/gitui.nix
-    ./programs/glow.nix
     ./programs/gpg.nix
     ./programs/kitty.nix
     ./programs/mise.nix

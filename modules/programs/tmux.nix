@@ -12,7 +12,6 @@ in {
     enableSystemd = true;
 
     catppuccin = {
-      enable = true;
       extraConfig = config.lib.tmux.formatOptions {
         prefix = "catppuccin_";
       } {

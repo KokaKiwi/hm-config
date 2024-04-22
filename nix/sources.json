@@ -29,10 +29,10 @@
         "homepage": "",
         "owner": "catppuccin",
         "repo": "nix",
-        "rev": "29bd8a3bda02434bf6ee3edf9ea6edd360a9ce17",
-        "sha256": "0msqy6i9pdb07zq9ml4vbdydzz60r5pchzvm809x66v3ghvckh25",
+        "rev": "4bf909a0d7b399754784db869e1fc89235c9dcc7",
+        "sha256": "0i0m434g51czydpnjc4dc3zd41szm6m9dl6fh85mqk8vrwbaaxmj",
         "type": "tarball",
-        "url": "https://github.com/catppuccin/nix/archive/29bd8a3bda02434bf6ee3edf9ea6edd360a9ce17.tar.gz",
+        "url": "https://github.com/catppuccin/nix/archive/4bf909a0d7b399754784db869e1fc89235c9dcc7.tar.gz",
         "url_template": "https://github.com/<owner>/<repo>/archive/<rev>.tar.gz"
     },
     "colmena": {
@@ -77,10 +77,10 @@
         "homepage": "https://nix-community.github.io/home-manager/",
         "owner": "nix-community",
         "repo": "home-manager",
-        "rev": "1451d2866d9ef3739c20f964c9c8bd6db39cc373",
-        "sha256": "0vlj2w9y5ggxw7qijpn9ajmrm46nh4f46ndarr8hl1xbwv1jy5vd",
+        "rev": "e866aae5bbbcfe6798ca05d3004a4e62f1828954",
+        "sha256": "00wbfifpcqaqqyymlzmamp2hcpp2pz5q5ysp2x6kqwhslwjgjdpm",
         "type": "tarball",
-        "url": "https://github.com/nix-community/home-manager/archive/1451d2866d9ef3739c20f964c9c8bd6db39cc373.tar.gz",
+        "url": "https://github.com/nix-community/home-manager/archive/e866aae5bbbcfe6798ca05d3004a4e62f1828954.tar.gz",
         "url_template": "https://github.com/<owner>/<repo>/archive/<rev>.tar.gz"
     },
     "niv": {

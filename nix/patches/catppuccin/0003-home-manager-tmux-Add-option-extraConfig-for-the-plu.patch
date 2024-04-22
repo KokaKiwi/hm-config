@@ -1,4 +1,4 @@
-From daf85c503d896731a95136d9672ed80c0ba7309b Mon Sep 17 00:00:00 2001
+From 40aeb306d01acc832ad4fa835a04b4647672607a Mon Sep 17 00:00:00 2001
 From: KokaKiwi <kokakiwi+git@kokakiwi.net>
 Date: Fri, 19 Apr 2024 20:32:04 +0200
 Subject: [PATCH 3/3] home-manager(tmux): Add option extraConfig for the plugin
