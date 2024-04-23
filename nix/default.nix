@@ -4,8 +4,7 @@ let
   patches = {
     catppuccin = [
       ./patches/catppuccin/0001-Expose-sources-and-lib.ctp.patch
-      ./patches/catppuccin/0002-chore-update-lockfiles-112.patch
-      ./patches/catppuccin/0003-home-manager-tmux-Add-option-extraConfig-for-the-plu.patch
+      ./patches/catppuccin/0002-home-manager-tmux-Add-option-extraConfig-for-the-plu.patch
     ];
   };
 
