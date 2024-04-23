@@ -12,10 +12,6 @@
   mux = callPackage ./mux {
     rustPlatform = pkgs.fenixStableRustPlatform;
   };
-  paru = callPackage ./paru {
-    git = pkgs.gitMinimal;
-    rustPlatform = pkgs.fenixStableRustPlatform;
-  };
   taplo = callPackage ./taplo {
     rustPlatform = pkgs.fenixStableRustPlatform;
   };

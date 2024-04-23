@@ -16,6 +16,10 @@ let
   '';
 in {
   programs.paru = {
+    package = pkgs.nur.repos.kokakiwi.paru.override {
+      rustPlatform = pkgs.fenixStableRustPlatform;
+    };
+
     extraSettings = ''
       [options]
       BottomUp
