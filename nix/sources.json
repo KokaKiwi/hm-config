@@ -29,10 +29,10 @@
         "homepage": "",
         "owner": "catppuccin",
         "repo": "nix",
-        "rev": "d146dd5a9e8ea412749230915fc3ccc3baa119e4",
-        "sha256": "0gvzmhj1pddnswrx0jf4n3v5l93wd2bhbgr6nmq5wrsmw4w274yh",
+        "rev": "cc89781d13834e0207ec6fb50ccb2d5122b274c3",
+        "sha256": "035i7fj59ihfv7bh9rn6ahqx0l04qmk74n0l2qckns7wg81px4a1",
         "type": "tarball",
-        "url": "https://github.com/catppuccin/nix/archive/d146dd5a9e8ea412749230915fc3ccc3baa119e4.tar.gz",
+        "url": "https://github.com/catppuccin/nix/archive/cc89781d13834e0207ec6fb50ccb2d5122b274c3.tar.gz",
         "url_template": "https://github.com/<owner>/<repo>/archive/<rev>.tar.gz"
     },
     "colmena": {
@@ -65,10 +65,10 @@
         "homepage": "",
         "owner": "nix-community",
         "repo": "fenix",
-        "rev": "f90ff54f3637d455352780f4f27715725a0d6841",
-        "sha256": "1rv83pnrwwvq1rqgswhd0gsa7z47hz3ya9aacbzfjai25ndbl4k7",
+        "rev": "d596927635ddd8db224bbff6e4ccb08e42649eb5",
+        "sha256": "1avngyggx53c1yh5bxyal4xzgv8xf52yk8dn19xwnvhjszxy5r9q",
         "type": "tarball",
-        "url": "https://github.com/nix-community/fenix/archive/f90ff54f3637d455352780f4f27715725a0d6841.tar.gz",
+        "url": "https://github.com/nix-community/fenix/archive/d596927635ddd8db224bbff6e4ccb08e42649eb5.tar.gz",
         "url_template": "https://github.com/<owner>/<repo>/archive/<rev>.tar.gz"
     },
     "home-manager": {
@@ -101,10 +101,10 @@
         "homepage": "",
         "owner": "NixOS",
         "repo": "nixpkgs",
-        "rev": "69ee1d82f1fa4c70a3dc9a64111e7eef3b8e4527",
-        "sha256": "0mpn4wz1swpskhkqf3900r7qymz5y967ajs6qp6ipdnqdsiag4b4",
+        "rev": "1e1dc66fe68972a76679644a5577828b6a7e8be4",
+        "sha256": "1nmra8aiiazi0w19x4cbb3qzy3l6ff9yaki3pkibhwh2grm88132",
         "type": "tarball",
-        "url": "https://github.com/NixOS/nixpkgs/archive/69ee1d82f1fa4c70a3dc9a64111e7eef3b8e4527.tar.gz",
+        "url": "https://github.com/NixOS/nixpkgs/archive/1e1dc66fe68972a76679644a5577828b6a7e8be4.tar.gz",
         "url_template": "https://github.com/<owner>/<repo>/archive/<rev>.tar.gz"
     },
     "tmux-loadavg": {
