@@ -65,10 +65,10 @@
         "homepage": "",
         "owner": "nix-community",
         "repo": "fenix",
-        "rev": "d596927635ddd8db224bbff6e4ccb08e42649eb5",
-        "sha256": "1avngyggx53c1yh5bxyal4xzgv8xf52yk8dn19xwnvhjszxy5r9q",
+        "rev": "5c3ff469526a6ca54a887fbda9d67aef4dd4a921",
+        "sha256": "1p30hff55aqbz9wzv3871g91xqc1bp7rqyfws8w72860ic8i516x",
         "type": "tarball",
-        "url": "https://github.com/nix-community/fenix/archive/d596927635ddd8db224bbff6e4ccb08e42649eb5.tar.gz",
+        "url": "https://github.com/nix-community/fenix/archive/5c3ff469526a6ca54a887fbda9d67aef4dd4a921.tar.gz",
         "url_template": "https://github.com/<owner>/<repo>/archive/<rev>.tar.gz"
     },
     "home-manager": {
