@@ -22,6 +22,7 @@
     ./programs/git.nix
     ./programs/glab.nix
     ./programs/gpg.nix
+    ./programs/imhex.nix
     ./programs/kitty.nix
     ./programs/mise.nix
     ./programs/mux.nix
