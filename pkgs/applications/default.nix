@@ -12,9 +12,6 @@
   mux = callPackage ./mux {
     rustPlatform = pkgs.fenixStableRustPlatform;
   };
-  taplo = callPackage ./taplo {
-    rustPlatform = pkgs.fenixStableRustPlatform;
-  };
   usage = callPackage ./usage {
     rustPlatform = pkgs.fenixStableRustPlatform;
   };
