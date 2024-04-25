@@ -1,0 +1,63 @@
+From 685c8fd71ff91447c6bf6676ac893d023efe9b3e Mon Sep 17 00:00:00 2001
+From: KokaKiwi <kokakiwi+git@kokakiwi.net>
+Date: Thu, 25 Apr 2024 19:30:32 +0200
+Subject: [PATCH 2/2] feat(tmux): add support for extraConfig
+
+Squashed commit of the following:
+
+commit e279e72a6e044ed7ff9bd76404040294632e0a3c
+Author: vdbewout <vdbewout@gmail.com>
+Date:   Sun Apr 21 16:31:18 2024 +0200
+
+    feat(tmux): add support for extraConfig
+
+    Add the option extraConfig this allows users to configure the plugin
+---
+ modules/home-manager/tmux.nix | 20 ++++++++++++++++++--
+ 1 file changed, 18 insertions(+), 2 deletions(-)
+
+diff --git a/modules/home-manager/tmux.nix b/modules/home-manager/tmux.nix
+index 4cdd2cc..f960fc2 100644
+--- a/modules/home-manager/tmux.nix
++++ b/modules/home-manager/tmux.nix
+@@ -5,6 +5,7 @@
+ , ...
+ }:
+ let
++  inherit (lib) ctp mkOption types concatStrings;
+   cfg = config.programs.tmux.catppuccin;
+   enable = cfg.enable && config.programs.tmux.enable;
+ 
+@@ -18,12 +19,27 @@ let
+ in
+ {
+   options.programs.tmux.catppuccin =
+-    lib.ctp.mkCatppuccinOpt "tmux";
++    ctp.mkCatppuccinOpt "tmux"
++    // {
++      extraConfig = mkOption {
++        type = types.lines;
++        description = "Additional configuration for the catppuccin plugin.";
++        default = "";
++        example = ''
++          set -g @catppuccin_status_modules_right "application session user host date_time"
++        '';
++      };
++    };
+ 
+   config.programs.tmux.plugins = lib.mkIf enable [
+     {
+       inherit plugin;
+-      extraConfig = "set -g @catppuccin_flavour '${cfg.flavour}'";
++      extraConfig = concatStrings [
++        ''
++          set -g @catppuccin_flavour '${cfg.flavour}'
++        ''
++        cfg.extraConfig
++      ];
+     }
+   ];
+ }
+-- 
+2.44.0
+
