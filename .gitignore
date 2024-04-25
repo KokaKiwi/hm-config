@@ -1,6 +1,5 @@
 Justfile
 result*
-repl.nix
 secrets
 
 .*

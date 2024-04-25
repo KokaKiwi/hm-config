@@ -1,6 +1,5 @@
 { pkgs, sources, callPackage }:
 {
-  ferdium-app = callPackage ./ferdium {};
   cargo-shell = callPackage ./cargo-shell {
     rustPlatform = pkgs.fenixStableRustPlatform;
   };

@@ -2,10 +2,12 @@
 with lib;
 let
   cfg = config.programs.ferdium;
+
+  ferdium = pkgs.nur.repos.kokakiwi.ferdium;
 in {
   programs.ferdium = {
     package = pkgs.writeShellScriptBin "ferdium" ''
-      ELECTRON_IS_DEV=0 exec /usr/bin/electron ${pkgs.ferdium-app}/share/ferdium "$@"
+      ELECTRON_IS_DEV=0 exec /usr/bin/electron ${ferdium}/share/ferdium "$@"
     '';
   };
 
