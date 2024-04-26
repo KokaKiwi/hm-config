@@ -22,7 +22,7 @@ in {
   home.packages = with pkgs; [
     attic-client cachix colmena
     eza hexyl
-    cargo-shell
+    cargo-shell opentofu gleam mergerfs
     nil niv nix-info nix-init nurl
     nix-output-monitor nixd
     procs skopeo
