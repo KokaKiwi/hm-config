@@ -24,7 +24,7 @@ in {
     eza hexyl
     cargo-shell
     nil niv nix-info nix-init nurl
-    nix-output-monitor
+    nix-output-monitor nixd
     procs skopeo
   ];
 
