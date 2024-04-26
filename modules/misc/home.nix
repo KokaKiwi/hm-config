@@ -21,7 +21,7 @@ let
 in {
   home.packages = with pkgs; [
     attic-client cachix colmena
-    eza hexyl
+    eza hexyl pdm
     cargo-shell opentofu gleam mergerfs
     nil niv nix-info nix-init nurl
     nix-output-monitor nixd
