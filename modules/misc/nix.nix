@@ -2,7 +2,7 @@
 let
   sources = import ../../nix;
 
-  nix = pkgs.nixVersions.nix_2_21;
+  nix = pkgs.nixVersions.nix_2_22;
 in {
   imports = [
     "${sources.declarative-cachix}/home-manager.nix"
