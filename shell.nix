@@ -1,10 +1,12 @@
 let
-  sources = import ./nix;
+  env = import ./default.nix;
 
-  pkgs = import sources.nixpkgs {};
+  inherit (env) config pkgs;
 in pkgs.mkShell {
   buildInputs = with pkgs; [
     gitMinimal
+    jq
+    config.nix.package
     nix-output-monitor
   ];
 
@@ -32,6 +34,11 @@ in pkgs.mkShell {
       local name="$1"
 
       NIXPKGS_ALLOW_BROKEN=1 nom-build -A "pkgs.$name"
+    }
+
+    listPackages() {
+      local outPath=$(nix profile list --json | jq -r '.elements."home-manager-path".storePaths[0]')
+      nix-store -q --references "$outPath" | sed 's/[^-]*-//' | sort --ignore-case
     }
   '';
 }
