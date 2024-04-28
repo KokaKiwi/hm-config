@@ -1,4 +1,5 @@
-{ pkgs, ... }:
+{ pkgs, lib, actualPkgs, ... }:
+with lib;
 {
   imports = [
     ./modules/all-modules.nix
@@ -26,5 +27,9 @@
       "en_US.UTF-8/UTF-8"
       "en_GB.UTF-8/UTF-8"
     ];
+  };
+
+  _module.args = {
+    pkgs = mkForce actualPkgs;
   };
 }

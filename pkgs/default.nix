@@ -31,10 +31,10 @@ let
   top-level = {
     lib = super.lib // lib;
 
-    fenix = callPackage sources.fenix {};
+    fenix = pkgs.callPackage sources.fenix {};
     inherit fenixStableToolchain fenixStableRustPlatform;
 
-    agenix = callPackage "${sources.agenix}/pkgs/agenix.nix" {
+    agenix = pkgs.callPackage "${sources.agenix}/pkgs/agenix.nix" {
       ageBin = "${pkgs.rage}/bin/rage";
     };
 
@@ -43,10 +43,10 @@ let
       inherit pkgs;
     };
 
-    colmena = callPackage "${sources.colmena}/package.nix" {
+    colmena = pkgs.callPackage "${sources.colmena}/package.nix" {
       rustPlatform = fenixStableRustPlatform;
     };
-    attic-client = callPackage "${sources.attic}/package.nix" {
+    attic-client = pkgs.callPackage "${sources.attic}/package.nix" {
       rustPlatform = fenixStableRustPlatform;
       clientOnly = true;
     };
@@ -61,6 +61,21 @@ let
       postPatch = prev.postPatch + ''
         substituteInPlace src/main.rs src/{config,core,display,input,git,runtime,todo_file,testutils,view}/src/lib.rs \
         --replace "warnings" ""
+      '';
+    });
+    glfw3 = super.glfw3.overrideAttrs (super: {
+      postPatch = super.postPatch + ''
+      substituteInPlace src/wl_init.c \
+      --replace "libdecor-0.so.0" "${pkgs.lib.getLib pkgs.libdecor}/lib/libdecor-0.so.0"
+
+      substituteInPlace src/wl_init.c \
+      --replace "libwayland-client.so.0" "${pkgs.lib.getLib pkgs.wayland}/lib/libwayland-client.so.0"
+
+      substituteInPlace src/wl_init.c \
+      --replace "libwayland-cursor.so.0" "${pkgs.lib.getLib pkgs.wayland}/lib/libwayland-cursor.so.0"
+
+      substituteInPlace src/wl_init.c \
+      --replace "libwayland-egl.so.1" "${pkgs.lib.getLib pkgs.wayland}/lib/libwayland-egl.so.1"
       '';
     });
   };

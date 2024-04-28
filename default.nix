@@ -2,7 +2,18 @@
 let
   sources = import ./nix;
 
-  pkgs = import sources.nixpkgs {};
+  pkgs = import sources.nixpkgs {
+    overlays = [
+      (self: super: import ./pkgs {
+        pkgs = self;
+        inherit super sources;
+      })
+    ];
+
+    localSystem = {
+      system = "x86_64-linux";
+    };
+  };
   module = import "${sources.home-manager}/modules" {
     configuration = ./home.nix;
 
@@ -11,6 +22,7 @@ let
 
     extraSpecialArgs = {
       inherit sources;
+      actualPkgs = pkgs;
     };
   };
 in module.activationPackage // {

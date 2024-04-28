@@ -8,7 +8,6 @@
     ./misc/home.nix
     ./misc/music.nix
     ./misc/nix.nix
-    ./misc/nixpkgs.nix
     ./misc/opengl.nix
     ./misc/secrets.nix
     ./misc/systemd.nix
