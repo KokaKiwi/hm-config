@@ -2,6 +2,9 @@ let
   system = builtins.currentSystem;
 
   patches = {
+    agenix = [
+      ./patches/agenix/0001-Fix-rekey.patch
+    ];
     catppuccin = [
       ./patches/catppuccin/0001-Expose-sources-and-lib.ctp.patch
       ./patches/catppuccin/0002-feat-tmux-add-support-for-extraConfig.patch
