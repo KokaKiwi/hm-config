@@ -1,5 +1,4 @@
-{ config, pkgs, lib, ... }:
-with lib;
+{ config, pkgs, ... }:
 let
   settings = fromTOML (config.lib.files.readLocalConfig "starship.toml");
 in {

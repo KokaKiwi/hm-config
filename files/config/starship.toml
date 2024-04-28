@@ -23,6 +23,7 @@ format = "in [$path]($style) "
 "/efi" = "[EFI]"
 "/mnt/kiwivault" = '\\KiwiVault'
 "/mnt/secure-data" = "[Secure]"
+"/run/media/kokakiwi/secure-data" = "[Secure]"
 "/mnt/extdata" = "[ExtData]"
 
 [status]
