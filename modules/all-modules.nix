@@ -24,6 +24,7 @@
     ./programs/gpg.nix
     ./programs/imhex.nix
     ./programs/kitty.nix
+    ./programs/litecli.nix
     ./programs/mise.nix
     ./programs/mux.nix
     ./programs/nvchecker.nix

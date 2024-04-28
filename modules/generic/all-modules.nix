@@ -11,6 +11,7 @@
     ./programs/glow.nix
     ./programs/hub.nix
     ./programs/kitty.nix
+    ./programs/litecli.nix
     ./programs/mux.nix
     ./programs/nvchecker.nix
     ./programs/paru.nix
