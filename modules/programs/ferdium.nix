@@ -16,7 +16,7 @@ in {
       name = "Ferdium";
       exec = "${getExe cfg.package} %U";
       terminal = false;
-      icon = "ferdium";
+      icon = "${ferdium}/share/icons/hicolor/128x128/apps/ferdium.png";
       comment = "Ferdium is your messaging app and combines chat & messaging services into one application.";
       mimeTypes = [ "x-scheme-handler/ferdium" ];
       categories = [ "Network" "InstantMessaging" ];
