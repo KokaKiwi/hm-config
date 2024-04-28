@@ -51,7 +51,9 @@ let
       clientOnly = true;
     };
 
-    niv = (import sources.niv {}).niv;
+    niv = (import sources.niv {
+      inherit pkgs;
+    }).niv;
   };
 
   overrides = {
