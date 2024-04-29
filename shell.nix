@@ -8,6 +8,7 @@ in pkgs.mkShell {
     jq
     config.nix.package
     nix-output-monitor
+    nixos-option
   ];
 
   shellHook = ''
@@ -39,6 +40,13 @@ in pkgs.mkShell {
     listPackages() {
       local outPath=$(nix profile list --json | jq -r '.elements."home-manager-path".storePaths[0]')
       nix-store -q --references "$outPath" | sed 's/[^-]*-//' | sort --ignore-case
+    }
+
+    showOption() {
+      nixos-option \
+        --options_expr "(import ./default.nix).options" \
+        --config_expr "(import ./default.nix).config" \
+        "$@"
     }
   '';
 }
