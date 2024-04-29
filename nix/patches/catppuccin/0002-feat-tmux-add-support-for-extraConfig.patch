@@ -1,7 +1,7 @@
-From 7cb92b3e71bcbb8f2a270955cdbb8cb25946be4f Mon Sep 17 00:00:00 2001
+From 6f7cb9de5c61328e4909cd05a3a1ddc58b470ec6 Mon Sep 17 00:00:00 2001
 From: KokaKiwi <kokakiwi+git@kokakiwi.net>
 Date: Thu, 25 Apr 2024 19:30:32 +0200
-Subject: [PATCH 2/3] feat(tmux): add support for extraConfig
+Subject: [PATCH 2/2] feat(tmux): add support for extraConfig
 
 Squashed commit of the following:
 
