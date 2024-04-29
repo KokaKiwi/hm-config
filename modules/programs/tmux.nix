@@ -28,7 +28,6 @@ in {
           "session"
         ];
         status_modules_right = concatStringsSep " " [
-          "battery"
           "load"
           "date_time"
         ];
@@ -61,8 +60,7 @@ in {
       "TERM" "TERM_PROGRAM"
     ];
 
-    plugins = with pkgs; [
-      tmuxPlugins.battery
+    plugins = [
       tmux-loadavg
     ];
 
