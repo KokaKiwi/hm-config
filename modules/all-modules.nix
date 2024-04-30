@@ -21,6 +21,7 @@
     ./programs/git.nix
     ./programs/glab.nix
     ./programs/gpg.nix
+    ./programs/hyfetch.nix
     ./programs/imhex.nix
     ./programs/kitty.nix
     ./programs/litecli.nix
