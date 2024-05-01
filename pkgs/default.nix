@@ -4,7 +4,7 @@ let
     inherit sources;
   });
   importSub = super.lib.callPackageWith {
-    inherit pkgs sources;
+    inherit pkgs super sources;
     inherit (pkgs) lib;
     inherit callPackage importSub;
   };
@@ -65,6 +65,7 @@ let
         --replace "warnings" ""
       '';
     });
+
     glfw3 = super.glfw3.overrideAttrs (super: {
       postPatch = super.postPatch + ''
       substituteInPlace src/wl_init.c \
