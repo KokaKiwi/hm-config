@@ -13,7 +13,7 @@ let
       llvm = pkgs.llvm_18;
       python3 = pkgs.python312;
     };
-  in config.lib.opengl.wrapPackage imhex { };
+  in config.lib.opengl.wrapPackage imhex;
 in {
   home.packages = [ imhex ];
 

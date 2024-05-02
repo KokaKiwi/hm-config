@@ -1,6 +1,7 @@
 {
   imports = [
     ./misc/nix.nix
+    ./misc/opengl.nix
     ./misc/xdg-desktop-entries.nix
 
     ./programs/discord.nix

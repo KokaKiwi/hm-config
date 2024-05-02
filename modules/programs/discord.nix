@@ -8,7 +8,7 @@ in {
     package = config.lib.opengl.wrapPackage (pkgs.vesktop.override {
       withTTS = false;
       withSystemVencord = false;
-    }) { };
+    });
   };
 
   xdg.localDesktopEntries = mkIf cfg.enable {

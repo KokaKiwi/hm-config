@@ -7,7 +7,7 @@ in {
     package = config.lib.opengl.wrapPackage (pkgs.kitty.override {
       python3 = pkgs.python312;
       python3Packages = pkgs.python312Packages;
-    }) { };
+    });
 
     font = {
       name = "FiraCode Nerd Font Mono";
