@@ -101,10 +101,10 @@
         "homepage": "",
         "owner": "NixOS",
         "repo": "nixpkgs",
-        "rev": "bcd44e224fd68ce7d269b4f44d24c2220fd821e7",
-        "sha256": "1dd8x811mkm0d89b0yy0cgv28g343bnid0xn2psd3sk1nkgx9g9j",
+        "rev": "94035b482d181af0a0f8f77823a790b256b7c3cc",
+        "sha256": "1fibcfg6c4rpi7p7mniy5anv0fb3287qg6x1kclcnc95vw1j8d4j",
         "type": "tarball",
-        "url": "https://github.com/NixOS/nixpkgs/archive/bcd44e224fd68ce7d269b4f44d24c2220fd821e7.tar.gz",
+        "url": "https://github.com/NixOS/nixpkgs/archive/94035b482d181af0a0f8f77823a790b256b7c3cc.tar.gz",
         "url_template": "https://github.com/<owner>/<repo>/archive/<rev>.tar.gz"
     },
     "tmux-loadavg": {
