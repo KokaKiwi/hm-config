@@ -4,15 +4,7 @@ let
 in {
   programs.starship = {
     package = pkgs.starship.override {
-      rustPlatform = let
-        rustToolchain = with pkgs.fenix; combine [
-          stable.rustc
-          stable.cargo
-        ];
-      in pkgs.makeRustPlatform {
-        rustc = rustToolchain;
-        cargo = rustToolchain;
-      };
+      rustPlatform = pkgs.fenixStableRustPlatform;
     };
 
     transience = {
