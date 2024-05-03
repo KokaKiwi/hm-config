@@ -46,7 +46,7 @@ in {
     extraCaches = [
       {
         url = "https://attic.bismuth.it/kokakiwi";
-        key = "kokakiwi:jjzBrtjfDKJwgyMZjajoQ1dXLa/hCU0iQBPEJhDGN+c=";
+        key = "kokakiwi:e3jihe8aS1LCVYET8hAm79TM68DZ3RDsbzPLuvZYEKA=";
       }
     ];
   };
