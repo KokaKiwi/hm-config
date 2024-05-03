@@ -26,7 +26,7 @@ in {
     cargo-shell opentofu gleam mergerfs
     nil niv nix-info nix-init nurl
     nix-output-monitor nixd
-    procs skopeo
+    procs skopeo uv
   ];
 
   home.sessionVariables = {
