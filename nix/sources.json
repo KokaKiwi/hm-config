@@ -60,15 +60,15 @@
         "url_template": "https://github.com/<owner>/<repo>/archive/<rev>.tar.gz"
     },
     "fenix": {
-        "branch": "staging",
+        "branch": "main",
         "description": "Rust toolchains and rust-analyzer nightly for Nix [maintainer=@figsoda]",
         "homepage": "",
         "owner": "nix-community",
         "repo": "fenix",
-        "rev": "599f8bab4f81a1d4bdbfc2929803c3b5cb3aee92",
-        "sha256": "152k5hf1hwms70nmj867h9nqakg6w63jp4bl7qy5jjxvak8jqiw1",
+        "rev": "0371cb3179c16f4f932557f855082bf57d371166",
+        "sha256": "1w5maw9l9fmnj6mmswq5wwyvdc1ad7a6jxlgk8b945mcjcd9fx2r",
         "type": "tarball",
-        "url": "https://github.com/nix-community/fenix/archive/599f8bab4f81a1d4bdbfc2929803c3b5cb3aee92.tar.gz",
+        "url": "https://github.com/nix-community/fenix/archive/0371cb3179c16f4f932557f855082bf57d371166.tar.gz",
         "url_template": "https://github.com/<owner>/<repo>/archive/<rev>.tar.gz"
     },
     "home-manager": {
@@ -101,10 +101,10 @@
         "homepage": "",
         "owner": "NixOS",
         "repo": "nixpkgs",
-        "rev": "94035b482d181af0a0f8f77823a790b256b7c3cc",
-        "sha256": "1fibcfg6c4rpi7p7mniy5anv0fb3287qg6x1kclcnc95vw1j8d4j",
+        "rev": "5fd8536a9a5932d4ae8de52b7dc08d92041237fc",
+        "sha256": "0hyfifrhzxsdjj80sh5fpwcgm6zq5vx6ilh0lvp2dw6fzay1vrd0",
         "type": "tarball",
-        "url": "https://github.com/NixOS/nixpkgs/archive/94035b482d181af0a0f8f77823a790b256b7c3cc.tar.gz",
+        "url": "https://github.com/NixOS/nixpkgs/archive/5fd8536a9a5932d4ae8de52b7dc08d92041237fc.tar.gz",
         "url_template": "https://github.com/<owner>/<repo>/archive/<rev>.tar.gz"
     },
     "tmux-loadavg": {
