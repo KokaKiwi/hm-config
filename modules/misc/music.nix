@@ -108,4 +108,10 @@ in {
       port = mpdCfg.network.port;
     };
   };
+
+  systemd.user.services.beets-mpdstats = {
+    Service = {
+      Restart = "on-failure";
+    };
+  };
 }
