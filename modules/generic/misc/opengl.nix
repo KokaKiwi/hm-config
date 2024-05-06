@@ -26,6 +26,8 @@ in {
 
         nativeBuildInputs = with pkgs; [ makeWrapper ];
 
+        separateDebugInfo = false;
+
         buildCommand = ''
           set -eo pipefail
 
@@ -45,6 +47,7 @@ in {
               --set LIBGL_DRIVERS_PATH ${makeSearchPathOutput "lib" "lib/dri" mesa-drivers} \
               --set LIBVA_DRIVERS_PATH ${makeSearchPathOutput "out" "lib/dri" (mesa-drivers ++ cfg.vaDrivers)}
           done
+          shopt -u nullglob # Revert nullglob back to its normal default state
         '';
       });
     };
