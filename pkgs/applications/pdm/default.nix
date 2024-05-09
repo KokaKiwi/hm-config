@@ -21,7 +21,7 @@ let
         src = fetchFromGitHub {
           owner = "sarugaku";
           repo = "resolvelib";
-          rev = "/refs/tags/${version}";
+          rev = "refs/tags/${version}";
           hash = "sha256-oxyPn3aFPOyx/2aP7Eg2ThtPbyzrFT1JzWqy6GqNbzM=";
         };
       };
@@ -29,18 +29,17 @@ let
     self = python;
   };
 in
-
 with python.pkgs;
 buildPythonApplication rec {
   pname = "pdm";
-  version = "2.15.1";
+  version = "2.15.2";
   pyproject = true;
 
   disabled = pythonOlder "3.8";
 
   src = fetchPypi {
     inherit pname version;
-    hash = "sha256-HJzQScEBZjOiPvkuwfx4LaiuB0MULvM/r31Ihy+HSzk=";
+    hash = "sha256-wI6HB4wpwA562WgdxqI0GdxWF9y+bMIFAk70tOfihHU=";
   };
 
   nativeBuildInputs = [
