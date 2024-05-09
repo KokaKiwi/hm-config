@@ -41,6 +41,11 @@ let
     nur = import sources.nur {
       nurpkgs = pkgs;
       inherit pkgs;
+      repoOverrides = {
+        kokakiwi = import sources."nur/kokakiwi" {
+          inherit pkgs;
+        };
+      };
     };
 
     colmena = pkgs.callPackage "${sources.colmena}/package.nix" {

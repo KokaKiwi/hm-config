@@ -10,5 +10,17 @@
         "type": "tarball",
         "url": "https://github.com/nix-community/nur/archive/5f91bfaba4e2a2a2fdcce3b711b76b9aed14cbde.tar.gz",
         "url_template": "https://github.com/<owner>/<repo>/archive/<rev>.tar.gz"
+    },
+    "nur/kokakiwi": {
+        "branch": "main",
+        "description": "My NUR packages",
+        "homepage": null,
+        "owner": "KokaKiwi",
+        "repo": "nur-packages",
+        "rev": "382b7e479f2ed7db055204649ae871343922344c",
+        "sha256": "0fkhprzlpd5n4ladw9l3vzgbicrfmcq1fs4v4682y36f94dcc8j9",
+        "type": "tarball",
+        "url": "https://github.com/KokaKiwi/nur-packages/archive/382b7e479f2ed7db055204649ae871343922344c.tar.gz",
+        "url_template": "https://github.com/<owner>/<repo>/archive/<rev>.tar.gz"
     }
 }
