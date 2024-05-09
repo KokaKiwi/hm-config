@@ -48,6 +48,10 @@ in {
         url = "https://attic.bismuth.it/kokakiwi";
         key = "kokakiwi:e3jihe8aS1LCVYET8hAm79TM68DZ3RDsbzPLuvZYEKA=";
       }
+      {
+        url = "https://cache.lix.systems";
+        key = "cache.lix.systems:aBnZUw8zA7H35Cz2RyKFVs3H4PlGTLawyY5KRbvJR8o=";
+      }
     ];
   };
 }
