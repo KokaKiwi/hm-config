@@ -24,6 +24,10 @@ let
     glados = {
       address = "192.168.1.65";
     };
+
+    vps-25707 = {
+      address = "37.205.12.231";
+    };
   };
 in {
   programs.ssh = {
@@ -83,6 +87,12 @@ in {
         user = "arch";
         identityFile = "~/.ssh/id_ed25519";
         port = 2223;
+      };
+
+      vps-25707 = {
+        hostname = machines.vps-25707.address;
+        user = "nixos";
+        identityFile = "~/.ssh/id_ed25519";
       };
     };
 
