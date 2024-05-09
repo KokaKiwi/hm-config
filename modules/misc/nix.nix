@@ -21,6 +21,13 @@ in {
         maxJobs = 8;
         speedFactor = 5;
       };
+      mel = {
+        uri = "ssh-ng://mel";
+        systems = [ "x86_64-linux" ];
+        identityFile = "/root/.ssh/id_nix";
+        maxJobs = 6;
+        speedFactor = 4;
+      };
       nix-alyx = {
         enable = false;
         uri = "ssh://nix-alyx";
