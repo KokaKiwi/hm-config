@@ -4,6 +4,10 @@ let
   mapSyntax = mapAttrsToList (name: value: "${name}:${value}");
 in {
   programs.bat = {
+    package = pkgs.bat.override {
+      rustPlatform = pkgs.fenixStableRustPlatform;
+    };
+
     config = {
       italic-text = "always";
       paging = "always";
