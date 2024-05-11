@@ -7,6 +7,10 @@
         rustPlatform = pkgs.fenixStableRustPlatform;
         python3 = pkgs.python312;
       };
+
+      settings = ''
+        --font "FiraCode Nerd Font Mono=15"
+      '';
     };
   };
 }
