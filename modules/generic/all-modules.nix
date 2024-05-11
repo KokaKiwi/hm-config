@@ -18,6 +18,7 @@
     ./programs/paru.nix
     ./programs/pgcli.nix
     ./programs/powerline.nix
+    ./programs/silicon.nix
     ./programs/ssh.nix
     ./programs/starship.nix
     ./programs/taplo.nix

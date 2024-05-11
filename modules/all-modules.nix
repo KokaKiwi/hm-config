@@ -32,6 +32,7 @@
     ./programs/password-store.nix
     ./programs/pgcli.nix
     ./programs/powerline.nix
+    ./programs/silicon.nix
     ./programs/ssh.nix
     ./programs/starship.nix
     ./programs/taplo.nix
