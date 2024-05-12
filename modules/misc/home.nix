@@ -21,10 +21,10 @@ let
   });
 in {
   home.packages = with pkgs; [
-    attic-client cachix colmena
+    attic-client colmena
     eza hexyl pdm
     cargo-shell opentofu gleam mergerfs
-    nil niv nix-info nix-init nurl
+    niv nix-info nix-init nurl
     nix-output-monitor nixd nix-update
     procs skopeo uv
     onefetch tokei
