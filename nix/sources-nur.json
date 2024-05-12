@@ -5,10 +5,10 @@
         "homepage": "https://nur.nix-community.org/",
         "owner": "nix-community",
         "repo": "nur",
-        "rev": "5f91bfaba4e2a2a2fdcce3b711b76b9aed14cbde",
-        "sha256": "1if7c7xy591fyzfdj5qsbl0x4mr6dxl5w5f6r3baq7a8niwc9x8c",
+        "rev": "2a59491fd5daee23e838cda3e80155286af38a63",
+        "sha256": "13drac8wfz29lw392wrvcbbj3cabrbvssj8q494m43738ckvpisn",
         "type": "tarball",
-        "url": "https://github.com/nix-community/nur/archive/5f91bfaba4e2a2a2fdcce3b711b76b9aed14cbde.tar.gz",
+        "url": "https://github.com/nix-community/nur/archive/2a59491fd5daee23e838cda3e80155286af38a63.tar.gz",
         "url_template": "https://github.com/<owner>/<repo>/archive/<rev>.tar.gz"
     },
     "nur/kokakiwi": {
@@ -17,10 +17,10 @@
         "homepage": null,
         "owner": "KokaKiwi",
         "repo": "nur-packages",
-        "rev": "382b7e479f2ed7db055204649ae871343922344c",
-        "sha256": "0fkhprzlpd5n4ladw9l3vzgbicrfmcq1fs4v4682y36f94dcc8j9",
+        "rev": "d2c8d99d4ff1651e233fd810fcf41d035223fead",
+        "sha256": "00dlh26qydflm0f45bfjbpq5vvlyaddggcwpvl4vpfm0j3dvlgfk",
         "type": "tarball",
-        "url": "https://github.com/KokaKiwi/nur-packages/archive/382b7e479f2ed7db055204649ae871343922344c.tar.gz",
+        "url": "https://github.com/KokaKiwi/nur-packages/archive/d2c8d99d4ff1651e233fd810fcf41d035223fead.tar.gz",
         "url_template": "https://github.com/<owner>/<repo>/archive/<rev>.tar.gz"
     }
 }
