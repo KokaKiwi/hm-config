@@ -9,7 +9,7 @@ let
     "nix-index" "discord" "glow" "glab"
     "password-store" "pgcli" "yt-dlp"
     "nvchecker" "element" "ferdium"
-    "litecli" "hyfetch"
+    "litecli" "hyfetch" "fd"
   ];
   enabledServices = [
     "gpg-agent" "mopidy" "pueue"

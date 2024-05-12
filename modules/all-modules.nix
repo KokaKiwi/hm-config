@@ -15,6 +15,7 @@
     ./programs/bat.nix
     ./programs/discord.nix
     ./programs/element.nix
+    ./programs/fd.nix
     ./programs/ferdium.nix
     ./programs/fish.nix
     ./programs/gh.nix
