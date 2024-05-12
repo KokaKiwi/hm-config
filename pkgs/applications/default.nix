@@ -3,12 +3,15 @@
   cargo-shell = callPackage ./cargo-shell {
     rustPlatform = pkgs.fenixStableRustPlatform;
   };
-  glab = callPackage ./glab {};
+  glab = callPackage ./glab { };
   mise = callPackage ./mise {
     rustPlatform = pkgs.fenixStableRustPlatform;
   };
-  module-server = callPackage ./module-server {};
+  module-server = callPackage ./module-server { };
   mux = callPackage ./mux {
+    rustPlatform = pkgs.fenixStableRustPlatform;
+  };
+  onefetch = callPackage ./onefetch {
     rustPlatform = pkgs.fenixStableRustPlatform;
   };
   pdm = callPackage ./pdm {
