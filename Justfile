@@ -6,7 +6,7 @@ _run-shell COMMAND:
 build: (_run-shell 'build')
 switch: (_run-shell 'switch')
 build-package NAME: (_run-shell ('buildPackage ' + quote(NAME)))
-update-package NAME: (_run-shell ('updatePackage ' + quote(NAME)))
+update-package NAME *ARGS: (_run-shell ('updatePackage ' + quote(NAME) + ' ' + ARGS))
 list-packages: (_run-shell 'listPackages')
 option PATH: (_run-shell ('showOption ' + quote(PATH)))
 
