@@ -25,7 +25,7 @@ in {
     eza hexyl pdm
     cargo-shell opentofu gleam mergerfs
     nil niv nix-info nix-init nurl
-    nix-output-monitor nixd
+    nix-output-monitor nixd nix-update
     procs skopeo uv
     onefetch tokei
   ];

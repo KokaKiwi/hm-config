@@ -9,6 +9,7 @@ in pkgs.mkShell {
     config.nix.package
     nix-output-monitor
     nixos-option
+    nix-update
   ];
 
   shellHook = ''
@@ -47,6 +48,12 @@ in pkgs.mkShell {
         --options_expr "(import ./default.nix).options" \
         --config_expr "(import ./default.nix).config" \
         "$@"
+    }
+
+    updatePackage() {
+      local name="$1"; shift
+
+      nix-update "pkgs.$name" "$@"
     }
   '';
 }
