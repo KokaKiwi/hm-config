@@ -13,16 +13,16 @@
 , openssl
 }: rustPlatform.buildRustPackage rec {
   pname = "mise";
-  version = "2024.5.5";
+  version = "2024.5.7";
 
   src = fetchFromGitHub {
     owner = "jdx";
     repo = "mise";
     rev = "v${version}";
-    hash = "sha256-v1UVglkgt+r5FW84ztSdo9ziEVn6gycw5u45TeZ95bs=";
+    hash = "sha256-2DLMpgXConSljTczYHaikVu9uY4Cifz/oH2nTAyUlCA=";
   };
 
-  cargoHash = "sha256-aVz0mqN8sExHpDaJFJa/GZfTXADLWjQ4cRCTXa0Njbs=";
+  cargoHash = "sha256-CZfF+99i8oGauo9m1TaBS4mth0gNKn7UHWdAqLvgCwI=";
 
   nativeBuildInputs = [ addUsageCompletion installShellFiles pkg-config ];
   buildInputs = [ openssl ];
@@ -61,9 +61,11 @@
       --zsh ./completions/_mise
   '';
 
-  meta = with lib; {
+  meta = {
     homepage = "https://mise.jdx.dev";
-    license = licenses.mit;
+    description = "The front-end to your dev env";
+    changelog = "https://github.com/jdx/mise/releases/tag/v${version}";
+    license = lib.licenses.mit;
     mainProgram = "mise";
   };
 }
