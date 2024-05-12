@@ -26,7 +26,7 @@ in {
         systems = [ "x86_64-linux" ];
         identityFile = "/root/.ssh/id_nix";
         maxJobs = 6;
-        speedFactor = 4;
+        speedFactor = 3;
       };
       nix-alyx = {
         enable = false;
