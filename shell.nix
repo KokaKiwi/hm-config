@@ -1,5 +1,5 @@
 let
-  env = import ./default.nix;
+  env = import ./default.nix { };
 
   inherit (env) config pkgs;
 in pkgs.mkShell {
