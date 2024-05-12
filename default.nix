@@ -9,6 +9,10 @@ let
       })
     ];
 
+    config = {
+      allowUnfree = true;
+    };
+
     localSystem = {
       system = "x86_64-linux";
     };
