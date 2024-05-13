@@ -1,17 +1,9 @@
-{ pkgs, sources, ... }:
+{ pkgs, ... }:
 let
-  mkPlugin = name: source: {
-    inherit name;
-    src = sources."fish/${name}";
-  };
-  plugins = [ ];
-
   build-package-expr = "{ ... }@args: (import <nixpkgs> {}).callPackage ./default.nix args";
 in {
   programs.fish = {
     package = pkgs.fish;
-
-    plugins = map mkPlugin plugins;
 
     functions = {
       copy = ''
@@ -82,6 +74,8 @@ in {
       set fish_greeting
 
       source /etc/profile.d/nix-daemon.fish
+
+      ${pkgs.any-nix-shell}/bin/any-nix-shell fish | source
     '';
   };
 }
