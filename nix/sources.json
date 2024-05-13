@@ -29,10 +29,10 @@
         "homepage": "",
         "owner": "catppuccin",
         "repo": "nix",
-        "rev": "deff55c9027a98eee6af07a630f4a7764598fa4a",
-        "sha256": "1k4zc2ijwaifbc8y1jcsx9rjgz2hg4hvg4l74ib23gbd34b8i9kn",
+        "rev": "29239aefd3532f46ee681e48987b0ce4db98d4a6",
+        "sha256": "0xfhl4mkc5f2dwzg69lxw2ak6gy4nh68dradv3awjcayzg3hrr5a",
         "type": "tarball",
-        "url": "https://github.com/catppuccin/nix/archive/deff55c9027a98eee6af07a630f4a7764598fa4a.tar.gz",
+        "url": "https://github.com/catppuccin/nix/archive/29239aefd3532f46ee681e48987b0ce4db98d4a6.tar.gz",
         "url_template": "https://github.com/<owner>/<repo>/archive/<rev>.tar.gz"
     },
     "colmena": {

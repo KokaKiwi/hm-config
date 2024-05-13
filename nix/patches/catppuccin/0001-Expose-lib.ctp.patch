@@ -1,0 +1,25 @@
+From d13b11d991586c51fc8159844dcbaed75cc1dab4 Mon Sep 17 00:00:00 2001
+From: KokaKiwi <kokakiwi+git@kokakiwi.net>
+Date: Mon, 13 May 2024 23:56:30 +0200
+Subject: [PATCH] Expose lib.ctp
+
+---
+ modules/home-manager/globals.nix | 4 ++++
+ 1 file changed, 4 insertions(+)
+
+diff --git a/modules/home-manager/globals.nix b/modules/home-manager/globals.nix
+index 1c9b1f8..d19e990 100644
+--- a/modules/home-manager/globals.nix
++++ b/modules/home-manager/globals.nix
+@@ -23,4 +23,8 @@
+       description = "Port sources used across all options";
+     };
+   };
++
++  config.lib = {
++    inherit (lib) ctp;
++  };
+ }
+-- 
+2.44.0
+
