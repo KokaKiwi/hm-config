@@ -55,5 +55,13 @@ in pkgs.mkShell {
 
       nix-update "pkgs.$name" "$@"
     }
+
+    copyPackage() {
+      local src="$1"
+      local dst="$2"
+
+      cp -Tr ${pkgs.path}/pkgs/$src pkgs/$dst
+      chmod -R +w pkgs
+    }
   '';
 }
