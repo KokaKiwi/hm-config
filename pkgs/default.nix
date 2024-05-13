@@ -55,10 +55,6 @@ let
       rustPlatform = fenixStableRustPlatform;
       clientOnly = true;
     };
-
-    niv = (import sources.niv {
-      inherit pkgs;
-    }).niv;
   };
 
   overrides = {

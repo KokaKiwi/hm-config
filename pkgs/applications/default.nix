@@ -1,5 +1,7 @@
 { pkgs, super, callPackage }:
-{
+let
+  inherit (pkgs) haskellPackages;
+in {
   ast-grep = callPackage ./ast-grep {
     rustPlatform = pkgs.fenixStableRustPlatform;
   };
@@ -17,6 +19,7 @@
   mux = callPackage ./mux {
     rustPlatform = pkgs.fenixStableRustPlatform;
   };
+  niv = haskellPackages.callPackage ./niv { };
   onefetch = callPackage ./onefetch {
     rustPlatform = pkgs.fenixStableRustPlatform;
   };
