@@ -28,6 +28,7 @@ in {
     nix-output-monitor nixd nix-update
     procs skopeo uv
     onefetch tokei ast-grep
+    nur.repos.kokakiwi.go-mod-upgrade
   ];
 
   home.sessionVariables = {
