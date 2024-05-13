@@ -1,4 +1,4 @@
-{ pkgs, lib, ... }:
+{ config, pkgs, lib, ... }:
 with lib;
 let
   enabledPrograms = [
@@ -16,6 +16,12 @@ let
     "module-server" "aria2" "kubo"
   ];
 
+  packages = {
+    npins = pkgs.npins.override {
+      nix = config.nix.package;
+    };
+  };
+
   enableNames = flip genAttrs (name: {
     enable = true;
   });
@@ -24,12 +30,12 @@ in {
     attic-client colmena
     eza hexyl pdm
     cargo-shell opentofu gleam mergerfs
-    niv.bin nix-info nix-init nurl
+    nix-info nix-init nurl
     nix-output-monitor nixd nix-update
     procs skopeo uv
     onefetch tokei ast-grep
     nur.repos.kokakiwi.go-mod-upgrade
-  ];
+  ] ++ (attrValues packages);
 
   home.sessionVariables = {
     EDITOR = "$(which nvim)";

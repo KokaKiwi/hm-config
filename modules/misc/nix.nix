@@ -1,7 +1,5 @@
-{ pkgs, ... }:
+{ pkgs, sources, ... }:
 let
-  sources = import ../../nix;
-
   nix = pkgs.nixVersions.nix_2_22;
 in {
   imports = [

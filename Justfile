@@ -15,15 +15,14 @@ repl:
   nix repl --file default.nix
 
 update *NAMES:
-  niv update {{NAMES}}
+  npins update {{NAMES}}
 
 commit-update NAMES:
-  git add nix
-  git commit -m 'chore: Update dependencies ({{NAMES}})'
+  git add npins && git commit -m 'chore(deps): Update ({{NAMES}})'
 
 update-nur:
-  niv -s nix/sources-nur.json update
-  -git add nix/sources-nur.json && git commit -m 'chore(deps): Update NUR'
+  npins -d npins/nur update
+  -git add npins/nur && git commit -m 'chore(deps): Update NUR'
 
 push:
   git push -f origin main

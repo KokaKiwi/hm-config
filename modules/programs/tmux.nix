@@ -4,7 +4,7 @@ let
   tmux-loadavg = pkgs.tmuxPlugins.mkTmuxPlugin {
     pluginName = "tmux-loadavg";
     rtpFilePath = "tmux-loadavg.tmux";
-    version = builtins.substring 0 8 sources.tmux-loadavg.rev;
+    version = builtins.substring 0 8 sources.tmux-loadavg.revision;
     src = sources.tmux-loadavg;
   };
 in {

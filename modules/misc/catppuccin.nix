@@ -1,7 +1,5 @@
-{ ... }:
-let
-  sources = import ../../nix;
-in {
+{ sources, ... }:
+{
   imports = [
     "${sources.catppuccin}/modules/home-manager"
   ];

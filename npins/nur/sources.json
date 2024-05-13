@@ -1,0 +1,29 @@
+{
+  "pins": {
+    "nur": {
+      "type": "Git",
+      "repository": {
+        "type": "GitHub",
+        "owner": "nix-community",
+        "repo": "nur"
+      },
+      "branch": "master",
+      "revision": "32532029fd0522f46f8d987c0f3bb6c6c2d3947e",
+      "url": "https://github.com/nix-community/nur/archive/32532029fd0522f46f8d987c0f3bb6c6c2d3947e.tar.gz",
+      "hash": "0h54qlcix2dnrhhwl70z2g6wy6xmjlnsshl95c42573vavrc2714"
+    },
+    "nur/kokakiwi": {
+      "type": "Git",
+      "repository": {
+        "type": "GitHub",
+        "owner": "KokaKiwi",
+        "repo": "nur-packages"
+      },
+      "branch": "main",
+      "revision": "c764969f514e8d10fd370d68efd2d85fdc6d9cb3",
+      "url": "https://github.com/KokaKiwi/nur-packages/archive/c764969f514e8d10fd370d68efd2d85fdc6d9cb3.tar.gz",
+      "hash": "1yyn4fg0gd7nawkxyffljrdzyps87dni2bpqcg57mr3qbnjamd7j"
+    }
+  },
+  "version": 3
+}

@@ -1,8 +1,6 @@
-{ config, pkgs, lib, ... }:
+{ config, pkgs, lib, sources, ... }:
 with lib;
 let
-  sources = import ../../nix;
-
   entries = import ../../secrets/secrets.nix;
   secrets = mapAttrs' (name: { path ? null, ... }@entry:
     let
