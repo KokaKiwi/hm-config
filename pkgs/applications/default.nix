@@ -1,5 +1,8 @@
 { pkgs, super, callPackage }:
 {
+  ast-grep = callPackage ./ast-grep {
+    rustPlatform = pkgs.fenixStableRustPlatform;
+  };
   cargo-shell = callPackage ./cargo-shell {
     rustPlatform = pkgs.fenixStableRustPlatform;
   };

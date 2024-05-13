@@ -27,7 +27,7 @@ in {
     niv nix-info nix-init nurl
     nix-output-monitor nixd nix-update
     procs skopeo uv
-    onefetch tokei
+    onefetch tokei ast-grep
   ];
 
   home.sessionVariables = {
