@@ -36,6 +36,7 @@ in {
       };
 
       aur = {
+        host = "aur aur.archlinux.org";
         hostname = "aur.archlinux.org";
         user = "aur";
         identityFile = "~/.ssh/id_aur";
