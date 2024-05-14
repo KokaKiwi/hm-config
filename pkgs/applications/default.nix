@@ -1,5 +1,7 @@
 { pkgs, callPackage }:
-{
+let
+  python3Packages = pkgs.python312Packages;
+in {
   ast-grep = callPackage ./ast-grep {
     rustPlatform = pkgs.fenixStableRustPlatform;
   };
@@ -26,6 +28,7 @@
   pdm = callPackage ./pdm {
     python3 = pkgs.python312;
   };
+  pgcli = python3Packages.callPackage ./pgcli { };
   usage = callPackage ./usage {
     rustPlatform = pkgs.fenixStableRustPlatform;
   };
