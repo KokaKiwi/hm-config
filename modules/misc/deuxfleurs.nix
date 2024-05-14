@@ -29,7 +29,7 @@ let
       names = [
         "concombre" "courgette" "celeri" "dahlia" "diplotaxis"
         "doradille" "df-ykl" "df-ymf" "df-ymk" "abricot"
-        "ananas"
+        "ananas" "onion"
       ];
       hostname = "%h.machine.deuxfleurs.fr";
     };
