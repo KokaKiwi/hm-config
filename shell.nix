@@ -2,8 +2,9 @@ let
   env = import ./default.nix { };
 
   inherit (env) config pkgs;
+  inherit (pkgs) lib;
 in pkgs.mkShell {
-  buildInputs = with pkgs; [
+   packages = with pkgs; [
     gitMinimal
     jq
     config.nix.package
@@ -39,14 +40,19 @@ in pkgs.mkShell {
     }
 
     listPackages() {
-      local outPath=$(nix profile list --json | jq -r '.elements."home-manager-path".storePaths[0]')
-      nix-store -q --references "$outPath" | sed 's/[^-]*-//' | sort --ignore-case
+      nix-instantiate --eval --strict --json --expr ${lib.escapeShellArg ''
+        let
+          env = (import ./default.nix {}).env;
+          inherit (env) pkgs homePackages;
+          inherit (pkgs) lib;
+        in lib.mapAttrs (name: drv: drv.version) homePackages
+      ''} | jq -r 'to_entries | map("\(.key) \(.value)") | .[]'
     }
 
     showOption() {
       nixos-option \
-        --options_expr "(import ./default.nix).options" \
-        --config_expr "(import ./default.nix).config" \
+        --options_expr "(import ./default.nix {}).options" \
+        --config_expr "(import ./default.nix {}).config" \
         "$@"
     }
 

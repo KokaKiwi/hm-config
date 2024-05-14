@@ -12,7 +12,7 @@ list-packages: (_run-shell 'listPackages')
 option PATH: (_run-shell ('showOption ' + quote(PATH)))
 
 repl:
-  nix repl --file default.nix
+  nix repl --expr '(import ./default.nix { }).env'
 
 update *NAMES:
   npins update {{NAMES}}

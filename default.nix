@@ -18,6 +18,8 @@ let
       system = "x86_64-linux";
     };
   };
+  inherit (pkgs) lib;
+
   module = import "${sources.home-manager}/modules" {
     configuration = ./home.nix;
 
@@ -29,7 +31,15 @@ let
       actualPkgs = pkgs;
     };
   };
-in module.activationPackage // {
-  inherit module;
-  inherit (module) config options pkgs;
-}
+
+  homePackages = with lib; let
+    packages = module.config.home.packages;
+    namedPackages = flip filter packages (drv: drv ? pname);
+  in builtins.listToAttrs (flip map namedPackages (drv: nameValuePair drv.pname drv));
+
+  env = {
+    inherit module;
+    inherit (module) config options pkgs;
+    inherit homePackages;
+  };
+in module.activationPackage // env // { inherit env; }
