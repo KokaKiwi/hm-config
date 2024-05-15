@@ -68,9 +68,9 @@
         "repo": "fenix"
       },
       "branch": "main",
-      "revision": "2c4905096782e8e908205e7fa54ef987fba62793",
-      "url": "https://github.com/nix-community/fenix/archive/2c4905096782e8e908205e7fa54ef987fba62793.tar.gz",
-      "hash": "0wh21ymqb4zbhghym8z3qm0zzkpp3v1hzp5077r6spadglifz67w"
+      "revision": "795a549e443c9690a74a042408600f13091e8b51",
+      "url": "https://github.com/nix-community/fenix/archive/795a549e443c9690a74a042408600f13091e8b51.tar.gz",
+      "hash": "0axy193dbzpbfpj3v1d059y766gqn5pr40rd67ql7zn3y137ww5v"
     },
     "home-manager": {
       "type": "Git",
