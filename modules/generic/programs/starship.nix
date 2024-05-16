@@ -1,14 +1,10 @@
-{ config, pkgs, lib, ... }:
+{ config, lib, ... }:
 with lib;
 let
   cfg = config.programs.starship;
 
-  generatePreset = name: let
-    presetSource = pkgs.runCommandLocal "starship-preset-${name}.toml" { } ''
-      export HOME=$(mktemp -d)
-      ${cfg.package}/bin/starship preset ${name} -o $out
-    '';
-  in importTOML presetSource.outPath;
+  mkPreset = name:
+    importTOML "${cfg.package.src}/docs/public/presets/toml/${name}.toml";
 in {
   options.programs.starship = {
     transience = {
@@ -60,7 +56,7 @@ in {
       '';
     })
     {
-      programs.starship.settings = mkMerge (map generatePreset cfg.presets);
+      programs.starship.settings = mkMerge (map mkPreset cfg.presets);
     }
   ];
 }
