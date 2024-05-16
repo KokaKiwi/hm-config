@@ -29,6 +29,9 @@ in {
     python3 = pkgs.python312;
   };
   pgcli = python3Packages.callPackage ./pgcli { };
+  starship = callPackage ./starship {
+    rustPlatform = pkgs.fenixStableRustPlatform;
+  };
   usage = callPackage ./usage {
     rustPlatform = pkgs.fenixStableRustPlatform;
   };

@@ -4,11 +4,9 @@ let
   cfg = config.programs.starship;
 
   generatePreset = name: let
-    presetSource = pkgs.runCommandLocal "starship-preset-${name}.toml" {
-      buildInputs = [ cfg.package ];
-    } ''
+    presetSource = pkgs.runCommandLocal "starship-preset-${name}.toml" { } ''
       export HOME=$(mktemp -d)
-      starship preset ${name} -o $out
+      ${cfg.package}/bin/starship preset ${name} -o $out
     '';
   in importTOML presetSource.outPath;
 in {
