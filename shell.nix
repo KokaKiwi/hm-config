@@ -4,7 +4,9 @@ let
   inherit (env) config pkgs;
   inherit (pkgs) lib;
 
-  update = import ./scripts/update.nix env;
+  update = import ./scripts/update.nix (env // {
+    doWarn = false;
+  });
 in pkgs.mkShell {
    packages = with pkgs; [
     gitMinimal

@@ -1,5 +1,6 @@
 { pkgs
 , homePackages
+, doWarn ? true
 , ...
 }:
 let
@@ -9,7 +10,7 @@ let
   toml = pkgs.formats.toml { };
 
   ignorePackages = [
-    # Let's nixpkgs update this one
+    # Let's nixpkgs update these one
     "nix"
     # WIP
     "hub"
@@ -54,7 +55,9 @@ let
     pypi = builtins.match "mirror://pypi/./([^/]+)/.*" src.url;
     cratesio = builtins.match "https://crates.io/api/v1/crates/([^/]+)/.*" src.url;
 
-    unknownUrl = builtins.trace "Unrecognized URL: ${src.url}" null;
+    unknownUrl = if doWarn
+      then builtins.trace "WARNING: Unrecognized URL: ${src.url}" null
+      else null;
 
     baseConfig = let
       githubOwner = builtins.elemAt github 0;
