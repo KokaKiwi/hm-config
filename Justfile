@@ -10,6 +10,7 @@ update-package NAME *ARGS: (_run-shell ('updatePackage ' + quote(NAME) + ' ' + A
 copy-package SRC DST: (_run-shell ('copyPackage ' + quote(SRC) + ' ' + quote(DST)))
 list-packages: (_run-shell 'listPackages')
 option PATH: (_run-shell ('showOption ' + quote(PATH)))
+check: (_run-shell 'checkUpdates')
 
 repl:
   nix repl --expr '(import ./default.nix { }).env'
@@ -26,9 +27,6 @@ update-nur:
 
 push:
   git push -f origin main
-
-check:
-  nvchecker -c .nvchecker.toml
 
 clean:
   -rm result*

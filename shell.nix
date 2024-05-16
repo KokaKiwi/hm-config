@@ -3,6 +3,8 @@ let
 
   inherit (env) config pkgs;
   inherit (pkgs) lib;
+
+  update = import ./scripts/update.nix env;
 in pkgs.mkShell {
    packages = with pkgs; [
     gitMinimal
@@ -68,6 +70,10 @@ in pkgs.mkShell {
 
       cp -Tr ${pkgs.path}/pkgs/$src pkgs/$dst
       chmod -R +w pkgs
+    }
+
+    checkUpdates() {
+      ${update.checkUpdates}
     }
   '';
 }
