@@ -11,6 +11,9 @@ in {
   cargo-shell = callPackage ./cargo-shell {
     rustPlatform = pkgs.fenixStableRustPlatform;
   };
+  eza = callPackage ./eza {
+    rustPlatform = pkgs.fenixStableRustPlatform;
+  };
   fd = callPackage ./fd {
     rustPlatform = pkgs.fenixStableRustPlatform;
   };
@@ -34,6 +37,7 @@ in {
     inherit python3;
   };
   pgcli = python3Packages.callPackage ./pgcli { };
+  skopeo = callPackage ./skopeo { };
   starship = callPackage ./starship {
     rustPlatform = pkgs.fenixStableRustPlatform;
   };
