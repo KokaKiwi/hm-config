@@ -5,24 +5,37 @@
 let
   inherit (pkgs) lib;
 
-  root = toString ../.;
-
   json = pkgs.formats.json { };
   toml = pkgs.formats.toml { };
 
-  ignorePackages = [ "hub" "nix" ];
+  ignorePackages = [
+    # Let's nixpkgs update this one
+    "nix"
+    # WIP
+    "hub"
+    # My own packages
+    "cargo-shell" "mux"
+  ];
   packages = lib.filterAttrs (name: drv: let
     hasUrl = drv ? src && drv.src ? url;
     isIgnored = builtins.elem name ignorePackages;
   in hasUrl && !isIgnored) homePackages;
 
   entryConfigs = {
+    glab.source = {
+      source = "gitlab";
+      gitlab = "gitlab-org/cli";
+      use_max_tag = true;
+      prefix = "v";
+    };
+
     aria2.config.prefix = "release-";
     gleam.config.prefix = "v";
     kitty.config.prefix = "v";
     kubo.config.prefix = "v";
     obsidian.config.prefix = "v";
     zoxide.config.prefix = "v";
+
     pgcli.overrides.use_latest_tag = true;
   };
 
@@ -37,24 +50,41 @@ let
   mkEntry = name: drv: let
     inherit (drv) src;
 
-    github = builtins.match "https://github.com/([^/]+)/([^/]+)(/(.*))?" src.url;
+    github = builtins.match "https://github.com/([^/]+)/([^/]+)(/.*)?" src.url;
+    pypi = builtins.match "mirror://pypi/./([^/]+)/.*" src.url;
+    cratesio = builtins.match "https://crates.io/api/v1/crates/([^/]+)/.*" src.url;
+
+    unknownUrl = builtins.trace "Unrecognized URL: ${src.url}" null;
 
     baseConfig = let
       githubOwner = builtins.elemAt github 0;
       githubRepo = lib.removeSuffix ".git" (builtins.elemAt github 1);
-    in if github != null then {
+
+      pypiName = builtins.elemAt pypi 0;
+
+      cratesioName = builtins.elemAt cratesio 0;
+    in if entryConfigs ? ${name}.source then entryConfigs.${name}.source
+    else if github != null then {
       source = "github";
       github = "${githubOwner}/${githubRepo}";
       use_latest_release = true;
     } // lib.optionalAttrs (src ? rev && lib.hasPrefix "v" src.rev) {
       prefix = "v";
     }
+    else if pypi != null then {
+      source = "pypi";
+      pypi = pypiName;
+    }
+    else if cratesio != null then {
+      source = "cratesio";
+      cratesio = cratesioName;
+    }
     else null;
     config = if baseConfig != null
       then baseConfig
       // entryConfigs.${name}.config or { }
       // entryConfigs.${name}.overrides or { }
-      else null;
+      else unknownUrl;
   in if config == null then null else {
     ${name} = config;
   };
