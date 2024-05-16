@@ -15,7 +15,7 @@ in {
     cargo-shell opentofu gleam mergerfs
     nix-info nix-init nurl
     nix-output-monitor nixd nix-update
-    procs skopeo uv
+    procs skopeo
     onefetch tokei ast-grep
     nur.repos.kokakiwi.go-mod-upgrade
   ] ++ (lib.attrValues packages);
