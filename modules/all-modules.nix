@@ -9,6 +9,7 @@
     ./misc/music.nix
     ./misc/nix.nix
     ./misc/opengl.nix
+    ./misc/packages.nix
     ./misc/secrets.nix
     ./misc/systemd.nix
 

@@ -1,6 +1,9 @@
 { pkgs, callPackage }:
 let
-  python3Packages = pkgs.python312Packages;
+  inherit (pkgs) libsForQt5;
+
+  python3 = pkgs.python312;
+  python3Packages = python3.pkgs;
 in {
   ast-grep = callPackage ./ast-grep {
     rustPlatform = pkgs.fenixStableRustPlatform;
@@ -12,6 +15,8 @@ in {
     rustPlatform = pkgs.fenixStableRustPlatform;
   };
   glab = callPackage ./glab { };
+  jellyfin-media-player = libsForQt5.callPackage ./jellyfin-media-player {
+  };
   mise = callPackage ./mise {
     rustPlatform = pkgs.fenixStableRustPlatform;
   };
@@ -26,7 +31,7 @@ in {
     rustPlatform = pkgs.fenixStableRustPlatform;
   };
   pdm = callPackage ./pdm {
-    python3 = pkgs.python312;
+    inherit python3;
   };
   pgcli = python3Packages.callPackage ./pgcli { };
   starship = callPackage ./starship {
