@@ -34,8 +34,8 @@ let
 
   homePackages = with lib; let
     packages = module.config.home.packages;
-    namedPackages = flip filter packages (drv: drv ? pname);
-  in builtins.listToAttrs (flip map namedPackages (drv: nameValuePair drv.pname drv));
+    namedPackages = filter (drv: drv ? pname) packages;
+  in builtins.listToAttrs (map (drv: nameValuePair drv.pname drv) namedPackages);
 
   env = {
     inherit module;

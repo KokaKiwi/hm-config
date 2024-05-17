@@ -45,6 +45,12 @@ in pkgs.mkShell {
       NIXPKGS_ALLOW_BROKEN=1 nom-build -A "pkgs.$name"
     }
 
+    buildHomePackage() {
+      local name="$1"
+
+      NIXPKGS_ALLOW_BROKEN=1 nom-build -A "homePackages.$name"
+    }
+
     listPackages() {
       nix-instantiate --eval --strict --json --expr ${lib.escapeShellArg ''
         let

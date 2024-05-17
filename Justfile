@@ -6,6 +6,7 @@ _run-shell COMMAND *ARGS:
 build: (_run-shell 'build')
 switch: (_run-shell 'switch')
 build-package NAME: (_run-shell ('buildPackage ' + quote(NAME)))
+build-home-package NAME: (_run-shell ('buildHomePackage ' + quote(NAME)))
 update-package NAME *ARGS: (_run-shell ('updatePackage ' + quote(NAME) + ' ' + ARGS))
 copy-package SRC DST: (_run-shell ('copyPackage ' + quote(SRC) + ' ' + quote(DST)))
 list-packages: (_run-shell 'listPackages')
