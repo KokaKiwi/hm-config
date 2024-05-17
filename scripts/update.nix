@@ -12,6 +12,8 @@ let
   ignorePackages = [
     # Let's nixpkgs update these one
     "nix"
+    # Too old
+    "hub"
     # My own packages
     "cargo-shell" "mux"
   ];
