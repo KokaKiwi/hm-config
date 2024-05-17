@@ -8,9 +8,9 @@
         "repo": "nur"
       },
       "branch": "master",
-      "revision": "12c94e6547b7432466087c3698795dcea329dfdb",
-      "url": "https://github.com/nix-community/nur/archive/12c94e6547b7432466087c3698795dcea329dfdb.tar.gz",
-      "hash": "06yk99jdl6fwa2grj6yr0lhihq3j4m8pr76dcbp79fw6adn2lxgb"
+      "revision": "d573ea71f82e0355ed0074039ce4c1cf75631e5b",
+      "url": "https://github.com/nix-community/nur/archive/d573ea71f82e0355ed0074039ce4c1cf75631e5b.tar.gz",
+      "hash": "08mbawwiwb7m8w563bchh5fx27p1k3jckv4s71pfhdliwf1p8pz6"
     },
     "nur/kokakiwi": {
       "type": "Git",
