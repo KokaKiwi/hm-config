@@ -1,7 +1,7 @@
 _default:
 
-_run-shell COMMAND:
-  nix-shell --run '{{COMMAND}}'
+_run-shell COMMAND *ARGS:
+  nix-shell {{ARGS}} --run '{{COMMAND}}'
 
 build: (_run-shell 'build')
 switch: (_run-shell 'switch')
@@ -10,7 +10,7 @@ update-package NAME *ARGS: (_run-shell ('updatePackage ' + quote(NAME) + ' ' + A
 copy-package SRC DST: (_run-shell ('copyPackage ' + quote(SRC) + ' ' + quote(DST)))
 list-packages: (_run-shell 'listPackages')
 option PATH: (_run-shell ('showOption ' + quote(PATH)))
-check: (_run-shell 'checkUpdates')
+check: (_run-shell 'checkUpdates' '--arg doWarn true')
 
 repl:
   nix repl --expr '(import ./default.nix { }).env'

@@ -1,3 +1,5 @@
+{ doWarn ? false
+}:
 let
   env = import ./default.nix { };
 
@@ -5,7 +7,7 @@ let
   inherit (pkgs) lib;
 
   update = import ./scripts/update.nix (env // {
-    doWarn = false;
+    inherit doWarn;
   });
 in pkgs.mkShell {
    packages = with pkgs; [
