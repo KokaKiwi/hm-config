@@ -12,8 +12,6 @@ let
   ignorePackages = [
     # Let's nixpkgs update these one
     "nix"
-    # WIP
-    "hub"
     # My own packages
     "cargo-shell" "mux"
   ];
@@ -55,9 +53,7 @@ let
     pypi = builtins.match "mirror://pypi/./([^/]+)/.*" src.url;
     cratesio = builtins.match "https://crates.io/api/v1/crates/([^/]+)/.*" src.url;
 
-    unknownUrl = if doWarn
-      then builtins.trace "WARNING: Unrecognized URL: ${src.url}" null
-      else null;
+    unknownUrl = lib.traceIf doWarn "WARNING: Unrecognized URL: ${src.url}" null;
 
     baseConfig = let
       githubOwner = builtins.elemAt github 0;
