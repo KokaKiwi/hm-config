@@ -29,6 +29,16 @@ let
       use_max_tag = true;
       prefix = "v";
     };
+    git-with-svn.source = {
+      source = "archpkg";
+      archpkg = "git";
+      strip_release = true;
+    };
+    gnupg.source = {
+      source = "archpkg";
+      archpkg = "gnupg";
+      strip_release = true;
+    };
 
     aria2.config.prefix = "release-";
     gleam.config.prefix = "v";
