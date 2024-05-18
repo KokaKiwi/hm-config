@@ -11,6 +11,7 @@ with lib;
   home.homeDirectory = "/home/kokakiwi";
 
   home.preferXdgDirectories = true;
+  home.enableDebugInfo = true;
 
   xdg.enable = true;
   programs.man.enable = false;

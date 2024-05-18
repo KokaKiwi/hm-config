@@ -40,6 +40,7 @@ let
   env = {
     inherit module;
     inherit (module) config options pkgs;
+    inherit (module.pkgs) lib;
     inherit homePackages;
   };
 in module.activationPackage // env // { inherit env; }
