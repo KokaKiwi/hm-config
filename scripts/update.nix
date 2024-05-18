@@ -27,7 +27,6 @@ let
       source = "gitlab";
       gitlab = "gitlab-org/cli";
       use_max_tag = true;
-      prefix = "v";
     };
     git-with-svn.source = {
       source = "archpkg";
@@ -38,6 +37,18 @@ let
       source = "archpkg";
       archpkg = "gnupg";
       strip_release = true;
+    };
+    ncmpcpp.source = {
+      source = "archpkg";
+      archpkg = "ncmpcpp";
+      strip_release = true;
+    };
+    nix-output-monitor.source = {
+      source = "gitea";
+      host = "code.maralorn.de";
+      gitea = "maralorn/nix-output-monitor";
+      use_max_tag = true;
+      prefix = "v";
     };
 
     aria2.config.prefix = "release-";
@@ -79,8 +90,6 @@ let
       source = "github";
       github = "${githubOwner}/${githubRepo}";
       use_latest_release = true;
-    } // lib.optionalAttrs (src ? rev && lib.hasPrefix "v" src.rev) {
-      prefix = "v";
     }
     else if pypi != null then {
       source = "pypi";
@@ -93,6 +102,9 @@ let
     else null;
     config = if baseConfig != null
       then baseConfig
+      // lib.optionalAttrs (src ? rev && lib.hasPrefix "v" src.rev) {
+        prefix = "v";
+      }
       // entryConfigs.${name}.config or { }
       // entryConfigs.${name}.overrides or { }
       else unknownUrl;
