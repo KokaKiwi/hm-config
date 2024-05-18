@@ -89,7 +89,7 @@ let
     else if github != null then {
       source = "github";
       github = "${githubOwner}/${githubRepo}";
-      use_latest_release = true;
+      use_max_tag = true;
     }
     else if pypi != null then {
       source = "pypi";
@@ -102,10 +102,13 @@ let
     else null;
     config = if baseConfig != null
       then baseConfig
+      // entryConfigs.${name}.config or { }
       // lib.optionalAttrs (src ? rev && lib.hasPrefix "v" src.rev) {
         prefix = "v";
       }
-      // entryConfigs.${name}.config or { }
+      // {
+        exclude_regex = ".*-(alpha|beta|rc).*";
+      }
       // entryConfigs.${name}.overrides or { }
       else unknownUrl;
   in if config == null then null else {
