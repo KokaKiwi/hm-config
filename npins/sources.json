@@ -87,8 +87,8 @@
     "nixpkgs": {
       "type": "Channel",
       "name": "nixpkgs-unstable",
-      "url": "https://releases.nixos.org/nixpkgs/nixpkgs-24.05pre627860.0837fbf22736/nixexprs.tar.xz",
-      "hash": "0wbyrgp8pp08flkkx5ajmj8lmbpg13g1hrm0n4b0bz3z6sd837w0"
+      "url": "https://releases.nixos.org/nixpkgs/nixpkgs-24.05pre627947.63d3e5d82edf/nixexprs.tar.xz",
+      "hash": "0ms2yfm7wgzsikwdi6l77dp9q7bpj293f1m79gg3chqvikl8g5y4"
     },
     "tmux-loadavg": {
       "type": "Git",
