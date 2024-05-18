@@ -3,11 +3,17 @@ with lib;
 let
   cfg = config.programs.ferdium;
 
-  ferdium = pkgs.nur.repos.kokakiwi.ferdium;
+  packageLib = config.lib.package;
 in {
   programs.ferdium = {
-    package = pkgs.writeShellScriptBin "ferdium" ''
-      ELECTRON_IS_DEV=0 exec /usr/bin/electron ${ferdium}/share/ferdium "$@"
+    package = let
+      ferdium = pkgs.nur.repos.kokakiwi.ferdium;
+      launcher = pkgs.writeShellScript "ferdium" ''
+        ELECTRON_IS_DEV=0 exec /usr/bin/electron ${ferdium}/share/ferdium "$@"
+      '';
+    in packageLib.wrapPackage ferdium { } ''
+      rm -f $out/bin/ferdium
+      cp -T ${launcher} $out/bin/ferdium
     '';
   };
 
@@ -16,7 +22,7 @@ in {
       name = "Ferdium";
       exec = "${getExe cfg.package} %U";
       terminal = false;
-      icon = "${ferdium}/share/icons/hicolor/128x128/apps/ferdium.png";
+      icon = "${cfg.package}/share/icons/hicolor/128x128/apps/ferdium.png";
       comment = "Ferdium is your messaging app and combines chat & messaging services into one application.";
       mimeTypes = [ "x-scheme-handler/ferdium" ];
       categories = [ "Network" "InstantMessaging" ];

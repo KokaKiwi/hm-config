@@ -2,6 +2,8 @@
   imports = [
     ./generic/all-modules.nix
 
+    ./lib/package.nix
+
     ./misc/catppuccin.nix
     ./misc/deuxfleurs.nix
     ./misc/files.nix

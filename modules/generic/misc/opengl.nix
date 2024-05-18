@@ -2,6 +2,8 @@
 with lib;
 let
   cfg = config.opengl;
+
+  packageLib = config.lib.package;
 in {
   options.opengl = {
     vaDrivers = mkOption {
@@ -21,35 +23,21 @@ in {
           (makeSearchPathOutput "lib" "lib/vdpau" libvdpau)
           (makeLibraryPath [ pkgs.libglvnd ])
         ];
-      in drv.overrideAttrs (super: {
-        name = "${drv.name}-glwrapped";
-
-        nativeBuildInputs = with pkgs; [ makeWrapper ];
-
-        separateDebugInfo = false;
-
-        buildCommand = ''
-          set -eo pipefail
-
-          ${concatMapStringsSep "\n" (outputName: ''
-            echo "Copying output ${outputName}"
-
-            cp -rs --no-preserve=mode ${drv.${outputName}} ''$${outputName}
-          '') (super.outputs or [ "out" ])}
-
-          rm -rf $out/bin/*
-          shopt -s nullglob
-          for executable in ${drv.out}/bin/*; do
-            makeWrapper $executable "$out/bin/$(basename $executable)" \
-              --inherit-argv0 \
-              --prefix LD_LIBRARY_PATH ":" ${concatStringsSep ":" libPaths} \
-              --prefix __EGL_VENDOR_LIBRARY_FILENAMES ":" ${pkgs.mesa.drivers}/share/glvnd/egl_vendor.d/50_mesa.json \
-              --set LIBGL_DRIVERS_PATH ${makeSearchPathOutput "lib" "lib/dri" mesa-drivers} \
-              --set LIBVA_DRIVERS_PATH ${makeSearchPathOutput "out" "lib/dri" (mesa-drivers ++ cfg.vaDrivers)}
-          done
-          shopt -u nullglob # Revert nullglob back to its normal default state
-        '';
-      });
+      in packageLib.wrapPackage drv {
+        suffix = "-glwrapped";
+      } ''
+        rm -rf $out/bin/*
+        shopt -s nullglob
+        for executable in ${drv.out}/bin/*; do
+          makeWrapper $executable "$out/bin/$(basename $executable)" \
+            --inherit-argv0 \
+            --prefix LD_LIBRARY_PATH ":" ${concatStringsSep ":" libPaths} \
+            --prefix __EGL_VENDOR_LIBRARY_FILENAMES ":" ${pkgs.mesa.drivers}/share/glvnd/egl_vendor.d/50_mesa.json \
+            --set LIBGL_DRIVERS_PATH ${makeSearchPathOutput "lib" "lib/dri" mesa-drivers} \
+            --set LIBVA_DRIVERS_PATH ${makeSearchPathOutput "out" "lib/dri" (mesa-drivers ++ cfg.vaDrivers)}
+        done
+        shopt -u nullglob # Revert nullglob back to its normal default state
+      '';
     };
   };
 }
