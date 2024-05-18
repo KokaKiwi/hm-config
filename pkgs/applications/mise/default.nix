@@ -13,16 +13,16 @@
 , openssl
 }: rustPlatform.buildRustPackage rec {
   pname = "mise";
-  version = "2024.5.16";
+  version = "2024.5.17";
 
   src = fetchFromGitHub {
     owner = "jdx";
     repo = "mise";
     rev = "v${version}";
-    hash = "sha256-RNwbz0QHOPhGdeL6NZTqWK+nmOp7V/6JmC0DadBY5+8=";
+    hash = "sha256-rZUgBlUbDnsBS+GT4e+X6WtCdP9wuO5M99DSahd6omQ=";
   };
 
-  cargoHash = "sha256-npj+qDQ7H6T1SS4BN+oBky0WPZLXD9gkx6X1Ef+0Hkg=";
+  cargoHash = "sha256-SuQvBheUlOWUA2DyXoGw3bWvxtEwl+zZ7TQM0pV9okg=";
 
   nativeBuildInputs = [ addUsageCompletion installShellFiles pkg-config ];
   buildInputs = [ openssl ];
@@ -42,13 +42,9 @@
       --replace-warn 'cmd!("direnv"' 'cmd!("${direnv}/bin/direnv"'
   '';
 
-  checkFlags = [
-    # Requires .git directory to be present
-    "--skip=cli::plugins::ls::tests::test_plugin_list_urls"
-  ];
   cargoTestFlags = [ "--all-features" ];
-  # some tests access the same folders, don't test in parallel to avoid race conditions
-  dontUseCargoParallelTests = true;
+
+  useNextest = true;
 
   postInstall = ''
     installManPage ./man/man1/mise.1
