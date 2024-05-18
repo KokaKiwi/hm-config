@@ -6,6 +6,7 @@
 
     ./misc/catppuccin.nix
     ./misc/deuxfleurs.nix
+    ./misc/editorconfig.nix
     ./misc/files.nix
     ./misc/home.nix
     ./misc/music.nix
