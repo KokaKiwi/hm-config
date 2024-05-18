@@ -17,6 +17,9 @@ in {
   fd = callPackage ./fd {
     rustPlatform = pkgs.fenixStableRustPlatform;
   };
+  gitui = callPackage ./gitui {
+    rustPlatform = pkgs.fenixStableRustPlatform;
+  };
   glab = callPackage ./glab { };
   jellyfin-media-player = libsForQt5.callPackage ./jellyfin-media-player {
   };
