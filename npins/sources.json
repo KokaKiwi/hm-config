@@ -85,16 +85,10 @@
       "hash": "1cp8p31yg8lzma6hydc0qzgd4l7a919cxvgigmmzqy7ggwrp5njv"
     },
     "nixpkgs": {
-      "type": "Git",
-      "repository": {
-        "type": "GitHub",
-        "owner": "NixOS",
-        "repo": "nixpkgs"
-      },
-      "branch": "nixpkgs-unstable",
-      "revision": "3f888f673360440b6b7e6994a1e6d092d7588e84",
-      "url": "https://github.com/NixOS/nixpkgs/archive/3f888f673360440b6b7e6994a1e6d092d7588e84.tar.gz",
-      "hash": "1isc8fxmb7h1pmnkznhh33ga4x9s3gq65d122f57s6s38a6dbmma"
+      "type": "Channel",
+      "name": "nixpkgs-unstable",
+      "url": "https://releases.nixos.org/nixpkgs/nixpkgs-24.05pre627860.0837fbf22736/nixexprs.tar.xz",
+      "hash": "0wbyrgp8pp08flkkx5ajmj8lmbpg13g1hrm0n4b0bz3z6sd837w0"
     },
     "tmux-loadavg": {
       "type": "Git",
