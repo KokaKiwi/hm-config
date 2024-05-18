@@ -7,6 +7,7 @@ let
       nix = config.nix.package;
     };
     jellyfin-media-player = opengl.wrapPackage pkgs.jellyfin-media-player;
+    cool-retro-term = opengl.wrapPackage pkgs.cool-retro-term;
   };
 in {
   home.packages = with pkgs; [
