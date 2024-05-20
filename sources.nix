@@ -7,6 +7,7 @@ let
     ];
     catppuccin = [
       ./npins/patches/catppuccin/0001-Expose-lib.ctp.patch
+      ./npins/patches/catppuccin/0002-Remove-neovim-module.patch
     ];
   };
 

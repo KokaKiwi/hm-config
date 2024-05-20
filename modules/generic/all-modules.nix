@@ -14,6 +14,7 @@
     ./programs/kitty.nix
     ./programs/litecli.nix
     ./programs/mux.nix
+    ./programs/neovim.nix
     ./programs/nvchecker.nix
     ./programs/paru.nix
     ./programs/pgcli.nix
