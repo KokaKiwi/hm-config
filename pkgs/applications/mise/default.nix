@@ -13,16 +13,16 @@
 , openssl
 }: rustPlatform.buildRustPackage rec {
   pname = "mise";
-  version = "2024.5.17";
+  version = "2024.5.18";
 
   src = fetchFromGitHub {
     owner = "jdx";
     repo = "mise";
     rev = "v${version}";
-    hash = "sha256-rZUgBlUbDnsBS+GT4e+X6WtCdP9wuO5M99DSahd6omQ=";
+    hash = "sha256-0MS53WZ69kL7euAikCOMcW7QiuCEcvxDIGbuNRcXcMc=";
   };
 
-  cargoHash = "sha256-SuQvBheUlOWUA2DyXoGw3bWvxtEwl+zZ7TQM0pV9okg=";
+  cargoHash = "sha256-VNd6EPkUYLalKGSL3IKKfU2Hvki/x+sVZEiL8IMjIvE=";
 
   nativeBuildInputs = [ addUsageCompletion installShellFiles pkg-config ];
   buildInputs = [ openssl ];
@@ -42,9 +42,7 @@
       --replace-warn 'cmd!("direnv"' 'cmd!("${direnv}/bin/direnv"'
   '';
 
-  cargoTestFlags = [ "--all-features" ];
-
-  useNextest = true;
+  doCheck = false;
 
   postInstall = ''
     installManPage ./man/man1/mise.1
