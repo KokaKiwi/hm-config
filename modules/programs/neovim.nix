@@ -9,6 +9,7 @@
     vimAlias = true;
 
     python3Package = pkgs.python312;
-    rubyPackage = pkgs.ruby_3_3;
+
+    withRuby = false;
   };
 }

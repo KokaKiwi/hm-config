@@ -4,7 +4,6 @@ let
   cfg = config.programs.neovim;
 
   neovimUtils = pkgs.neovimUtils.override {
-    ruby = cfg.rubyPackage;
     python3Packages = cfg.python3Package.pkgs;
 
     neovim-unwrapped = cfg.package;
@@ -75,7 +74,6 @@ in {
     };
 
     python3Package = mkPackageOption pkgs "python3" { };
-    rubyPackage = mkPackageOption pkgs "ruby" { };
 
     extraLuaPackages = mkOption {
       type = with types; functionTo (listOf package);
