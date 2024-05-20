@@ -4,13 +4,29 @@ let
   cfg = config.programs.neovim;
 
   neovimUtils = pkgs.neovimUtils.override {
+    ruby = cfg.rubyPackage;
     python3Packages = cfg.python3Package.pkgs;
-  };
-  neovimConfig = neovimUtils.makeNeovimConfig ({
-    inherit (cfg) viAlias vimAlias;
 
-    wrapRc = false;
-  } // cfg.extraNeovimConfigArgs);
+    neovim-unwrapped = cfg.package;
+  };
+  neovimConfig = let
+    base = neovimUtils.makeNeovimConfig ({
+      inherit (cfg)
+        viAlias vimAlias
+        withPython3 withNodeJs withRuby withPerl
+        extraPython3Packages extraLuaPackages;
+
+      wrapRc = false;
+    } // cfg.extraNeovimConfigArgs);
+  in base // {
+    wrapperArgs =
+      base.wrapperArgs
+      ++ cfg.extraWrapperArgs
+      ++ optionals (cfg.extraPackages != [ ]) [
+        "--suffix" "PATH" ":"
+        (makeBinPath cfg.extraPackages)
+      ];
+  };
 in {
   disabledModules = [
     "programs/neovim.nix"
@@ -41,7 +57,41 @@ in {
       default = false;
     };
 
+    withPython3 = mkOption {
+      type = types.bool;
+      default = true;
+    };
+    withNodeJs = mkOption {
+      type = types.bool;
+      default = false;
+    };
+    withRuby = mkOption {
+      type = types.bool;
+      default = true;
+    };
+    withPerl = mkOption {
+      type = types.bool;
+      default = false;
+    };
+
     python3Package = mkPackageOption pkgs "python3" { };
+    rubyPackage = mkPackageOption pkgs "ruby" { };
+
+    extraLuaPackages = mkOption {
+      type = with types; functionTo (listOf package);
+      default = _: [ ];
+      defaultText = literalExpression "ps: [ ]";
+    };
+    extraPython3Packages = mkOption {
+      type = with types; functionTo (listOf package);
+      default = _: [ ];
+      defaultText = literalExpression "ps: [ ]";
+    };
+
+    extraPackages = mkOption {
+      type = with types; listOf package;
+      default = [ ];
+    };
 
     defaultEditor = mkOption {
       type = types.bool;
@@ -51,6 +101,11 @@ in {
     extraNeovimConfigArgs = mkOption {
       type = types.attrs;
       default = { };
+    };
+
+    extraWrapperArgs = mkOption {
+      type = with types; listOf str;
+      default = [ ];
     };
   };
 

@@ -86,6 +86,10 @@ in stdenv.mkDerivation (final: {
   separateDebugInfo = true;
   enableParallelBuilding = true;
 
+  passthru = {
+    inherit lua tree-sitter;
+  };
+
   meta = {
     description = "Vim text editor fork focused on extensibility and agility";
     longDescription = ''
