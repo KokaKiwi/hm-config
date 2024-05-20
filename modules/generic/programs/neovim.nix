@@ -18,13 +18,7 @@ let
       wrapRc = false;
     } // cfg.extraNeovimConfigArgs);
   in base // {
-    wrapperArgs =
-      base.wrapperArgs
-      ++ cfg.extraWrapperArgs
-      ++ optionals (cfg.extraPackages != [ ]) [
-        "--suffix" "PATH" ":"
-        (makeBinPath cfg.extraPackages)
-      ];
+    wrapperArgs = base.wrapperArgs ++ cfg.extraWrapperArgs;
   };
 in {
   disabledModules = [
@@ -100,7 +94,11 @@ in {
       type = types.attrs;
       default = { };
     };
+    extraStartupCommands = mkOption {
 
+      type = with types; listOf str;
+      default = [ ];
+    };
     extraWrapperArgs = mkOption {
       type = with types; listOf str;
       default = [ ];
@@ -108,7 +106,22 @@ in {
   };
 
   config = mkIf cfg.enable {
-    programs.neovim.finalPackage = pkgs.wrapNeovimUnstable cfg.package neovimConfig;
+    programs.neovim = {
+      finalPackage = pkgs.wrapNeovimUnstable cfg.package neovimConfig;
+
+      extraWrapperArgs =
+        optionals (cfg.extraPackages != [ ]) [
+          "--suffix" "PATH" ":"
+          (makeBinPath cfg.extraPackages)
+        ]
+        ++ flatten (flip map cfg.extraStartupCommands (cmd: [
+          "--add-flags" ''--cmd "${cmd}"''
+        ]));
+
+      extraStartupCommands = [
+        "set shell=${pkgs.bashInteractive}/bin/bash"
+      ];
+    };
 
     home.packages = [ cfg.finalPackage ];
 
