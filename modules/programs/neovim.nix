@@ -1,6 +1,8 @@
 { pkgs, ... }:
 {
   programs.neovim = {
+    package = pkgs.kiwiPackages.neovim;
+
     defaultEditor = true;
 
     viAlias = true;

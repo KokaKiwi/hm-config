@@ -34,13 +34,13 @@
   tree-sitter = callPackage ./deps/tree-sitter.nix { };
 in stdenv.mkDerivation (final: {
   pname = "neovim";
-  version = "0.10.0-unstable-2024-05-19";
+  version = "nightly-unstable-2024-05-20";
 
   src = fetchFromGitHub {
     owner = "neovim";
     repo = "neovim";
-    rev = "0f4f7d32ce5d6d3b751b0b01455770f3b72531b9";
-    hash = "sha256-3xTgg1Jn2Fs1JnZ4x1+7arHRbTFuFk7zN6XfHlj/cWs=";
+    rev = "36a9da65472f1607568c9be9b91c06357e39fce4";
+    hash = "sha256-4hMvqOfqfMT3YegpQkxU7WOPy5qE/Szc7v2YaE5SOis=";
   };
 
   NIX_CFLAGS_COMPILE = toString [
