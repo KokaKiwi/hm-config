@@ -32,6 +32,7 @@
     ./programs/litecli.nix
     ./programs/mise.nix
     ./programs/mux.nix
+    ./programs/neovim.nix
     ./programs/nvchecker.nix
     ./programs/obsidian.nix
     ./programs/paru.nix

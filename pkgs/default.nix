@@ -20,13 +20,17 @@ let
   ];
   fenixStableRustPlatform = makeRustPlatform fenixStableToolchain;
 
-  applications = importSub ./applications {};
-  build-support = importSub ./build-support {};
-  data = importSub ./data {};
+  applications = importSub ./applications { };
+  build-support = importSub ./build-support { };
+  data = importSub ./data { };
 
-  packages = applications // build-support // data;
+  kiwiPackages = importSub ./kiwi-packages { };
 
-  lib = importSub ./lib {};
+  packages = applications // build-support // data // {
+    inherit kiwiPackages;
+  };
+
+  lib = importSub ./lib { };
 
   top-level = {
     lib = super.lib // lib;

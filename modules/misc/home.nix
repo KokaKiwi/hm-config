@@ -21,7 +21,6 @@ let
   });
 in {
   home.sessionVariables = {
-    EDITOR = "$(which nvim)";
     ANDROID_HOME = "$HOME/Android/Sdk";
     DEBUGINFOD_URLS = concatStringsSep " " [
       "https://debuginfod.archlinux.org"
