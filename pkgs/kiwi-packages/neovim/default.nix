@@ -39,8 +39,8 @@ in stdenv.mkDerivation (final: {
   src = fetchFromGitHub {
     owner = "neovim";
     repo = "neovim";
-    rev = "36a9da65472f1607568c9be9b91c06357e39fce4";
-    hash = "sha256-4hMvqOfqfMT3YegpQkxU7WOPy5qE/Szc7v2YaE5SOis=";
+    rev = "91892f56b6cbf21c24474e8e5f0199f02a0602b1";
+    hash = "sha256-HJcKW9cyI1mB61OCa6gjICKaP5g6JavCEgU/zLV5gaI=";
   };
 
   NIX_CFLAGS_COMPILE = toString [
