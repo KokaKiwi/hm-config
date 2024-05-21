@@ -47,7 +47,7 @@ in (neovim-unwrapped.override {
   inherit tree-sitter;
 
   NIX_CFLAGS_COMPILE = toString [
-    "-O2" "-march=x86-64-v3"
+    "-O2" "-march=skylake"
     "-flto=full"
     "-mllvm" "-polly"
   ];
