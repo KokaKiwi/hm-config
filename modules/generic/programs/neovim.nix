@@ -185,7 +185,7 @@ in {
 
       package = mkPackageOption pkgs "tree-sitter" { };
       cc = mkOption {
-        type = with types; nullOr package;
+        type = with types; nullOr (either package path);
         default = null;
       };
       nodejs = mkOption {
@@ -200,7 +200,7 @@ in {
       finalPackage = pkgs.wrapNeovimUnstable cfg.package neovimConfig;
 
       overridePackages =
-        optional (cfg.tree-sitter.enable && cfg.tree-sitter.cc != null) cfg.tree-sitter.cc
+        optional (cfg.tree-sitter.enable && cfg.tree-sitter.cc != null && isDerivation cfg.tree-sitter.cc) cfg.tree-sitter.cc
         ++ optional (cfg.tree-sitter.enable && cfg.tree-sitter.nodejs != null) cfg.tree-sitter.nodejs;
       extraPackages =
         optional (cfg.tree-sitter.enable) cfg.tree-sitter.package;
@@ -213,6 +213,9 @@ in {
         ++ optionals (cfg.extraPackages != [ ]) [
           "--suffix" "PATH" ":"
           (makeBinPath cfg.extraPackages)
+        ]
+        ++ optionals (cfg.tree-sitter.enable && cfg.tree-sitter.cc != null && !isDerivation cfg.tree-sitter.cc) [
+          "--set" "CC" (toString cfg.tree-sitter.cc)
         ]
         ++ flatten (mapAttrsToList (name: value: [
           "--set" name (toString value)

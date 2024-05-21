@@ -19,7 +19,7 @@
     tree-sitter = {
       enable = true;
       package = pkgs.kiwiPackages.neovim.tree-sitter;
-      cc = pkgs.stdenv.cc;
+      cc = "${pkgs.gcc}/bin/gcc";
       nodejs = pkgs.nodejs;
     };
   };
