@@ -8,6 +8,7 @@
 , removeReferencesTo
 , llvmPackages
 
+, libiconv
 , libuv
 , libvterm-neovim
 , msgpack-c
@@ -51,6 +52,7 @@ in stdenv.mkDerivation (final: {
   nativeBuildInputs = [
     cmake
     gettext
+    libiconv
     removeReferencesTo
   ];
 
@@ -68,9 +70,15 @@ in stdenv.mkDerivation (final: {
     substituteInPlace src/nvim/version.c --replace NVIM_VERSION_CFLAGS ""
   '';
 
+  preConfigure = ''
+    substituteInPlace cmake.config/versiondef.h.in \
+      --subst-var-by NVIM_VERSION_PRERELEASE "-${final.version}"
+  '';
+
   dontFixCmake = true;
   cmakeFlagsArray = [
     "-DUSE_BUNDLED=OFF"
+    "-DENABLE_LTO=OFF"
   ]
   ++ lib.optional (!lua.pkgs.isLuaJIT) "-DPREFER_LUA=ON"
   ++ lib.optionals lua.pkgs.isLuaJIT [
