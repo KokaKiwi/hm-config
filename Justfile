@@ -18,6 +18,8 @@ build-home-package ATTR:
 update-package ATTR *ARGS:
   nix-update "pkgs.{{ATTR}}" {{ARGS}}
 
+update-neovim: (update-package 'kiwiPackages.neovim' '--version=branch=master')
+
 repl:
   nix repl --expr '(import ./default.nix { }).env'
 
