@@ -40,6 +40,9 @@ in {
   };
   pgcli = python3Packages.callPackage ./pgcli { };
   ponysay = callPackage ./ponysay { };
+  rustup = callPackage ./rustup {
+    rustPlatform = pkgs.fenixStableRustPlatform;
+  };
   skopeo = callPackage ./skopeo { };
   starship = callPackage ./starship {
     rustPlatform = pkgs.fenixStableRustPlatform;
