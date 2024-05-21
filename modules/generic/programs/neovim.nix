@@ -154,9 +154,17 @@ in {
       default = _: [ ];
       defaultText = literalExpression "ps: [ ]";
     };
+    overridePackages = mkOption {
+      type = with types; listOf package;
+      default = [ ];
+    };
     extraPackages = mkOption {
       type = with types; listOf package;
       default = [ ];
+    };
+    envVariables = mkOption {
+      type = types.attrs;
+      default = { };
     };
 
     extraNeovimConfigArgs = mkOption {
@@ -164,7 +172,6 @@ in {
       default = { };
     };
     extraStartupCommands = mkOption {
-
       type = with types; listOf str;
       default = [ ];
     };
@@ -172,21 +179,42 @@ in {
       type = with types; listOf str;
       default = [ ];
     };
+
+    tree-sitter = {
+      enable = mkEnableOption "Tree-Sitter";
+
+      package = mkPackageOption pkgs "tree-sitter" { };
+      cc = mkOption {
+        type = with types; nullOr package;
+        default = null;
+      };
+    };
   };
 
   config = mkIf cfg.enable {
     programs.neovim = {
       finalPackage = pkgs.wrapNeovimUnstable cfg.package neovimConfig;
 
+      overridePackages =
+        optional (cfg.tree-sitter.enable && cfg.tree-sitter.cc != null) cfg.tree-sitter.cc;
+      extraPackages =
+        optional (cfg.tree-sitter.enable) cfg.tree-sitter.package;
+
       extraWrapperArgs =
-        optionals (cfg.extraPackages != [ ]) [
+        optionals (cfg.overridePackages != [ ]) [
+          "--prefix" "PATH" ":"
+          (makeBinPath cfg.overridePackages)
+        ]
+        ++ optionals (cfg.extraPackages != [ ]) [
           "--suffix" "PATH" ":"
           (makeBinPath cfg.extraPackages)
         ]
-        ++ flatten (flip map cfg.extraStartupCommands (cmd: [
+        ++ flatten (mapAttrsToList (name: value: [
+          "--set" name (toString value)
+        ]) cfg.envVariables)
+        ++ flatten (map (cmd: [
           "--add-flags" ''--cmd "${cmd}"''
-        ]));
-
+        ]) cfg.extraStartupCommands);
       extraStartupCommands = [
         "set shell=${pkgs.bashInteractive}/bin/bash"
       ];
