@@ -3,6 +3,48 @@ with lib;
 let
   cfg = config.programs.neovim;
 
+  pluginType = types.submodule ({ config, ... }: {
+    options = {
+      type = mkOption {
+        type = types.enum [ "viml" "lua" ];
+        default = "viml";
+      };
+
+      package = mkOption {
+        type = types.package;
+      };
+      plugin = mkOption {
+        type = with types; nullOr package;
+        default = null;
+        visible = false;
+      };
+
+      optional = mkOption {
+        type = types.bool;
+        default = false;
+      };
+
+      config = mkOption {
+        type = with types; nullOr lines;
+        default = null;
+      };
+    };
+
+    config = {
+      package = mkIf (config.plugin != null) config.plugin;
+    };
+  });
+
+  normalizedPlugins = flip map cfg.plugins (plugin:
+    if (plugin ? package) then plugin else { package = plugin; }
+  );
+
+  generatedConfigs = let
+    grouped = groupBy (plugin: plugin.type) normalizedPlugins;
+  in flip mapAttrs grouped (type: plugins: let
+    configs = flatten (flip map plugins (plugin: optional (plugin.config != null) plugin.config));
+  in concatStringsSep "\n" configs);
+
   neovimUtils = pkgs.neovimUtils.override {
     python3Packages = cfg.python3Package.pkgs;
 
@@ -15,7 +57,19 @@ let
         withPython3 withNodeJs withRuby withPerl
         extraPython3Packages extraLuaPackages;
 
-      wrapRc = false;
+      plugins = flip map normalizedPlugins (plugin: {
+        plugin = plugin.package;
+        inherit (plugin) optional;
+      } // optionalAttrs (plugin.type == "viml" && plugin.config != null) {
+        inherit (plugin) config;
+      });
+
+      customRC = cfg.extraRc;
+      luaRcContent = (generatedConfigs.lua or "") + cfg.extraLuaRc;
+
+      wrapRc = let
+        hasConfig = (generatedConfigs.viml or "") != "" || (generatedConfigs.lua or "") != "" || cfg.extraLuaRc != "";
+      in if cfg.wrapRc != null then cfg.wrapRc else hasConfig;
     } // cfg.extraNeovimConfigArgs);
   in base // {
     wrapperArgs = base.wrapperArgs ++ cfg.extraWrapperArgs;
@@ -23,8 +77,6 @@ let
 in {
   disabledModules = [
     "programs/neovim.nix"
-    # Defines programs.neovim.modules
-    "programs/pywal.nix"
   ];
 
   options.programs.neovim = {
@@ -35,6 +87,11 @@ in {
     finalPackage = mkOption {
       type = types.package;
       readOnly = true;
+    };
+
+    defaultEditor = mkOption {
+      type = types.bool;
+      default = false;
     };
 
     viAlias = mkOption {
@@ -67,6 +124,24 @@ in {
       default = false;
     };
 
+    wrapRc = mkOption {
+      type = with types; nullOr bool;
+      default = null;
+    };
+    extraRc = mkOption {
+      type = types.lines;
+      default = "";
+    };
+    extraLuaRc = mkOption {
+      type = types.lines;
+      default = "";
+    };
+
+    plugins = mkOption {
+      type = with types; listOf (either package pluginType);
+      default = [ ];
+    };
+
     python3Package = mkPackageOption pkgs "python3" { };
 
     extraLuaPackages = mkOption {
@@ -79,15 +154,9 @@ in {
       default = _: [ ];
       defaultText = literalExpression "ps: [ ]";
     };
-
     extraPackages = mkOption {
       type = with types; listOf package;
       default = [ ];
-    };
-
-    defaultEditor = mkOption {
-      type = types.bool;
-      default = false;
     };
 
     extraNeovimConfigArgs = mkOption {
