@@ -188,6 +188,10 @@ in {
         type = with types; nullOr package;
         default = null;
       };
+      nodejs = mkOption {
+        type = with types; nullOr package;
+        default = null;
+      };
     };
   };
 
@@ -196,7 +200,8 @@ in {
       finalPackage = pkgs.wrapNeovimUnstable cfg.package neovimConfig;
 
       overridePackages =
-        optional (cfg.tree-sitter.enable && cfg.tree-sitter.cc != null) cfg.tree-sitter.cc;
+        optional (cfg.tree-sitter.enable && cfg.tree-sitter.cc != null) cfg.tree-sitter.cc
+        ++ optional (cfg.tree-sitter.enable && cfg.tree-sitter.nodejs != null) cfg.tree-sitter.nodejs;
       extraPackages =
         optional (cfg.tree-sitter.enable) cfg.tree-sitter.package;
 

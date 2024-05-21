@@ -20,6 +20,7 @@
       enable = true;
       package = pkgs.kiwiPackages.neovim.tree-sitter;
       cc = pkgs.stdenv.cc;
+      nodejs = pkgs.nodejs;
     };
   };
 }
