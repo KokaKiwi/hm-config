@@ -12,14 +12,6 @@
 , libiconv
 }:
 let
-  rustPlatform = makeRustPlatform {
-    rustc = fenixStableToolchain;
-    cargo = fenixStableToolchain;
-
-    inherit stdenv;
-  };
-
-  lua = luajit;
   llvmPackages = llvmPackages_latest;
 
   stdenv = llvmPackages_latest.stdenv.override (super: {
@@ -27,6 +19,16 @@ let
       inherit (llvmPackages) bintools;
     };
   });
+
+  lua = luajit.override {
+    inherit stdenv;
+  };
+  rustPlatform = makeRustPlatform {
+    rustc = fenixStableToolchain;
+    cargo = fenixStableToolchain;
+
+    inherit stdenv;
+  };
 
   tree-sitter = callPackage ./deps/tree-sitter.nix {
     inherit rustPlatform;
