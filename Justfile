@@ -5,13 +5,18 @@ _run-shell COMMAND *ARGS:
 
 build: (_run-shell 'build')
 switch: (_run-shell 'switch')
-build-package NAME: (_run-shell ('buildPackage ' + quote(NAME)))
-build-home-package NAME: (_run-shell ('buildHomePackage ' + quote(NAME)))
-update-package NAME *ARGS: (_run-shell ('updatePackage ' + quote(NAME) + ' ' + ARGS))
 copy-package SRC DST: (_run-shell ('copyPackage ' + quote(SRC) + ' ' + quote(DST)))
 list-packages: (_run-shell 'listPackages')
 option PATH: (_run-shell ('showOption ' + quote(PATH)))
 check: (_run-shell 'checkUpdates' '--arg doWarn true')
+
+build-package ATTR:
+  NIXPKGS_ALLOW_BROKEN=1 nom-build -A "pkgs.{{ATTR}}"
+build-home-package ATTR:
+  NIXPKGS_ALLOW_BROKEN=1 nom-build -A "homePackages.{{ATTR}}"
+
+update-package ATTR *ARGS:
+  nix-update "pkgs.{{ATTR}}" {{ARGS}}
 
 repl:
   nix repl --expr '(import ./default.nix { }).env'

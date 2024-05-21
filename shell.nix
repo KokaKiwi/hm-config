@@ -39,18 +39,6 @@ in pkgs.mkShell {
         "$generationDir/activate"
     }
 
-    buildPackage() {
-      local name="$1"
-
-      NIXPKGS_ALLOW_BROKEN=1 nom-build -A "pkgs.$name"
-    }
-
-    buildHomePackage() {
-      local name="$1"
-
-      NIXPKGS_ALLOW_BROKEN=1 nom-build -A "homePackages.$name"
-    }
-
     listPackages() {
       nix-instantiate --eval --strict --json --expr ${lib.escapeShellArg ''
         let
@@ -66,12 +54,6 @@ in pkgs.mkShell {
         --options_expr "(import ./default.nix {}).options" \
         --config_expr "(import ./default.nix {}).config" \
         "$@"
-    }
-
-    updatePackage() {
-      local name="$1"; shift
-
-      nix-update "pkgs.$name" "$@"
     }
 
     copyPackage() {
