@@ -1,7 +1,4 @@
-{ pkgs, callPackage }:
+{ callPackage }:
 {
-  neovim = callPackage ./neovim {
-    llvmPackages = pkgs.llvmPackages_latest;
-    lua = pkgs.luajit;
-  };
+  neovim = callPackage ./neovim { };
 }
