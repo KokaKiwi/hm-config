@@ -32,4 +32,5 @@ in {
   skopeo = callPackage ./skopeo { };
   starship = callRustPackage ./starship { };
   usage = callRustPackage ./usage { };
+  xinspect = callRustPackage ./xinspect { };
 }

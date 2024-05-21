@@ -28,7 +28,7 @@ in {
     nix-output-monitor nixd nix-update
     procs skopeo dust
     onefetch tokei ast-grep
-    ponysay
+    ponysay xinspect
     nur.repos.kokakiwi.go-mod-upgrade
   ] ++ (lib.attrValues packages);
 }
