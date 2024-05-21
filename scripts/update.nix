@@ -29,6 +29,11 @@ let
       gitlab = "gitlab-org/cli";
       use_max_tag = true;
     };
+    cargo-depgraph.source = {
+      source = "github";
+      github = "jplatte/cargo-depgraph";
+      use_max_tag = true;
+    };
     git-with-svn.source = {
       source = "archpkg";
       archpkg = "git";
@@ -53,6 +58,8 @@ let
     };
 
     aria2.config.prefix = "release-";
+    cargo-nextest.config.prefix = "cargo-nextest-";
+    cargo-nextest.config.include_regex = "cargo-nextest-.*";
     gleam.config.prefix = "v";
     kitty.config.prefix = "v";
     kubo.config.prefix = "v";

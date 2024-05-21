@@ -2,52 +2,34 @@
 let
   inherit (pkgs) libsForQt5;
 
+  callRustPackage = path: args: callPackage path (args // {
+    rustPlatform = pkgs.fenixStableRustPlatform;
+  });
+
   python3 = pkgs.python312;
   python3Packages = python3.pkgs;
 in {
-  ast-grep = callPackage ./ast-grep {
-    rustPlatform = pkgs.fenixStableRustPlatform;
-  };
-  cargo-shell = callPackage ./cargo-shell {
-    rustPlatform = pkgs.fenixStableRustPlatform;
-  };
-  eza = callPackage ./eza {
-    rustPlatform = pkgs.fenixStableRustPlatform;
-  };
-  fd = callPackage ./fd {
-    rustPlatform = pkgs.fenixStableRustPlatform;
-  };
-  gitui = callPackage ./gitui {
-    rustPlatform = pkgs.fenixStableRustPlatform;
-  };
+  ast-grep = callRustPackage ./ast-grep { };
+  cargo-depgraph = callRustPackage ./cargo-depgraph { };
+  cargo-ndk = callRustPackage ./cargo-ndk { };
+  cargo-shell = callRustPackage ./cargo-shell { };
+  eza = callRustPackage ./eza { };
+  fd = callRustPackage ./fd { };
+  gitui = callRustPackage ./gitui { };
   glab = callPackage ./glab { };
   jellyfin-media-player = libsForQt5.callPackage ./jellyfin-media-player { };
-  mise = callPackage ./mise {
-    rustPlatform = pkgs.fenixStableRustPlatform;
-  };
+  mise = callRustPackage ./mise { };
   module-server = callPackage ./module-server { };
-  mux = callPackage ./mux {
-    rustPlatform = pkgs.fenixStableRustPlatform;
-  };
-  npins = callPackage ./npins {
-    rustPlatform = pkgs.fenixStableRustPlatform;
-  };
-  onefetch = callPackage ./onefetch {
-    rustPlatform = pkgs.fenixStableRustPlatform;
-  };
+  mux = callRustPackage ./mux { };
+  npins = callRustPackage ./npins { };
+  onefetch = callRustPackage ./onefetch { };
   pdm = callPackage ./pdm {
     inherit python3;
   };
   pgcli = python3Packages.callPackage ./pgcli { };
   ponysay = callPackage ./ponysay { };
-  rustup = callPackage ./rustup {
-    rustPlatform = pkgs.fenixStableRustPlatform;
-  };
+  rustup = callRustPackage ./rustup { };
   skopeo = callPackage ./skopeo { };
-  starship = callPackage ./starship {
-    rustPlatform = pkgs.fenixStableRustPlatform;
-  };
-  usage = callPackage ./usage {
-    rustPlatform = pkgs.fenixStableRustPlatform;
-  };
+  starship = callRustPackage ./starship { };
+  usage = callRustPackage ./usage { };
 }
