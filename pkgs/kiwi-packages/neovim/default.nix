@@ -49,6 +49,7 @@ in (neovim-unwrapped.override {
   NIX_CFLAGS_COMPILE = toString [
     "-O2" "-march=x86-64-v3"
     "-flto=full"
+    "-mllvm" "-polly"
   ];
 
   nativeBuildInputs = super.nativeBuildInputs ++ [
