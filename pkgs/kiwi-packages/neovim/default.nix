@@ -52,6 +52,11 @@ in (neovim-unwrapped.override {
     "-O2" "-march=skylake"
     "-flto=full"
     "-mllvm" "-polly"
+    "-mllvm" "-polly-parallel"
+    "-mllvm" "-polly-num-threads=8"
+  ];
+  NIX_CFLAGS_LINK = toString [
+    "-lgomp"
   ];
 
   nativeBuildInputs = super.nativeBuildInputs ++ [
