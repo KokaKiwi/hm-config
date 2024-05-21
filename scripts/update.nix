@@ -19,8 +19,9 @@ let
   ];
   packages = lib.filterAttrs (name: drv: let
     hasUrl = drv ? src && drv.src ? url;
+    isUnstable = lib.hasInfix "unstable" drv.name;
     isIgnored = builtins.elem name ignorePackages;
-  in hasUrl && !isIgnored) homePackages;
+  in hasUrl && !isUnstable && !isIgnored) homePackages;
 
   entryConfigs = {
     glab.source = {

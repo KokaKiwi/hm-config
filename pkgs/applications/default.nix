@@ -21,8 +21,7 @@ in {
     rustPlatform = pkgs.fenixStableRustPlatform;
   };
   glab = callPackage ./glab { };
-  jellyfin-media-player = libsForQt5.callPackage ./jellyfin-media-player {
-  };
+  jellyfin-media-player = libsForQt5.callPackage ./jellyfin-media-player { };
   mise = callPackage ./mise {
     rustPlatform = pkgs.fenixStableRustPlatform;
   };
@@ -40,6 +39,7 @@ in {
     inherit python3;
   };
   pgcli = python3Packages.callPackage ./pgcli { };
+  ponysay = callPackage ./ponysay { };
   skopeo = callPackage ./skopeo { };
   starship = callPackage ./starship {
     rustPlatform = pkgs.fenixStableRustPlatform;
