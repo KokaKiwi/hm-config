@@ -15,13 +15,8 @@ let
     # Too old
     "hub"
     # My own packages
-    "cargo-shell" "mux"
+    "cargo-shell" "mux" "xinspect"
   ];
-  packages = lib.filterAttrs (name: drv: let
-    hasUrl = drv ? src && drv.src ? url;
-    isUnstable = lib.hasInfix "unstable" drv.name;
-    isIgnored = builtins.elem name ignorePackages;
-  in hasUrl && !isUnstable && !isIgnored) homePackages;
 
   entryConfigs = {
     glab.source = {
@@ -56,6 +51,7 @@ let
       use_max_tag = true;
       prefix = "v";
     };
+    neovim.package = pkgs.kiwiPackages.neovim;
 
     aria2.config.prefix = "release-";
     cargo-nextest.config.prefix = "cargo-nextest-";
@@ -69,16 +65,32 @@ let
     pgcli.overrides.use_latest_tag = true;
   };
 
+  resolveHomePackages =
+    lib.mapAttrs
+    (name: drv: if entryConfigs ? ${name}.package then entryConfigs.${name}.package
+      else drv)
+    homePackages;
+  packages = lib.filterAttrs (name: drv: let
+    hasUrl = drv ? src && drv.src ? url;
+    isIgnored = builtins.elem name ignorePackages;
+  in hasUrl && !isIgnored) resolveHomePackages;
+
   oldVer = {
     version = 2;
-    data = lib.mapAttrs (name: drv: {
-      version = drv.version;
+    data = lib.mapAttrs (name: drv: let
+      inherit (drv) src;
+
+      isUnstable = lib.hasInfix "unstable" drv.name;
+    in {
+      version = if isUnstable then src.rev else drv.version;
     }) packages;
   };
   oldVerFile = json.generate "oldver.json" oldVer;
 
   mkEntry = name: drv: let
     inherit (drv) src;
+
+    isUnstable = lib.hasInfix "unstable" drv.name;
 
     github = builtins.match "https://github.com/([^/]+)/([^/]+)(/.*)?" src.url;
     pypi = builtins.match "mirror://pypi/./([^/]+)/.*" src.url;
@@ -93,21 +105,32 @@ let
       pypiName = builtins.elemAt pypi 0;
 
       cratesioName = builtins.elemAt cratesio 0;
+
+      stableConfig = if github != null then {
+        source = "github";
+        github = "${githubOwner}/${githubRepo}";
+        use_max_tag = true;
+      }
+      else if pypi != null then {
+        source = "pypi";
+        pypi = pypiName;
+      }
+      else if cratesio != null then {
+        source = "cratesio";
+        cratesio = cratesioName;
+      }
+      else null;
+
+      unstableConfig = if github != null then {
+        source = "git";
+        git = "https://github.com/${githubOwner}/${githubRepo}.git";
+        use_commit = true;
+      }
+      else null;
     in if entryConfigs ? ${name}.source then entryConfigs.${name}.source
-    else if github != null then {
-      source = "github";
-      github = "${githubOwner}/${githubRepo}";
-      use_max_tag = true;
-    }
-    else if pypi != null then {
-      source = "pypi";
-      pypi = pypiName;
-    }
-    else if cratesio != null then {
-      source = "cratesio";
-      cratesio = cratesioName;
-    }
-    else null;
+    else if isUnstable then unstableConfig
+    else stableConfig;
+
     config = if baseConfig != null
       then baseConfig
       // entryConfigs.${name}.config or { }
