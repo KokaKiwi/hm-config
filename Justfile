@@ -11,9 +11,9 @@ option PATH: (_run-shell ('showOption ' + quote(PATH)))
 check: (_run-shell 'checkUpdates' '--arg doWarn true')
 
 build-package ATTR:
-  NIXPKGS_ALLOW_BROKEN=1 nom-build -A "pkgs.{{ATTR}}"
+  NIXPKGS_ALLOW_BROKEN=1 nom-build --keep-failed -A "pkgs.{{ATTR}}"
 build-home-package ATTR:
-  NIXPKGS_ALLOW_BROKEN=1 nom-build -A "homePackages.{{ATTR}}"
+  NIXPKGS_ALLOW_BROKEN=1 nom-build --keep-failed -A "homePackages.{{ATTR}}"
 
 update-package ATTR *ARGS:
   nix-update "pkgs.{{ATTR}}" {{ARGS}}
