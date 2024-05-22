@@ -1,4 +1,4 @@
-{ pkgs, callPackage }:
+{ pkgs, callPackage, sources }:
 let
   inherit (pkgs) libsForQt5;
 
@@ -9,10 +9,13 @@ let
   python3 = pkgs.python312;
   python3Packages = python3.pkgs;
 in {
+  agenix = callPackage "${sources.agenix}/pkgs/agenix.nix" { };
   ast-grep = callRustPackage ./ast-grep { };
+  attic-client = callRustPackage ./attic-client { };
   cargo-depgraph = callRustPackage ./cargo-depgraph { };
   cargo-ndk = callRustPackage ./cargo-ndk { };
   cargo-shell = callRustPackage ./cargo-shell { };
+  colmena = callRustPackage ./colmena { };
   eza = callRustPackage ./eza { };
   fd = callRustPackage ./fd { };
   gitui = callRustPackage ./gitui { };

@@ -13,12 +13,16 @@ let
       file = lib.path.append ../../secrets name;
       path = mkIf (path != null) path';
     })) entries;
+
+  agenix = pkgs.agenix.override {
+    ageBin = "${pkgs.rage}/bin/rage";
+  };
 in {
   imports = [
     "${sources.agenix}/modules/age-home.nix"
   ];
 
-  home.packages = with pkgs; [ agenix ];
+  home.packages = [ agenix ];
 
   age.package = pkgs.rage;
 

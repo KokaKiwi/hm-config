@@ -12,18 +12,6 @@
       "url": "https://github.com/ryantm/agenix/archive/8d37c5bdeade12b6479c85acd133063ab53187a0.tar.gz",
       "hash": "0z26jj4pwliz6v5fdgnwc5fsihjdsy2gz49fcivr4p4178fw4gnr"
     },
-    "attic": {
-      "type": "Git",
-      "repository": {
-        "type": "GitHub",
-        "owner": "zhaofengli",
-        "repo": "attic"
-      },
-      "branch": "main",
-      "revision": "4dbdbee45728d8ce5788db6461aaaa89d98081f0",
-      "url": "https://github.com/zhaofengli/attic/archive/4dbdbee45728d8ce5788db6461aaaa89d98081f0.tar.gz",
-      "hash": "1iri77pbf0gvas93zra29qy1c3l61n97z84xblqxmmhsxvljzvnh"
-    },
     "catppuccin": {
       "type": "Git",
       "repository": {
@@ -35,18 +23,6 @@
       "revision": "fea5242c0eacc5efa81be0e36206a62e889dbd82",
       "url": "https://github.com/catppuccin/nix/archive/fea5242c0eacc5efa81be0e36206a62e889dbd82.tar.gz",
       "hash": "0m05k2yy7ac0mncrbqijdp8bq0xd9rya2vfyzj5y5xf8ybb8g6kr"
-    },
-    "colmena": {
-      "type": "Git",
-      "repository": {
-        "type": "GitHub",
-        "owner": "zhaofengli",
-        "repo": "colmena"
-      },
-      "branch": "main",
-      "revision": "cd65ef7a25cdc75052fbd04b120aeb066c3881db",
-      "url": "https://github.com/zhaofengli/colmena/archive/cd65ef7a25cdc75052fbd04b120aeb066c3881db.tar.gz",
-      "hash": "0n1j499702iclz4hdb4ywvmn8rl4d1mbdf43dwm7lvpjq5pjjqc1"
     },
     "declarative-cachix": {
       "type": "Git",

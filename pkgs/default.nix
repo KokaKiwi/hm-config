@@ -26,21 +26,17 @@ let
 
   kiwiPackages = importSub ./kiwi-packages { };
 
-  packages = applications // build-support // data // {
-    inherit kiwiPackages;
-  };
+  packages = applications // build-support // data;
 
   lib = importSub ./lib { };
 
   top-level = {
     lib = super.lib // lib;
 
+    inherit kiwiPackages;
+
     fenix = pkgs.callPackage sources.fenix {};
     inherit fenixStableToolchain fenixStableRustPlatform;
-
-    agenix = pkgs.callPackage "${sources.agenix}/pkgs/agenix.nix" {
-      ageBin = "${pkgs.rage}/bin/rage";
-    };
 
     nur = import sources.nur {
       nurpkgs = pkgs;
@@ -50,14 +46,6 @@ let
           inherit pkgs;
         };
       };
-    };
-
-    colmena = pkgs.callPackage "${sources.colmena}/package.nix" {
-      rustPlatform = fenixStableRustPlatform;
-    };
-    attic-client = pkgs.callPackage "${sources.attic}/package.nix" {
-      rustPlatform = fenixStableRustPlatform;
-      clientOnly = true;
     };
   };
 
