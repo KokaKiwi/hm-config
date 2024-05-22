@@ -1,11 +1,15 @@
-{
-  fetchFromGitHub
+{ lib
+
+, fetchFromGitHub
 , fetchFromGitLab
-, python312Packages
+
+, makeWrapper
+, python3Packages
+
+, cargo
 }:
-with python312Packages;
 let
-  aiohttp-mako = buildPythonPackage {
+  aiohttp-mako = python3Packages.buildPythonPackage {
     pname = "aiohttp-mako";
     version = "0.4.0";
     format = "setuptools";
@@ -17,16 +21,16 @@ let
       hash = "sha256-1Z8SAziKmiuxIgfjCemUpknywmZEMdTRNiXal4/Onug=";
     };
 
-    nativeBuildInputs = [
+    nativeBuildInputs = with python3Packages; [
       pip
       setuptools
     ];
-    propagatedBuildInputs = [
+    propagatedBuildInputs = with python3Packages; [
       aiohttp
       mako
     ];
   };
-in buildPythonApplication {
+in python3Packages.buildPythonApplication {
   pname = "module-server";
   version = "0.1.0";
   format = "pyproject";
@@ -39,10 +43,12 @@ in buildPythonApplication {
     hash = "sha256-Uo1O12a9h4YfU+HAXiTkAsGGaZvlWvBYOScO2tn+ReU=";
   };
 
-  nativeBuildInputs = [
+  nativeBuildInputs = with python3Packages; [
+    makeWrapper
+
     pdm-backend
   ];
-  propagatedBuildInputs = [
+  propagatedBuildInputs = with python3Packages; [
     aiohttp
     aiohttp-mako
     appdirs
@@ -60,6 +66,11 @@ in buildPythonApplication {
 
   configurePhase = ''
     python -m module_server --compile-style
+  '';
+
+  postInstall = ''
+    wrapProgram $out/bin/module-server \
+      --prefix PATH : "${lib.makeBinPath [ cargo ]}"
   '';
 
   meta = {

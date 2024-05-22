@@ -23,7 +23,9 @@ in {
   glab = callPackage ./glab { };
   jellyfin-media-player = libsForQt5.callPackage ./jellyfin-media-player { };
   mise = callRustPackage ./mise { };
-  module-server = callPackage ./module-server { };
+  module-server = callPackage ./module-server {
+    inherit python3Packages;
+  };
   mux = callRustPackage ./mux { };
   npins = callRustPackage ./npins { };
   onefetch = callRustPackage ./onefetch { };
