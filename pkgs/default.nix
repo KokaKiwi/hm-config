@@ -74,5 +74,13 @@ let
       --replace "libwayland-egl.so.1" "${pkgs.lib.getLib pkgs.wayland}/lib/libwayland-egl.so.1"
       '';
     });
+
+    imhex = super.imhex.overrideAttrs (super: {
+      patches = (super.patches or [ ]) ++ [
+        ./patches/imhex.patch
+      ];
+
+      meta.mainProgram = "imhex";
+    });
   };
 in packages // top-level // overrides

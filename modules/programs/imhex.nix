@@ -1,19 +1,12 @@
 { config, pkgs, lib, ... }:
 with lib;
 let
-  imhex = let
-    patchedImhex = pkgs.imhex.overrideAttrs {
-      patches = [
-        ../../patches/imhex.patch
-      ];
+  inherit (config.lib) opengl;
 
-      meta.mainProgram = "imhex";
-    };
-    imhex = patchedImhex.override {
-      llvm = pkgs.llvm_18;
-      python3 = pkgs.python312;
-    };
-  in config.lib.opengl.wrapPackage imhex;
+  imhex = opengl.wrapPackage (pkgs.imhex.override {
+    llvm = pkgs.llvm_18;
+    python3 = pkgs.python312;
+  });
 in {
   home.packages = [ imhex ];
 
