@@ -9,8 +9,12 @@ let
         url = "https://mirrors.edge.kernel.org/pub/software/scm/git/git-${version}.tar.xz";
         hash = "sha256-5k00Co5ieuIs+4vMZRzKC0l88en99SNzVUT/SnMvEr8=";
       };
+
+      NIX_CFLAGS_LINK = (prev.NIX_CFLAGS_LINK or "") + " -fuse-ld=lld";
     });
   in git.override {
+    stdenv = pkgs.llvmStdenv;
+
     python3 = pkgs.python312;
 
     svnSupport = true;

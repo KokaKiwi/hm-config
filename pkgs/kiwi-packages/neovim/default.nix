@@ -1,4 +1,4 @@
-{ callPackage
+{ llvmStdenv, callPackage
 
 , fetchFromGitHub
 
@@ -7,19 +7,12 @@
 , writeText
 
 , luajit
-, llvmPackages_latest
 , neovim-unwrapped
 
 , libiconv
 }:
 let
-  llvmPackages = llvmPackages_latest;
-
-  stdenv = llvmPackages_latest.stdenv.override (super: {
-    cc = super.cc.override {
-      inherit (llvmPackages) bintools;
-    };
-  });
+  stdenv = llvmStdenv;
 
   lua = luajit.override {
     inherit stdenv;

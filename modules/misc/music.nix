@@ -1,5 +1,4 @@
-{ config, pkgs, lib, ... }:
-with lib;
+{ config, pkgs, ... }:
 let
   mpdCfg = config.services.mpd;
 
@@ -7,6 +6,7 @@ let
 in {
   programs.ncmpcpp = {
     package = pkgs.ncmpcpp.override {
+      stdenv = pkgs.llvmStdenv;
       visualizerSupport = true;
     };
 
