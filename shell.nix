@@ -11,22 +11,17 @@ let
   });
 in pkgs.mkShell {
    packages = with pkgs; [
-    gitMinimal
-    jq
-    config.nix.package
-    nix-output-monitor
-    nixos-option
-    nix-update
+     git
+     jq
+     config.nix.package
+     nix-output-monitor
+     nixos-option
   ];
 
   shellHook = ''
     init() {
       git clone gitlab@gitlab.kokakiwi.net:kokakiwi/home-manager-secrets.git secrets
       switch
-    }
-
-    build() {
-      nom-build
     }
 
     switch() {
