@@ -31,7 +31,6 @@ in {
 
   home.sessionPath = [
     "$HOME/.local/bin"
-    "$HOME/.cabal/bin"
     "$HOME/.cargo/bin"
     "$HOME/go/bin"
   ];
