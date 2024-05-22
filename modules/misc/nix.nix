@@ -16,14 +16,14 @@ in {
         uri = "ssh-ng://nix-games";
         systems = [ "x86_64-linux" ];
         identityFile = "/root/.ssh/id_nix";
-        maxJobs = 8;
+        maxJobs = 4;
         speedFactor = 5;
       };
       mel = {
         uri = "ssh-ng://mel";
         systems = [ "x86_64-linux" ];
         identityFile = "/root/.ssh/id_nix";
-        maxJobs = 4;
+        maxJobs = 2;
         speedFactor = 3;
       };
       nix-alyx = {
