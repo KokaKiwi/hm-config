@@ -24,6 +24,21 @@
       "url": "https://github.com/catppuccin/nix/archive/fea5242c0eacc5efa81be0e36206a62e889dbd82.tar.gz",
       "hash": "0m05k2yy7ac0mncrbqijdp8bq0xd9rya2vfyzj5y5xf8ybb8g6kr"
     },
+    "crane": {
+      "type": "GitRelease",
+      "repository": {
+        "type": "GitHub",
+        "owner": "ipetkov",
+        "repo": "crane"
+      },
+      "pre_releases": false,
+      "version_upper_bound": null,
+      "release_prefix": "v",
+      "version": "v0.17.1",
+      "revision": "1bb9d8fc0ea490e27ddc303ce93cee97669d464b",
+      "url": "https://api.github.com/repos/ipetkov/crane/tarball/v0.17.1",
+      "hash": "0bvr05wwnli5h2hrgadd73p8s78d54gv3iqhadpbhwlicpnifdaf"
+    },
     "declarative-cachix": {
       "type": "Git",
       "repository": {

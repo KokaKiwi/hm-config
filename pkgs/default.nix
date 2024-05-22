@@ -20,6 +20,8 @@ let
   ];
   fenixStableRustPlatform = makeRustPlatform fenixStableToolchain;
 
+  craneLibStable = pkgs.craneLib.overrideToolchain fenixStableToolchain;
+
   applications = importSub ./applications { };
   build-support = importSub ./build-support { };
   data = importSub ./data { };
@@ -37,6 +39,11 @@ let
 
     fenix = pkgs.callPackage sources.fenix {};
     inherit fenixStableToolchain fenixStableRustPlatform;
+
+    craneLib = import sources.crane {
+      pkgs = super;
+    };
+    inherit craneLibStable;
 
     nur = import sources.nur {
       nurpkgs = pkgs;

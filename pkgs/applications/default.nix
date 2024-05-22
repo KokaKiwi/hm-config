@@ -1,8 +1,9 @@
 { pkgs, callPackage, sources }:
 let
-  inherit (pkgs) libsForQt5;
+  inherit (pkgs) lib libsForQt5;
 
-  callRustPackage = path: args: callPackage path (args // {
+  callRustPackage = lib.callPackageWith (pkgs // {
+    craneLib = pkgs.craneLibStable;
     rustPlatform = pkgs.fenixStableRustPlatform;
   });
 
