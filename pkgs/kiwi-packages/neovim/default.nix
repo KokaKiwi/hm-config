@@ -4,6 +4,7 @@
 
 , fenixStableToolchain
 , makeRustPlatform
+, writeText
 
 , luajit
 , llvmPackages_latest
@@ -29,6 +30,12 @@ let
 
     inherit stdenv;
   };
+
+  cmakeGenerateVersion = writeText "GenerateVersion.cmake" ''
+    if (NOT EXISTS ''${OUTPUT})
+      file(WRITE ''${OUTPUT} "")
+    endif ()
+  '';
 
   tree-sitter = callPackage ./deps/tree-sitter.nix {
     inherit rustPlatform;
@@ -64,6 +71,7 @@ in (neovim-unwrapped.override {
   ];
 
   preConfigure = (super.preConfigure or "") + ''
+    cp -T ${cmakeGenerateVersion} cmake/GenerateVersion.cmake
     substituteInPlace cmake.config/versiondef.h.in \
       --subst-var-by NVIM_VERSION_PRERELEASE "-${final.version}"
   '';
