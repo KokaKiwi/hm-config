@@ -32,9 +32,9 @@
         "repo": "nix"
       },
       "branch": "main",
-      "revision": "ac87622fa4b515c741a745390b83df29815cb856",
-      "url": "https://github.com/catppuccin/nix/archive/ac87622fa4b515c741a745390b83df29815cb856.tar.gz",
-      "hash": "1bxb4f306zwzhzf6ywhz0ai7qxvsfpvgxn2ff5xq7fnw267ai0j0"
+      "revision": "fea5242c0eacc5efa81be0e36206a62e889dbd82",
+      "url": "https://github.com/catppuccin/nix/archive/fea5242c0eacc5efa81be0e36206a62e889dbd82.tar.gz",
+      "hash": "0m05k2yy7ac0mncrbqijdp8bq0xd9rya2vfyzj5y5xf8ybb8g6kr"
     },
     "colmena": {
       "type": "Git",

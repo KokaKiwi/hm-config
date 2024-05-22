@@ -76,7 +76,7 @@ in {
     programs.glow = mkIf cfg.catppuccin.enable {
       style = {
         src = config.catppuccin.sources.glamour;
-        path = "themes/catppuccin-${cfg.catppuccin.flavour}.json";
+        path = "themes/catppuccin-${cfg.catppuccin.flavor}.json";
       };
     };
   };

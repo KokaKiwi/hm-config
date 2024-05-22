@@ -1,4 +1,4 @@
-From 6ade578bf817182ec7ba9b81847cb73a616f63d7 Mon Sep 17 00:00:00 2001
+From 9d90d8845a1883f5ee4c327da15dc29c36a648e1 Mon Sep 17 00:00:00 2001
 From: KokaKiwi <kokakiwi+git@kokakiwi.net>
 Date: Mon, 13 May 2024 23:56:30 +0200
 Subject: [PATCH] Expose lib.ctp
@@ -8,7 +8,7 @@ Subject: [PATCH] Expose lib.ctp
  1 file changed, 4 insertions(+)
 
 diff --git a/modules/home-manager/globals.nix b/modules/home-manager/globals.nix
-index 0f66e18..aae6e4e 100644
+index dbe97a7..1406ace 100644
 --- a/modules/home-manager/globals.nix
 +++ b/modules/home-manager/globals.nix
 @@ -25,4 +25,8 @@

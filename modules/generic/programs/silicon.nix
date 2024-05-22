@@ -60,7 +60,7 @@ in {
     })));
 
     programs.silicon = let
-      themeName = "Catppuccin-${ctp.mkUpper cfg.catppuccin.flavour}";
+      themeName = "Catppuccin-${ctp.mkUpper cfg.catppuccin.flavor}";
     in mkIf cfg.catppuccin.enable {
       settings = ''
         --theme "${themeName}"
@@ -68,7 +68,7 @@ in {
 
       themes.${themeName} = {
         src = config.catppuccin.sources.bat;
-        file = "themes/Catppuccin ${ctp.mkUpper cfg.catppuccin.flavour}.tmTheme";
+        file = "themes/Catppuccin ${ctp.mkUpper cfg.catppuccin.flavor}.tmTheme";
       };
     };
 
