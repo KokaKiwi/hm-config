@@ -17,6 +17,7 @@ in {
   cargo-ndk = callRustPackage ./cargo-ndk { };
   cargo-shell = callRustPackage ./cargo-shell { };
   colmena = callRustPackage ./colmena { };
+  docker-credential-helpers = callPackage ./docker-credential-helpers { };
   eza = callRustPackage ./eza { };
   fd = callRustPackage ./fd { };
   gitui = callRustPackage ./gitui { };
