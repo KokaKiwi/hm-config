@@ -25,6 +25,7 @@ in {
         ];
       in packageLib.wrapPackage drv {
         suffix = "-glwrapped";
+        withBinaryWrapper = true;
       } ''
         rm -rf $out/bin/*
         shopt -s nullglob
