@@ -48,14 +48,14 @@ in (neovim-unwrapped.override {
 
   inherit tree-sitter;
 
-  NIX_CFLAGS_COMPILE = toString [
+  env.NIX_CFLAGS_COMPILE = toString [
     "-O2" "-march=skylake"
     "-flto=full"
     "-mllvm" "-polly"
     "-mllvm" "-polly-parallel"
     "-mllvm" "-polly-num-threads=8"
   ];
-  NIX_CFLAGS_LINK = toString [
+  env.NIX_CFLAGS_LINK = toString [
     "-lgomp"
   ];
 

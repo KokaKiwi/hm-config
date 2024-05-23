@@ -23,11 +23,12 @@ let
   craneLibStable = pkgs.craneLib.overrideToolchain fenixStableToolchain;
 
   llvmPackages = pkgs.llvmPackages_latest;
-  llvmStdenv = llvmPackages.stdenv.override (super: {
+  useLLVMBintools = stdenv: stdenv.override (super: {
     cc = super.cc.override {
       inherit (llvmPackages) bintools;
     };
   });
+  llvmStdenv = useLLVMBintools llvmPackages.stdenv;
 
   applications = importSub ./applications { };
   build-support = importSub ./build-support { };
@@ -44,7 +45,7 @@ let
 
     inherit kiwiPackages;
 
-    inherit llvmStdenv;
+    inherit useLLVMBintools llvmStdenv;
 
     fenix = pkgs.callPackage sources.fenix {};
     inherit fenixStableToolchain fenixStableRustPlatform;
