@@ -1,3 +1,5 @@
+nix-build := 'NIXPKGS_ALLOW_BROKEN=1 nom-build --keep-failed'
+
 _default:
 
 _run-shell COMMAND *ARGS:
@@ -14,9 +16,11 @@ build:
   nom-build
 
 build-package ATTR:
-  NIXPKGS_ALLOW_BROKEN=1 nom-build --keep-failed -A "pkgs.{{ATTR}}"
+  {{nix-build}} -A pkgs.{{ATTR}}
 build-home-package ATTR:
-  NIXPKGS_ALLOW_BROKEN=1 nom-build --keep-failed -A "homePackages.{{ATTR}}"
+  {{nix-build}} -A homePackages.{{ATTR}}
+build-program-package NAME ATTR='package':
+  {{nix-build}} -A config.programs.{{NAME}}.{{ATTR}}
 
 update-package ATTR *ARGS:
   nix-update "pkgs.{{ATTR}}" {{ARGS}}
