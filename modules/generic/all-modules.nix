@@ -24,6 +24,7 @@
     ./programs/starship.nix
     ./programs/taplo.nix
     ./programs/tmux.nix
+    ./programs/xh.nix
 
     ./services/aria2.nix
     ./services/kubo.nix

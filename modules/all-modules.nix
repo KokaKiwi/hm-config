@@ -45,6 +45,7 @@
     ./programs/starship.nix
     ./programs/taplo.nix
     ./programs/tmux.nix
+    ./programs/xh.nix
     ./programs/yazi.nix
     ./programs/yt-dlp.nix
 
