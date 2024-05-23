@@ -4,14 +4,14 @@
     wrapPackage = drv: {
       suffix ? null,
       nativeBuildInputs ? [ ],
-      withBinaryWrapper ? false
+      makeWrapper ? pkgs.makeShellWrapper
     }: buildCommand: drv.overrideAttrs (super: {
       name = if suffix != null
         then "${drv.name}${suffix}"
         else drv.name;
 
-      nativeBuildInputs = with pkgs; [
-        (if withBinaryWrapper then makeBinaryWrapper else makeShellWrapper)
+      nativeBuildInputs = [
+        makeWrapper
       ] ++ nativeBuildInputs;
 
       separateDebugInfo = false;
