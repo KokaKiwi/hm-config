@@ -8,16 +8,6 @@ let
     npins = pkgs.npins.override {
       nix = config.nix.package;
     };
-    trashy = let
-      base = pkgs.trashy.override {
-        rustPlatform = pkgs.fenixStableRustPlatform;
-      };
-    in base.overrideAttrs (super: {
-      postInstall = ''
-        $out/bin/trash manpage > trash.1
-        installManPage trash.1
-      '';
-    });
   };
 in {
   home.packages = with pkgs; [
@@ -26,7 +16,7 @@ in {
     cargo-shell opentofu gleam mergerfs
     nix-info nix-init nurl
     nix-output-monitor nixd nix-update
-    procs skopeo dust
+    procs skopeo dust rage
     onefetch tokei ast-grep
     ponysay xinspect
     nur.repos.kokakiwi.go-mod-upgrade

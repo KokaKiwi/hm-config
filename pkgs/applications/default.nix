@@ -15,6 +15,7 @@ in {
   attic-client = callRustPackage ./attic-client { };
   cargo-depgraph = callRustPackage ./cargo-depgraph { };
   cargo-ndk = callRustPackage ./cargo-ndk { };
+  cargo-nextest = callRustPackage ./cargo-nextest { };
   cargo-shell = callRustPackage ./cargo-shell { };
   colmena = callRustPackage ./colmena { };
   docker-credential-helpers = callPackage ./docker-credential-helpers { };

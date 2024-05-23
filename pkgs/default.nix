@@ -97,5 +97,12 @@ let
 
       meta.mainProgram = "imhex";
     });
+
+    trashy = super.trashy.overrideAttrs {
+      postInstall = ''
+        $out/bin/trash manpage > trash.1
+        installManPage trash.1
+      '';
+    };
   };
 in packages // top-level // overrides
