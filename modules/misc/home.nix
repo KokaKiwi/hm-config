@@ -10,7 +10,7 @@ let
     "password-store" "pgcli" "yt-dlp"
     "nvchecker" "element" "ferdium"
     "litecli" "hyfetch" "fd" "neovim"
-    "xh"
+    "xh" "nix-init"
   ];
   enabledServices = [
     "gpg-agent" "mopidy" "pueue"

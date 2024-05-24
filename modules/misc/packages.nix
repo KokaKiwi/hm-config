@@ -27,7 +27,7 @@ in {
     attic-client colmena
     eza hexyl pdm
     cargo-shell opentofu gleam mergerfs
-    nix-info nix-init nurl
+    nix-info nurl
     nix-output-monitor nixd nix-update
     procs skopeo dust rage
     onefetch tokei ast-grep

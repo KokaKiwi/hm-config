@@ -15,6 +15,7 @@
     ./programs/litecli.nix
     ./programs/mux.nix
     ./programs/neovim.nix
+    ./programs/nix-init.nix
     ./programs/nvchecker.nix
     ./programs/paru.nix
     ./programs/pgcli.nix
