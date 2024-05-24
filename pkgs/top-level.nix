@@ -15,19 +15,18 @@ let
   ];
   fenixStableRustPlatform = makeRustPlatform fenixStableToolchain;
 
-  llvmPackages = pkgs.llvmPackages_latest;
-  useLLVMBintools = adapters.overrideBintools llvmPackages.bintools;
+  mkLLVMStdenv = llvmPackages: lib.pipe llvmPackages.stdenv [
+    (adapters.overrideBintools llvmPackages.bintools)
+    adapters.useLLDLinker
+  ];
 in {
   lib = super.lib // (importSub ./lib { });
 
   kiwiPackages = importSub ./kiwi-packages { };
 
   stdenv-adapters = adapters;
-  inherit useLLVMBintools;
-  llvmStdenv = lib.pipe llvmPackages.stdenv [
-    useLLVMBintools
-    adapters.useLLDLinker
-  ];
+  inherit mkLLVMStdenv;
+  llvmStdenv = mkLLVMStdenv pkgs.llvmPackages_latest;
 
   fenix = pkgs.callPackage sources.fenix {};
   inherit fenixStableToolchain fenixStableRustPlatform;
