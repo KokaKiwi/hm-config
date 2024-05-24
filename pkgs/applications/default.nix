@@ -13,6 +13,7 @@ in {
   agenix = callPackage "${sources.agenix}/pkgs/agenix.nix" { };
   ast-grep = callRustPackage ./ast-grep { };
   attic-client = callRustPackage ./attic-client { };
+  cargo-deny = callRustPackage ./cargo-deny { };
   cargo-depgraph = callRustPackage ./cargo-depgraph { };
   cargo-ndk = callRustPackage ./cargo-ndk { };
   cargo-nextest = callRustPackage ./cargo-nextest { };
