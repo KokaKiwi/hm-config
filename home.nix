@@ -6,6 +6,8 @@ with lib;
   ];
 
   home.stateVersion = "24.05";
+  # FIXME: Remove when home-manager update its version
+  home.enableNixpkgsReleaseCheck = false;
 
   home.username = "kokakiwi";
   home.homeDirectory = "/home/kokakiwi";
