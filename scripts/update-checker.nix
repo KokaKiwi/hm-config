@@ -80,7 +80,7 @@ let
   in lib.filterAttrs (name: drv: let
     isIgnored = builtins.elem name ignoredPackages;
   in !isIgnored) resolvedPackages;
-in pkgs.mkUpdateChecker {
+in pkgs.nur.repos.kokakiwi.lib.mkUpdateChecker {
   inherit packages;
   inherit configs sources overrides;
   inherit doWarn;

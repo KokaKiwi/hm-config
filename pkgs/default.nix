@@ -13,9 +13,8 @@ let
   applications = importSub ./applications { };
   build-support = importSub ./build-support { };
   data = importSub ./data { };
-  tools = importSub ./tools { };
 
-  packages = applications // build-support // data // tools;
+  packages = applications // build-support // data;
 
   overrides = importSub ./overrides.nix { };
 
