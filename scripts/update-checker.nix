@@ -70,7 +70,7 @@ let
 
   packages = let
     extraPackages' = let
-      namedPackages = lib.filter (drv: drv ? pname) packages;
+      namedPackages = lib.filter (drv: drv ? pname) extraPackages;
     in builtins.listToAttrs (map (drv: lib.nameValuePair drv.pname drv) namedPackages);
     allPackages = homePackages // extraPackages';
 
