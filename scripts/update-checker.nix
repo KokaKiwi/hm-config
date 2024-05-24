@@ -43,6 +43,7 @@ in pkgs.nur.repos.kokakiwi.lib.mkUpdateChecker {
     gleam.prefix = "v";
     kitty.prefix = "v";
     kubo.prefix = "v";
+    minio-client.prefix = "RELEASE.";
     obsidian.prefix = "v";
     zoxide.prefix = "v";
   };
