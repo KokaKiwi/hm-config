@@ -14,6 +14,7 @@ let
     # My own packages
     "cargo-shell" "mux" "xinspect"
   ];
+  extraPackages = [ ];
 
   configs = {
     aria2.prefix = "release-";
@@ -68,9 +69,14 @@ let
   };
 
   packages = let
+    extraPackages' = let
+      namedPackages = lib.filter (drv: drv ? pname) packages;
+    in builtins.listToAttrs (map (drv: lib.nameValuePair drv.pname drv) namedPackages);
+    allPackages = homePackages // extraPackages';
+
     resolvedPackages = lib.mapAttrs (name: drv:
       if aliases ? ${name} then aliases.${name} else drv
-    ) homePackages;
+    ) allPackages;
   in lib.filterAttrs (name: drv: let
     isIgnored = builtins.elem name ignoredPackages;
   in !isIgnored) resolvedPackages;
