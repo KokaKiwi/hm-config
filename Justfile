@@ -26,6 +26,7 @@ update-package ATTR *ARGS:
   nix-update "pkgs.{{ATTR}}" {{ARGS}}
 
 update-neovim: (update-package 'kiwiPackages.neovim' '--version=branch=master')
+  -git add pkgs/kiwi-packages/neovim && git commit -m 'pkgs(neovim): Update revision'
 
 repl:
   nix repl --expr '(import ./default.nix { }).env'
