@@ -6,7 +6,7 @@ let
   inherit (env) config pkgs;
   inherit (pkgs) lib;
 
-  update = import ./scripts/update.nix (env // {
+  updateChecker = import ./scripts/update-checker.nix (env // {
     inherit doWarn;
   });
 in pkgs.mkShell {
@@ -60,7 +60,7 @@ in pkgs.mkShell {
     }
 
     checkUpdates() {
-      ${update.checkUpdates}
+      ${updateChecker}
     }
   '';
 }
