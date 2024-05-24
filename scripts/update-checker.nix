@@ -1,20 +1,40 @@
-{ pkgs
-, homePackages
+{ pkgs, lib
+, config, homePackages
 , doWarn ? true
 , ...
 }:
 let
-  inherit (pkgs) lib;
-
   ignoredPackages = [
-    # Let's nixpkgs update these one
+    # Let's nixpkgs handle these
     "nix"
     # Too old
     "hub"
     # My own packages
     "cargo-shell" "mux" "xinspect"
   ];
-  extraPackages = [ ];
+
+  extraPackages = [
+    config.programs.neovim.package.tree-sitter
+  ];
+  aliases = {
+    neovim = config.programs.neovim.package;
+  };
+
+  packages = let
+    extraPackages' = let
+      namedPackages = lib.filter (drv: drv ? pname) extraPackages;
+    in builtins.listToAttrs (map (drv: lib.nameValuePair drv.pname drv) namedPackages);
+    allPackages = homePackages // extraPackages';
+
+    resolvedPackages = lib.mapAttrs (name: drv:
+      if aliases ? ${name} then aliases.${name} else drv
+    ) allPackages;
+  in lib.filterAttrs (name: drv: let
+    isIgnored = builtins.elem name ignoredPackages;
+  in !isIgnored) resolvedPackages;
+in pkgs.nur.repos.kokakiwi.lib.mkUpdateChecker {
+  inherit doWarn;
+  inherit packages;
 
   configs = {
     aria2.prefix = "release-";
@@ -63,27 +83,6 @@ let
   overrides = {
     pgcli.use_latest_tag = true;
   };
-
-  aliases = {
-    neovim = pkgs.kiwiPackages.neovim;
-  };
-
-  packages = let
-    extraPackages' = let
-      namedPackages = lib.filter (drv: drv ? pname) extraPackages;
-    in builtins.listToAttrs (map (drv: lib.nameValuePair drv.pname drv) namedPackages);
-    allPackages = homePackages // extraPackages';
-
-    resolvedPackages = lib.mapAttrs (name: drv:
-      if aliases ? ${name} then aliases.${name} else drv
-    ) allPackages;
-  in lib.filterAttrs (name: drv: let
-    isIgnored = builtins.elem name ignoredPackages;
-  in !isIgnored) resolvedPackages;
-in pkgs.nur.repos.kokakiwi.lib.mkUpdateChecker {
-  inherit packages;
-  inherit configs sources overrides;
-  inherit doWarn;
 
   nvcheckerConfig = {
     keyfile = "~/.config/nvchecker/keyfile.toml";
