@@ -10,11 +10,12 @@ let
     "password-store" "pgcli" "yt-dlp"
     "nvchecker" "element" "ferdium"
     "litecli" "hyfetch" "fd" "neovim"
-    "xh" "nix-init"
+    "xh" "nix-init" "sccache"
   ];
   enabledServices = [
     "gpg-agent" "mopidy" "pueue"
     "module-server" "aria2" "kubo"
+    "sccache"
   ];
 
   enableNames = flip genAttrs (name: {

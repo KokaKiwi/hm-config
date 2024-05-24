@@ -21,6 +21,7 @@
     ./programs/paru.nix
     ./programs/pgcli.nix
     ./programs/powerline.nix
+    ./programs/sccache.nix
     ./programs/silicon.nix
     ./programs/ssh.nix
     ./programs/starship.nix
@@ -31,5 +32,6 @@
     ./services/aria2.nix
     ./services/kubo.nix
     ./services/module-server.nix
+    ./services/sccache.nix
   ];
 }

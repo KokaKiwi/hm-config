@@ -42,6 +42,7 @@
     ./programs/pgcli.nix
     ./programs/powerline.nix
     ./programs/rust.nix
+    ./programs/sccache.nix
     ./programs/silicon.nix
     ./programs/ssh.nix
     ./programs/starship.nix
