@@ -31,6 +31,7 @@
     ./programs/kde.nix
     ./programs/kitty.nix
     ./programs/litecli.nix
+    ./programs/llvm.nix
     ./programs/mise.nix
     ./programs/mux.nix
     ./programs/neovim.nix
