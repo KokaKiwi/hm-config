@@ -4,6 +4,7 @@
     ./misc/opengl.nix
     ./misc/xdg-desktop-entries.nix
 
+    ./programs/bpython.nix
     ./programs/discord.nix
     ./programs/element.nix
     ./programs/ferdium.nix

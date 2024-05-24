@@ -17,6 +17,7 @@
     ./misc/systemd.nix
 
     ./programs/bat.nix
+    ./programs/bpython.nix
     ./programs/discord.nix
     ./programs/element.nix
     ./programs/fd.nix
