@@ -11,6 +11,7 @@
     ./programs/glab.nix
     ./programs/glow.nix
     ./programs/hub.nix
+    ./programs/kde.nix
     ./programs/kitty.nix
     ./programs/litecli.nix
     ./programs/mux.nix

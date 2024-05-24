@@ -28,6 +28,7 @@
     ./programs/gpg.nix
     ./programs/hyfetch.nix
     ./programs/imhex.nix
+    ./programs/kde.nix
     ./programs/kitty.nix
     ./programs/litecli.nix
     ./programs/mise.nix
