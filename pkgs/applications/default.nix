@@ -29,6 +29,10 @@ in {
     inherit python3Packages;
   };
   mux = callRustPackage ./mux { };
+  nixd = callPackage ./nixd {
+    llvmPackages = pkgs.llvmPackages_16;
+    nix = pkgs.nixVersions.nix_2_19;
+  };
   npins = callRustPackage ./npins { };
   onefetch = callRustPackage ./onefetch { };
   pdm = callPackage ./pdm {
