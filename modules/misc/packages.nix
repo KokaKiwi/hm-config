@@ -32,7 +32,7 @@ in {
     procs skopeo dust rage
     onefetch tokei ast-grep
     ponysay xinspect
-    trashy minio-client
+    trashy minio-client minisign
     nix-binutils
     nur.repos.kokakiwi.go-mod-upgrade
   ] ++ (lib.attrValues packages);
