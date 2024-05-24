@@ -1,5 +1,18 @@
 { config, pkgs, lib, ... }:
 let
+  nix-binutils = let
+    stdenv = pkgs.stdenv;
+    libc = stdenv.cc.libc_bin;
+
+    executables = [ "ldd" "ld.so" ];
+  in pkgs.runCommandLocal "nix-binutils-${libc.name}" { } ''
+    mkdir -p $out/bin
+
+    for exe in ${toString executables}; do
+      ln -s ${libc}/bin/$exe $out/bin/nix-$exe
+    done
+  '';
+
   packages = let
     opengl = config.lib.opengl;
   in {
@@ -19,6 +32,7 @@ in {
     procs skopeo dust rage
     onefetch tokei ast-grep
     ponysay xinspect
+    nix-binutils
     nur.repos.kokakiwi.go-mod-upgrade
   ] ++ (lib.attrValues packages);
 }
