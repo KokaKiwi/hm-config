@@ -5,10 +5,10 @@ let
   toml = pkgs.formats.toml { };
 
   cargoPlugins = [
-    "about" "binutils" "bloat" "criterion"
+    "about" "binutils" "bloat" "cache" "criterion"
     "nextest" "expand" "deny" "outdated"
     "show-asm" "msrv" "depgraph" "udeps"
-    "ndk" "mommy" "tarpaulin"
+    "ndk" "mommy" "tarpaulin" "pgrx"
   ];
 
   cargoConfig = {
@@ -17,7 +17,7 @@ let
     };
 
     target.x86_64-unknown-linux-gnu = {
-      linker = "${llvmPackages.clang}/bin/clang";
+      linker = "${llvmPackages.clang}/bin/lld";
     };
 
     profile.dev = {
