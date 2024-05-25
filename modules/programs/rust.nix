@@ -17,7 +17,7 @@ let
     };
 
     target.x86_64-unknown-linux-gnu = {
-      linker = "${llvmPackages.clang}/bin/lld";
+      linker = "${llvmPackages.clang}/bin/clang";
     };
 
     profile.dev = {
