@@ -25,6 +25,10 @@ in {
   gitui = callRustPackage ./gitui { };
   glab = callPackage ./glab { };
   jellyfin-media-player = libsForQt5.callPackage ./jellyfin-media-player { };
+  kitty = callPackage ./terminal-emulators/kitty {
+    inherit python3Packages;
+  };
+  kitty-themes = callPackage ./terminal-emulators/kitty/themes.nix { };
   mise = callRustPackage ./mise { };
   module-server = callPackage ./module-server {
     inherit python3Packages;

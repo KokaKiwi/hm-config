@@ -4,10 +4,7 @@ let
   cfg = config.programs.kitty;
 in {
   programs.kitty = {
-    package = config.lib.opengl.wrapPackage (pkgs.kitty.override {
-      python3 = pkgs.python312;
-      python3Packages = pkgs.python312Packages;
-    });
+    package = config.lib.opengl.wrapPackage pkgs.kitty;
 
     font = {
       name = "FiraCode Nerd Font Mono";
