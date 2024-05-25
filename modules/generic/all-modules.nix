@@ -34,6 +34,7 @@
     ./services/aria2.nix
     ./services/kubo.nix
     ./services/module-server.nix
+    ./services/nix-web.nix
     ./services/sccache.nix
   ];
 }

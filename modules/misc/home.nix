@@ -16,7 +16,7 @@ let
   enabledServices = [
     "gpg-agent" "mopidy" "pueue"
     "module-server" "aria2" "kubo"
-    "sccache"
+    "sccache" "nix-web"
   ];
 
   enableNames = flip genAttrs (name: {
