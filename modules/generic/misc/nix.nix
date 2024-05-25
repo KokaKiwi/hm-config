@@ -68,10 +68,37 @@ let
       };
     };
   };
+
+  channelsPackage = let
+    mkEntry = name: drv: {
+      inherit name;
+      path = toString drv;
+    };
+  in pkgs.linkFarm "nix-channels" (mapAttrsToList mkEntry cfg.channels);
+  channelsPath = "${cfg.defExprDirectory}/50-home-manager";
 in {
   options.nix = {
     builders = mkOption {
       type = with types; attrsOf builderType;
+      default = { };
+    };
+
+    defExprDirectory = mkOption {
+      type = types.path;
+      readOnly = true;
+    };
+
+    nixPath = mkOption {
+      type = with types; listOf str;
+      default = [ ];
+    };
+    overrideNixPath = mkOption {
+      type = types.bool;
+      default = false;
+    };
+
+    channels = mkOption {
+      type = with types; attrsOf package;
       default = { };
     };
   };
@@ -85,5 +112,21 @@ in {
           (builtins.attrValues cfg.builders);
         machines = pkgs.writeText "machines" (concatLines builders');
       in mkIf (builders' != []) "@${machines}";
+
+    nix.defExprDirectory =
+      if cfg.enable && (cfg.settings.use-xdg-base-directories or false)
+      then "${config.xdg.stateHome}/nix/defexpr"
+      else "${config.home.homeDirectory}/.nix-defexpr";
+
+    home.sessionVariables = mkIf (cfg.nixPath != [ ]) {
+      NIX_PATH = let
+        nixPath = concatStringsSep ":" cfg.nixPath;
+      in if cfg.overrideNixPath then nixPath else "${nixPath}\${NIX_PATH:+:$NIX_PATH}";
+    };
+
+    nix.nixPath = mkIf (cfg.channels != { }) [ channelsPath ];
+    home.file.${channelsPath} = mkIf (cfg.channels != { }) {
+      source = channelsPackage;
+    };
   };
 }

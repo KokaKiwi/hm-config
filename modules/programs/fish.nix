@@ -73,8 +73,6 @@ in {
     interactiveShellInit = ''
       set fish_greeting
 
-      source /etc/profile.d/nix-daemon.fish
-
       ${pkgs.any-nix-shell}/bin/any-nix-shell fish | source
     '';
   };

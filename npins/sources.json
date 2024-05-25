@@ -75,6 +75,18 @@
       "url": "https://github.com/nix-community/home-manager/archive/d179da4e81bcd4227e8abf4b62b92c4ae214ae39.tar.gz",
       "hash": "0cni52ck4fyf08s02846py5sk0jp7nm7r5kqi0mrac31kbz0793m"
     },
+    "nixos-23.11": {
+      "type": "Channel",
+      "name": "nixos-23.11",
+      "url": "https://releases.nixos.org/nixos/23.11/nixos-23.11.7237.46397778ef1f/nixexprs.tar.xz",
+      "hash": "00cy8q07diavxb91g7pxl0gqc68s3hzimsggjc9rqyf99h1q9d3r"
+    },
+    "nixos-unstable": {
+      "type": "Channel",
+      "name": "nixos-unstable",
+      "url": "https://releases.nixos.org/nixos/unstable/nixos-24.11pre630835.bfb7a882678e/nixexprs.tar.xz",
+      "hash": "04qn48v4vjpxsk00x407v558p3f1x8blwjppk2sswzbjhyn2vgxw"
+    },
     "nixpkgs": {
       "type": "Channel",
       "name": "nixpkgs-unstable",
