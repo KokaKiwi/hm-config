@@ -12,6 +12,7 @@ let
 
   main = import ./npins;
   nur = import ./npins/nur;
+  channels = import ./npins/channels;
 
   pkgs = import main.nixpkgs { inherit system; };
   inherit (pkgs) lib;
@@ -24,4 +25,6 @@ let
     src = source;
     patches = sourcePatches;
   });
-in applyPatches (main // nur)
+in applyPatches main // nur // {
+  inherit channels;
+}

@@ -37,8 +37,8 @@ in {
     channels = {
       nixpkgs = sources.nixpkgs;
       nixpkgs-unstable = sources.nixpkgs;
-      nixos-unstable = sources.nixos-unstable;
-      "nixos-23.11" = sources."nixos-23.11";
+      nixos-unstable = sources.channels.nixos-unstable;
+      "nixos-23.11" = sources.channels."nixos-23.11";
     };
 
     settings = {

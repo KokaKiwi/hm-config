@@ -38,7 +38,7 @@ let
   in builtins.listToAttrs (map (drv: nameValuePair drv.pname drv) namedPackages);
 
   env = {
-    inherit module;
+    inherit module sources;
     inherit (module) config options pkgs;
     inherit (module.pkgs) lib;
     inherit homePackages;

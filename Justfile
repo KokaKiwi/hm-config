@@ -41,6 +41,10 @@ update-nur:
   npins -d npins/nur update
   -git add npins/nur && git commit -m 'chore(deps): Update NUR'
 
+update-channels:
+  npins -d npins/channels update
+  -git add npins/channels && git commit -m 'chore: Update channels'
+
 push:
   git push -f origin main
 
