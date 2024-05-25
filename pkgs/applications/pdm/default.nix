@@ -1,41 +1,18 @@
 { lib
-, python3
-, fetchFromGitHub
+
 , fetchPypi
-, nix-update-script
-, runtimeShell
+
 , installShellFiles
-, testers
-, pdm
+, python3Packages
+
+, runtimeShell
 }:
-let
-  python = python3.override {
-    # override resolvelib due to
-    # 1. pdm requiring a later version of resolvelib
-    # 2. Ansible being packaged as a library
-    # 3. Ansible being unable to upgrade to a later version of resolvelib
-    # see here for more details: https://github.com/NixOS/nixpkgs/pull/155380/files#r786255738
-    packageOverrides = self: super: {
-      resolvelib = super.resolvelib.overridePythonAttrs rec {
-        version = "1.0.1";
-        src = fetchFromGitHub {
-          owner = "sarugaku";
-          repo = "resolvelib";
-          rev = "refs/tags/${version}";
-          hash = "sha256-oxyPn3aFPOyx/2aP7Eg2ThtPbyzrFT1JzWqy6GqNbzM=";
-        };
-      };
-    };
-    self = python;
-  };
-in
-with python.pkgs;
-buildPythonApplication rec {
+python3Packages.buildPythonApplication rec {
   pname = "pdm";
   version = "2.15.3";
   pyproject = true;
 
-  disabled = pythonOlder "3.8";
+  disabled = python3Packages.pythonOlder "3.8";
 
   src = fetchPypi {
     inherit pname version;
@@ -46,11 +23,11 @@ buildPythonApplication rec {
     installShellFiles
   ];
 
-  build-system = [
+  build-system = with python3Packages; [
     pdm-backend
   ];
 
-  dependencies = [
+  dependencies = with python3Packages; [
     blinker
     dep-logic
     filelock
@@ -70,8 +47,8 @@ buildPythonApplication rec {
     tomlkit
     unearth
     virtualenv
-  ] ++ httpx.optional-dependencies.socks
-  ++ pbs-installer.optional-dependencies.install
+  ]
+  ++ httpx.optional-dependencies.socks
   ++ lib.optionals (pythonOlder "3.11") [
     tomli
   ]
@@ -93,18 +70,23 @@ buildPythonApplication rec {
   '';
 
   postInstall = ''
+    export PDM_LOG_DIR=/tmp/pdm/log
+
     installShellCompletion --cmd pdm \
       --bash <($out/bin/pdm completion bash) \
       --fish <($out/bin/pdm completion fish) \
       --zsh <($out/bin/pdm completion zsh)
+
+    unset PDM_LOG_DIR
   '';
 
-  nativeCheckInputs = [
+  nativeCheckInputs = with python3Packages; [
+    first
     pytestCheckHook
     pytest-mock
     pytest-xdist
     pytest-httpserver
-  ] ++ lib.optional stdenv.isLinux first;
+  ];
 
   pytestFlagsArray = [
     "-m 'not network'"
@@ -128,19 +110,12 @@ buildPythonApplication rec {
     "test_find_interpreters_with_PDM_IGNORE_ACTIVE_VENV"
   ];
 
-  __darwinAllowLocalNetworking = true;
-
-  passthru.tests.version = testers.testVersion {
-    package = pdm;
-  };
-
-  passthru.updateScript = nix-update-script { };
-
   meta = with lib; {
     homepage = "https://pdm-project.org";
     changelog = "https://github.com/pdm-project/pdm/releases/tag/${version}";
     description = "A modern Python package and dependency manager supporting the latest PEP standards";
     license = licenses.mit;
+    maintainers = with maintainers; [ cpcloud ];
     mainProgram = "pdm";
   };
 }

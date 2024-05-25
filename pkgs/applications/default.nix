@@ -9,6 +9,9 @@ let
 
   python3 = pkgs.python312;
   python3Packages = python3.pkgs;
+  callPythonPackage = lib.callPackageWith (pkgs // rec {
+    inherit python3 python3Packages;
+  });
 in {
   agenix = callPackage "${sources.agenix}/pkgs/agenix.nix" { };
   ast-grep = callRustPackage ./ast-grep { };
@@ -25,14 +28,10 @@ in {
   gitui = callRustPackage ./gitui { };
   glab = callPackage ./glab { };
   jellyfin-media-player = libsForQt5.callPackage ./jellyfin-media-player { };
-  kitty = callPackage ./terminal-emulators/kitty {
-    inherit python3Packages;
-  };
+  kitty = callPythonPackage ./terminal-emulators/kitty { };
   kitty-themes = callPackage ./terminal-emulators/kitty/themes.nix { };
   mise = callRustPackage ./mise { };
-  module-server = callPackage ./module-server {
-    inherit python3Packages;
-  };
+  module-server = callPythonPackage ./module-server { };
   mux = callRustPackage ./mux { };
   nixd = callPackage ./nixd {
     llvmPackages = pkgs.llvmPackages_16;
@@ -40,9 +39,7 @@ in {
   };
   npins = callRustPackage ./npins { };
   onefetch = callRustPackage ./onefetch { };
-  pdm = callPackage ./pdm {
-    inherit python3;
-  };
+  pdm = callPythonPackage ./pdm { };
   pgcli = python3Packages.callPackage ./pgcli { };
   ponysay = callPackage ./ponysay { };
   rustup = callRustPackage ./rustup { };
