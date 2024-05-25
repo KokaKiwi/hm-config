@@ -33,7 +33,7 @@ in {
     onefetch tokei ast-grep
     ponysay xinspect
     trashy minio-client minisign
-    nix-binutils
+    nix-binutils git-absorb
     nur.repos.kokakiwi.go-mod-upgrade
   ] ++ (lib.attrValues packages);
 }
