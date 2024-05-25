@@ -1,12 +1,9 @@
-{ pkgs, lib, ... }:
-with lib;
+{ config, pkgs, lib, ... }:
 {
   programs.nvchecker = {
     package = let
-      python = pkgs.python312;
-      nvchecker = python.pkgs.nvchecker;
-    in nvchecker.overridePythonAttrs {
-      dependencies = flatten (attrValues nvchecker.optional-dependencies);
-    };
+      python3Packages = pkgs.python312Packages;
+      nvchecker = python3Packages.nvchecker;
+    in config.lib.python.extendPackageEnv nvchecker (_: lib.flatten (lib.attrValues nvchecker.optional-dependencies));
   };
 }
