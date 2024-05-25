@@ -46,6 +46,7 @@ in {
   pgcli = python3Packages.callPackage ./pgcli { };
   ponysay = callPackage ./ponysay { };
   rustup = callRustPackage ./rustup { };
+  sccache = callRustPackage ./development/tools/sccache { };
   skopeo = callPackage ./skopeo { };
   starship = callRustPackage ./starship { };
   usage = callRustPackage ./usage { };
