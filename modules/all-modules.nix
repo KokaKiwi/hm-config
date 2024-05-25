@@ -44,6 +44,7 @@
     ./programs/password-store.nix
     ./programs/pgcli.nix
     ./programs/powerline.nix
+    ./programs/ptpython.nix
     ./programs/rust.nix
     ./programs/sccache.nix
     ./programs/silicon.nix

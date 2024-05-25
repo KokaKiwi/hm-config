@@ -11,6 +11,7 @@ let
     "nvchecker" "element" "ferdium"
     "litecli" "hyfetch" "fd" "neovim"
     "xh" "nix-init" "sccache" "bpython"
+    "ptpython"
   ];
   enabledServices = [
     "gpg-agent" "mopidy" "pueue"

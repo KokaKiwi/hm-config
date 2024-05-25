@@ -22,6 +22,7 @@
     ./programs/paru.nix
     ./programs/pgcli.nix
     ./programs/powerline.nix
+    ./programs/ptpython.nix
     ./programs/sccache.nix
     ./programs/silicon.nix
     ./programs/ssh.nix
