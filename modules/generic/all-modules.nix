@@ -1,5 +1,6 @@
 {
   imports = [
+    ./misc/data.nix
     ./misc/nix.nix
     ./misc/opengl.nix
     ./misc/xdg-desktop-entries.nix

@@ -93,17 +93,6 @@ in {
         identityFile = "~/.ssh/id_ed25519";
         port = 2223;
       };
-
-      deuxfleurs-git = {
-        host = "git.deuxfleurs.fr";
-        user = "git";
-        identityFile = "~/.ssh/id_deuxfleurs";
-      };
-
-      onion-local = {
-        hostname = "192.168.1.34";
-        identityFile = "~/.ssh/id_ed25519";
-      };
     };
 
     authorizedKeys = [ ];
