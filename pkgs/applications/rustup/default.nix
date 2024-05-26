@@ -1,12 +1,10 @@
-{ lib, stdenv
+{ lib
 
 , fetchFromGitHub
 
 , installShellFiles
 , makeBinaryWrapper
-, patchelf
 , rustPlatform
-, substituteAll
 
 , pkg-config
 , openssl
@@ -37,19 +35,6 @@ in rustPlatform.buildRustPackage rec {
   cargoLock = {
     lockFile = ./Cargo.lock;
   };
-
-  patches = [
-    (substituteAll {
-      src = ./0001-dynamically-patchelf-binaries.patch;
-
-      patchelf = toString patchelf;
-      libPath = "$ORIGIN/../lib:${libPath}";
-      dynamicLinker = lib.pipe "${stdenv.cc}/nix-support/dynamic-linker" [
-        builtins.readFile
-        (lib.removeSuffix "\n")
-      ];
-    })
-  ];
 
   nativeBuildInputs = [
     installShellFiles makeBinaryWrapper
