@@ -34,10 +34,10 @@
       "pre_releases": false,
       "version_upper_bound": null,
       "release_prefix": "v",
-      "version": "v0.17.1",
-      "revision": "1bb9d8fc0ea490e27ddc303ce93cee97669d464b",
-      "url": "https://api.github.com/repos/ipetkov/crane/tarball/v0.17.1",
-      "hash": "0bvr05wwnli5h2hrgadd73p8s78d54gv3iqhadpbhwlicpnifdaf"
+      "version": "v0.17.2",
+      "revision": "b5eb15b359d5228013c812dcb7c571e1e9daf14d",
+      "url": "https://api.github.com/repos/ipetkov/crane/tarball/v0.17.2",
+      "hash": "0b8r2mfq41x668qvwlcigcpkswdvlnpn4fjgc8mlzbrqi3sm3bgh"
     },
     "declarative-cachix": {
       "type": "Git",
