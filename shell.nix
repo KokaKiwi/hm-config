@@ -44,13 +44,6 @@ in pkgs.mkShell {
       ''} | jq -r 'to_entries | map("\(.key) \(.value)") | .[]'
     }
 
-    showOption() {
-      nixos-option \
-        --options_expr "(import ./default.nix {}).options" \
-        --config_expr "(import ./default.nix {}).config" \
-        "$@"
-    }
-
     copyPackage() {
       local src="$1"
       local dst="$2"
