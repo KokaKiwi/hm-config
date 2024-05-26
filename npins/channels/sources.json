@@ -3,8 +3,8 @@
     "nixos-23.11": {
       "type": "Channel",
       "name": "nixos-23.11",
-      "url": "https://releases.nixos.org/nixos/23.11/nixos-23.11.7237.46397778ef1f/nixexprs.tar.xz",
-      "hash": "00cy8q07diavxb91g7pxl0gqc68s3hzimsggjc9rqyf99h1q9d3r"
+      "url": "https://releases.nixos.org/nixos/23.11/nixos-23.11.7313.9d29cd266ceb/nixexprs.tar.xz",
+      "hash": "0phfgypnshhlh6ri54yp2f9qabq0hlq06jn46zv692jy6axss4kx"
     },
     "nixos-unstable": {
       "type": "Channel",
