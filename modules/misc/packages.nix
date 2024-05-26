@@ -35,5 +35,6 @@ in {
     trashy minio-client minisign
     nix-binutils git-absorb
     nur.repos.kokakiwi.go-mod-upgrade
+    nur.repos.kokakiwi.lddtree
   ] ++ (lib.attrValues packages);
 }
