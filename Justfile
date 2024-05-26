@@ -9,7 +9,7 @@ init: (_run-shell 'init')
 switch: (_run-shell 'switch')
 copy-package SRC DST: (_run-shell ('copyPackage ' + quote(SRC) + ' ' + quote(DST)))
 list-packages: (_run-shell 'listPackages')
-option PATH: (_run-shell ('showOption ' + quote(PATH)))
+option PATH='': (_run-shell ('showOption ' + quote(PATH)))
 check: (_run-shell 'checkUpdates' '--arg doWarn true')
 
 build:
