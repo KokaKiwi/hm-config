@@ -54,7 +54,6 @@
     ./programs/tmux.nix
     ./programs/xh.nix
     ./programs/yazi.nix
-    ./programs/yt-dlp.nix
 
     ./services/aria2.nix
     ./services/gpg-agent.nix
