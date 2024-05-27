@@ -13,6 +13,8 @@ with lib;
   home.preferXdgDirectories = true;
   home.enableDebugInfo = true;
 
+  targets.genericLinux.enable = true;
+
   xdg.enable = true;
   programs.man.enable = false;
   xdg.mime.enable = false;

@@ -123,6 +123,11 @@ in {
         nixPath = concatStringsSep ":" cfg.nixPath;
       in if cfg.overrideNixPath then nixPath else "${nixPath}\${NIX_PATH:+:$NIX_PATH}";
     };
+    systemd.user.sessionVariables = mkIf (cfg.nixPath != [ ]) {
+      NIX_PATH = let
+        nixPath = concatStringsSep ":" cfg.nixPath;
+      in mkForce (if cfg.overrideNixPath then nixPath else "${nixPath}\${NIX_PATH:+:$NIX_PATH}");
+    };
 
     nix.nixPath = mkIf (cfg.channels != { }) [ channelsPath ];
     home.file.${channelsPath} = mkIf (cfg.channels != { }) {
