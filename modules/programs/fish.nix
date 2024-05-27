@@ -1,9 +1,12 @@
 { pkgs, ... }:
-let
-  build-package-expr = "{ ... }@args: (import <nixpkgs> {}).callPackage ./default.nix args";
-in {
+{
   programs.fish = {
-    package = pkgs.fish;
+    package = pkgs.fish.override {
+      stdenv = pkgs.llvmStdenv;
+      python3 = pkgs.python312;
+
+      useOperatingSystemEtc = false;
+    };
 
     functions = {
       copy = ''
@@ -32,20 +35,6 @@ in {
           nix repl --expr "import <nixpkgs> {}" $argv
         '';
         wraps = "nix repl";
-      };
-
-      nix-build-package = {
-        body = ''
-          nix-build --expr "${build-package-expr}" $argv
-        '';
-        wraps = "nix-build";
-      };
-
-      nom-build-package = {
-        body = ''
-          nom-build --expr "${build-package-expr}" $argv
-        '';
-        wraps = "nix-build";
       };
     };
 
