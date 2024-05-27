@@ -52,6 +52,7 @@ in {
   sccache = callRustPackage ./development/tools/sccache { };
   skopeo = callPackage ./skopeo { };
   starship = callRustPackage ./starship { };
+  stockfish = callPackage ./games/stockfish { };
   usage = callRustPackage ./usage { };
   xinspect = callRustPackage ./xinspect { };
   yt-dlp = python3Packages.callPackage ./misc/yt-dlp { };

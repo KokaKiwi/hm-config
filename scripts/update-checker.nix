@@ -48,6 +48,8 @@ in pkgs.nur.repos.kokakiwi.lib.mkUpdateChecker {
     kubo.prefix = "v";
     minio-client.prefix = "RELEASE.";
     obsidian.prefix = "v";
+    stockfish.include_regex = "sf_.*";
+    stockfish.prefix = "sf_";
     zoxide.prefix = "v";
   };
   sources = {

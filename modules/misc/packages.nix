@@ -21,6 +21,10 @@ let
     npins = pkgs.npins.override {
       nix = config.nix.package;
     };
+    stockfish = pkgs.stockfish.override {
+      stdenv = pkgs.llvmStdenv;
+      targetArch = "x86-64-bmi2";
+    };
   };
 in {
   home.packages = with pkgs; [
