@@ -35,6 +35,7 @@ in {
   kitty = callPythonPackage ./terminal-emulators/kitty { };
   kitty-themes = callPackage ./terminal-emulators/kitty/themes.nix { };
   mise = callRustPackage ./mise { };
+  minio-client = callPackage ./tools/networking/minio-client { };
   module-server = callPythonPackage ./module-server { };
   mux = callRustPackage ./mux { };
   nixd = callPackage ./nixd {
