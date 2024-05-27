@@ -1,6 +1,6 @@
-{ pkgs, callPackage, sources }:
+{ pkgs, lib, callPackage, sources }:
 let
-  inherit (pkgs) lib libsForQt5;
+  inherit (pkgs) libsForQt5;
 
   callRustPackage = lib.callPackageWith (pkgs // {
     craneLib = pkgs.craneLibStable;
