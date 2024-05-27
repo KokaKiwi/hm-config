@@ -44,15 +44,6 @@ in pkgs.mkShell {
       ''} | jq -r 'to_entries | map("\(.key) \(.value)") | .[]'
     }
 
-    copyPackage() {
-      local src="$1"
-      local dst="$2"
-
-      mkdir -p pkgs/$(dirname $dst)
-      cp -Tr ${pkgs.path}/pkgs/$src pkgs/$dst
-      chmod -R +w pkgs
-    }
-
     checkUpdates() {
       ${updateChecker}
     }

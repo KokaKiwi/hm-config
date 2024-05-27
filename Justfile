@@ -7,7 +7,6 @@ _run-shell COMMAND *ARGS:
 
 init: (_run-shell 'init')
 switch: (_run-shell 'switch')
-copy-package SRC DST: (_run-shell ('copyPackage ' + quote(SRC) + ' ' + quote(DST)))
 list-packages: (_run-shell 'listPackages')
 check: (_run-shell 'checkUpdates' '--arg doWarn true')
 
@@ -20,6 +19,11 @@ build-home-package ATTR:
   {{nix-build}} -A homePackages.{{ATTR}}
 build-program-package NAME ATTR='package':
   {{nix-build}} -A config.programs.{{NAME}}.{{ATTR}}
+
+copy-package SRC DST:
+  mkdir -p $(basename pkgs/{{DST}})
+  cp -Tr ~/.local/state/nix/defexpr/50-home-manager/nixpkgs-unstable/pkgs/{{SRC}} pkgs/{{DST}}
+  chmod -R +w pkgs/{{DST}}
 
 update-package ATTR *ARGS:
   nix-update "pkgs.{{ATTR}}" {{ARGS}}
