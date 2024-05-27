@@ -1,4 +1,4 @@
-{ config, pkgs, lib, ... }:
+{ config, lib, ... }:
 with lib;
 let
   enabledPrograms = [
@@ -46,7 +46,7 @@ in {
     tnew = "tmux new -ADs";
   };
 
-  home.shell.package = pkgs.fish;
+  home.shell.package = config.programs.fish.package;
 
   fonts.fontconfig.enable = true;
 

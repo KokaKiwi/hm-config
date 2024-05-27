@@ -15,6 +15,7 @@ let
 
   extraPackages = [
     config.programs.neovim.package.tree-sitter
+    config.home.shell.package
   ];
   aliases = {
     neovim = config.programs.neovim.package;
