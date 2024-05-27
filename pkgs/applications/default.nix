@@ -47,6 +47,7 @@ in {
   pdm = callPythonPackage ./pdm { };
   pgcli = python3Packages.callPackage ./pgcli { };
   ponysay = callPackage ./ponysay { };
+  ptpython = python3Packages.callPackage ./ptpython { };
   rustup = callRustPackage ./rustup { };
   sccache = callRustPackage ./development/tools/sccache { };
   skopeo = callPackage ./skopeo { };
