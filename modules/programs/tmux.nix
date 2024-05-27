@@ -48,7 +48,7 @@ in {
     historyLimit = 50000;
     baseIndex = 1;
 
-    shell = getExe config.programs.fish.package;
+    shell = config.home.shell.fullPath;
 
     updateEnvironment = [
       "SSH_AUTH_SOCK" "SSH_CONNECTION" "SSH_ASKPASS"
