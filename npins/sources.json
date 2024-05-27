@@ -71,9 +71,9 @@
         "repo": "home-manager"
       },
       "branch": "master",
-      "revision": "5d151429e1e79107acf6d06dcc5ace4e642ec239",
-      "url": "https://github.com/nix-community/home-manager/archive/5d151429e1e79107acf6d06dcc5ace4e642ec239.tar.gz",
-      "hash": "1imp3945nfw0y53avnn2k1yk0079v8m52bz10daqna97v6f6cx47"
+      "revision": "10c7c219b7dae5795fb67f465a0d86cbe29f25fa",
+      "url": "https://github.com/nix-community/home-manager/archive/10c7c219b7dae5795fb67f465a0d86cbe29f25fa.tar.gz",
+      "hash": "02f6xpn863vjxzamizd5my2hc8jz974v798q0kg6v8vl2p0jqcdf"
     },
     "nixpkgs": {
       "type": "Channel",
