@@ -21,7 +21,7 @@ build-program-package NAME ATTR='package':
   {{nix-build}} -A config.programs.{{NAME}}.{{ATTR}}
 
 copy-package SRC DST:
-  mkdir -p $(basename pkgs/{{DST}})
+  mkdir -p $(dirname pkgs/{{DST}})
   cp -Tr ~/.local/state/nix/defexpr/50-home-manager/nixpkgs-unstable/pkgs/{{SRC}} pkgs/{{DST}}
   chmod -R +w pkgs/{{DST}}
 

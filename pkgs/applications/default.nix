@@ -30,6 +30,7 @@ in {
   fd = callRustPackage ./fd { };
   gitui = callRustPackage ./gitui { };
   glab = callPackage ./glab { };
+  gleam = callRustPackage ./compilers/gleam { };
   jellyfin-media-player = libsForQt5.callPackage ./jellyfin-media-player { };
   kitty = callPythonPackage ./terminal-emulators/kitty { };
   kitty-themes = callPackage ./terminal-emulators/kitty/themes.nix { };
