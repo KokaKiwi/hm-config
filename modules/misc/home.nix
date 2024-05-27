@@ -1,4 +1,4 @@
-{ lib, ... }:
+{ config, lib, ... }:
 with lib;
 let
   enabledPrograms = [
@@ -30,6 +30,7 @@ in {
       "https://debuginfod.elfutils.org"
     ];
     GHCUP_USE_XDG_DIRS = "true";
+    BW_SESSION = "$(cat \"${config.age.secrets.bitwarden-session-key.path}\" | tr -d \\n)";
   };
 
   home.sessionPath = [

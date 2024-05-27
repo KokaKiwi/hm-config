@@ -24,7 +24,7 @@ let
   };
 in {
   home.packages = with pkgs; [
-    attic-client colmena
+    attic-client colmena bitwarden-cli
     eza hexyl pdm
     cargo-shell opentofu gleam mergerfs
     nix-info nurl nixos-option

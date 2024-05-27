@@ -38,8 +38,10 @@ in pkgs.nur.repos.kokakiwi.lib.mkUpdateChecker {
 
   configs = {
     aria2.prefix = "release-";
-    cargo-nextest.prefix = "cargo-nextest-";
+    bitwarden-cli.include_regex = "cli-v.*";
+    bitwarden-cli.prefix = "cli-v";
     cargo-nextest.include_regex = "cargo-nextest-.*";
+    cargo-nextest.prefix = "cargo-nextest-";
     gleam.prefix = "v";
     kitty.prefix = "v";
     kubo.prefix = "v";
