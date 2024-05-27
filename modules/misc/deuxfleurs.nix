@@ -52,13 +52,25 @@ in {
       identityFile = "~/.ssh/id_deuxfleurs";
     };
   }
-  // (mapAttrs' (name: { names, ... }@args: {
+  // mapAttrs' (name: { names, ... }@args: {
     name = "deuxfleurs-${name}";
-    value = machines.default // (flip builtins.removeAttrs [ "names" ] args) // {
-      host = toString names;
+    value = machines.default // builtins.removeAttrs args [ "names" ] // {
+      host = concatStringsSep " " names;
+      localForwards = [
+        {
+          bind.port = 14646;
+          host.address = "127.0.0.1";
+          host.port = 4646;
+        }
+        {
+          bind.port = 8501;
+          host.address = "127.0.0.1";
+          host.port = 8501;
+        }
+      ];
     };
-  }) (flip builtins.removeAttrs [ "default" ] machines))
-  // (mapAttrs' (name: address: {
+  }) (builtins.removeAttrs machines [ "default" ])
+  // mapAttrs' (name: address: {
     name = "deuxfleurs-${name}-local";
     value = {
       host = "${name}-local";
@@ -67,30 +79,5 @@ in {
       identityFile = "~/.ssh/id_ed25519";
       hostname = address;
     };
-  }) machines-local);
-
-  # programs.ssh.matchBlocks = mkMerge [
-  #   (mapAttrs' (name: { names, ... }@args: {
-  #     name = "deuxfleurs-${name}";
-  #     value = machines.default // (flip builtins.removeAttrs [ "names" ] args) // {
-  #       host = concatStringsSep " " names;
-  #     };
-  #   }) (flip builtins.removeAttrs [ "default" ] machines))
-  #   (mapAttrs' (name: address: {
-  #     name = "deuxfleurs-${name}-local";
-  #     value = {
-  #       user = "kokakiwi";
-  #       identitiesOnly = true;
-  #       identityFile = "~/.ssh/id_ed25519";
-  #       hostname = address;
-  #     };
-  #   }) machines-local)
-  #   {
-  #     deuxfleurs-git = {
-  #       host = "git.deuxfleurs.fr";
-  #       user = "git";
-  #       identityFile = "~/.ssh/id_deuxfleurs";
-  #     };
-  #   }
-  # ];
+  }) machines-local;
 }
