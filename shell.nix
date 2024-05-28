@@ -15,7 +15,6 @@ in pkgs.mkShell {
      jq
      config.nix.package
      nix-output-monitor
-     nixos-option
   ];
 
   shellHook = ''
