@@ -20,9 +20,9 @@
         "repo": "nix"
       },
       "branch": "main",
-      "revision": "296adaf9331cd2c1eb479a25d5207508fbd06188",
-      "url": "https://github.com/catppuccin/nix/archive/296adaf9331cd2c1eb479a25d5207508fbd06188.tar.gz",
-      "hash": "1k5bsc3q690l72jnr588i3ncvg9cwml96vv5vpynf87agxqz6d47"
+      "revision": "96681f62faa285ad0c8dce2cdae6b0a1d0a8f094",
+      "url": "https://github.com/catppuccin/nix/archive/96681f62faa285ad0c8dce2cdae6b0a1d0a8f094.tar.gz",
+      "hash": "12avqv820scp9qmsjm2dasqaz93wq2nklpfv5sikv7hr8ww4nd05"
     },
     "crane": {
       "type": "GitRelease",
@@ -71,9 +71,9 @@
         "repo": "home-manager"
       },
       "branch": "master",
-      "revision": "373ead20606efa9181cd15ba19a5deac7ead1492",
-      "url": "https://github.com/nix-community/home-manager/archive/373ead20606efa9181cd15ba19a5deac7ead1492.tar.gz",
-      "hash": "1fd7631c8f5l1ma5ksn8i57xhx5iiwqw9mwf5cxis3hmq7z9wpk6"
+      "revision": "a9b36cbe9292a649222b89fdb9ae9907e9c74086",
+      "url": "https://github.com/nix-community/home-manager/archive/a9b36cbe9292a649222b89fdb9ae9907e9c74086.tar.gz",
+      "hash": "1yhmp22fvj04ly0v3xiw06944h3hy7cj0kqy8hjbpjy97pkd70dp"
     },
     "nixpkgs": {
       "type": "Channel",
