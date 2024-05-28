@@ -15,9 +15,15 @@ let
 
   packages = let
     opengl = config.lib.opengl;
+    package = config.lib.package;
   in {
     cool-retro-term = opengl.wrapPackage pkgs.cool-retro-term;
     jellyfin-media-player = opengl.wrapPackage pkgs.jellyfin-media-player;
+    minio-client = package.wrapPackage pkgs.minio-client {
+      suffix = "-arch";
+    } ''
+      mv $out/bin/mc $out/bin/mcli
+    '';
     npins = pkgs.npins.override {
       nix = config.nix.package;
     };
@@ -36,7 +42,7 @@ in {
     procs skopeo dust rage
     onefetch tokei ast-grep
     ponysay xinspect
-    trashy minio-client minisign
+    trashy minisign
     nix-binutils git-absorb pingu
     nur.repos.kokakiwi.go-mod-upgrade
     nur.repos.kokakiwi.lddtree
