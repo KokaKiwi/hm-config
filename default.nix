@@ -18,7 +18,6 @@ let
       system = "x86_64-linux";
     };
   };
-  inherit (pkgs) lib;
 
   module = import "${sources.home-manager}/modules" {
     configuration = ./home.nix;
@@ -32,15 +31,9 @@ let
     };
   };
 
-  homePackages = with lib; let
-    packages = module.config.home.packages;
-    namedPackages = filter (drv: drv ? pname) packages;
-  in builtins.listToAttrs (map (drv: nameValuePair drv.pname drv) namedPackages);
-
   env = {
     inherit module sources;
     inherit (module) config options pkgs;
     inherit (module.pkgs) lib;
-    inherit homePackages;
-  };
+  } // module.config.env;
 in module.activationPackage // env // { inherit env; }

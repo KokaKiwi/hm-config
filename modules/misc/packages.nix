@@ -41,4 +41,8 @@ in {
     nur.repos.kokakiwi.go-mod-upgrade
     nur.repos.kokakiwi.lddtree
   ] ++ (lib.attrValues packages);
+
+  env.homePackages = let
+    namedPackages = lib.filter (drv: drv ? pname) config.home.packages;
+  in builtins.listToAttrs (map (drv: lib.nameValuePair drv.pname drv) namedPackages);
 }

@@ -1,6 +1,7 @@
 {
   imports = [
     ./misc/data.nix
+    ./misc/env.nix
     ./misc/home.nix
     ./misc/nix.nix
     ./misc/opengl.nix
