@@ -44,6 +44,8 @@ in {
     ll = "eza -gl";
 
     tnew = "tmux new -ADs";
+
+    elfcomment = "readelf -p .comment";
   };
 
   home.shell.package = config.programs.fish.package;
