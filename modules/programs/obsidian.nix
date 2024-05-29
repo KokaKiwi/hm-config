@@ -1,5 +1,4 @@
-{ config, pkgs, lib, ... }:
-with lib;
+{ config, pkgs, ... }:
 let
   opengl = config.lib.opengl;
 
@@ -10,7 +9,7 @@ in {
   xdg.localDesktopEntries.obsidian = {
     name = "Obsidian";
     icon = "obsidian";
-    exec = "${getExe obsidian} %U";
+    exec = "${obsidian}/bin/obsidian %U";
     startupWMClass = "Obsidian";
   };
 }
