@@ -28,6 +28,7 @@ in {
   docker-credential-helpers = callPackage ./docker-credential-helpers { };
   eza = callRustPackage ./eza { };
   fd = callRustPackage ./fd { };
+  gh = callPackage ./version-management/gh { };
   gitui = callRustPackage ./gitui { };
   glab = callPackage ./glab { };
   gleam = callRustPackage ./compilers/gleam { };
