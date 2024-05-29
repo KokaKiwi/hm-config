@@ -16,7 +16,7 @@ in {
         uri = "ssh-ng://nix-games";
         systems = [ "x86_64-linux" ];
         identityFile = "/root/.ssh/id_nix";
-        maxJobs = 4;
+        maxJobs = 3;
         speedFactor = 5;
       };
       mel = {
@@ -29,7 +29,7 @@ in {
       nix-alyx = {
         enable = false;
         uri = "ssh://nix-alyx";
-        maxJobs = 4;
+        maxJobs = 2;
         speedFactor = 1;
       };
     };
