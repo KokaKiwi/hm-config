@@ -1,4 +1,4 @@
-{ llvmStdenv, callPackage
+{ lib, llvmStdenv, callPackage
 
 , fetchFromGitHub
 
@@ -16,6 +16,15 @@ let
 
   lua = luajit.override {
     inherit stdenv;
+
+    version = "2.1.1716656478";
+
+    src = fetchFromGitHub {
+      owner = "LuaJIT";
+      repo = "LuaJIT";
+      rev = "93e87998b24021b94de8d1c8db244444c46fb6e9";
+      hash = "sha256-0ORSNetyCWwTx7W4G7viZJ3k7hdardAYwgbYQSh4kWg=";
+    };
   };
   rustPlatform = makeRustPlatform {
     rustc = fenixStableToolchain;

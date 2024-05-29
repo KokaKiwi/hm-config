@@ -13,12 +13,20 @@ let
     "cargo-shell" "mux" "xinspect"
   ];
 
+  neovim = config.programs.neovim.package;
+
   extraPackages = [
-    config.programs.neovim.package.tree-sitter
+    neovim.tree-sitter neovim.lua
     config.home.shell.package
   ];
-  aliases = {
-    neovim = config.programs.neovim.package;
+  aliases = let
+    mkUnstable = drv: drv.overrideAttrs (super: {
+      name = "${drv.name}-unstable";
+      version = super.src.rev;
+    });
+  in {
+    inherit neovim;
+    luajit = mkUnstable neovim.lua;
   };
 
   packages = let
