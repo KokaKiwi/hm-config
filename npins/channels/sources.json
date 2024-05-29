@@ -5,12 +5,6 @@
       "name": "nixos-23.11",
       "url": "https://releases.nixos.org/nixos/23.11/nixos-23.11.7313.9d29cd266ceb/nixexprs.tar.xz",
       "hash": "0phfgypnshhlh6ri54yp2f9qabq0hlq06jn46zv692jy6axss4kx"
-    },
-    "nixos-unstable": {
-      "type": "Channel",
-      "name": "nixos-unstable",
-      "url": "https://releases.nixos.org/nixos/unstable/nixos-24.11pre630835.bfb7a882678e/nixexprs.tar.xz",
-      "hash": "04qn48v4vjpxsk00x407v558p3f1x8blwjppk2sswzbjhyn2vgxw"
     }
   },
   "version": 3
