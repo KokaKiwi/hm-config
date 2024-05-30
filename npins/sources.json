@@ -20,9 +20,9 @@
         "repo": "nix"
       },
       "branch": "main",
-      "revision": "96681f62faa285ad0c8dce2cdae6b0a1d0a8f094",
-      "url": "https://github.com/catppuccin/nix/archive/96681f62faa285ad0c8dce2cdae6b0a1d0a8f094.tar.gz",
-      "hash": "12avqv820scp9qmsjm2dasqaz93wq2nklpfv5sikv7hr8ww4nd05"
+      "revision": "2c7661c9fa26a920b8088300ef87d14179c71a27",
+      "url": "https://github.com/catppuccin/nix/archive/2c7661c9fa26a920b8088300ef87d14179c71a27.tar.gz",
+      "hash": "07ffbvgvpjvr0qijkdd2s7cf5z9910va09lrwykbyh3as4h0qcb5"
     },
     "crane": {
       "type": "GitRelease",
@@ -76,10 +76,16 @@
       "hash": "1x979fm2h5j6g4j8kxvy180h83ycqh4km8999fwkcfz66p3lw61d"
     },
     "nixpkgs": {
-      "type": "Channel",
-      "name": "nixpkgs-unstable",
-      "url": "https://releases.nixos.org/nixpkgs/nixpkgs-24.11pre632545.6c25325ec30a/nixexprs.tar.xz",
-      "hash": "0lkskd6rgqs124h0y1pqs7jqbr04qrv40g17ljd6rvzz5l9i0fxq"
+      "type": "Git",
+      "repository": {
+        "type": "GitHub",
+        "owner": "NixOS",
+        "repo": "nixpkgs"
+      },
+      "branch": "nixpkgs-unstable",
+      "revision": "ac82a513e55582291805d6f09d35b6d8b60637a1",
+      "url": "https://github.com/NixOS/nixpkgs/archive/ac82a513e55582291805d6f09d35b6d8b60637a1.tar.gz",
+      "hash": "0nibz3nb5dqp670vlxf56nkxrppiglgxlrvyjs254gl8ny6bjmx4"
     },
     "tmux-loadavg": {
       "type": "Git",
