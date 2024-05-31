@@ -1,4 +1,4 @@
-{ pkgs, sources, ... }:
+{ pkgs, lib, sources, ... }:
 let
   nix = pkgs.nixVersions.nix_2_22;
 in {
@@ -34,11 +34,12 @@ in {
       };
     };
 
-    channels = {
+    channels = let
+      names = [ "nixos-23.11" "nixos-24.05" ];
+    in {
       nixpkgs = sources.nixpkgs;
       nixpkgs-unstable = sources.nixpkgs;
-      "nixos-23.11" = sources.channels."nixos-23.11";
-    };
+    } // builtins.listToAttrs (map (name: lib.nameValuePair name sources.channels.${name}) names);
     overrideNixPath = true;
 
     settings = {

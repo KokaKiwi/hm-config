@@ -5,6 +5,12 @@
       "name": "nixos-23.11",
       "url": "https://releases.nixos.org/nixos/23.11/nixos-23.11.7454.25cf937a30bf/nixexprs.tar.xz",
       "hash": "16w56cds1hrwsm22mhwb7mmy51hpysqv1ws48pkx73dkydnqx2wd"
+    },
+    "nixos-24.05": {
+      "type": "Channel",
+      "name": "nixos-24.05",
+      "url": "https://releases.nixos.org/nixos/24.05/nixos-24.05.653.d24e7fdcfaec/nixexprs.tar.xz",
+      "hash": "10r25qjk52smp33i5c2xm8hyn2lilcmra8358pwaabz90ln5ir0c"
     }
   },
   "version": 3
