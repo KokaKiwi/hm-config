@@ -1,6 +1,8 @@
-{ lib, ... }:
+{ config, lib, ... }:
 with lib;
 let
+  hosts = config.programs.ssh.matchBlocks;
+
   ciphers = [
     "chacha20-poly1305@openssh.com"
     "aes128-gcm@openssh.com"
@@ -11,21 +13,8 @@ let
   ];
 
   machines = {
-    alyx = {
-      address = "alyx.kokakiwi.net";
-    };
-    mel = {
-      address = "mel.kokakiwi.net";
-    };
-
-    galileo = {
-      address = "192.168.1.1";
-    };
     kiwi-games = {
-      address = "192.168.1.225";
-    };
-    glados = {
-      address = "192.168.1.65";
+      hostname = "192.168.1.225";
     };
   };
 in {
@@ -52,46 +41,46 @@ in {
       };
 
       alyx = {
-        hostname = machines.alyx.address;
+        hostname = "alyx.kokakiwi.net";
         user = "kokakiwi";
         identityFile = "~/.ssh/id_ed25519";
       };
       mel = {
-        hostname = machines.mel.address;
+        hostname = "mel.kokakiwi.net";
         user = "nixos";
         identityFile = "~/.ssh/id_ed25519";
       };
 
       archrepo = {
-        hostname = machines.alyx.address;
+        inherit (hosts.alyx.data) hostname;
         user = "archrepo";
         identityFile = "~/.ssh/id_ed25519";
       };
 
-      glados = {
-        hostname = machines.glados.address;
-        user = "kokakiwi";
-        identityFile = "~/.ssh/id_ed25519";
-      };
-
       galileo = {
-        hostname = machines.galileo.address;
+        hostname = "192.168.1.1";
         user = "pi";
         identityFile = "~/.ssh/id_router";
       };
 
       nix-games = {
-        hostname = machines.kiwi-games.address;
+        inherit (machines.kiwi-games) hostname;
         user = "nixos";
         identityFile = "~/.ssh/id_ed25519";
         port = 2222;
       };
 
       arch-games = {
-        hostname = machines.kiwi-games.address;
+        inherit (machines.kiwi-games) hostname;
         user = "arch";
         identityFile = "~/.ssh/id_ed25519";
         port = 2223;
+      };
+
+      kiwivault = {
+        hostname = "192.168.1.80";
+        user = "nixos";
+        identityFile = "~/.ssh/id_ed25519";
       };
     };
 
