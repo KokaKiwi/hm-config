@@ -42,7 +42,7 @@ in {
     procs skopeo dust rage
     onefetch tokei ast-grep
     ponysay xinspect
-    trashy minisign
+    trashy minisign mkcert
     nix-binutils git-absorb pingu
     nur.repos.kokakiwi.go-mod-upgrade
     nur.repos.kokakiwi.lddtree
