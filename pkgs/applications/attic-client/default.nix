@@ -20,8 +20,8 @@ rustPlatform.buildRustPackage {
   src = fetchFromGitHub {
     owner = "zhaofengli";
     repo = "attic";
-    rev = "6603ee14ed38dc84a0eb7ce4995395634bf99971";
-    hash = "sha256-jtWtPB16JrBctpYkLG1b46yQPeWMfyNut/NGjp799ME=";
+    rev = "717cc95983cdc357bc347d70be20ced21f935843";
+    hash = "sha256-kH04ReTjxOpQumgWnqy40vvQLSnLGxWP6RF3nq5Esrk=";
   };
 
   cargoLock = {
