@@ -82,6 +82,11 @@ in {
         user = "nixos";
         identityFile = "~/.ssh/id_ed25519";
       };
+      "kiwivault.ygg" = {
+        hostname = "203:9e60:bd6d:d73b:55e5:ed7a:a11c:ebf1";
+        user = "nixos";
+        identityFile = "~/.ssh/id_ed25519";
+      };
     };
 
     authorizedKeys = [ ];
