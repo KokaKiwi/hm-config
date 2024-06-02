@@ -37,6 +37,7 @@
         "/mnt/secure-data" = "[Secure]";
         "/run/media/kokakiwi/secure-data" = "[Secure]";
         "/mnt/extdata" = "[ExtData]";
+        "/mnt/kiwivault" = "[KiwiVault]";
       };
     };
   };
