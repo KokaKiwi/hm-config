@@ -26,7 +26,9 @@ copy-package SRC DST:
   chmod -R +w pkgs/{{DST}}
 
 update-package ATTR *ARGS:
-  nix-update "pkgs.{{ATTR}}" {{ARGS}}
+  nix-update pkgs.{{ATTR}} {{ARGS}}
+update-home-package ATTR *ARGS:
+  nix-update homepackages.{{ATTR}} {{ARGS}}
 
 update-neovim: (update-package 'kiwiPackages.neovim' '--version=branch=master')
   -git add pkgs/kiwi-packages/neovim && git commit -m 'pkgs(neovim): Update revision'
