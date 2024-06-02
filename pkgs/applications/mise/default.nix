@@ -13,16 +13,16 @@
 , openssl
 }: rustPlatform.buildRustPackage rec {
   pname = "mise";
-  version = "2024.5.28";
+  version = "2024.6.0";
 
   src = fetchFromGitHub {
     owner = "jdx";
     repo = "mise";
     rev = "v${version}";
-    hash = "sha256-EbULmZ0kIXMz2EQ0wlWT2Og5SxetwqcGIZeJlB2fNpQ=";
+    hash = "sha256-pttT3qN12Xd61vCHbM9wARtIbtIc76VkEXto0rnL7us=";
   };
 
-  cargoHash = "sha256-as5qyA43GnR4Vqst+B/SOLidQ2dzQCB/IVY4zmo8BWI=";
+  cargoHash = "sha256-hXH14UD3lZwnRzdYgoBLcMNOcwZtP0M7s1SC9pqoVuE=";
 
   nativeBuildInputs = [ addUsageCompletion installShellFiles pkg-config ];
   buildInputs = [ openssl ];
