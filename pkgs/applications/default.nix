@@ -19,6 +19,7 @@ in {
   bitwarden-cli = callPackage ./bitwarden-cli {
     inherit python3;
   };
+  cargo-about = callRustPackage ./development/tools/cargo-about { };
   cargo-deny = callRustPackage ./cargo-deny { };
   cargo-depgraph = callRustPackage ./cargo-depgraph { };
   cargo-ndk = callRustPackage ./cargo-ndk { };
