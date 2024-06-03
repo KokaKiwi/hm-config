@@ -1,11 +1,11 @@
-{ pkgs, ... }:
-{
+{ config, pkgs, lib, ... }:
+let
+  cfg = config.programs.neovim;
+in {
   programs.neovim = {
     package = pkgs.kiwiPackages.neovim;
 
     catppuccin.enable = false;
-
-    defaultEditor = true;
 
     withRuby = false;
 
@@ -23,4 +23,6 @@
       nodejs = pkgs.nodejs;
     };
   };
+
+  home.sessionVariables.EDITOR = lib.getExe cfg.finalPackage;
 }
