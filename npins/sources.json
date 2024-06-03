@@ -34,10 +34,10 @@
       "pre_releases": false,
       "version_upper_bound": null,
       "release_prefix": "v",
-      "version": "v0.17.2",
-      "revision": "b5eb15b359d5228013c812dcb7c571e1e9daf14d",
-      "url": "https://api.github.com/repos/ipetkov/crane/tarball/v0.17.2",
-      "hash": "0b8r2mfq41x668qvwlcigcpkswdvlnpn4fjgc8mlzbrqi3sm3bgh"
+      "version": "v0.17.3",
+      "revision": "3f9bd1c65a9bb7d439810cbccf1db88e29ed05f2",
+      "url": "https://api.github.com/repos/ipetkov/crane/tarball/v0.17.3",
+      "hash": "0rbigziyhwcxbmjwmjvpciz5a2v41jh1zdzjcaldg11firnlg7z7"
     },
     "declarative-cachix": {
       "type": "Git",
@@ -59,9 +59,9 @@
         "repo": "fenix"
       },
       "branch": "main",
-      "revision": "53cd289dfda8bcd148dc92178efa707ac83c9d9a",
-      "url": "https://github.com/nix-community/fenix/archive/53cd289dfda8bcd148dc92178efa707ac83c9d9a.tar.gz",
-      "hash": "048yxl1v24syvxqwf01ng2265pmnrs1dk77vkwnm2chrczyy57h8"
+      "revision": "287ad8ef730c3bdbfbd643dca8bc4d3ff15fad84",
+      "url": "https://github.com/nix-community/fenix/archive/287ad8ef730c3bdbfbd643dca8bc4d3ff15fad84.tar.gz",
+      "hash": "0d6kr98m461snkwxfsw0ngzqgax6c5qaiknb3d4gjjk97na87zlj"
     },
     "home-manager": {
       "type": "Git",
@@ -76,10 +76,16 @@
       "hash": "1hn0fnrczpiccaiqrdil5zvr2hvxqnwa9nkfg5sd7prfjyjh8bay"
     },
     "nixpkgs": {
-      "type": "Channel",
-      "name": "nixpkgs-unstable",
-      "url": "https://releases.nixos.org/nixpkgs/nixpkgs-24.11pre633168.6132b0f6e344/nixexprs.tar.xz",
-      "hash": "0jli5364mw57krjc9csswc3xh1bvbjcv85hf81l9gx7fcp5qkswa"
+      "type": "Git",
+      "repository": {
+        "type": "GitHub",
+        "owner": "NixOS",
+        "repo": "nixpkgs"
+      },
+      "branch": "nixpkgs-unstable",
+      "revision": "4a4ecb0ab415c9fccfb005567a215e6a9564cdf5",
+      "url": "https://github.com/NixOS/nixpkgs/archive/4a4ecb0ab415c9fccfb005567a215e6a9564cdf5.tar.gz",
+      "hash": "15fwgghwlzq0x4i7q4i36ys1slzgfmdjsw8c2ilqnm5mz89rl9bq"
     },
     "tmux-loadavg": {
       "type": "Git",
