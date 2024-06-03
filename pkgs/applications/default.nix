@@ -25,6 +25,7 @@ in {
   cargo-ndk = callRustPackage ./cargo-ndk { };
   cargo-nextest = callRustPackage ./cargo-nextest { };
   cargo-shell = callRustPackage ./cargo-shell { };
+  cargo-show-asm = callRustPackage ./development/tools/cargo-show-asm { };
   colmena = callRustPackage ./colmena { };
   docker-credential-helpers = callPackage ./docker-credential-helpers { };
   eza = callRustPackage ./eza { };
