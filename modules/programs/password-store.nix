@@ -8,7 +8,16 @@ in {
   ]);
 
   programs.password-store = {
-    package = pkgs.pass.withExtensions (exts: with exts; [
+    package = let
+      pass = pkgs.pass.override {
+        dmenuSupport = false;
+        x11Support = false;
+        waylandSupport = true;
+
+        inherit pass;
+      };
+    in pass.withExtensions (exts: with exts; [
+      pass-file
       pass-otp
     ]);
   };
