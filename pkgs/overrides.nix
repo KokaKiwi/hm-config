@@ -19,14 +19,6 @@
     '';
   });
 
-  imhex = super.imhex.overrideAttrs (super: {
-    patches = (super.patches or [ ]) ++ [
-      ./patches/imhex.patch
-    ];
-
-    meta.mainProgram = "imhex";
-  });
-
   trashy = super.trashy.overrideAttrs {
     postInstall = ''
       $out/bin/trash manpage > trash.1

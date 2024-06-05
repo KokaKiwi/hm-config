@@ -34,6 +34,7 @@ in {
   gitui = callRustPackage ./gitui { };
   glab = callPackage ./glab { };
   gleam = callRustPackage ./compilers/gleam { };
+  imhex = callPackage ./misc/imhex { };
   jellyfin-media-player = libsForQt5.callPackage ./jellyfin-media-player { };
   kitty = callPythonPackage ./terminal-emulators/kitty { };
   kitty-themes = callPackage ./terminal-emulators/kitty/themes.nix { };
@@ -51,6 +52,7 @@ in {
   pgcli = python3Packages.callPackage ./pgcli { };
   ponysay = callPackage ./ponysay { };
   ptpython = python3Packages.callPackage ./ptpython { };
+  pueue = callRustPackage ./misc/pueue { };
   rustup = callRustPackage ./rustup { };
   sccache = callRustPackage ./development/tools/sccache { };
   skopeo = callPackage ./skopeo { };

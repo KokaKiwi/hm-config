@@ -1,5 +1,4 @@
-{ config, pkgs, lib, ... }:
-with lib;
+{ config, pkgs, ... }:
 let
   inherit (config.lib) opengl;
 
@@ -14,7 +13,7 @@ in {
     name = "ImHex";
     comment = "ImHex Hex Editor";
     genericName = "Hex Editor";
-    exec = "${getExe imhex} %U";
+    exec = "${imhex}/bin/imhex %U";
     icon = "imhex";
     startupNotify = true;
     startupWMClass = "imhex";
