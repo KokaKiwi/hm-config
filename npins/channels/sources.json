@@ -3,14 +3,14 @@
     "nixos-23.11": {
       "type": "Channel",
       "name": "nixos-23.11",
-      "url": "https://releases.nixos.org/nixos/23.11/nixos-23.11.7476.a62e6edd6d5e/nixexprs.tar.xz",
-      "hash": "0acylxwnjlx3g4fifgl8cxx6qc9lcnv3kcfgn6mws1rpifw3f2nd"
+      "url": "https://releases.nixos.org/nixos/23.11/nixos-23.11.7503.a2e1d0414259/nixexprs.tar.xz",
+      "hash": "0f16yl63niibi57l64ijsxygvbgx394piymirvn2agabyzsy38s1"
     },
     "nixos-24.05": {
       "type": "Channel",
       "name": "nixos-24.05",
-      "url": "https://releases.nixos.org/nixos/24.05/nixos-24.05.675.805a384895c6/nixexprs.tar.xz",
-      "hash": "1lgx2ln363mhdv1hnmnpiryhg3fpkpgzq50k1gnscp24sm5rskv2"
+      "url": "https://releases.nixos.org/nixos/24.05/nixos-24.05.984.0b8e7a1ae5a9/nixexprs.tar.xz",
+      "hash": "138iipwzsrpsnlvfhix76lgc3k1hv6k8i5a8hj15m3j5zm2snpmy"
     }
   },
   "version": 3
