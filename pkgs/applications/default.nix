@@ -47,6 +47,7 @@ in {
     nix = pkgs.nixVersions.nix_2_19;
   };
   npins = callRustPackage ./npins { };
+  obsidian = callPackage ./misc/obsidian { };
   onefetch = callRustPackage ./onefetch { };
   pdm = callPythonPackage ./pdm { };
   pgcli = python3Packages.callPackage ./pgcli { };
