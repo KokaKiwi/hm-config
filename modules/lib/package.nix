@@ -2,13 +2,11 @@
 {
   lib.package = {
     wrapPackage = drv: {
-      suffix ? null,
+      suffix ? "",
       nativeBuildInputs ? [ ],
       makeWrapper ? pkgs.makeShellWrapper
     }: buildCommand: drv.overrideAttrs (super: {
-      name = if suffix != null
-        then "${drv.name}${suffix}"
-        else drv.name;
+      name = "${drv.name}${suffix}";
 
       nativeBuildInputs = [
         makeWrapper
