@@ -1,14 +1,14 @@
-From ddbfa1017173e4bfef3ac02330cb2677f971dbad Mon Sep 17 00:00:00 2001
+From 0c87d4037ace58fee79c9caf4992b3decae51d01 Mon Sep 17 00:00:00 2001
 From: KokaKiwi <kokakiwi+git@kokakiwi.net>
 Date: Thu, 16 May 2024 16:33:57 +0200
-Subject: [PATCH 2/2] disable update notifications
+Subject: [PATCH] disable update notifications
 
 ---
  resources/settings/settings_description.json | 2 +-
  1 file changed, 1 insertion(+), 1 deletion(-)
 
 diff --git a/resources/settings/settings_description.json b/resources/settings/settings_description.json
-index 3329d0d..ccd5718 100644
+index 0d8cf1f..a3f56c2 100644
 --- a/resources/settings/settings_description.json
 +++ b/resources/settings/settings_description.json
 @@ -127,7 +127,7 @@
@@ -21,5 +21,5 @@ index 3329d0d..ccd5718 100644
        {
          "value": "enableInputRepeat",
 -- 
-2.44.0
+2.45.2
 

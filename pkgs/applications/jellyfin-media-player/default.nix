@@ -1,7 +1,8 @@
-{ lib
+{ lib, stdenv
+
 , fetchFromGitHub
 , mkDerivation
-, stdenv
+
 , SDL2
 , cmake
 , libGL
@@ -18,23 +19,21 @@
 , qtwebengine
 , qtx11extras
 , jellyfin-web
-, withDbus ? stdenv.isLinux, dbus
+, withDbus ? stdenv.isLinux
 }:
-
 mkDerivation rec {
   pname = "jellyfin-media-player";
-  version = "1.10.1";
+  version = "1.11.0";
 
   src = fetchFromGitHub {
     owner = "jellyfin";
     repo = "jellyfin-media-player";
     rev = "v${version}";
-    hash = "sha256-l1jNrEUrDCc4R1CZ0b0Omjka6wTryjWqnEJbfCSJ0ZE=";
+    hash = "sha256-UAry6YND1Lc3Lj0uTpWZv12lZzozPAh9OBn7hEJcX9E=";
   };
 
   patches = [
-    ./0001-fix-the-location-of-the-jellyfin-web-path.patch
-    ./0002-disable-update-notifications.patch
+    ./0001-disable-update-notifications.patch
   ];
 
   buildInputs = [
