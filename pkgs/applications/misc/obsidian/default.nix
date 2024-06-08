@@ -24,11 +24,11 @@ let
   };
 in stdenv.mkDerivation rec {
   pname = "obsidian";
-  version = "1.6.2";
+  version = "1.6.3";
 
   src = fetchurl {
     url = "https://github.com/obsidianmd/obsidian-releases/releases/download/v${version}/obsidian-${version}.tar.gz";
-    hash = "sha256-NzMXF5OjcErOCGzzkdJLCMfF04lNfOWbT+0qEv7Nmns=";
+    hash = "sha256-Eq2cUXjp0XdVeR4t3oG2DUtsKOp3e3nPMMhznUc4BmE=";
   };
 
   nativeBuildInputs = [ makeWrapper imagemagick ];
