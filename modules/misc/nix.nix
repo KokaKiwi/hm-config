@@ -14,7 +14,7 @@ in {
     builders = {
       nix-games = {
         uri = "ssh-ng://nix-games";
-        systems = [ "x86_64-linux" ];
+        systems = [ "x86_64-linux" "aarch64-linux" ];
         identityFile = "/root/.ssh/id_nix";
         maxJobs = 3;
         speedFactor = 5;
@@ -43,6 +43,7 @@ in {
     overrideNixPath = true;
 
     settings = {
+      extra-platforms = [ "aarch64-linux" ];
       experimental-features = [ "nix-command" "flakes" ];
       use-xdg-base-directories = true;
     };
