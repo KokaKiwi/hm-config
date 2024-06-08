@@ -32,7 +32,7 @@ in {
       };
 
       "alma*" = {
-        user = "alarm";
+        user = "root";
         identityFile = "~/.ssh/id_ed25519";
       };
 
