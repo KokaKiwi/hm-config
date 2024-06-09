@@ -88,7 +88,7 @@ in {
       };
 
       plugins = [
-        "absubmit"
+        # "absubmit"
         "acousticbrainz"
         "chroma"
         "convert"
@@ -106,12 +106,6 @@ in {
 
       host = "127.0.0.1";
       port = mpdCfg.network.port;
-    };
-  };
-
-  systemd.user.services.beets-mpdstats = {
-    Service = {
-      Restart = "on-failure";
     };
   };
 }
