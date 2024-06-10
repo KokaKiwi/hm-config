@@ -11,6 +11,10 @@ in {
   programs.tmux = {
     enableSystemd = true;
 
+    package = pkgs.tmux.override {
+      stdenv = pkgs.llvmStdenv;
+    };
+
     catppuccin = {
       extraConfig = config.lib.tmux.formatOptions {
         prefix = "catppuccin_";
