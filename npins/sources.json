@@ -20,9 +20,9 @@
         "repo": "nix"
       },
       "branch": "main",
-      "revision": "0cdfa29b902976fc2941468d326325d24e148437",
-      "url": "https://github.com/catppuccin/nix/archive/0cdfa29b902976fc2941468d326325d24e148437.tar.gz",
-      "hash": "0xnxymgypqgy69aq3hvf936rzlnycwp1ggh67rf9b8pk4rwqckmr"
+      "revision": "e55fb4262b17f702624bcbb58531a2b84a69a94e",
+      "url": "https://github.com/catppuccin/nix/archive/e55fb4262b17f702624bcbb58531a2b84a69a94e.tar.gz",
+      "hash": "16nd8g9dm7l77vgjj0jg7q14b0h5nr817i8gax4132wy6v7l9zbi"
     },
     "crane": {
       "type": "GitRelease",
@@ -83,9 +83,9 @@
         "repo": "nixpkgs"
       },
       "branch": "nixpkgs-unstable",
-      "revision": "cd18e2ae9ab8e2a0a8d715b60c91b54c0ac35ff9",
-      "url": "https://github.com/NixOS/nixpkgs/archive/cd18e2ae9ab8e2a0a8d715b60c91b54c0ac35ff9.tar.gz",
-      "hash": "01kdnslli483pf12j4bq7w8vrhlg6lgvnss8wavndr9mvzvdikbk"
+      "revision": "3bcedce9f4de37570242faf16e1e143583407eab",
+      "url": "https://github.com/NixOS/nixpkgs/archive/3bcedce9f4de37570242faf16e1e143583407eab.tar.gz",
+      "hash": "1pm4jbwlnv9nqd94jz1ifw0rb338nqmv4x411ha021kb2rjkmiaq"
     },
     "tmux-loadavg": {
       "type": "Git",
