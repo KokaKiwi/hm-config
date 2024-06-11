@@ -28,7 +28,7 @@ in stdenv.mkDerivation rec {
 
   src = fetchurl {
     url = "https://github.com/obsidianmd/obsidian-releases/releases/download/v${version}/obsidian-${version}.tar.gz";
-    hash = "sha256-Eq2cUXjp0XdVeR4t3oG2DUtsKOp3e3nPMMhznUc4BmE=";
+    hash = "sha256-ho8E2Iq+s/w8NjmxzZo/y5aj3MNgbyvIGjk3nSKPLDw=";
   };
 
   nativeBuildInputs = [ makeWrapper imagemagick ];
