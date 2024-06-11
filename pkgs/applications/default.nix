@@ -38,6 +38,7 @@ in {
   jellyfin-media-player = libsForQt5.callPackage ./jellyfin-media-player { };
   kitty = callPythonPackage ./terminal-emulators/kitty { };
   kitty-themes = callPackage ./terminal-emulators/kitty/themes.nix { };
+  kubo = callPackage ./kubo { };
   mise = callRustPackage ./mise { };
   minio-client = callPackage ./tools/networking/minio-client { };
   module-server = callPythonPackage ./module-server { };
