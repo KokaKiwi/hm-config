@@ -65,8 +65,6 @@ in {
   };
 
   programs.beets = {
-    package = pkgs.beets;
-
     settings = {
       asciify_paths = true;
 
@@ -88,12 +86,12 @@ in {
       };
 
       plugins = [
-        # "absubmit"
-        "acousticbrainz"
         "chroma"
         "convert"
         "fetchart"
         "fromfilename"
+        "info"
+        "ipfs"
         "lastgenre"
         "mbsync"
         "thumbnails"
