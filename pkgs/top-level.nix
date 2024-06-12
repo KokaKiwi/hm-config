@@ -28,7 +28,9 @@ in {
   inherit mkLLVMStdenv;
   llvmStdenv = mkLLVMStdenv pkgs.llvmPackages_latest;
 
-  fenix = pkgs.callPackage sources.fenix {};
+  fenix = import sources.fenix {
+    inherit pkgs lib;
+  };
   inherit fenixStableToolchain fenixStableRustPlatform;
 
   craneLib = import sources.crane {
