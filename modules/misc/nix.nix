@@ -40,7 +40,7 @@ in {
       nixpkgs = sources.nixpkgs;
       nixpkgs-unstable = sources.nixpkgs;
     } // builtins.listToAttrs (map (name: lib.nameValuePair name sources.channels.${name}) names);
-    overrideNixPath = true;
+    keepOldNixPath = false;
 
     settings = {
       extra-platforms = [ "aarch64-linux" ];
