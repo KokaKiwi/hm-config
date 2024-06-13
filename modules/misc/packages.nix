@@ -37,7 +37,7 @@ in {
     attic-client colmena bitwarden-cli
     eza hexyl pdm pnpm-lock-export
     cargo-shell opentofu gleam mergerfs
-    nix-info nurl nixos-option
+    nix-info nurl nixos-option nixfmt-rfc-style
     nix-output-monitor nixd nix-update
     procs skopeo dust rage
     onefetch tokei ast-grep
