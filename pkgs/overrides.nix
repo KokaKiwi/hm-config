@@ -1,14 +1,5 @@
 { pkgs, super }:
 {
-  git-interactive-rebase-tool = (super.git-interactive-rebase-tool.override {
-    rustPlatform = pkgs.fenixStableRustPlatform;
-  }).overrideAttrs (prev: {
-    postPatch = prev.postPatch + ''
-      substituteInPlace src/main.rs src/{config,core,display,input,git,runtime,todo_file,testutils,view}/src/lib.rs \
-        --replace-warn "warnings" ""
-    '';
-  });
-
   glfw3 = super.glfw3.overrideAttrs (super: {
     postPatch = super.postPatch + ''
     substituteInPlace src/wl_init.c \

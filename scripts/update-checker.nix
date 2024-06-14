@@ -18,6 +18,7 @@ let
   extraPackages = [
     neovim.tree-sitter neovim.lua
     config.home.shell.package
+    pkgs.git-interactive-rebase-tool
   ];
   aliases = let
     mkUnstable = drv: drv.overrideAttrs (super: {

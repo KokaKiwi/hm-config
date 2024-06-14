@@ -31,6 +31,7 @@ in {
   eza = callRustPackage ./eza { };
   fd = callRustPackage ./fd { };
   gh = callPackage ./version-management/gh { };
+  git-interactive-rebase-tool = callRustPackage ./version-management/git-interactive-rebase-tool { };
   gitui = callRustPackage ./gitui { };
   glab = callPackage ./glab { };
   gleam = callRustPackage ./compilers/gleam { };
