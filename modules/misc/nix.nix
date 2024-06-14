@@ -20,6 +20,7 @@ in {
         speedFactor = 5;
       };
       mel = {
+        enable = false;
         uri = "ssh-ng://mel";
         systems = [ "x86_64-linux" ];
         identityFile = "/root/.ssh/id_nix";
