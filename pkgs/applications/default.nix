@@ -61,6 +61,7 @@ in {
   skopeo = callPackage ./skopeo { };
   starship = callRustPackage ./starship { };
   stockfish = callPackage ./games/stockfish { };
+  trunk = callRustPackage ./development/tools/trunk { };
   usage = callRustPackage ./usage { };
   xinspect = callRustPackage ./xinspect { };
   yt-dlp = python3Packages.callPackage ./misc/yt-dlp { };
