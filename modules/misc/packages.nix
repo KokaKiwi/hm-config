@@ -40,7 +40,7 @@ in {
     nix-info nurl nixos-option nixfmt-rfc-style
     nix-output-monitor nixd nix-update
     procs skopeo dust rage
-    onefetch tokei ast-grep
+    onefetch tokei ast-grep trunk
     ponysay xinspect
     trashy minisign mkcert
     nix-binutils git-absorb pingu
