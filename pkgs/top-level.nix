@@ -9,9 +9,14 @@ let
     cargo = rustToolchain;
   };
 
-  fenixStableToolchain = with pkgs.fenix; combine [
-    stable.rustc
-    stable.cargo
+  fenixStableToolchain = with pkgs.fenix; let
+    toolchain = toolchainOf {
+      channel = "1.79.0";
+      sha256 = "sha256-Ngiz76YP4HTY75GGdH2P+APE/DEIx2R/Dn+BwwOyzZU=";
+    };
+  in combine [
+    toolchain.rustc
+    toolchain.cargo
   ];
   fenixStableRustPlatform = makeRustPlatform fenixStableToolchain;
 
