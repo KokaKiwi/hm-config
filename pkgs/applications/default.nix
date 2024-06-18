@@ -1,4 +1,4 @@
-{ pkgs, lib, callPackage, sources }:
+{ pkgs, super, lib, callPackage, sources }:
 let
   inherit (pkgs) libsForQt5;
 
@@ -12,6 +12,14 @@ let
   callPythonPackage = lib.callPackageWith (pkgs // rec {
     inherit python3 python3Packages;
   });
+
+  go = super.go.overrideAttrs rec {
+    version = "1.22.4";
+    src = pkgs.fetchurl {
+      url = "https://go.dev/dl/go${version}.src.tar.gz";
+      hash = "sha256-/tcgZ45yinyjC6jR3tHKr+J9FgKPqwIyuLqOIgCPt4Q=";
+    };
+  };
 in {
   agenix = callPackage "${sources.agenix}/pkgs/agenix.nix" { };
   ast-grep = callRustPackage ./ast-grep { };
@@ -33,7 +41,11 @@ in {
   gh = callPackage ./version-management/gh { };
   git-interactive-rebase-tool = callRustPackage ./version-management/git-interactive-rebase-tool { };
   gitui = callRustPackage ./gitui { };
-  glab = callPackage ./glab { };
+  glab = callPackage ./glab {
+    buildGoModule = super.buildGoModule.override {
+      inherit go;
+    };
+  };
   gleam = callRustPackage ./compilers/gleam { };
   imhex = callPackage ./misc/imhex { };
   jellyfin-media-player = libsForQt5.callPackage ./jellyfin-media-player { };
