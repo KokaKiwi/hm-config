@@ -17,6 +17,7 @@
     ./programs/hub.nix
     ./programs/kde.nix
     ./programs/kitty.nix
+    ./programs/lan-mouse.nix
     ./programs/litecli.nix
     ./programs/mux.nix
     ./programs/neovim.nix

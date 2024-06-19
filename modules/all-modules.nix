@@ -32,6 +32,7 @@
     ./programs/imhex.nix
     ./programs/kde.nix
     ./programs/kitty.nix
+    ./programs/lan-mouse.nix
     ./programs/litecli.nix
     ./programs/llvm.nix
     ./programs/mise.nix

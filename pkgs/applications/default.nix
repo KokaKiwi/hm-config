@@ -9,7 +9,7 @@ let
 
   python3 = pkgs.python312;
   python3Packages = python3.pkgs;
-  callPythonPackage = lib.callPackageWith (pkgs // rec {
+  callPythonPackage = lib.callPackageWith (pkgs // {
     inherit python3 python3Packages;
   });
 
@@ -52,6 +52,7 @@ in {
   kitty = callPythonPackage ./terminal-emulators/kitty { };
   kitty-themes = callPackage ./terminal-emulators/kitty/themes.nix { };
   kubo = callPackage ./kubo { };
+  lan-mouse = callRustPackage ./lan-mouse { };
   mise = callRustPackage ./mise { };
   minio-client = callPackage ./tools/networking/minio-client { };
   module-server = callPythonPackage ./module-server { };
