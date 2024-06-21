@@ -6,12 +6,14 @@ _run-shell COMMAND *ARGS:
   nix-shell {{ARGS}} --run '{{COMMAND}}'
 
 init: (_run-shell 'init')
-switch: (_run-shell 'switch')
 list-packages: (_run-shell 'listPackages')
 check: (_run-shell 'checkUpdates' '--arg doWarn true')
 
 build:
   nom-build
+
+switch:
+  nom-build && result/activate
 
 build-package ATTR:
   {{nix-build}} -A pkgs.{{ATTR}}
