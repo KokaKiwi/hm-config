@@ -13,6 +13,7 @@ in {
 
     builders = {
       nix-games = {
+        enable = false;
         uri = "ssh-ng://nix-games";
         systems = [ "x86_64-linux" "aarch64-linux" ];
         identityFile = "/root/.ssh/id_nix";
