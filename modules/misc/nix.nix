@@ -1,6 +1,6 @@
 { pkgs, lib, sources, ... }:
 let
-  nix = pkgs.nixVersions.nix_2_22;
+  nix = pkgs.nixVersions.nix_2_23;
 in {
   imports = [
     "${sources.declarative-cachix}/home-manager.nix"
