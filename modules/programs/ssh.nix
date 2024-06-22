@@ -35,9 +35,22 @@ in {
         user = "root";
         identityFile = "~/.ssh/id_ed25519";
       };
-
       alma = hm.dag.entryAfter [ "alma*" ] {
-        hostname = "alma.lan";
+        hostname = "192.168.1.42";
+      };
+      "alma.ygg" = hm.dag.entryAfter [ "alma*" ] {
+        hostname = "201:f51e:16e4:d0e5:d4eb:53b2:5449:517";
+      };
+
+      "kiwivault*" = {
+        user = "nixos";
+        identityFile = "~/.ssh/id_ed25519";
+      };
+      kiwivault = hm.dag.entryAfter [ "kiwivault*" ] {
+        hostname = "192.168.1.80";
+      };
+      "kiwivault.ygg" = hm.dag.entryAfter [ "kiwivault*" ] {
+        hostname = "200:872c:820e:7bb6:1b98:e6e6:913:a512";
       };
 
       alyx = {
@@ -75,17 +88,6 @@ in {
         user = "arch";
         identityFile = "~/.ssh/id_ed25519";
         port = 2223;
-      };
-
-      kiwivault = {
-        hostname = "192.168.1.80";
-        user = "nixos";
-        identityFile = "~/.ssh/id_ed25519";
-      };
-      "kiwivault.ygg" = {
-        hostname = "200:872c:820e:7bb6:1b98:e6e6:913:a512";
-        user = "nixos";
-        identityFile = "~/.ssh/id_ed25519";
       };
     };
 
