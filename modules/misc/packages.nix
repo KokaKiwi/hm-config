@@ -25,7 +25,7 @@ let
       mv $out/bin/mc $out/bin/mcli
     '';
     npins = pkgs.npins.override {
-      nix = config.nix.package;
+      # nix = config.nix.package;
     };
     stockfish = pkgs.stockfish.override {
       stdenv = pkgs.llvmStdenv;
