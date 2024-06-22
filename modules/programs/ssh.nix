@@ -83,7 +83,7 @@ in {
         identityFile = "~/.ssh/id_ed25519";
       };
       "kiwivault.ygg" = {
-        hostname = "203:9e60:bd6d:d73b:55e5:ed7a:a11c:ebf1";
+        hostname = "200:872c:820e:7bb6:1b98:e6e6:913:a512";
         user = "nixos";
         identityFile = "~/.ssh/id_ed25519";
       };
