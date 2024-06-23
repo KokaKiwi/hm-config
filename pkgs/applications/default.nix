@@ -61,6 +61,9 @@ in {
     llvmPackages = pkgs.llvmPackages_16;
     nix = pkgs.nixVersions.nix_2_19;
   };
+  nomad_1_8 = callPackage ./networking/cluster/nomad {
+    buildGoModule = pkgs.buildGo122Module;
+  };
   npins = callRustPackage ./npins { };
   obsidian = callPackage ./misc/obsidian { };
   onefetch = callRustPackage ./onefetch { };

@@ -30,7 +30,7 @@ copy-package SRC DST:
 update-package ATTR *ARGS:
   nix-update --commit pkgs.{{ATTR}} {{ARGS}}
 update-home-package ATTR *ARGS:
-  nix-update --commit homepackages.{{ATTR}} {{ARGS}}
+  nix-update --commit homePackages.{{ATTR}} {{ARGS}}
 
 update-neovim: (update-package 'kiwiPackages.neovim' '--version=branch=master')
 
