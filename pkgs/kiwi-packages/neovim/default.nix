@@ -46,13 +46,13 @@ in (neovim-unwrapped.override {
   inherit stdenv;
   inherit lua tree-sitter;
 }).overrideAttrs (final: super: {
-  version = "nightly-unstable-2024-06-22";
+  version = "nightly-unstable-2024-06-23";
 
   src = fetchFromGitHub {
     owner = "neovim";
     repo = "neovim";
-    rev = "6c3f7e7e27a0ffcf6d58dc1f5ad2fce7e59a2d88";
-    hash = "sha256-C2stSASvUp0XHljA6iZfDFHSH0JIDJ0g7g0uQUIHU2E=";
+    rev = "be999e6a0e5b251b2b37500d06636d4167334c6e";
+    hash = "sha256-+rM0RjvuW6/vzxdJxEU6KvQEF159NXrgB+irtS044Cc=";
   };
 
   inherit tree-sitter;
