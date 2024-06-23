@@ -31,6 +31,7 @@ let
       stdenv = pkgs.llvmStdenv;
       targetArch = "x86-64-bmi2";
     };
+    nomad = pkgs.nomad_1_8;
   };
 in {
   home.packages = with pkgs; [
