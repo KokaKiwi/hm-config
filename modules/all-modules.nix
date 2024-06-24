@@ -27,6 +27,7 @@
     ./programs/gh.nix
     ./programs/git.nix
     ./programs/glab.nix
+    ./programs/glances.nix
     ./programs/gpg.nix
     ./programs/hyfetch.nix
     ./programs/imhex.nix

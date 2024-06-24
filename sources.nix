@@ -17,7 +17,7 @@ let
   pkgs = import main.nixpkgs { inherit system; };
   inherit (pkgs) lib;
 
-  applyPatches = sources: lib.flip lib.mapAttrs sources (name: source: let
+  applyPatches = lib.mapAttrs (name: source: let
     sourcePatches = patches.${name} or [ ];
   in if sourcePatches == [ ] then source
   else pkgs.srcOnly {

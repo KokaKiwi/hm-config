@@ -13,6 +13,7 @@
     ./programs/ferdium.nix
     ./programs/fish.nix
     ./programs/glab.nix
+    ./programs/glances.nix
     ./programs/glow.nix
     ./programs/hub.nix
     ./programs/kde.nix

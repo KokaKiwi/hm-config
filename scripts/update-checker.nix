@@ -11,6 +11,8 @@ let
     "hub"
     # My own packages
     "cargo-shell" "mux" "xinspect"
+    # Unstable packages
+    "glances"
   ];
 
   neovim = config.programs.neovim.package;
