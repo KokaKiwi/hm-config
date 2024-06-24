@@ -13,25 +13,16 @@ in {
 
     builders = {
       nix-games = {
-        enable = false;
         uri = "ssh-ng://nix-games";
         systems = [ "x86_64-linux" "aarch64-linux" ];
         identityFile = "/root/.ssh/id_nix";
         maxJobs = 3;
         speedFactor = 5;
       };
-      mel = {
-        enable = false;
-        uri = "ssh-ng://mel";
-        systems = [ "x86_64-linux" ];
-        identityFile = "/root/.ssh/id_nix";
-        maxJobs = 2;
-        speedFactor = 3;
-      };
       nix-alyx = {
-        enable = false;
         uri = "ssh://nix-alyx";
-        maxJobs = 2;
+        identityFile = "/root/.ssh/id_nix";
+        maxJobs = 1;
         speedFactor = 1;
       };
     };
