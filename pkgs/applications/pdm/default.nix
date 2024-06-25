@@ -108,6 +108,8 @@ python3Packages.buildPythonApplication rec {
     "test_find_candidates_from_find_links"
     "test_lock_all_with_excluded_groups"
     "test_find_interpreters_with_PDM_IGNORE_ACTIVE_VENV"
+
+    "test_run_script_with_inline_metadata"
   ];
 
   meta = with lib; {
