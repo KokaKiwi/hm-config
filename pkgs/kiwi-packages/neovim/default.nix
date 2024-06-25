@@ -51,8 +51,8 @@ in (neovim-unwrapped.override {
   src = fetchFromGitHub {
     owner = "neovim";
     repo = "neovim";
-    rev = "9e436251de0329b1479365ff162d87ef18d6d14c";
-    hash = "sha256-mMuMr3aZHdcUWIxmsQkdqD8CgcMd+Alv99Ueaytiwes=";
+    rev = "9dc09a4cdde9fad4e7861b9467276260bd9b82a9";
+    hash = "sha256-rnBC/8Y0CECztfoMKBxxo4hzd4TBu1bu9CnwpWDaB1U=";
   };
 
   inherit tree-sitter;
@@ -81,4 +81,8 @@ in (neovim-unwrapped.override {
   cmakeFlagsArray = super.cmakeFlagsArray ++ [
     "-DENABLE_LTO=OFF"
   ];
+
+  meta = super.meta // {
+    description = "${super.meta.description} (Kiwi Edition)";
+  };
 })
