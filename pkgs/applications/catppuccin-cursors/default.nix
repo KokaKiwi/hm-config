@@ -5,6 +5,7 @@
 , hyprcursor
 , inkscape
 , just
+, xcur2png
 , xorg
 }:
 let
@@ -25,7 +26,13 @@ in stdenvNoCC.mkDerivation rec {
     hash = "sha256-CuzD6O/RImFKLWzJoiUv7nlIdoXNvwwl+k5mTeVIY10=";
   };
 
-  nativeBuildInputs = [ just inkscape xorg.xcursorgen hyprcursor ];
+  nativeBuildInputs = [
+    just
+    inkscape
+    xorg.xcursorgen
+    xcur2png
+    hyprcursor
+  ];
 
   outputs = variants ++ [ "out" ]; # dummy "out" output to prevent breakage
 
