@@ -1,17 +1,9 @@
-{ pkgs, super, lib, callPackage, sources }:
+{ pkgs, super, lib, sources }:
 let
   inherit (pkgs) libsForQt5;
 
-  callRustPackage = lib.callPackageWith (pkgs // {
-    craneLib = pkgs.craneLibStable;
-    rustPlatform = pkgs.fenixStableRustPlatform;
-  });
-
   python3 = pkgs.python312;
   python3Packages = python3.pkgs;
-  callPythonPackage = lib.callPackageWith (pkgs // {
-    inherit python3 python3Packages;
-  });
 
   go = super.go.overrideAttrs rec {
     version = "1.22.4";
@@ -20,66 +12,68 @@ let
       hash = "sha256-/tcgZ45yinyjC6jR3tHKr+J9FgKPqwIyuLqOIgCPt4Q=";
     };
   };
+  buildGoModule = super.buildGoModule.override {
+    inherit go;
+  };
+
+  callPackage = lib.callPackageWith (pkgs // {
+    craneLib = pkgs.craneLibStable;
+    rustPlatform = pkgs.fenixStableRustPlatform;
+    inherit python3 python3Packages;
+    inherit go buildGoModule;
+  });
 in {
   agenix = callPackage "${sources.agenix}/pkgs/agenix.nix" { };
-  ast-grep = callRustPackage ./ast-grep { };
-  attic-client = callRustPackage ./attic-client { };
-  bitwarden-cli = callPackage ./bitwarden-cli {
-    inherit python3;
-  };
-  cargo-about = callRustPackage ./development/tools/cargo-about { };
-  cargo-deny = callRustPackage ./cargo-deny { };
-  cargo-depgraph = callRustPackage ./cargo-depgraph { };
-  cargo-ndk = callRustPackage ./cargo-ndk { };
-  cargo-nextest = callRustPackage ./cargo-nextest { };
-  cargo-shell = callRustPackage ./cargo-shell { };
-  cargo-show-asm = callRustPackage ./development/tools/cargo-show-asm { };
+  ast-grep = callPackage ./ast-grep { };
+  attic-client = callPackage ./attic-client { };
+  bitwarden-cli = callPackage ./bitwarden-cli { };
+  cargo-about = callPackage ./development/tools/cargo-about { };
+  cargo-deny = callPackage ./cargo-deny { };
+  cargo-depgraph = callPackage ./cargo-depgraph { };
+  cargo-ndk = callPackage ./cargo-ndk { };
+  cargo-nextest = callPackage ./cargo-nextest { };
+  cargo-shell = callPackage ./cargo-shell { };
+  cargo-show-asm = callPackage ./development/tools/cargo-show-asm { };
   catppuccin-cursors = callPackage ./catppuccin-cursors { };
-  colmena = callRustPackage ./colmena { };
+  colmena = callPackage ./colmena { };
   docker-credential-helpers = callPackage ./docker-credential-helpers { };
-  eza = callRustPackage ./eza { };
-  fd = callRustPackage ./fd { };
+  eza = callPackage ./eza { };
+  fd = callPackage ./fd { };
   gh = callPackage ./version-management/gh { };
-  git-interactive-rebase-tool = callRustPackage ./version-management/git-interactive-rebase-tool { };
-  gitui = callRustPackage ./gitui { };
-  glab = callPackage ./glab {
-    buildGoModule = super.buildGoModule.override {
-      inherit go;
-    };
-  };
-  gleam = callRustPackage ./compilers/gleam { };
+  git-interactive-rebase-tool = callPackage ./version-management/git-interactive-rebase-tool { };
+  gitui = callPackage ./gitui { };
+  glab = callPackage ./glab { };
+  gleam = callPackage ./compilers/gleam { };
   imhex = callPackage ./misc/imhex { };
   jellyfin-media-player = libsForQt5.callPackage ./jellyfin-media-player { };
-  kitty = callPythonPackage ./terminal-emulators/kitty { };
+  kitty = callPackage ./terminal-emulators/kitty { };
   kitty-themes = callPackage ./terminal-emulators/kitty/themes.nix { };
   kubo = callPackage ./kubo { };
-  lan-mouse = callRustPackage ./lan-mouse { };
-  mise = callRustPackage ./mise { };
+  lan-mouse = callPackage ./lan-mouse { };
+  mise = callPackage ./mise { };
   minio-client = callPackage ./tools/networking/minio-client { };
-  module-server = callPythonPackage ./module-server { };
-  mux = callRustPackage ./mux { };
+  module-server = callPackage ./module-server { };
+  mux = callPackage ./mux { };
   nixd = callPackage ./nixd {
     llvmPackages = pkgs.llvmPackages_16;
     nix = pkgs.nixVersions.nix_2_19;
   };
-  nomad_1_8 = callPackage ./networking/cluster/nomad {
-    buildGoModule = pkgs.buildGo122Module;
-  };
-  npins = callRustPackage ./npins { };
+  nomad_1_8 = callPackage ./networking/cluster/nomad { };
+  npins = callPackage ./npins { };
   obsidian = callPackage ./misc/obsidian { };
-  onefetch = callRustPackage ./onefetch { };
-  pdm = callPythonPackage ./pdm { };
+  onefetch = callPackage ./onefetch { };
+  pdm = callPackage ./pdm { };
   pgcli = python3Packages.callPackage ./pgcli { };
   ponysay = callPackage ./ponysay { };
   ptpython = python3Packages.callPackage ./ptpython { };
-  pueue = callRustPackage ./misc/pueue { };
-  rustup = callRustPackage ./rustup { };
-  sccache = callRustPackage ./development/tools/sccache { };
+  pueue = callPackage ./misc/pueue { };
+  rustup = callPackage ./rustup { };
+  sccache = callPackage ./development/tools/sccache { };
   skopeo = callPackage ./skopeo { };
-  starship = callRustPackage ./starship { };
+  starship = callPackage ./starship { };
   stockfish = callPackage ./games/stockfish { };
-  trunk = callRustPackage ./development/tools/trunk { };
-  usage = callRustPackage ./usage { };
-  xinspect = callRustPackage ./xinspect { };
+  trunk = callPackage ./development/tools/trunk { };
+  usage = callPackage ./usage { };
+  xinspect = callPackage ./xinspect { };
   yt-dlp = python3Packages.callPackage ./misc/yt-dlp { };
 }
