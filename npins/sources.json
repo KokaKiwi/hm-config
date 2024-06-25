@@ -20,9 +20,9 @@
         "repo": "nix"
       },
       "branch": "main",
-      "revision": "6e77fdd91d4d92e3e984306458dd14502d91ca60",
-      "url": "https://github.com/catppuccin/nix/archive/6e77fdd91d4d92e3e984306458dd14502d91ca60.tar.gz",
-      "hash": "10x6i15yx4il9hpr3wqljzjsv82hqd730v47wfcx9jjgwplqjdpi"
+      "revision": "1adbfeb44a54be0ae79eca751ba948a6faa3bb0f",
+      "url": "https://github.com/catppuccin/nix/archive/1adbfeb44a54be0ae79eca751ba948a6faa3bb0f.tar.gz",
+      "hash": "1020q0qnszc6qn3idsas61ahnfl4qqdd9nkyjrvmaskvsg4r5zvq"
     },
     "crane": {
       "type": "GitRelease",
