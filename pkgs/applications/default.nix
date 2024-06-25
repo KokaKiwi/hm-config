@@ -34,6 +34,7 @@ in {
   cargo-nextest = callRustPackage ./cargo-nextest { };
   cargo-shell = callRustPackage ./cargo-shell { };
   cargo-show-asm = callRustPackage ./development/tools/cargo-show-asm { };
+  catppuccin-cursors = callPackage ./catppuccin-cursors { };
   colmena = callRustPackage ./colmena { };
   docker-credential-helpers = callPackage ./docker-credential-helpers { };
   eza = callRustPackage ./eza { };
