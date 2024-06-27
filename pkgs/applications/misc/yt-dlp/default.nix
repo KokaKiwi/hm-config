@@ -1,6 +1,7 @@
 { lib
 
 , fetchPypi
+, fetchFromGitHub
 
 , buildPythonPackage
 
@@ -26,16 +27,14 @@
 }:
 buildPythonPackage rec {
   pname = "yt-dlp";
-  # The websites yt-dlp deals with are a very moving target. That means that
-  # downloads break constantly. Because of that, updates should always be backported
-  # to the latest stable release.
-  version = "2024.5.27";
+  version = "2024.05.27-unstable-2024-06-27";
   pyproject = true;
 
-  src = fetchPypi {
-    inherit version;
-    pname = "yt_dlp";
-    hash = "sha256-NWbA3iQNDNPRwihc5lX3LKON/GGNY01GgYsA2J1SiL4=";
+  src = fetchFromGitHub {
+    owner = "yt-dlp";
+    repo = "yt-dlp";
+    rev = "7a03f88c40b80d3cf54f68edd9d4bdd6sha256-HbiQOw0c05vOY/7KctfFni8wKqDxZKxYIJfID5ezTcc=527570";
+    hash = "sha256-HbiQOw0c05vOY/7KctfFni8wKqDxZKxYIJfID5ezTcc=";
   };
 
   build-system = [
