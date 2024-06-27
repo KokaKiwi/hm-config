@@ -33,7 +33,7 @@ buildPythonPackage rec {
   src = fetchFromGitHub {
     owner = "yt-dlp";
     repo = "yt-dlp";
-    rev = "7a03f88c40b80d3cf54f68edd9d4bdd6sha256-HbiQOw0c05vOY/7KctfFni8wKqDxZKxYIJfID5ezTcc=527570";
+    rev = "7a03f88c40b80d3cf54f68edd9d4bdd6aa527570";
     hash = "sha256-HbiQOw0c05vOY/7KctfFni8wKqDxZKxYIJfID5ezTcc=";
   };
 
