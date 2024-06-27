@@ -20,7 +20,7 @@ let
       names = [
         "concombre" "courgette" "celeri" "dahlia" "diplotaxis"
         "doradille" "df-ykl" "df-ymf" "df-ymk" "abricot"
-        "ananas" "onion" "oseille" "io"
+        "ananas" "onion" "oseille" "io" "ortie"
       ];
       hostname = "%h.machine.deuxfleurs.fr";
     };
@@ -30,6 +30,7 @@ let
     onion = "192.168.1.34";
     oseille = "192.168.1.35";
     io = "192.168.1.36";
+    ortie = "192.168.1.37";
   };
 in {
   data.deuxfleurs = {
