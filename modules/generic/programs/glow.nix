@@ -34,7 +34,9 @@ in {
 
     package = mkPackageOption pkgs "glow" { };
 
-    catppuccin = ctp.mkCatppuccinOpt "glow";
+    catppuccin = ctp.mkCatppuccinOpt {
+      name = "glow";
+    };
 
     style = mkOption {
       type = with types; either str styleSettings;

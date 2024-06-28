@@ -23,7 +23,9 @@ in {
 
     package = mkPackageOption pkgs "silicon" { };
 
-    catppuccin = ctp.mkCatppuccinOpt "silicon";
+    catppuccin = ctp.mkCatppuccinOpt {
+      name = "silicon";
+    };
 
     settings = mkOption {
       type = types.lines;
