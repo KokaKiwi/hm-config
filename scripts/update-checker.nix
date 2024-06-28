@@ -11,6 +11,7 @@ let
     "hub"
     # My own packages
     "cargo-shell" "mux" "xinspect"
+    "doll"
     # Unstable packages
     "glances"
   ];
