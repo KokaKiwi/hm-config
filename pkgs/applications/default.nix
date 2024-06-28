@@ -1,27 +1,7 @@
-{ pkgs, super, lib, sources }:
+{ pkgs, sources }:
 let
   inherit (pkgs) libsForQt5;
-
-  python3 = pkgs.python312;
-  python3Packages = python3.pkgs;
-
-  go = super.go.overrideAttrs rec {
-    version = "1.22.4";
-    src = pkgs.fetchurl {
-      url = "https://go.dev/dl/go${version}.src.tar.gz";
-      hash = "sha256-/tcgZ45yinyjC6jR3tHKr+J9FgKPqwIyuLqOIgCPt4Q=";
-    };
-  };
-  buildGoModule = super.buildGoModule.override {
-    inherit go;
-  };
-
-  callPackage = lib.callPackageWith (pkgs // {
-    craneLib = pkgs.craneLibStable;
-    rustPlatform = pkgs.fenixStableRustPlatform;
-    inherit python3 python3Packages;
-    inherit go buildGoModule;
-  });
+  inherit (pkgs.kiwiPackages) callPackage python3Packages;
 in {
   agenix = callPackage "${sources.agenix}/pkgs/agenix.nix" { };
   ast-grep = callPackage ./ast-grep { };
