@@ -20,6 +20,7 @@ in {
         speedFactor = 5;
       };
       nix-alyx = {
+        enable = false;
         uri = "ssh-ng://nix-alyx";
         identityFile = "/root/.ssh/id_nix";
         maxJobs = 1;
