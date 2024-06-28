@@ -22,5 +22,6 @@ rec {
     inherit go;
   };
 
+  doll = callPackage ./doll { };
   neovim = callPackage ./neovim { };
 }

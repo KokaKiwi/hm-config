@@ -45,6 +45,7 @@ in {
     ponysay xinspect
     trashy minisign mkcert
     nix-binutils git-absorb pingu
+    kiwiPackages.doll
     nur.repos.kokakiwi.go-mod-upgrade
     nur.repos.kokakiwi.lddtree
   ] ++ (lib.attrValues packages);
