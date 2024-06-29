@@ -24,21 +24,21 @@
 }:
 stdenv.mkDerivation rec {
   pname = "imhex";
-  version = "1.34.0";
+  version = "1.35.0";
 
   src = fetchFromGitHub {
     fetchSubmodules = true;
     owner = "WerWolv";
     repo = "ImHex";
     rev = "v${version}";
-    hash = "sha256-ZPjiWVhyY8Is/puSqgrblRMDnPl02ocngaTYtsvgZ10=";
+    hash = "sha256-hScED6+9au/GmCwneI7hEDK56ffMPQ2Mn6CoLGXVhIU=";
   };
 
   patterns = fetchFromGitHub {
     owner = "WerWolv";
     repo = "ImHex-Patterns";
     rev = "ImHex-v${version}";
-    hash = "sha256-QJzHLzqXS0XhKDHSXGppmny604CeXld9Dfw4g1kqwLE=";
+    hash = "sha256-h86qoFMSP9ehsXJXOccUK9Mfqe+DVObfSRT4TCtK0rY=";
   };
 
   nativeBuildInputs = [ cmake llvm python3 perl pkg-config rsync ];
