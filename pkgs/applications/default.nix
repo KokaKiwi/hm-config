@@ -24,7 +24,6 @@ in {
   gitui = callPackage ./gitui { };
   glab = callPackage ./glab { };
   gleam = callPackage ./compilers/gleam { };
-  imhex = callPackage ./misc/imhex { };
   jellyfin-media-player = libsForQt5.callPackage ./jellyfin-media-player { };
   kitty = callPackage ./terminal-emulators/kitty { };
   kitty-themes = callPackage ./terminal-emulators/kitty/themes.nix { };

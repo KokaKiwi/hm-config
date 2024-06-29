@@ -2,10 +2,12 @@
 let
   inherit (config.lib) opengl;
 
-  imhex = opengl.wrapPackage (pkgs.imhex.override {
-    llvm = pkgs.llvm_18;
-    python3 = pkgs.python312;
-  });
+  imhex = let
+    package = pkgs.nur.repos.kokakiwi.imhex.override {
+      llvm = pkgs.llvm_18;
+      python3 = pkgs.python312;
+    };
+  in opengl.wrapPackage package;
 in {
   home.packages = [ imhex ];
 
