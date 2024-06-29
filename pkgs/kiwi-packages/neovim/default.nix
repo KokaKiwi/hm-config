@@ -10,6 +10,7 @@
 , neovim-unwrapped
 
 , libiconv
+, utf8proc
 }:
 let
   stdenv = llvmStdenv;
@@ -70,6 +71,7 @@ in (neovim-unwrapped.override {
 
   nativeBuildInputs = super.nativeBuildInputs ++ [
     libiconv
+    utf8proc
   ];
 
   preConfigure = (super.preConfigure or "") + ''
