@@ -18,6 +18,7 @@ in {
   catppuccin-cursors = callPackage ./catppuccin-cursors { };
   colmena = callPackage ./colmena { };
   docker-credential-helpers = callPackage ./docker-credential-helpers { };
+  doggo = callPackage ./networking/doggo { };
   eza = callPackage ./eza { };
   fd = callPackage ./fd { };
   gh = callPackage ./version-management/gh { };
