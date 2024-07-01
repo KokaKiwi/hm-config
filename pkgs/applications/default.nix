@@ -14,6 +14,7 @@ in {
   cargo-nextest = callPackage ./cargo-nextest { };
   cargo-shell = callPackage ./cargo-shell { };
   cargo-show-asm = callPackage ./development/tools/cargo-show-asm { };
+  cargo-udeps = callPackage ./development/tools/rust/cargo-udeps { };
   catppuccin-cursors = callPackage ./catppuccin-cursors { };
   colmena = callPackage ./colmena { };
   docker-credential-helpers = callPackage ./docker-credential-helpers { };
