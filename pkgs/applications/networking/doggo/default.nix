@@ -7,18 +7,18 @@
 }:
 buildGoModule rec {
   pname = "doggo";
-  version = "1.0.0";
+  version = "1.0.2";
 
   src = fetchFromGitHub {
     owner = "mr-karan";
     repo = pname;
     rev = "v${version}";
-    hash = "sha256-UNcU//meWcIvnZea1j7QBy4bkedCIV42XWVfYIQh9iw=";
+    hash = "sha256-de8dYFcvvfuBohWziXln3/R2oORX1gqMoskdBegdm8o=";
   };
 
   vendorHash = "sha256-RdxEf8AsN+K0GW4+XVNPHUOtZ8+0Ge0cHZVQwMuVZog=";
   nativeBuildInputs = [ installShellFiles ];
-  subPackages = [ "cmd" ];
+  subPackages = [ "cmd/doggo" ];
 
   ldflags = [
     "-w -s"
@@ -26,8 +26,6 @@ buildGoModule rec {
   ];
 
   postInstall = ''
-    mv $out/bin/cmd $out/bin/doggo
-
     installShellCompletion --cmd doggo \
       --bash <($out/bin/doggo completions bash) \
       --fish <($out/bin/doggo completions fish) \
