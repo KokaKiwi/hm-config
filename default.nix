@@ -2,8 +2,28 @@
 let
   sources = import ./sources.nix;
 
+  lix = rec {
+    version = "2.90.0-rc1";
+
+    lix = fetchTarball {
+      name = "source";
+      url = "https://git.lix.systems/lix-project/lix/archive/${version}.tar.gz";
+      sha256 = "sha256-WY7BGnu5PnbK4O8cKKv9kvxwzZIGbIQUQLGPHFXitI0=";
+    };
+    nixosModule = fetchTarball {
+      name = "source";
+      url = "https://git.lix.systems/lix-project/nixos-module/archive/${version}.tar.gz";
+      sha256 = "sha256-64lB/NO6AQ6z6EDCemPSYZWX/Qc6Rt04cPia5T5v01g=";
+    };
+
+    overlay = import "${nixosModule}/overlay.nix" {
+      inherit lix;
+    };
+  };
+
   pkgs = import sources.nixpkgs {
     overlays = [
+      lix.overlay
       (self: super: import ./pkgs {
         pkgs = self;
         inherit super sources;

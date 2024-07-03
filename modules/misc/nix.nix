@@ -1,15 +1,15 @@
-{ pkgs, lib, sources, ... }:
-let
-  nix = pkgs.nixVersions.nix_2_23;
-in {
+{ config, pkgs, lib, sources, ... }:
+{
   imports = [
     "${sources.declarative-cachix}/home-manager.nix"
   ];
 
-  home.packages = [ nix ];
+  home.packages = [
+    config.nix.package
+  ];
 
   nix = {
-    package = nix;
+    package = pkgs.nix;
 
     builders = {
       nix-games = {

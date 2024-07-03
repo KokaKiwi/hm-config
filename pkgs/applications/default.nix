@@ -5,7 +5,9 @@ let
 in {
   agenix = callPackage "${sources.agenix}/pkgs/agenix.nix" { };
   ast-grep = callPackage ./ast-grep { };
-  attic-client = callPackage ./attic-client { };
+  attic-client = callPackage ./attic-client {
+    nix = pkgs.nixVersions.nix_2_18_upstream;
+  };
   bitwarden-cli = callPackage ./bitwarden-cli { };
   cargo-about = callPackage ./development/tools/cargo-about { };
   cargo-deny = callPackage ./cargo-deny { };
