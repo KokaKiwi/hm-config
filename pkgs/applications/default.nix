@@ -37,7 +37,9 @@ in {
   minio-client = callPackage ./tools/networking/minio-client { };
   module-server = callPackage ./module-server { };
   mux = callPackage ./mux { };
-  nix-update = callPackage ./tools/package-management/nix-update { };
+  nix-update = callPackage ./tools/package-management/nix-update {
+    nixfmt = pkgs.nixfmt-rfc-style;
+  };
   nixd = callPackage ./nixd {
     llvmPackages = pkgs.llvmPackages_16;
     nix = pkgs.nixVersions.nix_2_19;
