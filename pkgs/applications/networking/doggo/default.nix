@@ -7,13 +7,13 @@
 }:
 buildGoModule rec {
   pname = "doggo";
-  version = "1.0.3";
+  version = "1.0.4";
 
   src = fetchFromGitHub {
     owner = "mr-karan";
     repo = pname;
     rev = "v${version}";
-    hash = "sha256-lsSfrWGFn9gUGYHB3zFWCQFDL0YWeJxxLf38vKw/oNs=";
+    hash = "sha256-SD/BcJxoc5Oi8+nAs+CWBEcbgtaohykNlZ14jJvEWew=";
   };
 
   vendorHash = "sha256-JIc6/G1hMf8+oIe4OMc+b0th5MCgi5Mwp3AxW4OD1lg=";
