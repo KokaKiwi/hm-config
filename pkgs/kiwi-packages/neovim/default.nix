@@ -18,13 +18,13 @@ let
   lua = luajit.override {
     inherit stdenv;
 
-    version = "2.1.1716656478";
+    version = "2.1.1720049189";
 
     src = fetchFromGitHub {
       owner = "LuaJIT";
       repo = "LuaJIT";
-      rev = "93e87998b24021b94de8d1c8db244444c46fb6e9";
-      hash = "sha256-0ORSNetyCWwTx7W4G7viZJ3k7hdardAYwgbYQSh4kWg=";
+      rev = "04dca7911ea255f37be799c18d74c305b921c1a6";
+      hash = "sha256-IvkOwyKXUqo++A0XalCKuS0uLj5PlTOUQX1qXDP6JBk=";
     };
   };
   rustPlatform = makeRustPlatform {
