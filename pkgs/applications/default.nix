@@ -60,6 +60,7 @@ in {
   stockfish = callPackage ./games/stockfish { };
   trunk = callPackage ./development/tools/trunk { };
   usage = callPackage ./usage { };
+  vesktop = callPackage ./vesktop { };
   xinspect = callPackage ./xinspect { };
   yt-dlp = python3Packages.callPackage ./misc/yt-dlp { };
 }
