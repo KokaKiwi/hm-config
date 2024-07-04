@@ -105,8 +105,9 @@ in pkgs.nur.repos.kokakiwi.lib.mkUpdateChecker {
     };
   };
   overrides = {
-    pgcli.use_latest_tag = true;
+    aura.exclude_regex = "^$";
     lix.exclude_regex = "^$";
+    pgcli.use_latest_tag = true;
   };
 
   nvcheckerConfig = {

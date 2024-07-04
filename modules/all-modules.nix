@@ -17,6 +17,7 @@
     ./misc/secrets.nix
     ./misc/systemd.nix
 
+    ./programs/aura.nix
     ./programs/bat.nix
     ./programs/bpython.nix
     ./programs/discord.nix

@@ -7,6 +7,7 @@
     ./misc/opengl.nix
     ./misc/xdg-desktop-entries.nix
 
+    ./programs/aura.nix
     ./programs/bpython.nix
     ./programs/discord.nix
     ./programs/element.nix
