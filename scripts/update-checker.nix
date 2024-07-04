@@ -6,7 +6,7 @@
 let
   ignoredPackages = [
     # Let's nixpkgs handle these
-    "nix" "nixfmt"
+    "nixfmt"
     # Too old
     "hub"
     # My own packages
@@ -90,6 +90,12 @@ in pkgs.nur.repos.kokakiwi.lib.mkUpdateChecker {
       archpkg = "ncmpcpp";
       strip_release = true;
     };
+    lix = {
+      source = "gitea";
+      host = "git.lix.systems";
+      gitea = "lix-project/lix";
+      use_max_tag = true;
+    };
     nix-output-monitor = {
       source = "gitea";
       host = "code.maralorn.de";
@@ -100,6 +106,7 @@ in pkgs.nur.repos.kokakiwi.lib.mkUpdateChecker {
   };
   overrides = {
     pgcli.use_latest_tag = true;
+    lix.exclude_regex = "^$";
   };
 
   nvcheckerConfig = {
