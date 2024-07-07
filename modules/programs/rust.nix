@@ -9,7 +9,7 @@ let
     "nextest" "expand" "deny" "outdated"
     "show-asm" "msrv" "depgraph" "udeps"
     "ndk" "mommy" "tarpaulin" "pgrx"
-    "wipe" "sort"
+    "wipe" "sort" "generate" "leptos"
   ];
 
   cargoConfig = {
