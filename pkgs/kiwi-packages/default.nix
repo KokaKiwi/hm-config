@@ -22,6 +22,7 @@ rec {
     inherit go;
   };
 
+  cargo-setup-project = callPackage ./cargo-setup-project { };
   doll = callPackage ./doll { };
   neovim = callPackage ./neovim { };
 }

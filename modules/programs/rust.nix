@@ -11,6 +11,9 @@ let
     "ndk" "mommy" "tarpaulin" "pgrx"
     "wipe" "sort" "generate" "leptos"
   ];
+  extraPackages = [
+    pkgs.kiwiPackages.cargo-setup-project
+  ];
 
   cargoConfig = {
     build = {
@@ -44,7 +47,8 @@ in {
     [ pkgs.rustup ]
     ++ map (pluginName: pkgs."cargo-${pluginName}".override {
       rustPlatform = pkgs.fenixStableRustPlatform;
-    }) cargoPlugins;
+    }) cargoPlugins
+    ++ extraPackages;
 
   home.file.".cargo/config.toml".source = toml.generate "cargo-config.toml" cargoConfig;
 }
