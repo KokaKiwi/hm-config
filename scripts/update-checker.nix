@@ -56,6 +56,7 @@ in pkgs.nur.repos.kokakiwi.lib.mkUpdateChecker {
     cargo-nextest.include_regex = "cargo-nextest-.*";
     cargo-nextest.prefix = "cargo-nextest-";
     gleam.prefix = "v";
+    imhex.prefix = "v";
     kitty.prefix = "v";
     kubo.prefix = "v";
     minio-client.prefix = "RELEASE.";
