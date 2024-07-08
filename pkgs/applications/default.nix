@@ -62,6 +62,7 @@ in {
   trunk = callPackage ./development/tools/trunk { };
   usage = callPackage ./usage { };
   vesktop = callPackage ./vesktop { };
+  xh = callPackage ./tools/networking/xh { };
   xinspect = callPackage ./xinspect { };
   yt-dlp = python3Packages.callPackage ./misc/yt-dlp { };
 }
