@@ -1,12 +1,13 @@
 { pkgs, super }:
 {
-  glfw3 = super.glfw3.overrideAttrs (super: {
-    postPatch = super.postPatch + ''
-    substituteInPlace src/wl_init.c \
-      --replace-warn "libdecor-0.so.0" "${pkgs.lib.getLib pkgs.libdecor}/lib/libdecor-0.so.0" \
-      --replace-warn "libwayland-client.so.0" "${pkgs.lib.getLib pkgs.wayland}/lib/libwayland-client.so.0" \
-      --replace-warn "libwayland-cursor.so.0" "${pkgs.lib.getLib pkgs.wayland}/lib/libwayland-cursor.so.0" \
-      --replace-warn "libwayland-egl.so.1" "${pkgs.lib.getLib pkgs.wayland}/lib/libwayland-egl.so.1"
+  glfw3 = super.glfw3.overrideAttrs (super: with pkgs; {
+    postPatch = ''
+      substituteInPlace src/wl_init.c \
+        --replace-fail "libxkbcommon.so.0" "${lib.getLib libxkbcommon}/lib/libxkbcommon.so.0" \
+        --replace-fail "libdecor-0.so.0" "${lib.getLib libdecor}/lib/libdecor-0.so.0" \
+        --replace-fail "libwayland-client.so.0" "${lib.getLib wayland}/lib/libwayland-client.so.0" \
+        --replace-fail "libwayland-cursor.so.0" "${lib.getLib wayland}/lib/libwayland-cursor.so.0" \
+        --replace-fail "libwayland-egl.so.1" "${lib.getLib wayland}/lib/libwayland-egl.so.1"
     '';
   });
 
