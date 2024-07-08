@@ -11,13 +11,7 @@ rec {
   python3 = pkgs.python312;
   python3Packages = python3.pkgs;
 
-  go = super.go.overrideAttrs rec {
-    version = "1.22.4";
-    src = pkgs.fetchurl {
-      url = "https://go.dev/dl/go${version}.src.tar.gz";
-      hash = "sha256-/tcgZ45yinyjC6jR3tHKr+J9FgKPqwIyuLqOIgCPt4Q=";
-    };
-  };
+  inherit (pkgs) go;
   buildGoModule = super.buildGoModule.override {
     inherit go;
   };

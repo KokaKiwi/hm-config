@@ -24,6 +24,7 @@ in {
   eza = callPackage ./eza { };
   fd = callPackage ./fd { };
   gh = callPackage ./version-management/gh { };
+  git-absorb = callPackage ./version-management/git-absorb { };
   git-interactive-rebase-tool = callPackage ./version-management/git-interactive-rebase-tool { };
   gitui = callPackage ./gitui { };
   glab = callPackage ./glab { };
