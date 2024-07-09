@@ -49,6 +49,7 @@ in {
   npins = callPackage ./npins { };
   obsidian = callPackage ./misc/obsidian { };
   onefetch = callPackage ./onefetch { };
+  opentofu = callPackage ./networking/cluster/opentofu { };
   pdm = callPackage ./pdm { };
   pgcli = python3Packages.callPackage ./pgcli { };
   ponysay = callPackage ./ponysay { };
