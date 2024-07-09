@@ -43,6 +43,11 @@ in {
   };
   craneLibStable = pkgs.craneLib.overrideToolchain fenixStableToolchain;
 
+  nixgl = import sources.nixgl {
+    inherit pkgs;
+    enable32bits = false;
+  };
+
   nur = import sources.nur {
     nurpkgs = pkgs;
     inherit pkgs;
