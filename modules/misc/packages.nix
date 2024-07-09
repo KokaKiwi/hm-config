@@ -44,7 +44,7 @@ in {
     onefetch tokei ast-grep trunk
     ponysay xinspect
     trashy minisign mkcert doggo
-    nix-binutils git-absorb pingu
+    nix-binutils git-absorb pingu miniserve
     nixgl.nixGLIntel
     kiwiPackages.doll
     nur.repos.kokakiwi.go-mod-upgrade
