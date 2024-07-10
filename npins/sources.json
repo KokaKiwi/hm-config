@@ -8,9 +8,9 @@
         "repo": "agenix"
       },
       "branch": "main",
-      "revision": "3a56735779db467538fb2e577eda28a9daacaca6",
-      "url": "https://github.com/ryantm/agenix/archive/3a56735779db467538fb2e577eda28a9daacaca6.tar.gz",
-      "hash": "1h66zapc6im07k3kcgvhy3lhzahb70vd6m2ijhz4i0v6mn5l3fk9"
+      "revision": "de96bd907d5fbc3b14fc33ad37d1b9a3cb15edc6",
+      "url": "https://github.com/ryantm/agenix/archive/de96bd907d5fbc3b14fc33ad37d1b9a3cb15edc6.tar.gz",
+      "hash": "0rkcx72bq7fm5b1qy1nrzp8v93nv784wh11srgi3pi0m6sr9g03f"
     },
     "catppuccin": {
       "type": "Git",
@@ -59,9 +59,9 @@
         "repo": "fenix"
       },
       "branch": "main",
-      "revision": "5c6f98d68f4825e4fa7b62b65d6777f8d152b3a0",
-      "url": "https://github.com/nix-community/fenix/archive/5c6f98d68f4825e4fa7b62b65d6777f8d152b3a0.tar.gz",
-      "hash": "1szmyj460pkj0ll7i07iz87b1y3qb7q5zcsdkvxcwdrax6vhrpvi"
+      "revision": "1a3edfb3317af90822b892a01708c60d0d30e1d8",
+      "url": "https://github.com/nix-community/fenix/archive/1a3edfb3317af90822b892a01708c60d0d30e1d8.tar.gz",
+      "hash": "0agvpm11ay5c6bdrrpkhh48fwc4s294vzppgg2a7fgc30lma53lk"
     },
     "home-manager": {
       "type": "Git",
@@ -95,9 +95,9 @@
         "repo": "nixpkgs"
       },
       "branch": "nixpkgs-unstable",
-      "revision": "106e145e1d4583d1e2bb20e54947d15ad55e75e1",
-      "url": "https://github.com/NixOS/nixpkgs/archive/106e145e1d4583d1e2bb20e54947d15ad55e75e1.tar.gz",
-      "hash": "0pqhgyrqf30zjlsyzyqada4znyahdanxwf7h74k8xds08y98kslf"
+      "revision": "f571ea25a6d088f0416d4a9323d9dd9a6edd0088",
+      "url": "https://github.com/NixOS/nixpkgs/archive/f571ea25a6d088f0416d4a9323d9dd9a6edd0088.tar.gz",
+      "hash": "1mzj29m29zws57inam1hvlmnk5aplarc779kh0y58vj22w6k30bh"
     },
     "tmux-loadavg": {
       "type": "Git",
