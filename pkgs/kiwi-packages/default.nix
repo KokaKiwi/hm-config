@@ -3,9 +3,9 @@ rec {
   callPackage = lib.callPackageWith (pkgs // {
     craneLib = pkgs.craneLibStable;
     rustPlatform = pkgs.fenixStableRustPlatform;
-    inherit python3 python3Packages;
-    inherit (pkgs.kiwiPackages) go;
-    inherit buildGoModule;
+    inherit (pkgs.kiwiPackages) python3 python3Packages;
+    inherit (pkgs.kiwiPackages) go buildGoModule;
+    inherit (pkgs.kiwiPackages) libgit2;
   });
 
   python3 = pkgs.python312;
@@ -18,5 +18,6 @@ rec {
 
   cargo-setup-project = callPackage ./cargo-setup-project { };
   doll = callPackage ./doll { };
+  libgit2 = callPackage ./libgit2 { };
   neovim = callPackage ./neovim { };
 }
