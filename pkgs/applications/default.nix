@@ -12,6 +12,7 @@ in {
   cargo-about = callPackage ./development/tools/cargo-about { };
   cargo-deny = callPackage ./cargo-deny { };
   cargo-depgraph = callPackage ./cargo-depgraph { };
+  cargo-generate = callPackage ./development/tools/rust/cargo-generate { };
   cargo-ndk = callPackage ./cargo-ndk { };
   cargo-nextest = callPackage ./cargo-nextest { };
   cargo-shell = callPackage ./cargo-shell { };
