@@ -12,8 +12,10 @@ check: (_run-shell 'checkUpdates' '--arg doWarn true')
 build:
   nom-build
 
-switch:
-  nom-build && result/activate
+switch: build
+  result/activate
+dry-activate: build
+  DRY_RUN=1 result/activate
 
 build-package ATTR:
   {{nix-build}} -A pkgs.{{ATTR}}
