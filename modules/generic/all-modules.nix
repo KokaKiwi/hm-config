@@ -5,6 +5,7 @@
     ./misc/home.nix
     ./misc/nix.nix
     ./misc/opengl.nix
+    ./misc/upgrade-diff.nix
     ./misc/xdg-desktop-entries.nix
 
     ./programs/aura.nix
