@@ -4,11 +4,15 @@ let
 
   toml = pkgs.formats.toml { };
 
+  mkStablePackage = drv: drv.override {
+    rustPlatform = pkgs.fenixStableRustPlatform;
+  };
+
   cargoPlugins = [
     "about" "binutils" "bloat" "cache" "criterion"
     "nextest" "expand" "deny" "outdated"
     "show-asm" "msrv" "depgraph" "udeps"
-    "ndk" "mommy" "tarpaulin" "pgrx"
+    "ndk" "tarpaulin" "pgrx"
     "wipe" "sort" "generate" "leptos"
     "c"
   ];
@@ -46,10 +50,21 @@ let
 in {
   home.packages =
     [ pkgs.rustup ]
-    ++ map (pluginName: pkgs."cargo-${pluginName}".override {
-      rustPlatform = pkgs.fenixStableRustPlatform;
-    }) cargoPlugins
+    ++ map (pluginName: mkStablePackage pkgs."cargo-${pluginName}") cargoPlugins
     ++ extraPackages;
 
   home.file.".cargo/config.toml".source = toml.generate "cargo-config.toml" cargoConfig;
+
+  programs.rust = {
+    cargo-mommy = {
+      enable = true;
+      package = mkStablePackage pkgs.cargo-mommy;
+
+      enableAlias = true;
+
+      config = {
+        little = [ "drone" "doll" "toy" ];
+      };
+    };
+  };
 }

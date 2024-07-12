@@ -1,3 +1,4 @@
+{ lib, ... }:
 {
   imports = [
     ./generic/all-modules.nix
@@ -63,5 +64,6 @@
     ./services/kubo.nix
     ./services/nix-web.nix
     ./services/pueue.nix
-  ];
+  ]
+  ++ lib.optional (builtins.pathExists ./private) ./private;
 }
