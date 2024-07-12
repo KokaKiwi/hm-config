@@ -1,3 +1,4 @@
+cargo := env_var_or_default('CARGO_BIN', '@cargo@')
 cargo-all-features := env_var_or_default('CARGO_ALL_FEATURES', '0')
 cargo-features := env_var_or_default('CARGO_FEATURES', '')
 cargo-use-workspace := env_var_or_default('CARGO_WORKSPACE', '0')
@@ -33,7 +34,7 @@ alias check := clippy
 all: build doc
 
 _cargo *ARGS:
-  cargo {{ARGS}}
+  {{cargo}} {{ARGS}}
 
 # Run arbitrary cargo command
 cargo COMMAND *ARGS: (_cargo COMMAND cargo-flags-all ARGS)
@@ -66,7 +67,7 @@ flamegraph *ARGS: (cargo 'flamegraph' ARGS)
 
 # Create new workspace crate (under crates/ directory)
 new NAME *ARGS:
-  cargo new {{ARGS}} --name {{NAME}} crates/{{NAME}}
+  {{cargo}} new {{ARGS}} --name {{NAME}} crates/{{NAME}}
 
 @expand PACKAGE MODULE='':
   CARGO_TARGET_DIR='target/expand' cargo expand -p {{PACKAGE}} {{cargo-features-flag}} {{cargo-target-flag}} {{MODULE}} | bat -l 'Rust'
@@ -86,5 +87,7 @@ clean-doc:
 
 rebuild: clean build doc
 redoc: clean-doc doc
+
+import? 'Justfile.local'
 
 # vim: set ft=just :

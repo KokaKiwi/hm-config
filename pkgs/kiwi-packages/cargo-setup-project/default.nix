@@ -1,11 +1,17 @@
 { lib
 
 , writeShellScriptBin
+, substituteAll
+
+, cargo ? "cargo"
 }:
 let
   files = {
     ".mise.toml" = ./mise.toml;
-    "Justfile" = ./Justfile.base;
+    "Justfile" = substituteAll {
+      src = ./Justfile.base;
+      inherit cargo;
+    };
   };
 in writeShellScriptBin "cargo-setup-project" ''
   ${lib.concatStringsSep "\n" (lib.mapAttrsToList (name: source:

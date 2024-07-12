@@ -17,7 +17,9 @@ let
     "c"
   ];
   extraPackages = [
-    pkgs.kiwiPackages.cargo-setup-project
+    (pkgs.kiwiPackages.cargo-setup-project.override {
+      cargo = "cargo-mommy";
+    })
   ];
 
   cargoConfig = {
