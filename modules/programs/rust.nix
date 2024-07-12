@@ -10,6 +10,7 @@ let
     "show-asm" "msrv" "depgraph" "udeps"
     "ndk" "mommy" "tarpaulin" "pgrx"
     "wipe" "sort" "generate" "leptos"
+    "c"
   ];
   extraPackages = [
     pkgs.kiwiPackages.cargo-setup-project
