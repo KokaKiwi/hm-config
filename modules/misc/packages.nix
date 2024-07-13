@@ -45,6 +45,7 @@ in {
     ponysay xinspect
     trashy minisign mkcert doggo
     nix-binutils git-absorb pingu miniserve
+    patool
     nixgl.nixGLIntel
     kiwiPackages.doll
     nur.repos.kokakiwi.go-mod-upgrade
