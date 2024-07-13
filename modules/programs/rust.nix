@@ -65,7 +65,8 @@ in {
       enableAlias = true;
 
       config = {
-        roles = [ "mxtress" ];
+        roles = "mxtress";
+        pronouns = "their";
         little = [ "drone" "doll" "toy" ];
       };
     };
