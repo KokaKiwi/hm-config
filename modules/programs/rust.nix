@@ -20,6 +20,7 @@ let
     (pkgs.kiwiPackages.cargo-setup-project.override {
       cargo = "cargo-mommy";
     })
+    (mkStablePackage pkgs.nur.repos.kokakiwi.streampager)
   ];
 
   cargoConfig = {
