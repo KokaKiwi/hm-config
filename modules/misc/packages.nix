@@ -17,6 +17,13 @@ let
     opengl = config.lib.opengl;
     package = config.lib.package;
   in {
+    bun = pkgs.bun.overrideAttrs (self: super: {
+      version = "1.1.20";
+      src = pkgs.fetchurl {
+        url = "https://github.com/oven-sh/bun/releases/download/bun-v${self.version}/bun-linux-x64.zip";
+        hash = "sha256-bLcK0DSaLOzJSrIRPNHQeld5qud8ccqxzyDIgawMB3U=";
+      };
+    });
     cool-retro-term = opengl.wrapPackage pkgs.cool-retro-term;
     jellyfin-media-player = opengl.wrapPackage pkgs.jellyfin-media-player;
     minio-client = package.wrapPackage pkgs.minio-client {

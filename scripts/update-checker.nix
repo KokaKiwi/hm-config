@@ -53,6 +53,8 @@ in pkgs.nur.repos.kokakiwi.lib.mkUpdateChecker {
     aria2.prefix = "release-";
     bitwarden-cli.include_regex = "cli-v.*";
     bitwarden-cli.prefix = "cli-v";
+    bun.include_regex = "bun-v.*";
+    bun.prefix = "bun-v";
     cargo-nextest.include_regex = "cargo-nextest-.*";
     cargo-nextest.prefix = "cargo-nextest-";
     gleam.prefix = "v";
