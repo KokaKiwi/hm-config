@@ -7,16 +7,16 @@
 }:
 buildGoModule rec {
   pname = "nomad";
-  version = "1.8.1";
+  version = "1.8.2";
 
   src = fetchFromGitHub {
     owner = "hashicorp";
     repo = "nomad";
     rev = "v${version}";
-    hash = "sha256-twk3gCzGSl0gF2uPvarDuT4lWSWd9AV2PWUm2mBJpag=";
+    hash = "sha256-deVLC7yGgLHCauq+3h0Uu5ln5omoeV8/FkVtQM9CEXc=";
   };
 
-  vendorHash = "sha256-sD3OboMQ5gJVz2+o0Rgpbco3YgibAOHUJUSiyxiG5OA=";
+  vendorHash = "sha256-Pr38tRzym8UFPZKs9367xOZJ9P5OHotwwClorcSgOys=";
 
   nativeBuildInputs = [ installShellFiles ];
 
