@@ -22,6 +22,8 @@ in {
   colmena = callPackage ./colmena { };
   docker-credential-helpers = callPackage ./docker-credential-helpers { };
   doggo = callPackage ./networking/doggo { };
+  du-dust = pkgs.dust;
+  dust = callPackage ./misc/dust { };
   eza = callPackage ./eza { };
   fd = callPackage ./fd { };
   gh = callPackage ./version-management/gh { };
