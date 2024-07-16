@@ -53,6 +53,14 @@ stdenv.mkDerivation (finalAttrs: {
 
   env.CXXFLAGS = "-include ${nix.dev}/include/nix/config.h";
 
+  env.NIX_CFLAGS_COMPILE = toString [
+    "-O2" "-march=skylake"
+  ];
+
+  mesonFlags = [
+    "-D" "b_lto=true"
+  ];
+
   # https://github.com/nix-community/nixd/issues/215
   doCheck = !stdenv.isDarwin;
 
