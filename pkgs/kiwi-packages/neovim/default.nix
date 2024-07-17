@@ -52,7 +52,7 @@ in (neovim-unwrapped.override {
   src = fetchFromGitHub {
     owner = "neovim";
     repo = "neovim";
-    rev = "8ddcf9d9390000c05bb817f70a1cbe36f2145d81";
+    rev = "dafd944a465c576a86cfa34cc7f7a5e18a39b8e7";
     hash = "sha256-tJx/livhpGERxJlp6mw3X8fUj9iKpdBxsDoC7K6Gxec=";
   };
 
