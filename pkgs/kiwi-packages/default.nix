@@ -1,6 +1,7 @@
 { pkgs, lib, super }:
 rec {
   callPackage = lib.callPackageWith (pkgs // {
+    inherit callPackage;
     craneLib = pkgs.craneLibStable;
     rustPlatform = pkgs.fenixStableRustPlatform;
     inherit (pkgs.kiwiPackages) python3 python3Packages;
