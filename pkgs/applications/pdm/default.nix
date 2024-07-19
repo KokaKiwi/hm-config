@@ -31,12 +31,12 @@
   };
 
   dep-logic = python3Packages.dep-logic.overridePythonAttrs (super: rec {
-    version = "0.4.2";
+    version = "0.4.3";
 
     src = fetchPypi {
       pname = "dep_logic";
       inherit version;
-      hash = "sha256-wvbpOOwweIlS7j4MUdqQ0EPgNURgyWtPpgisQ6XOVm8=";
+      hash = "sha256-5HaPCibIwcDjn9Ug8+C9CZylKOxqjyA1n7yJ/8342kU=";
     };
   });
 in python3Packages.buildPythonApplication rec {
