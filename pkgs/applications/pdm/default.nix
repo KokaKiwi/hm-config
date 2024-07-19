@@ -41,14 +41,14 @@
   });
 in python3Packages.buildPythonApplication rec {
   pname = "pdm";
-  version = "2.17.0";
+  version = "2.17.1";
   pyproject = true;
 
   disabled = python3Packages.pythonOlder "3.8";
 
   src = fetchPypi {
     inherit pname version;
-    hash = "sha256-3iMIa20KguQMynDCFxuNKcGfz8Fk55uTwUQCX/0CMvo=";
+    hash = "sha256-nhoo7MqD82J6pwCx49Us0/gvEPyQisZJkRm696PU6mw=";
   };
 
   nativeBuildInputs = [
