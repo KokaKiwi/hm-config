@@ -18,6 +18,7 @@ in {
   cargo-nextest = callPackage ./cargo-nextest { };
   cargo-shell = callPackage ./cargo-shell { };
   cargo-show-asm = callPackage ./development/tools/cargo-show-asm { };
+  cargo-tarpaulin = callPackage ./development/tools/analysis/cargo-tarpaulin { };
   cargo-udeps = callPackage ./development/tools/rust/cargo-udeps { };
   catppuccin-cursors = callPackage ./catppuccin-cursors { };
   colmena = callPackage ./colmena { };
