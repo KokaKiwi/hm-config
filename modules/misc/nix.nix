@@ -28,6 +28,13 @@
       };
     };
 
+    gc = {
+      automatic = true;
+      options = toString [
+        "--delete-older-than" "15d"
+      ];
+    };
+
     channels = let
       names = [ "nixos-23.11" "nixos-24.05" ];
     in {
