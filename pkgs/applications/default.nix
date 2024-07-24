@@ -27,6 +27,9 @@ in {
   du-dust = pkgs.dust;
   dust = callPackage ./misc/dust { };
   eza = callPackage ./eza { };
+  fastfetch = callPackage ./fastfetch {
+    stdenv = pkgs.llvmStdenv;
+  };
   fd = callPackage ./fd { };
   gh = callPackage ./version-management/gh { };
   git-absorb = callPackage ./version-management/git-absorb { };
