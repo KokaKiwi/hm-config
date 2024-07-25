@@ -40,7 +40,11 @@
     in {
       nixpkgs = sources.nixpkgs;
       nixpkgs-unstable = sources.nixpkgs;
-    } // builtins.listToAttrs (map (name: lib.nameValuePair name sources.channels.${name}) names);
+    }
+    // builtins.listToAttrs (map (name: lib.nameValuePair name sources.channels.${name}) names)
+    // {
+      inherit (sources) crane fenix;
+    };
     keepOldNixPath = false;
 
     settings = {
