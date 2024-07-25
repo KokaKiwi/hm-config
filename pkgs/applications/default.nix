@@ -10,6 +10,9 @@ in {
   };
   bitwarden-cli = callPackage ./bitwarden-cli { };
   cargo-about = callPackage ./development/tools/cargo-about { };
+  cargo-c-next = callPackage ./development/tools/rust/cargo-c {
+    rustPlatform = pkgs.fenixStableRustPlatform;
+  };
   cargo-deny = callPackage ./cargo-deny { };
   cargo-depgraph = callPackage ./cargo-depgraph { };
   cargo-generate = callPackage ./development/tools/rust/cargo-generate { };

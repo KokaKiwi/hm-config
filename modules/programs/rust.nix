@@ -14,7 +14,7 @@ let
     "show-asm" "msrv" "depgraph" "udeps"
     "ndk" "tarpaulin" "pgrx"
     "wipe" "sort" "generate" "leptos"
-    "c" "make"
+    "c-next" "make"
   ];
   extraPackages = [
     (pkgs.kiwiPackages.cargo-setup-project.override {
@@ -53,7 +53,7 @@ let
 in {
   home.packages =
     [ pkgs.rustup ]
-    ++ map (pluginName: mkStablePackage pkgs."cargo-${pluginName}") cargoPlugins
+    ++ map (pluginName: pkgs."cargo-${pluginName}") cargoPlugins
     ++ extraPackages;
 
   home.file.".cargo/config.toml".source = toml.generate "cargo-config.toml" cargoConfig;
