@@ -11,8 +11,8 @@ let
 
   fenixStableToolchain = with pkgs.fenix; let
     toolchain = toolchainOf {
-      channel = "1.79.0";
-      sha256 = "sha256-Ngiz76YP4HTY75GGdH2P+APE/DEIx2R/Dn+BwwOyzZU=";
+      channel = "1.80.0";
+      sha256 = "sha256-6eN/GKzjVSjEhGO9FhWObkRFaE1Jf+uqMSdQnb8lcB4=";
     };
   in combine [
     toolchain.rustc
