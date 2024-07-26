@@ -18,13 +18,13 @@
 }:
 stdenv.mkDerivation (finalAttrs: {
   pname = "nixd";
-  version = "2.2.3";
+  version = "2.3.0";
 
   src = fetchFromGitHub {
     owner = "nix-community";
     repo = "nixd";
     rev = finalAttrs.version;
-    hash = "sha256-1i4U012vqw84NuD5cjgfVX/he4vW9MyEeIetJ55g280=";
+    hash = "sha256-iB6Hc3kgtsZ360JlAhPqCRWFTf3tawHEKYAeYt7DM4E=";
   };
 
   mesonBuildType = "release";
