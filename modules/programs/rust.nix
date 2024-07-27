@@ -30,6 +30,10 @@ in {
         jobs = 6;
       };
 
+      alias = {
+        gen = "generate";
+      };
+
       target.x86_64-unknown-linux-gnu = {
         linker = "${llvmPackages.clang}/bin/clang";
       };

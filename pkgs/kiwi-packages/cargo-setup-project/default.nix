@@ -23,7 +23,7 @@ in writeShellScriptBin "cargo-setup-project" ''
     src,
     overwrite ? true,
   }: lib.concatStringsSep " " (
-    (lib.optional (!overwrite) "[[ -f \"${name}\" ]] &&")
+    (lib.optional (!overwrite) "[[ ! -f \"${name}\" ]] &&")
     ++ [
       "cp -Tr --no-preserve=mode ${src} ${name}"
     ]
