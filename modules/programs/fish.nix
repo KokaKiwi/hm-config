@@ -62,7 +62,7 @@
     interactiveShellInit = ''
       set fish_greeting
 
-      ${pkgs.any-nix-shell}/bin/any-nix-shell fish | source
+      ${pkgs.nix-your-shell}/bin/nix-your-shell fish | source
     '';
   };
 }
