@@ -8,6 +8,7 @@ in {
   ]);
 
   programs.password-store = {
+    enable = true;
     package = let
       pass = pkgs.pass.override {
         dmenuSupport = false;

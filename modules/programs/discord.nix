@@ -1,9 +1,10 @@
 { config, pkgs, lib, ... }:
-with lib;
 let
   cfg = config.programs.discord;
 in {
   programs.discord = {
+    enable = true;
+
     flavour = "vesktop";
     package = config.lib.opengl.wrapPackage (pkgs.vesktop.override {
       withTTS = false;
@@ -22,7 +23,8 @@ in {
 
       vencord = {
         theme = ''
-          @import"https://discordstyles.github.io/RadialStatus/dist/RadialStatus.css";
+          @import "https://discordstyles.github.io/RadialStatus/dist/RadialStatus.css";
+
           :root {
             --rs-small-spacing: 2px;
             --rs-medium-spacing: 3px;
@@ -46,7 +48,7 @@ in {
     };
   };
 
-  xdg.localDesktopEntries = mkIf cfg.enable {
+  xdg.localDesktopEntries = with lib; mkIf cfg.enable {
     vesktop = {
       name = "Vesktop";
       icon = "vesktop";

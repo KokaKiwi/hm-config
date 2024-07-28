@@ -1,6 +1,7 @@
 { pkgs, ... }:
 {
   programs.litecli = {
+    enable = true;
     package = let
       python = pkgs.python312;
     in pkgs.litecli.override {

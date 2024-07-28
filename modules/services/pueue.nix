@@ -3,6 +3,8 @@ let
   inherit (config) xdg;
 in {
   services.pueue = {
+    enable = true;
+
     settings = {
       client = {
         dark_mode = true;

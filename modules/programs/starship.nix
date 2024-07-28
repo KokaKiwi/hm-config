@@ -1,6 +1,8 @@
 { ... }:
 {
   programs.starship = {
+    enable = true;
+
     transience = {
       enable = true;
     };

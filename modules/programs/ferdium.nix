@@ -6,6 +6,7 @@ let
   packageLib = config.lib.package;
 in {
   programs.ferdium = {
+    enable = true;
     package = let
       ferdium = pkgs.nur.repos.kokakiwi.ferdium;
       launcher = pkgs.writeShellScript "ferdium" ''

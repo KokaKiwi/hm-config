@@ -19,6 +19,7 @@ let
   };
 in {
   programs.ssh = {
+    enable = true;
     matchBlocks = {
       "gitlab.kokakiwi.net" = {
         identityFile = "~/.ssh/id_ed25519";

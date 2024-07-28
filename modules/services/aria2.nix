@@ -1,6 +1,8 @@
 { ... }:
 {
   services.aria2 = {
+    enable = true;
+
     settings = {
       continue = true;
       max-connection-per-server = 4;

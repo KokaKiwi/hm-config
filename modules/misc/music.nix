@@ -5,6 +5,7 @@ let
   inherit (config) xdg;
 in {
   programs.ncmpcpp = {
+    enable = true;
     package = pkgs.ncmpcpp.override {
       stdenv = pkgs.llvmStdenv;
       visualizerSupport = true;
@@ -22,6 +23,8 @@ in {
   };
 
   services.mopidy = {
+    enable = true;
+
     extensionPackages = with pkgs; [
       mopidy-local
       mopidy-mpd
@@ -65,6 +68,8 @@ in {
   };
 
   programs.beets = {
+    enable = true;
+
     settings = {
       asciify_paths = true;
 

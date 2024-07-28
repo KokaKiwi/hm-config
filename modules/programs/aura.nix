@@ -1,6 +1,7 @@
 { config, pkgs, ... }:
 {
   programs.aura = {
+    enable = true;
     package = pkgs.nur.repos.kokakiwi.aura;
 
     settings = {

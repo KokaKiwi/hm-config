@@ -16,6 +16,7 @@ let
   '';
 in {
   programs.paru = {
+    enable = true;
     package = pkgs.nur.repos.kokakiwi.paru.override {
       rustPlatform = pkgs.fenixStableRustPlatform;
     };

@@ -1,31 +1,8 @@
 { config, lib, ... }:
-with lib;
-let
-  enabledPrograms = [
-    "bat" "beets" "fish" "gh" "gitui"
-    "hub" "kitty" "mise" "mux" "ncmpcpp"
-    "ssh" "starship" "tmux" "taplo"
-    "paru" "zoxide" "yazi" "git" "gpg"
-    "nix-index" "discord" "glow" "glab"
-    "password-store" "pgcli" "yt-dlp"
-    "nvchecker" "element" "ferdium"
-    "litecli" "hyfetch" "fd" "neovim"
-    "xh" "nix-init" "sccache" "bpython"
-    "ptpython" "glances" "aura"
-  ];
-  enabledServices = [
-    "gpg-agent" "mopidy" "pueue"
-    "module-server" "aria2" "kubo"
-    "sccache" "nix-web"
-  ];
-
-  enableNames = flip genAttrs (name: {
-    enable = true;
-  });
-in {
+{
   home.sessionVariables = {
     ANDROID_HOME = "$HOME/Android/Sdk";
-    DEBUGINFOD_URLS = concatStringsSep " " [
+    DEBUGINFOD_URLS = lib.concatStringsSep " " [
       "https://debuginfod.archlinux.org"
       "https://debuginfod.elfutils.org"
     ];
@@ -51,7 +28,4 @@ in {
   home.shell.package = config.programs.fish.package;
 
   fonts.fontconfig.enable = true;
-
-  programs = enableNames enabledPrograms;
-  services = enableNames enabledServices;
 }

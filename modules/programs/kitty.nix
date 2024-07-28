@@ -4,6 +4,7 @@ let
   cfg = config.programs.kitty;
 in {
   programs.kitty = {
+    enable = true;
     package = config.lib.opengl.wrapPackage pkgs.kitty;
 
     font = {

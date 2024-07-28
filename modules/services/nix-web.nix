@@ -1,4 +1,6 @@
 { ... }:
 {
-  services.nix-web = {};
+  services.nix-web = {
+    enable = true;
+  };
 }

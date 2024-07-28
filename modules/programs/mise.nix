@@ -1,6 +1,8 @@
 { ... }:
 {
   programs.mise = {
+    enable = true;
+
     globalConfig = {
       tools = {
         cmake = "system";

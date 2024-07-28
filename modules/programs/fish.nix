@@ -1,6 +1,7 @@
 { pkgs, ... }:
 {
   programs.fish = {
+    enable = true;
     package = pkgs.fish.override {
       stdenv = pkgs.llvmStdenv;
       python3 = pkgs.python312;

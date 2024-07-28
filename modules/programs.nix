@@ -1,23 +1,6 @@
-{ lib, ... }:
+{ ... }:
 {
   imports = [
-    ./generic/all-modules.nix
-
-    ./lib/package.nix
-    ./lib/python.nix
-
-    ./misc/catppuccin.nix
-    ./misc/deuxfleurs.nix
-    ./misc/editorconfig.nix
-    ./misc/files.nix
-    ./misc/home.nix
-    ./misc/music.nix
-    ./misc/nix.nix
-    ./misc/opengl.nix
-    ./misc/packages.nix
-    ./misc/secrets.nix
-    ./misc/systemd.nix
-
     ./programs/aura.nix
     ./programs/bat.nix
     ./programs/bpython.nix
@@ -58,12 +41,17 @@
     ./programs/tmux.nix
     ./programs/xh.nix
     ./programs/yazi.nix
+  ];
 
-    ./services/aria2.nix
-    ./services/gpg-agent.nix
-    ./services/kubo.nix
-    ./services/nix-web.nix
-    ./services/pueue.nix
-  ]
-  ++ lib.optional (builtins.pathExists ./private) ./private;
+  programs = {
+    aura.enable = true;
+    gitui.enable = true;
+    glances.enable = true;
+    glow.enable = true;
+    hub.enable = true;
+    nix-index.enable = true;
+    sccache.enable = true;
+    yt-dlp.enable = true;
+    zoxide.enable = true;
+  };
 }

@@ -1,6 +1,7 @@
 { config, pkgs, lib, ... }:
 {
   programs.nvchecker = {
+    enable = true;
     package = let
       python3Packages = pkgs.python312Packages;
       nvchecker = python3Packages.nvchecker.overridePythonAttrs (super: rec {

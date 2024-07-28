@@ -1,6 +1,8 @@
 { ... }:
 {
   programs.taplo = {
+    enable = true;
+
     rootConfig = {
       formatting = {
         array_auto_expand = false;

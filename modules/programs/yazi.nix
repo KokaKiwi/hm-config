@@ -13,6 +13,7 @@ let
   '';
 in {
   programs.yazi = {
+    enable = true;
     enableFishIntegration = true;
 
     settings = {

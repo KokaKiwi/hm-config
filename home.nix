@@ -2,7 +2,7 @@
 with lib;
 {
   imports = [
-    ./modules/all-modules.nix
+    ./modules
   ];
 
   home.stateVersion = "24.05";

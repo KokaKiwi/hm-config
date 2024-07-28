@@ -3,6 +3,7 @@ let
   cfg = config.programs.neovim;
 in {
   programs.neovim = {
+    enable = true;
     package = pkgs.kiwiPackages.neovim;
 
     catppuccin.enable = false;

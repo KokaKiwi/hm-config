@@ -1,4 +1,6 @@
 { ... }:
 {
-  programs.nix-init = {};
+  programs.nix-init = {
+    enable = true;
+  };
 }

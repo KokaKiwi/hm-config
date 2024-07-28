@@ -9,6 +9,7 @@ let
   };
 in {
   programs.tmux = {
+    enable = true;
     enableSystemd = true;
 
     package = pkgs.tmux.override {

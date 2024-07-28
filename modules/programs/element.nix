@@ -3,7 +3,9 @@ with lib;
 let
   cfg = config.programs.element;
 in {
-  programs.element = {};
+  programs.element = {
+    enable = true;
+  };
 
   xdg.localDesktopEntries = mkIf cfg.enable {
     element-desktop = {
