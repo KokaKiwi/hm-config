@@ -2,11 +2,11 @@
 with lib;
 let
   git = let
-    git = pkgs.git.overrideAttrs (prev: rec {
+    git = pkgs.git.overrideAttrs (self: prev: {
       version = "2.46.0";
 
       src = pkgs.fetchurl {
-        url = "https://mirrors.edge.kernel.org/pub/software/scm/git/git-${version}.tar.xz";
+        url = "https://www.kernel.org/pub/software/scm/git/git-${self.version}.tar.xz";
         hash = "sha256-fxI0YqKLfKPr4mB0hfcWhVTCsQ38FVx+xGMAZmrCf5U=";
       };
 
@@ -16,9 +16,19 @@ let
     stdenv = pkgs.llvmStdenv;
 
     python3 = pkgs.python312;
+    openssl = pkgs.openssl_3_3;
+    curl = pkgs.curl.override {
+      openssl = pkgs.quictls;
+
+      http3Support = true;
+    };
+
+    perlSupport = true;
+    pythonSupport = true;
 
     svnSupport = true;
     sendEmailSupport = true;
+
     withSsh = true;
     withLibsecret = true;
   };
