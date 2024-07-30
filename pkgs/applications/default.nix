@@ -65,6 +65,7 @@ in {
   pdm = callPackage ./pdm { };
   pgcli = python3Packages.callPackage ./pgcli { };
   ponysay = callPackage ./ponysay { };
+  procs = callPackage ./tools/admin/procs { };
   ptpython = python3Packages.callPackage ./ptpython { };
   pueue = callPackage ./misc/pueue { };
   rustup = callPackage ./rustup { };
