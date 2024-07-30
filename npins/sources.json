@@ -8,9 +8,9 @@
         "repo": "agenix"
       },
       "branch": "main",
-      "revision": "de96bd907d5fbc3b14fc33ad37d1b9a3cb15edc6",
-      "url": "https://github.com/ryantm/agenix/archive/de96bd907d5fbc3b14fc33ad37d1b9a3cb15edc6.tar.gz",
-      "hash": "0rkcx72bq7fm5b1qy1nrzp8v93nv784wh11srgi3pi0m6sr9g03f"
+      "revision": "3f1dae074a12feb7327b4bf43cbac0d124488bb7",
+      "url": "https://github.com/ryantm/agenix/archive/3f1dae074a12feb7327b4bf43cbac0d124488bb7.tar.gz",
+      "hash": "09aldzzc50121p0b3apj2c0l71jgmbif46a76shlgps8wbbbkr35"
     },
     "catppuccin": {
       "type": "Git",
