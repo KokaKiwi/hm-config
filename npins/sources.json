@@ -59,9 +59,9 @@
         "repo": "fenix"
       },
       "branch": "main",
-      "revision": "483df76def3e5010d709aa3a0418ba2088503994",
-      "url": "https://github.com/nix-community/fenix/archive/483df76def3e5010d709aa3a0418ba2088503994.tar.gz",
-      "hash": "0cr7mx0whflk6bv9dwz2kf74i999ylrbxlw2847wrk9bv0k9mw8d"
+      "revision": "0900ff903f376cc822ca637fef58c1ca4f44fab5",
+      "url": "https://github.com/nix-community/fenix/archive/0900ff903f376cc822ca637fef58c1ca4f44fab5.tar.gz",
+      "hash": "1g5szfhr8wzlgnai3zdw2an8lh49m880qs6aqliz0hi8m9k7857v"
     },
     "home-manager": {
       "type": "Git",
@@ -71,9 +71,9 @@
         "repo": "home-manager"
       },
       "branch": "master",
-      "revision": "4fcd54df7cbb1d79cbe81209909ee8514d6b17a4",
-      "url": "https://github.com/nix-community/home-manager/archive/4fcd54df7cbb1d79cbe81209909ee8514d6b17a4.tar.gz",
-      "hash": "0hns0s2x0ygz7sxksn67xrfpp0lnd3r1afk9rv5vd0m439amdrar"
+      "revision": "58cef3796271aaeabaed98884d4abaab5d9d162d",
+      "url": "https://github.com/nix-community/home-manager/archive/58cef3796271aaeabaed98884d4abaab5d9d162d.tar.gz",
+      "hash": "1q2gg5swqrawvw2i3f8xrsxg45kim6a50fz3h291971n8wfmbjn1"
     },
     "nixgl": {
       "type": "Git",
