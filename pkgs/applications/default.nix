@@ -73,6 +73,7 @@ in {
   skopeo = callPackage ./skopeo { };
   starship = callPackage ./starship { };
   stockfish = callPackage ./games/stockfish { };
+  taplo = callPackage ./development/tools/taplo { };
   trunk = callPackage ./development/tools/trunk { };
   usage = callPackage ./usage { };
   vesktop = callPackage ./vesktop { };
