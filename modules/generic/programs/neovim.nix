@@ -200,8 +200,7 @@ in {
       finalPackage = pkgs.wrapNeovimUnstable cfg.package neovimConfig;
 
       overridePackages =
-        optional (cfg.tree-sitter.enable && cfg.tree-sitter.cc != null && isDerivation cfg.tree-sitter.cc) cfg.tree-sitter.cc
-        ++ optional (cfg.tree-sitter.enable && cfg.tree-sitter.nodejs != null) cfg.tree-sitter.nodejs;
+        optional (cfg.tree-sitter.enable && cfg.tree-sitter.nodejs != null) cfg.tree-sitter.nodejs;
       extraPackages =
         optional (cfg.tree-sitter.enable) cfg.tree-sitter.package;
 
