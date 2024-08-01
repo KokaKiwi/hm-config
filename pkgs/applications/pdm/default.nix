@@ -31,24 +31,24 @@
   };
 
   dep-logic = python3Packages.dep-logic.overridePythonAttrs (super: rec {
-    version = "0.4.3";
+    version = "0.4.4";
 
     src = fetchPypi {
       pname = "dep_logic";
       inherit version;
-      hash = "sha256-5HaPCibIwcDjn9Ug8+C9CZylKOxqjyA1n7yJ/8342kU=";
+      hash = "sha256-5xav3ak1EQfFTvT2/T/SlWj1NSmvszO0lYGDudMG5Eo=";
     };
   });
 in python3Packages.buildPythonApplication rec {
   pname = "pdm";
-  version = "2.17.1";
+  version = "2.17.2";
   pyproject = true;
 
   disabled = python3Packages.pythonOlder "3.8";
 
   src = fetchPypi {
     inherit pname version;
-    hash = "sha256-nhoo7MqD82J6pwCx49Us0/gvEPyQisZJkRm696PU6mw=";
+    hash = "sha256-vx6bjiKDjsVyofeOddusMOoj88tYNlW5CEdAy5LwXNM=";
   };
 
   nativeBuildInputs = [
