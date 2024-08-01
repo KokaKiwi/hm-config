@@ -15,6 +15,7 @@ in {
   };
   cargo-deny = callPackage ./cargo-deny { };
   cargo-depgraph = callPackage ./cargo-depgraph { };
+  cargo-expand = callPackage ./development/tools/rust/cargo-expand { };
   cargo-generate = callPackage ./development/tools/rust/cargo-generate { };
   cargo-make = callPackage ./development/tools/rust/cargo-make { };
   cargo-ndk = callPackage ./cargo-ndk { };
