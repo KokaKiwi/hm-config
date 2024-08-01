@@ -9,7 +9,11 @@
   ];
 
   nix = {
-    package = pkgs.nix;
+    package = pkgs.nix.override {
+      openssl = pkgs.quictls;
+      curl = pkgs.curlHTTP3;
+      python3 = pkgs.python312;
+    };
 
     builders = {
       nix-games = {
