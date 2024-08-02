@@ -52,7 +52,7 @@ in {
     ponysay xinspect
     trashy minisign mkcert doggo
     nix-binutils git-absorb pingu miniserve
-    patool nix-prefetch
+    patool nix-prefetch kx-aspe-cli
     nixgl.nixGLIntel
     kiwiPackages.doll
     nur.repos.kokakiwi.go-mod-upgrade
