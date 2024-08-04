@@ -5,7 +5,6 @@
     ./programs/bat.nix
     ./programs/bpython.nix
     ./programs/discord.nix
-    ./programs/element.nix
     ./programs/fd.nix
     ./programs/ferdium.nix
     ./programs/fish.nix
@@ -16,7 +15,6 @@
     ./programs/glances.nix
     ./programs/gpg.nix
     ./programs/hyfetch.nix
-    ./programs/imhex.nix
     ./programs/kde.nix
     ./programs/kitty.nix
     ./programs/lan-mouse.nix
@@ -27,7 +25,6 @@
     ./programs/neovim.nix
     ./programs/nix-init.nix
     ./programs/nvchecker.nix
-    ./programs/obsidian.nix
     ./programs/paru.nix
     ./programs/password-store.nix
     ./programs/pgcli.nix
@@ -46,6 +43,7 @@
 
   programs = {
     aura.enable = true;
+    element.enable = true;
     gitui.enable = true;
     glances.enable = true;
     glow.enable = true;

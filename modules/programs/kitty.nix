@@ -1,8 +1,5 @@
-{ config, pkgs, lib, ... }:
-with lib;
-let
-  cfg = config.programs.kitty;
-in {
+{ config, pkgs, ... }:
+{
   programs.kitty = {
     enable = true;
     package = config.lib.opengl.wrapPackage pkgs.kitty;
@@ -48,18 +45,6 @@ in {
       # Tab management
       "map kitty_mod+page_up" = "previous_tab";
       "map kitty_mod+page_down" = "next_tab";
-    };
-  };
-
-  xdg.localDesktopEntries = mkIf cfg.enable {
-    kitty = {
-      name = "Kitty";
-      genericName = "Terminal emulator";
-      icon = "kitty";
-      exec = "${getExe cfg.package} --single-instance";
-      terminal = false;
-      noDisplay = false;
-      categories = [ "System" "TerminalEmulator" ];
     };
   };
 }

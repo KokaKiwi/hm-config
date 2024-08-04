@@ -47,15 +47,4 @@ in {
       };
     };
   };
-
-  xdg.localDesktopEntries = with lib; mkIf cfg.enable {
-    vesktop = {
-      name = "Vesktop";
-      icon = "vesktop";
-      exec = "${getExe cfg.package} %U";
-      startupWMClass = "Vesktop";
-      keywords = [ "discord" "vencord" "electron" "chat" ];
-      categories = [ "Network" "InstantMessaging" "Chat" ];
-    };
-  };
 }
