@@ -90,6 +90,11 @@ in pkgs.nur.repos.kokakiwi.lib.mkUpdateChecker {
       archpkg = "gnupg";
       strip_release = true;
     };
+    kx-aspe-cli = {
+      source = "git";
+      git = "https://codeberg.org/keyoxide/kx-aspe-cli.git";
+      use_commit = true;
+    };
     ncmpcpp = {
       source = "archpkg";
       archpkg = "ncmpcpp";
