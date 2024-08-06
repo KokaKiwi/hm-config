@@ -19,7 +19,9 @@ let
       cargo = "cargo-mommy";
     })
     (mkStablePackage pkgs.nur.repos.kokakiwi.streampager)
-  ];
+  ] ++ (with pkgs; [
+    rust-bindgen
+  ]);
 in {
   home.packages = map (pluginName: pkgs."cargo-${pluginName}") cargoPlugins
     ++ extraPackages;
