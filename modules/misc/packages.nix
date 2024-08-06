@@ -62,9 +62,13 @@ in {
     patool nix-prefetch kx-aspe-cli shellcheck
     nixgl.nixGLIntel
     kiwiPackages.doll
-    nur.repos.kokakiwi.go-mod-upgrade
-    nur.repos.kokakiwi.lddtree
-  ] ++ (lib.attrValues packages);
+  ]
+  ++ (with nur.repos; [
+    kokakiwi.enquirer
+    kokakiwi.go-mod-upgrade
+    kokakiwi.lddtree
+  ])
+  ++ (lib.attrValues packages);
 
   env.homePackages = let
     namedPackages = lib.filter (drv: drv ? pname) config.home.packages;
