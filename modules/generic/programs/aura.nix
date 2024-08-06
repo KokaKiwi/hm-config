@@ -18,7 +18,7 @@ in {
   config = with lib; mkIf cfg.enable {
     home.packages = [ cfg.package ];
 
-    xdg.configFile."aura.toml" = mkIf (cfg.settings != { }) {
+    xdg.configFile."aura/config.toml" = mkIf (cfg.settings != { }) {
       source = tomlFormat.generate "aura/config.toml" cfg.settings;
     };
   };
