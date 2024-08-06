@@ -14,6 +14,8 @@ let
     "doll"
     # Unstable packages
     "glances"
+    # Haskell stuff
+    "ShellCheck"
   ];
 
   neovim = config.programs.neovim.package;
