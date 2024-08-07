@@ -1,4 +1,4 @@
-{ ... }:
+{ config, ... }:
 {
   programs.mise = {
     enable = true;
@@ -19,7 +19,7 @@
 
     settings = {
       trusted_config_paths = [
-        "~/projects"
+        "${config.home.homeDirectory}/projects"
       ];
 
       experimental = true;

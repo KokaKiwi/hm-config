@@ -1,6 +1,0 @@
-{ ... }:
-{
-  programs.glab = {
-    enable = true;
-  };
-}
