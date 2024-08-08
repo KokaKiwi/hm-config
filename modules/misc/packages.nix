@@ -17,11 +17,16 @@ let
     opengl = config.lib.opengl;
     package = config.lib.package;
   in {
-    bun = pkgs.bun.overrideAttrs (self: super: {
-      version = "1.1.21";
+    bun = let
+      bun = pkgs.bun;
+    in bun.overrideAttrs (self: super: {
+      version = "1.1.22";
+
+      buildInputs = [ ];
+
       src = pkgs.fetchurl {
         url = "https://github.com/oven-sh/bun/releases/download/bun-v${self.version}/bun-linux-x64.zip";
-        hash = "sha256-KPq1T0jxN6ghFIoKRe3rQqUtI6qMuRdMzIFVSj+JMco=";
+        hash = "sha256-sKhv4Bz4r17sShUaaV1X6uxQWMoyxKWEO8R4RBrqiUg=";
       };
     });
     cool-retro-term = opengl.wrapPackage pkgs.cool-retro-term;
