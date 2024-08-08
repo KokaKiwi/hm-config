@@ -34,6 +34,7 @@
     ./programs/silicon.nix
     ./programs/ssh.nix
     ./programs/starship.nix
+    ./programs/szurubooru-cli.nix
     ./programs/taplo.nix
     ./programs/tmux.nix
     ./programs/xh.nix
