@@ -13,8 +13,8 @@ python3Packages.buildPythonApplication {
     domain = "gitlab.kokakiwi.net";
     owner = "kokakiwi";
     repo = "szurubooru-cli";
-    rev = "c2fe65a18d7a60305154829d040117aa59ceec5a";
-    hash = "sha256-W9QGRxkO8PGcISgrB/nIsi0DKL0PC/Bc0lyYfRMujug=";
+    rev = "d0f765efbc15189fa0e5331f2f60db916415a7f5";
+    hash = "sha256-HZHzeoETKvNaM5b0anPkERnTyKAHYeS0p03qkUzjpC8=";
   };
 
   nativeBuildInputs = with python3Packages; [
