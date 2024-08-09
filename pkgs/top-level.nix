@@ -31,7 +31,7 @@ in {
 
   stdenv-adapters = adapters;
   inherit mkLLVMStdenv;
-  llvmStdenv = mkLLVMStdenv pkgs.llvmPackages_latest;
+  llvmStdenv = mkLLVMStdenv pkgs.llvmPackages_18;
 
   fenix = import sources.fenix {
     inherit pkgs lib;
