@@ -29,7 +29,6 @@
     ./programs/silicon.nix
     ./programs/ssh.nix
     ./programs/starship.nix
-    ./programs/szurubooru-cli.nix
     ./programs/taplo.nix
     ./programs/tmux.nix
     ./programs/xh.nix
@@ -48,6 +47,7 @@
     nix-index.enable = true;
     nix-init.enable = true;
     sccache.enable = true;
+    szurubooru-cli.enable = true;
     yt-dlp.enable = true;
     zoxide.enable = true;
   };
