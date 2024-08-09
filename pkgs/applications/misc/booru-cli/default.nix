@@ -6,15 +6,15 @@
 }:
 python3Packages.buildPythonApplication {
   pname = "szurubooru-cli";
-  version = "0-unstable-2024-08-08";
+  version = "0-unstable-2024-08-09";
   pyproject = true;
 
   src = fetchFromGitLab {
     domain = "gitlab.kokakiwi.net";
     owner = "kokakiwi";
     repo = "szurubooru-cli";
-    rev = "d0f765efbc15189fa0e5331f2f60db916415a7f5";
-    hash = "sha256-HZHzeoETKvNaM5b0anPkERnTyKAHYeS0p03qkUzjpC8=";
+    rev = "c028c733b37eb74f0fc27dd08c2412bdab3d4fc0";
+    hash = "sha256-yzlsL7TQSK6LeFgyqrPOF+WOS3At3FUZ2zQhI41Kyac=";
   };
 
   nativeBuildInputs = with python3Packages; [
