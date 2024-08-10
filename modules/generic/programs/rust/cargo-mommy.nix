@@ -63,7 +63,9 @@ in {
         CARGO_MOMMYS_PARTS = cfg.config.parts;
         CARGO_MOMMYS_FUCKING = cfg.config.fucking;
       };
-    in package.wrapPackage cfg.package { } ''
+    in package.wrapPackage cfg.package {
+      makeWrapper = pkgs.makeBinaryWrapper;
+    } ''
       wrapProgram $out/bin/cargo-mommy \
         ${concatStringsSep " " (mapAttrsToList setEnv envs)}
     '';
