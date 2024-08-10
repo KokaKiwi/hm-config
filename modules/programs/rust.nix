@@ -12,7 +12,7 @@ let
     "show-asm" "msrv" "depgraph" "udeps"
     "ndk" "tarpaulin" "pgrx"
     "wipe" "sort" "leptos"
-    "c-next" "make"
+    "c-next" "make" "audit"
   ];
   extraPackages = [
     (pkgs.kiwiPackages.cargo-setup-project.override {
