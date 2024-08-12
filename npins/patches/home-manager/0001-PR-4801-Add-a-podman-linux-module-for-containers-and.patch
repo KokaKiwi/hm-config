@@ -1,0 +1,1191 @@
+From 2cd664858b7c75b991730802cc6b2ce74c2f3cd5 Mon Sep 17 00:00:00 2001
+From: KokaKiwi <kokakiwi+git@kokakiwi.net>
+Date: Mon, 12 Aug 2024 11:11:52 +0200
+Subject: [PATCH] PR#4801: Add a podman linux module for containers and
+ networks
+
+Squashed commit of the following:
+
+commit 6df649c89a8637e07522d8cdaab486aca1c78509
+Author: Nicholas Hassan <nick@hassan.host>
+Date:   Fri Dec 22 10:54:18 2023 +1030
+
+    podman: add new module 'podman'
+
+    Adds a new Podman module for creating user containers and networks as
+    systemd services. These are installed to the user's XDG_CONFIG/systemd/user directory.
+
+    Signed-off-by: Nicholas Hassan <nick@hassan.host>
+---
+ modules/lib/maintainers.nix                   |  10 +
+ modules/modules.nix                           |   1 +
+ modules/services/podman-linux/containers.nix  | 433 ++++++++++++++++++
+ modules/services/podman-linux/default.nix     |  14 +
+ .../services/podman-linux/install-quadlet.nix | 178 +++++++
+ modules/services/podman-linux/networks.nix    |  60 +++
+ modules/services/podman-linux/options.nix     |  42 ++
+ modules/services/podman-linux/podman-lib.nix  |  81 ++++
+ modules/services/podman-linux/services.nix    |  56 +++
+ tests/default.nix                             |   1 +
+ .../services/podman-linux/container.nix       |  70 +++
+ .../modules/services/podman-linux/default.nix |   5 +
+ .../services/podman-linux/manifest.nix        |  63 +++
+ .../modules/services/podman-linux/network.nix |  29 ++
+ 14 files changed, 1043 insertions(+)
+ create mode 100644 modules/services/podman-linux/containers.nix
+ create mode 100644 modules/services/podman-linux/default.nix
+ create mode 100644 modules/services/podman-linux/install-quadlet.nix
+ create mode 100644 modules/services/podman-linux/networks.nix
+ create mode 100644 modules/services/podman-linux/options.nix
+ create mode 100644 modules/services/podman-linux/podman-lib.nix
+ create mode 100644 modules/services/podman-linux/services.nix
+ create mode 100644 tests/modules/services/podman-linux/container.nix
+ create mode 100644 tests/modules/services/podman-linux/default.nix
+ create mode 100644 tests/modules/services/podman-linux/manifest.nix
+ create mode 100644 tests/modules/services/podman-linux/network.nix
+
+diff --git a/modules/lib/maintainers.nix b/modules/lib/maintainers.nix
+index 9793d5c3..d276637d 100644
+--- a/modules/lib/maintainers.nix
++++ b/modules/lib/maintainers.nix
+@@ -276,6 +276,16 @@
+     github = "nilp0inter";
+     githubId = 1224006;
+   };
++  n-hass = {
++    name = "Nicholas Hassan";
++    email = "nick@hassan.host";
++    github = "n-hass";
++    githubId = 72363381;
++    keys = [{
++      longkeyid = "ed25519/0xA37159732728A6A6";
++      fingerprint = "FDEE 6116 DBA7 8840 7323  4466 A371 5973 2728 A6A6";
++    }];
++  };
+   seylerius = {
+     email = "sable@seyleri.us";
+     name = "Sable Seyler";
+diff --git a/modules/modules.nix b/modules/modules.nix
+index dbeebfbf..b67a2c85 100644
+--- a/modules/modules.nix
++++ b/modules/modules.nix
+@@ -345,6 +345,7 @@ let
+     ./services/plan9port.nix
+     ./services/playerctld.nix
+     ./services/plex-mpv-shim.nix
++    ./services/podman-linux
+     ./services/polybar.nix
+     ./services/poweralertd.nix
+     ./services/psd.nix
+diff --git a/modules/services/podman-linux/containers.nix b/modules/services/podman-linux/containers.nix
+new file mode 100644
+index 00000000..2acf6ce1
+--- /dev/null
++++ b/modules/services/podman-linux/containers.nix
+@@ -0,0 +1,433 @@
++{ config, lib, ... }:
++
++with lib;
++
++let
++  podman-lib = import ./podman-lib.nix { inherit lib; };
++
++  createQuadletSource = name: containerDef:
++    let
++      ### Definitions
++      serviceName = if containerDef.serviceName != null then
++        containerDef.serviceName
++      else
++        name;
++      containerName = name; # Use the submodule name as the container name
++      mergedServiceConfig = podman-lib.serviceConfigDefaults
++        // containerDef.serviceConfig;
++      mergedUnitConfig = podman-lib.unitConfigDefaults
++        // containerDef.unitConfig;
++      ###
++
++      ### Helpers
++      ifNotNull = condition: text: if condition != null then text else "";
++      ifNotEmptyList = list: text: if list != [ ] then text else "";
++      ifNotEmptySet = set: text: if set != { } then text else "";
++      ###
++
++      ### Formatters
++      formatExtraConfig = podman-lib.formatExtraConfig;
++      formatPrimitiveValue = podman-lib.formatPrimitiveValue;
++
++      formatNetworkDependencies = networks:
++        let formatElement = network: "podman-${network}-network.service";
++        in concatStringsSep " " (map formatElement networks);
++
++      formatEnvironment = env:
++        if env != { } then
++          concatStringsSep " "
++          (mapAttrsToList (k: v: "${k}=${formatPrimitiveValue v}") env)
++        else
++          "";
++
++      formatPorts = ports:
++        if ports != [ ] then
++          concatStringsSep "\n" (map (port: "PublishPort=${port}") ports)
++        else
++          "";
++
++      formatVolumes = volumes:
++        if volumes != [ ] then
++          concatStringsSep "\n" (map (volume: "Volume=${volume}") volumes)
++        else
++          "";
++
++      formatDevices = devices:
++        if devices != [ ] then
++          concatStringsSep "\n" (map (device: "AddDevice=${device}") devices)
++        else
++          "";
++
++      formatCapabilities = action: capabilities:
++        if capabilities != [ ] then
++          concatStringsSep "\n"
++          (map (capability: "${action}Capability=${capability}") capabilities)
++        else
++          "";
++
++      formatLabels = labels:
++        if labels != [ ] then
++          concatStringsSep "\n" (map (label: "Label=${label}") labels)
++        else
++          "";
++
++      formatAutoUpdate = autoupdate:
++        if autoupdate == "registry" then
++          "AutoUpdate=registry"
++        else if autoupdate == "local" then
++          "AutoUpdate=local"
++        else
++          "";
++
++      # TODO: check that the user hasn't supplied both networkMode and networks
++      formatNetwork = containerDef:
++        if containerDef.networkMode != null then
++          "Network=${containerDef.networkMode}"
++        else if containerDef.networks != [ ] then
++          "Network=${concatStringsSep "," containerDef.networks}"
++        else
++          "";
++
++      formatPodmanArgs = containerDef:
++        let
++          networkAliasArg = if containerDef.networkAlias != null then
++            "--network-alias ${containerDef.networkAlias}"
++          else
++            null;
++          entrypointArg = if containerDef.entrypoint != null then
++            "--entrypoint ${containerDef.entrypoint}"
++          else
++            null;
++          allArgs = [ networkAliasArg entrypointArg ]
++            ++ containerDef.extraOptions;
++        in if allArgs != [ ] && allArgs != [ "" ] then
++          "PodmanArgs=${
++            concatStringsSep " "
++            (filter (arg: arg != null && arg != "") allArgs)
++          }"
++        else
++          "";
++      ###
++
++      configText = ''
++        # Automatically generated by home-manager podman containers module
++        # DO NOT EDIT THIS FILE DIRECTLY
++        #
++        # ${serviceName}.container
++        [Unit]
++        Description=${
++          if containerDef.description != null then
++            containerDef.description
++          else
++            "Service for container ${containerName}"
++        }
++        After=network.target ${formatNetworkDependencies containerDef.networks}
++        ${ifNotEmptyList containerDef.networks
++        "Requires=${formatNetworkDependencies containerDef.networks}"}
++        ${formatExtraConfig mergedUnitConfig}
++
++        [Container]
++        ContainerName=${containerName}
++        Image=${containerDef.image}
++        Label=nix.home-manager.managed=true
++        ${ifNotEmptySet containerDef.environment
++        "Environment=${formatEnvironment containerDef.environment}"}
++        ${ifNotNull containerDef.environmentFile
++        "EnvironmentFile=${containerDef.environmentFile}"}
++        ${ifNotNull containerDef.command "Exec=${containerDef.command}"}
++        ${ifNotNull containerDef.user
++        "User=${formatPrimitiveValue containerDef.user}"}
++        ${ifNotNull containerDef.userNS "UserNS=${containerDef.userNS}"}
++        ${ifNotNull containerDef.group
++        "Group=${formatPrimitiveValue containerDef.group}"}
++        ${ifNotEmptyList containerDef.ports (formatPorts containerDef.ports)}
++        ${ifNotNull containerDef.networkMode
++        "Network=${containerDef.networkMode}"}
++        ${formatNetwork containerDef}
++        ${ifNotNull containerDef.ip4 "IP=${containerDef.ip4}"}
++        ${ifNotNull containerDef.ip6 "IP6=${containerDef.ip6}"}
++        ${ifNotEmptyList containerDef.volumes
++        (formatVolumes containerDef.volumes)}
++        ${ifNotEmptyList containerDef.devices
++        (formatDevices containerDef.devices)}
++        ${formatAutoUpdate containerDef.autoupdate}
++        ${ifNotEmptyList containerDef.addCapabilities
++        (formatCapabilities "Add" containerDef.addCapabilities)}
++        ${ifNotEmptyList containerDef.dropCapabilities
++        (formatCapabilities "Drop" containerDef.dropCapabilities)}
++        ${ifNotEmptyList containerDef.labels (formatLabels containerDef.labels)}
++        ${formatPodmanArgs containerDef}
++        ${formatExtraConfig containerDef.extraContainerConfig}
++
++        [Service]
++        Environment="PATH=/run/wrappers/bin:/run/current-system/sw/bin:${config.home.homeDirectory}/.nix-profile/bin"
++        ${formatExtraConfig mergedServiceConfig}
++
++        [Install]
++        ${if containerDef.autostart then
++          "WantedBy=multi-user.target default.target"
++        else
++          ""}
++      '';
++
++      removeBlankLines = text:
++        let
++          lines = splitString "\n" text;
++          nonEmptyLines = filter (line: line != "") lines;
++        in concatStringsSep "\n" nonEmptyLines;
++
++    in removeBlankLines configText;
++
++  toQuadletInternal = name: containerDef:
++    let
++      allAssertions =
++        (podman-lib.assertConfigTypes podman-lib.serviceConfigTypeRules
++          containerDef.serviceConfig name)
++        ++ (podman-lib.assertConfigTypes podman-lib.unitConfigTypeRules
++          containerDef.unitConfig name);
++    in {
++      serviceName = if containerDef.serviceName != null then
++        containerDef.serviceName
++      else
++        "podman-${name}";
++      source = createQuadletSource name containerDef;
++      unitType = "container";
++      assertions = allAssertions;
++    };
++
++in let
++  # Define the container user type as the user interface
++  containerDefinitionType = types.submodule {
++    options = {
++      serviceName = mkOption {
++        type = with types; nullOr str;
++        description =
++          "The name of the systemd service to generate for the container.";
++        default = null;
++      };
++
++      description = mkOption {
++        type = with types; nullOr str;
++        description = "The description of the container.";
++        default = null;
++      };
++
++      image = mkOption {
++        type = types.str;
++        description = "The container image.";
++      };
++
++      entrypoint = mkOption {
++        type = with types; nullOr str;
++        description = "The container entrypoint.";
++        default = null;
++      };
++
++      command = mkOption {
++        type = with types; nullOr str;
++        description = "The command to run after the container specification.";
++        default = null;
++      };
++
++      environment = mkOption {
++        type = podman-lib.primitiveAttrs;
++        description = "Environment variables to set in the container";
++        default = { };
++        example = literalMD ''
++          ```
++          environment = {
++            VAR1 = "0:100";
++            VAR2 = true;
++            VAR3 = 5;
++          };
++          ```
++        '';
++      };
++
++      environmentFile = mkOption {
++        type = with types; nullOr str;
++        default = null;
++        description =
++          "Path to a file containing environment variables to set in the container.";
++        example = literalMD ''
++          `environmentFile = "/etc/environment";`
++        '';
++      };
++
++      ports = mkOption {
++        type = with types; listOf str;
++        default = [ ];
++        description = "A mapping of ports between host and container";
++        example = literalMD ''
++          `ports = [ "8080:80" ];`
++        '';
++      };
++
++      user = mkOption {
++        type = with types; nullOr (oneOf [ str int ]);
++        default = null;
++        description = "The user ID inside the container.";
++      };
++
++      userNS = mkOption {
++        type = with types; nullOr str;
++        default = null;
++        description = "Use a user namespace for the container.";
++      };
++
++      group = mkOption {
++        type = with types; nullOr (oneOf [ str int ]);
++        default = null;
++        description = "The group ID inside the container.";
++      };
++
++      networkMode = mkOption {
++        type = with types; nullOr str;
++        default = null;
++        description = "The network mode for the container.";
++      };
++
++      networks = mkOption {
++        type = with types; listOf str;
++        default = [ ];
++        description =
++          "The networks to connect the container to. Best that these networks are defined with services.podman.networks";
++        example = literalMD ''
++          `networks = [ "mynet" ];`
++        '';
++      };
++
++      ip4 = mkOption {
++        type = with types; nullOr str;
++        default = null;
++        description = "Set an IPv4 address for the container.";
++      };
++
++      ip6 = mkOption {
++        type = with types; nullOr str;
++        default = null;
++        description = "Set an IPv6 address for the container.";
++      };
++
++      networkAlias = mkOption {
++        type = with types; nullOr str;
++        default = null;
++        description = "Set a network alias for the container.";
++      };
++
++      volumes = mkOption {
++        type = with types; listOf str;
++        default = [ ];
++        description = "The volumes to mount into the container.";
++        example = literalMD ''
++          ```
++          volumes = [
++            "/tmp:/tmp"
++            "/var/run/test.secret:/etc/secret:ro"
++          ];
++          ```
++        '';
++      };
++
++      devices = mkOption {
++        type = types.listOf types.str;
++        default = [ ];
++        description =
++          "The devices to mount into the container, in the format '/dev/<host>:/dev/<container>'.";
++      };
++
++      autoupdate = mkOption {
++        type = with types; enum [ "" "registry" "local" ];
++        default = "";
++        description = "The autoupdate policy for the container.";
++        example = literalMD ''
++          `autoupdate = "registry"`;
++        '';
++      };
++
++      autostart = mkOption {
++        type = types.bool;
++        default = true;
++        description =
++          "Whether to start the container on user login / boot (requires user lingering).";
++      };
++
++      addCapabilities = mkOption {
++        type = with types; listOf str;
++        default = [ ];
++        description = "The capabilities to add to the container.";
++      };
++
++      dropCapabilities = mkOption {
++        type = with types; listOf str;
++        default = [ ];
++        description = "The capabilities to drop from the container.";
++      };
++
++      labels = mkOption {
++        type = with types; listOf str;
++        default = [ ];
++        description = "The labels to apply to the container.";
++      };
++
++      extraOptions = mkOption {
++        type = with types; listOf str;
++        default = [ ];
++        description = "Extra options to pass to the podman run command.";
++      };
++
++      extraContainerConfig = mkOption {
++        type = podman-lib.primitiveAttrs;
++        default = { };
++        description = "Extra configuration, in Podman Quadlet format.";
++        example = literalMD ''
++          ```
++          extraContainerConfig = {
++            UIDMap = "0:1000:1";
++            ReadOnlyTmpfs = true;
++            EnvironmentFile = [ /etc/environment /root/.env];
++          };
++          ```
++        '';
++      };
++
++      serviceConfig = mkOption {
++        type = podman-lib.serviceConfigType;
++        default = { };
++        description =
++          "Configuration values for the systemd service for the container.";
++      };
++
++      unitConfig = mkOption {
++        type = podman-lib.unitConfigType;
++        default = { };
++        description =
++          "Configuration values for the systemd unit for the container.";
++      };
++
++    };
++  };
++
++in {
++
++  imports = [ ./options.nix ];
++
++  options.services.podman.containers = mkOption {
++    type = types.attrsOf containerDefinitionType;
++    default = { };
++    description = "Attribute set of container definitions.";
++  };
++
++  config = let
++    containerQuadlets =
++      mapAttrsToList toQuadletInternal config.services.podman.containers;
++  in {
++    internal.podman-quadlet-definitions = containerQuadlets;
++    assertions = lib.flatten (map (container: container.assertions)
++      config.internal.podman-quadlet-definitions);
++
++    # manifest file
++    home.file."${config.xdg.configHome}/podman/containers.manifest".text =
++      podman-lib.generateManifestText containerQuadlets;
++  };
++}
+diff --git a/modules/services/podman-linux/default.nix b/modules/services/podman-linux/default.nix
+new file mode 100644
+index 00000000..5ab5fd0b
+--- /dev/null
++++ b/modules/services/podman-linux/default.nix
+@@ -0,0 +1,14 @@
++{ pkgs, lib, ... }:
++
++with lib;
++
++{
++  imports =
++    [ ./services.nix ./networks.nix ./containers.nix ./install-quadlet.nix ];
++
++  config = {
++    meta.maintainers = [ maintainers.n-hass ];
++    assertions =
++      [ (hm.assertions.assertPlatform "podman" pkgs platforms.linux) ];
++  };
++}
+diff --git a/modules/services/podman-linux/install-quadlet.nix b/modules/services/podman-linux/install-quadlet.nix
+new file mode 100644
+index 00000000..6be89059
+--- /dev/null
++++ b/modules/services/podman-linux/install-quadlet.nix
+@@ -0,0 +1,178 @@
++{ config, lib, pkgs, ... }:
++
++with lib;
++
++let
++  quadletActivationCleanupScript = ''
++    resourceManifest=()
++    # Define VERBOSE_ENABLED as a function
++    VERBOSE_ENABLED() {
++      if [[ -n "''${VERBOSE:-}" ]]; then
++        return 0
++      else
++        return 1
++      fi
++    }
++
++    # Function to fill resourceManifest from the manifest file
++    function loadManifest {
++      local manifestFile="$1"
++      VERBOSE_ENABLED && echo "Loading manifest from $manifestFile..."
++      IFS=$'\n' read -r -d "" -a resourceManifest <<< "$(cat "$manifestFile")" || true
++    }
++
++    function isResourceInManifest {
++      local resource="$1"
++      for manifestEntry in "''${resourceManifest[@]}"; do
++        if [ "$resource" = "$manifestEntry" ]; then
++          return 0  # Resource found in manifest
++        fi
++      done
++      return 1  # Resource not found in manifest
++    }
++
++    function removeContainer {
++      echo "Removing orphaned container: $1"
++      if [[ -n "''${DRY_RUN:-}" ]]; then
++        echo "Would run podman stop $1"
++        echo "Would run podman $resourceType rm -f $1"
++      else
++        ${config.services.podman.package}/bin/podman stop "$1"
++        ${config.services.podman.package}/bin/podman $resourceType rm -f "$1"
++      fi
++    }
++
++    function removeNetwork {
++      echo "Removing orphaned network: $1"
++      if [[ -n "''${DRY_RUN:-}" ]]; then
++        echo "Would run podman network rm $1"
++      else
++        if ! ${config.services.podman.package}/bin/podman network rm "$1"; then
++          echo "Failed to remove network $1. Is it still in use by a container?"
++          return 1
++        fi
++      fi
++    }
++
++    function cleanup {
++      local resourceType=$1
++      local manifestFile="${config.xdg.configHome}/podman/$2"
++      local extraListCommands="''${3:-}"
++      [[ $resourceType = "container" ]] && extraListCommands+=" -a"
++
++      VERBOSE_ENABLED && echo "Cleaning up ''${resourceType}s not in manifest..."
++
++      loadManifest "$manifestFile"
++
++      formatString="{{.Name}}"
++      [[ $resourceType = "container" ]] && formatString="{{.Names}}"
++
++      # Capture the output of the podman command to a variable
++      local listOutput=$(${config.services.podman.package}/bin/podman $resourceType ls $extraListCommands --filter 'label=nix.home-manager.managed=true' --format "$formatString")
++
++      IFS=$'\n' read -r -d "" -a podmanResources <<< "$listOutput" || true
++
++      # Check if the array is populated and iterate over it
++      if [ ''${#resourceManifest[@]} -eq 0 ]; then
++        VERBOSE_ENABLED && echo "No ''${resourceType}s available to process."
++      else
++        for resource in "''${podmanResources[@]}"; do
++            if ! isResourceInManifest "$resource"; then
++
++              [[ $resourceType = "container" ]] && removeContainer "$resource"
++              [[ $resourceType = "network" ]] && removeNetwork "$resource"
++
++            else
++              if VERBOSE_ENABLED; then
++                echo "Keeping managed $resourceType: $resource"
++              fi
++            fi
++          done
++      fi
++    }
++
++    # Cleanup containers
++    cleanup "container" "containers.manifest"
++
++    # Cleanup networks
++    cleanup "network" "networks.manifest"
++  '';
++
++  # derivation to build a single Podman quadlet, outputting its systemd unit files
++  buildPodmanQuadlet = quadlet:
++    pkgs.stdenv.mkDerivation {
++      name = "home-${quadlet.unitType}-${quadlet.serviceName}";
++
++      buildInputs = [ config.services.podman.package ];
++
++      dontUnpack = true;
++
++      buildPhase = ''
++        mkdir $out
++        # Directory for the quadlet file
++        mkdir -p $out/quadlets
++        # Directory for systemd unit files
++        mkdir -p $out/units
++
++        # Write the quadlet file
++        echo -n "${quadlet.source}" > $out/quadlets/${quadlet.serviceName}.${quadlet.unitType}
++
++        # Generate systemd unit file/s from the quadlet file
++        export QUADLET_UNIT_DIRS=$out/quadlets
++        ${config.services.podman.package}/lib/systemd/user-generators/podman-user-generator $out/units
++      '';
++
++      passthru = {
++        outPath = self.out;
++        quadletData = quadlet;
++      };
++    };
++
++  # Create a derivation for each quadlet spec
++  builtQuadlets =
++    map buildPodmanQuadlet config.internal.podman-quadlet-definitions;
++
++  accumulateUnitFiles = prefix: path: quadlet:
++    let
++      entries = builtins.readDir path;
++      processEntry = name: type:
++        let
++          newPath = "${path}/${name}";
++          newPrefix = prefix + (if prefix == "" then "" else "/") + name;
++        in if type == "directory" then
++          accumulateUnitFiles newPrefix newPath quadlet
++        else [{
++          key = newPrefix;
++          value = {
++            path = newPath;
++            parentQuadlet = quadlet;
++          };
++        }];
++    in flatten
++    (map (name: processEntry name (getAttr name entries)) (attrNames entries));
++
++  allUnitFiles = concatMap (builtQuadlet:
++    accumulateUnitFiles "" "${builtQuadlet.outPath}/units"
++    builtQuadlet.quadletData) builtQuadlets;
++
++  # we're doing this because the home-manager recursive file linking implementation can't
++  # merge from multiple sources. so we link each file explicitly, which is fine for all unique files
++  generateSystemdFileLinks = files:
++    listToAttrs (map (unitFile: {
++      name = "${config.xdg.configHome}/systemd/user/${unitFile.key}";
++      value = { source = unitFile.value.path; };
++    }) files);
++
++in {
++  imports = [ ./options.nix ];
++
++  config = {
++    home.file = generateSystemdFileLinks allUnitFiles;
++
++    # if the length of builtQuadlets is 0, then we don't need register the activation script
++    home.activation.podmanQuadletCleanup =
++      lib.mkIf (lib.length builtQuadlets >= 1)
++      (lib.hm.dag.entryAfter [ "reloadSystemd" ]
++        quadletActivationCleanupScript);
++  };
++}
+diff --git a/modules/services/podman-linux/networks.nix b/modules/services/podman-linux/networks.nix
+new file mode 100644
+index 00000000..1b80ce63
+--- /dev/null
++++ b/modules/services/podman-linux/networks.nix
+@@ -0,0 +1,60 @@
++{ config, lib, pkgs, ... }:
++
++with lib;
++
++let
++  podman-lib = import ./podman-lib.nix { inherit lib; };
++
++  createQuadletSource = name: networkDef: ''
++    # Automatically generated by home-manager for podman network configuration
++    # DO NOT EDIT THIS FILE DIRECTLY
++    [Network]
++    Label=nix.home-manager.managed=true
++    NetworkName=${name}
++    ${podman-lib.formatExtraConfig networkDef}
++
++    [Install]
++    WantedBy=multi-user.target default.target
++
++    [Service]
++    Environment="PATH=${pkgs.su}:${pkgs.shadow}:${pkgs.coreutils}"
++    RemainAfterExit=yes
++  '';
++
++  toQuadletInternal = name: networkDef: {
++    serviceName =
++      "podman-${name}"; # becomes podman-<netname>-network.service because of quadlet
++    source = createQuadletSource name networkDef;
++    unitType = "network";
++  };
++
++in {
++  options = {
++    services.podman.networks = mkOption {
++      type = types.attrsOf (podman-lib.primitiveAttrs);
++      default = { };
++      example = literalMD ''
++        ```
++        {
++          mynetwork = {
++            Subnet = "192.168.1.0/24";
++            Gateway = "192.168.1.1";
++          };
++        }
++        ```
++      '';
++      description = "Defines Podman network quadlet configurations.";
++    };
++  };
++
++  config = let
++    networkQuadlets =
++      mapAttrsToList toQuadletInternal config.services.podman.networks;
++  in {
++    internal.podman-quadlet-definitions = networkQuadlets;
++
++    # manifest file
++    home.file."${config.xdg.configHome}/podman/networks.manifest".text =
++      podman-lib.generateManifestText networkQuadlets;
++  };
++}
+diff --git a/modules/services/podman-linux/options.nix b/modules/services/podman-linux/options.nix
+new file mode 100644
+index 00000000..22075170
+--- /dev/null
++++ b/modules/services/podman-linux/options.nix
+@@ -0,0 +1,42 @@
++{ lib, pkgs, ... }:
++
++let
++  # Define the systemd service type
++  quadletInternalType = lib.types.submodule {
++    options = {
++      serviceName = lib.mkOption {
++        type = lib.types.str;
++        description = "The name of the systemd service.";
++      };
++
++      unitType = lib.mkOption {
++        type = lib.types.str;
++        default = "";
++        description = "The type of the systemd unit.";
++      };
++
++      source = lib.mkOption {
++        type = lib.types.str;
++        description = "The quadlet source file content.";
++      };
++
++      assertions = lib.mkOption {
++        type = with lib.types; listOf unspecified;
++        default = [ ];
++        description = "List of Nix type assertions.";
++      };
++    };
++  };
++in {
++  options.internal.podman-quadlet-definitions = lib.mkOption {
++    type = lib.types.listOf quadletInternalType;
++    default = { };
++    description = "List of quadlet source file content and service names.";
++  };
++
++  options.services.podman.package = lib.mkOption {
++    type = lib.types.package;
++    default = pkgs.podman;
++    description = "The podman package to use.";
++  };
++}
+diff --git a/modules/services/podman-linux/podman-lib.nix b/modules/services/podman-linux/podman-lib.nix
+new file mode 100644
+index 00000000..8af36cad
+--- /dev/null
++++ b/modules/services/podman-linux/podman-lib.nix
+@@ -0,0 +1,81 @@
++{ lib, ... }:
++
++with lib;
++
++let
++  primitive = with types; nullOr (oneOf [ bool int str path ]);
++  primitiveAttrs = with types; attrsOf (either primitive (listOf primitive));
++
++  formatPrimitiveValue = value:
++    if isBool value then
++      (if value then "true" else "false")
++    else if isList value then
++      concatStringsSep " " (map toString value)
++    else
++      toString value;
++in {
++  inherit primitive;
++  inherit primitiveAttrs;
++  inherit formatPrimitiveValue;
++
++  serviceConfigTypeRules = {
++    Restart = types.enum [ "no" "always" "on-failure" "unless-stopped" ];
++    TimeoutStopSec = types.int;
++  };
++  serviceConfigDefaults = {
++    Restart = "always";
++    TimeoutStopSec = 30;
++    ExecStartPre = null;
++  };
++  serviceConfigType = with types; attrsOf (either primitive (listOf primitive));
++
++  unitConfigTypeRules = { After = with types; nullOr (listOf str); };
++  unitConfigDefaults = { After = null; };
++  unitConfigType = with types; attrsOf (either primitive (listOf primitive));
++
++  assertConfigTypes = configTypeRules: config: containerName:
++    lib.flatten (lib.mapAttrsToList (name: value:
++      if lib.hasAttr name configTypeRules then [{
++        assertion = configTypeRules.${name}.check value;
++        message = "in '${containerName}' config. ${name}: '${
++            toString value
++          }' does not match expected type: ${
++            configTypeRules.${name}.description
++          }";
++      }] else
++        [ ]) config);
++
++  formatExtraConfig = extraConfig:
++    let
++      nonNullConfig = lib.filterAttrs (name: value: value != null) extraConfig;
++    in concatStringsSep "\n"
++    (mapAttrsToList (name: value: "${name}=${formatPrimitiveValue value}")
++      nonNullConfig);
++
++  # input is expecting a list of quadletInternalType with all the same unitType
++  generateManifestText = quadlets:
++    let
++      # create a list of all unique quadlet.unitTypes in quadlets
++      quadletTypes = unique (map (quadlet: quadlet.unitType) quadlets);
++      # if quadletTypes is > 1, then all quadlets are not the same type
++      allQuadletsSameType = length quadletTypes <= 1;
++
++      # ensures the service name is formatted correctly to be easily read by the activation script and matches `podman <resource> ls` output
++      formatServiceName = quadlet:
++        let
++          # remove the podman- prefix from the service name string
++          strippedName =
++            builtins.replaceStrings [ "podman-" ] [ "" ] quadlet.serviceName;
++          # specific logic for writing the unit name goes here. It should be identical to what `podman <resource> ls` shows
++        in {
++          "container" = strippedName;
++          "network" = strippedName;
++        }."${quadlet.unitType}";
++    in if allQuadletsSameType then ''
++      ${concatStringsSep "\n"
++      (map (quadlet: formatServiceName quadlet) quadlets)}
++    '' else
++      abort ''
++        All quadlets must be of the same type.
++        Quadlet types in this manifest: ${concatStringsSep ", " quadletTypes}'';
++}
+diff --git a/modules/services/podman-linux/services.nix b/modules/services/podman-linux/services.nix
+new file mode 100644
+index 00000000..db76683c
+--- /dev/null
++++ b/modules/services/podman-linux/services.nix
+@@ -0,0 +1,56 @@
++{ config, lib, pkgs, ... }:
++
++with lib;
++
++let cfg = config.services.podman;
++in {
++  options.services.podman = {
++
++    auto-update = {
++      enable = mkOption {
++        type = types.bool;
++        default = false;
++        description = "Automatically update the podman images.";
++      };
++
++      OnCalendar = mkOption {
++        type = types.str;
++        default = "Sun *-*-* 00:00";
++        description = "Systemd OnCalendar expression for the update";
++      };
++    };
++
++  };
++
++  config = mkMerge [
++    (mkIf cfg.auto-update.enable {
++      systemd.user.services."podman-auto-update" = {
++        Unit = {
++          Description = "Podman auto-update service";
++          Documentation = "man:podman-auto-update(1)";
++          Wants = [ "network-online.target" ];
++          After = [ "network-online.target" ];
++        };
++        Service = {
++          Type = "oneshot";
++          Environment =
++            "PATH=/run/wrappers/bin:/run/current-system/sw/bin:${config.home.homeDirectory}/.nix-profile/bin";
++          ExecStart = "${pkgs.podman}/bin/podman auto-update";
++          ExecStartPost = "${pkgs.podman}/bin/podman image prune -f";
++          TimeoutStartSec = "300s";
++          TimeoutStopSec = "10s";
++        };
++      };
++
++      systemd.user.timers."podman-auto-update" = {
++        Unit = { Description = "Podman auto-update timer"; };
++        Timer = {
++          OnCalendar = cfg.auto-update.OnCalendar;
++          RandomizedDelaySec = 300;
++          Persistent = true;
++        };
++        Install = { WantedBy = [ "timers.target" ]; };
++      };
++    })
++  ];
++}
+diff --git a/tests/default.nix b/tests/default.nix
+index 1c143716..b93436d6 100644
+--- a/tests/default.nix
++++ b/tests/default.nix
+@@ -263,6 +263,7 @@ in import nmtSrc {
+     ./modules/services/pbgopy
+     ./modules/services/picom
+     ./modules/services/playerctld
++    ./modules/services/podman-linux
+     ./modules/services/polybar
+     ./modules/services/recoll
+     ./modules/services/redshift-gammastep
+diff --git a/tests/modules/services/podman-linux/container.nix b/tests/modules/services/podman-linux/container.nix
+new file mode 100644
+index 00000000..8b4f7418
+--- /dev/null
++++ b/tests/modules/services/podman-linux/container.nix
+@@ -0,0 +1,70 @@
++{ ... }:
++
++{
++  config = {
++    services.podman.containers."my-container" = {
++      serviceName = "a-test-container";
++      description = "home-manager test";
++      autoupdate = "registry";
++      autostart = true;
++      image = "docker.io/alpine:latest";
++      entrypoint = "sleep 1000";
++      environment = {
++        "VAL_A" = "A";
++        "VAL_B" = 2;
++        "VAL_C" = false;
++      };
++      ports = [ "8080:80" ];
++      volumes = [ "/tmp:/tmp" ];
++      devices = [ "/dev/null:/dev/null" ];
++
++      networks = [ "mynet" ];
++      networkAlias = "test-alias";
++
++      extraOptions = [ "--security-opt=no-new-privileges" ];
++      extraContainerConfig = { ReadOnlyTmpfs = true; };
++      serviceConfig = { Restart = "on-failure"; };
++      unitConfig = { Before = [ "fake.target" ]; };
++    };
++
++    nmt.script = ''
++      configPath=home-files/.config/systemd/user
++      assertFileExists $configPath/a-test-container.service
++
++      assertFileContains $configPath/a-test-container.service \
++        "a-test-container.container"
++      assertFileContains $configPath/a-test-container.service \
++        "Description=home-manager test"
++      assertFileContains $configPath/a-test-container.service \
++        "AutoUpdate=registry"
++      assertFileContains $configPath/a-test-container.service \
++        "Image=docker.io/alpine:latest"
++      assertFileContains $configPath/a-test-container.service \
++        "PodmanArgs=--network-alias test-alias --entrypoint sleep 1000 --security-opt=no-new-privileges"
++      assertFileContains $configPath/a-test-container.service \
++        "Environment=VAL_A=A VAL_B=2 VAL_C=false"
++      assertFileContains $configPath/a-test-container.service \
++        "PublishPort=8080:80"
++      assertFileContains $configPath/a-test-container.service \
++        "Volume=/tmp:/tmp"
++      assertFileContains $configPath/a-test-container.service \
++        "AddDevice=/dev/null:/dev/null"
++      assertFileContains $configPath/a-test-container.service \
++        "Network=mynet"
++      assertFileContains $configPath/a-test-container.service \
++        "Requires=podman-mynet-network.service"
++      assertFileContains $configPath/a-test-container.service \
++        "After=network.target podman-mynet-network.service"
++      assertFileContains $configPath/a-test-container.service \
++        "ReadOnlyTmpfs=true"
++      assertFileContains $configPath/a-test-container.service \
++        "Restart=on-failure"
++      assertFileContains $configPath/a-test-container.service \
++        "Before=fake.target"
++      assertFileContains $configPath/a-test-container.service \
++        "WantedBy=multi-user.target default.target"
++      assertFileContains $configPath/a-test-container.service \
++        "Label=nix.home-manager.managed=true"
++    '';
++  };
++}
+diff --git a/tests/modules/services/podman-linux/default.nix b/tests/modules/services/podman-linux/default.nix
+new file mode 100644
+index 00000000..c8b12bbd
+--- /dev/null
++++ b/tests/modules/services/podman-linux/default.nix
+@@ -0,0 +1,5 @@
++{
++  podman-container = ./container.nix;
++  podman-network = ./network.nix;
++  podman-state-manifest = ./manifest.nix;
++}
+diff --git a/tests/modules/services/podman-linux/manifest.nix b/tests/modules/services/podman-linux/manifest.nix
+new file mode 100644
+index 00000000..00702759
+--- /dev/null
++++ b/tests/modules/services/podman-linux/manifest.nix
+@@ -0,0 +1,63 @@
++{ pkgs, ... }:
++
++{
++  config = {
++    services.podman.containers."my-container-1" = {
++      description = "home-manager test";
++      autoupdate = "registry";
++      autostart = true;
++      image = "docker.io/alpine:latest";
++      entrypoint = "sleep 1000";
++      environment = {
++        "VAL_A" = "A";
++        "VAL_B" = 2;
++        "VAL_C" = false;
++      };
++    };
++
++    services.podman.containers."my-container-2" = {
++      description = "home-manager test";
++      autoupdate = "registry";
++      autostart = true;
++      image = "docker.io/alpine:latest";
++      entrypoint = "sleep 1000";
++      environment = {
++        "VAL_A" = "B";
++        "VAL_B" = 3;
++        "VAL_C" = true;
++      };
++    };
++
++    services.podman.networks."mynet-1" = {
++      Subnet = "192.168.1.0/24";
++      Gateway = "192.168.1.1";
++    };
++    services.podman.networks."mynet-2" = {
++      Subnet = "192.168.2.0/24";
++      Gateway = "192.168.2.1";
++    };
++
++    nmt.script = ''
++      configPath=home-files/.config/podman
++      containerManifest=$configPath/containers.manifest
++      networkManifest=$configPath/networks.manifest
++
++      assertFileExists $containerManifest
++      assertFileExists $networkManifest
++
++      assertFileContent $containerManifest ${
++        pkgs.writeText "containers.expected" ''
++          my-container-1
++          my-container-2
++        ''
++      }
++
++      assertFileContent $networkManifest ${
++        pkgs.writeText "containers.expected" ''
++          mynet-1
++          mynet-2
++        ''
++      }
++    '';
++  };
++}
+diff --git a/tests/modules/services/podman-linux/network.nix b/tests/modules/services/podman-linux/network.nix
+new file mode 100644
+index 00000000..c506c014
+--- /dev/null
++++ b/tests/modules/services/podman-linux/network.nix
+@@ -0,0 +1,29 @@
++{ ... }:
++
++{
++  config = {
++    services.podman.networks."mynet" = {
++      Subnet = "192.168.1.0/24";
++      Gateway = "192.168.1.1";
++    };
++
++    nmt.script = ''
++      configPath=home-files/.config/systemd/user
++      networkFile=$configPath/podman-mynet-network.service
++      assertFileExists $networkFile
++
++      assertFileContains $networkFile \
++        "Subnet=192.168.1.0/24"
++      assertFileContains $networkFile \
++        "Gateway=192.168.1.1"
++      assertFileContains $networkFile \
++        "NetworkName=mynet"
++      assertFileContains $networkFile \
++        "WantedBy=multi-user.target default.target"
++      assertFileContains $networkFile \
++        "RemainAfterExit=yes"
++      assertFileContains $networkFile \
++        "Label=nix.home-manager.managed=true"
++    '';
++  };
++}
+-- 
+2.46.0
+

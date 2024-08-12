@@ -5,6 +5,7 @@
     ./services/gpg-agent.nix
     ./services/kubo.nix
     ./services/nix-web.nix
+    ./services/podman.nix
     ./services/pueue.nix
   ];
 
