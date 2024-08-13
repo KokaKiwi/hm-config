@@ -1,4 +1,9 @@
-{ pkgs, lib, super, sources, importSub }:
+{ pkgs, super, lib
+
+, sources
+
+, importSub
+}:
 let
   adapters = import ./stdenv/adapters.nix {
     inherit pkgs;
