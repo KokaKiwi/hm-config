@@ -20,13 +20,13 @@ let
     bun = let
       bun = pkgs.bun;
     in bun.overrideAttrs (self: super: {
-      version = "1.1.22";
+      version = "1.1.24";
 
       buildInputs = [ ];
 
       src = pkgs.fetchurl {
         url = "https://github.com/oven-sh/bun/releases/download/bun-v${self.version}/bun-linux-x64.zip";
-        hash = "sha256-sKhv4Bz4r17sShUaaV1X6uxQWMoyxKWEO8R4RBrqiUg=";
+        hash = "sha256-9HiIBnjPKC/dpGzJ1Y4goN3h+tjJz+4Sjq1DmWRT4cg=";
       };
     });
     cool-retro-term = opengl.wrapPackage pkgs.cool-retro-term;
