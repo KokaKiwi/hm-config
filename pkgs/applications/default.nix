@@ -51,6 +51,10 @@ in {
   minio-client = callPackage ./tools/networking/minio-client { };
   module-server = callPackage ./module-server { };
   mux = callPackage ./mux { };
+  nix-init = callPackage ./tools/nix/nix-init {
+    # nix-init needs libgit2 <1.8.0
+    libgit2 = pkgs.libgit2;
+  };
   nix-update = callPackage ./tools/package-management/nix-update {
     nixfmt = pkgs.nixfmt-rfc-style;
   };
