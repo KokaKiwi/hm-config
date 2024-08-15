@@ -20,9 +20,9 @@
         "repo": "nix"
       },
       "branch": "main",
-      "revision": "66f4ea170093b62f319f41cebd2337a51b225c5a",
-      "url": "https://github.com/catppuccin/nix/archive/66f4ea170093b62f319f41cebd2337a51b225c5a.tar.gz",
-      "hash": "1w3ai7q47ryk5dqhjk78alvxqmrsxw6ygbcjqhnlvp2hlmq4akmw"
+      "revision": "552056779a136092eb6358c573d925630172fc30",
+      "url": "https://github.com/catppuccin/nix/archive/552056779a136092eb6358c573d925630172fc30.tar.gz",
+      "hash": "0j9y9vpmf2vj8vy5qi6kllmxm5djasjs3q5yx7valsjcf6y5avhp"
     },
     "crane": {
       "type": "GitRelease",
@@ -59,9 +59,9 @@
         "repo": "fenix"
       },
       "branch": "main",
-      "revision": "7bad6c7ff73b784a9c7de9147626c8d5d5072809",
-      "url": "https://github.com/nix-community/fenix/archive/7bad6c7ff73b784a9c7de9147626c8d5d5072809.tar.gz",
-      "hash": "1ijw758b8pgpykn6kzvq6bg4ff9y3fqcyvl8kccmrk0285ydhccc"
+      "revision": "6e4233dc54850e8aff6eff401400e9a9343881eb",
+      "url": "https://github.com/nix-community/fenix/archive/6e4233dc54850e8aff6eff401400e9a9343881eb.tar.gz",
+      "hash": "1x9gi27jqxn4vah4hsbf99jm0g384nclc96hl0vra7nifz96ms7d"
     },
     "home-manager": {
       "type": "Git",
