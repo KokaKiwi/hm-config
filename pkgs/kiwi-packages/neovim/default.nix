@@ -18,13 +18,13 @@ let
   lua = luajit.override {
     inherit stdenv;
 
-    version = "2.1.1720049189";
+    version = "2.1.1723675123";
 
     src = fetchFromGitHub {
       owner = "LuaJIT";
       repo = "LuaJIT";
-      rev = "04dca7911ea255f37be799c18d74c305b921c1a6";
-      hash = "sha256-IvkOwyKXUqo++A0XalCKuS0uLj5PlTOUQX1qXDP6JBk=";
+      rev = "ae4735f621d89d84758769b76432d2319dda9827";
+      hash = "sha256-V3MtsHE6UwtR3EkOmEUtpJ3DGq1XnvKU0LCe7CwwM/Y=";
     };
   };
   rustPlatform = makeRustPlatform {
@@ -52,8 +52,8 @@ in (neovim-unwrapped.override {
   src = fetchFromGitHub {
     owner = "neovim";
     repo = "neovim";
-    rev = "40bc48479dca0d4a02c6445ceccab700847dcbe9";
-    hash = "sha256-88sQQl055+h9UbD0fRNKzGjT7uvoPf5lV2Q+0dnh0XE=";
+    rev = "fd65422b99c7cc69e5053a852244cfc9d46d7b65";
+    hash = "sha256-e7QFAYeZSjhQ1H0mk2awv2KcXlsepzXki3uYEUBXZ8Q=";
   };
 
   inherit tree-sitter;
