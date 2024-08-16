@@ -27,6 +27,7 @@ in {
   cargo-udeps = callPackage ./development/tools/rust/cargo-udeps { };
   catppuccin-cursors = callPackage ./catppuccin-cursors { };
   colmena = callPackage ./colmena { };
+  delta = callPackage ./version-management/delta { };
   docker-credential-helpers = callPackage ./docker-credential-helpers { };
   doggo = callPackage ./networking/doggo { };
   du-dust = pkgs.dust;
