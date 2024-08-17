@@ -1,7 +1,6 @@
 { config, ... }:
 {
-  services.podman = {
-  };
+  services.podman = { };
 
   home.packages = [
     config.services.podman.package
