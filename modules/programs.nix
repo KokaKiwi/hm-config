@@ -10,7 +10,6 @@
     ./programs/gdb.nix
     ./programs/gh.nix
     ./programs/git.nix
-    ./programs/glances.nix
     ./programs/gpg.nix
     ./programs/hyfetch.nix
     ./programs/kde.nix
