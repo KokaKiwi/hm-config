@@ -22,6 +22,7 @@
 , libunistring
 , libxkbcommon
 , ncurses
+, nerdfonts
 , openssl
 , simde
 , sudo
@@ -33,22 +34,28 @@
 }:
 let
   inherit (python3Packages) python;
+
+  nerdfonts-kitty = nerdfonts.override {
+    fonts = [
+      "NerdFontsSymbolsOnly"
+    ];
+  };
 in python3Packages.buildPythonApplication rec {
   pname = "kitty";
-  version = "0.35.2";
+  version = "0.36.0";
   format = "other";
 
   src = fetchFromGitHub {
     owner = "kovidgoyal";
     repo = "kitty";
     rev = "refs/tags/v${version}";
-    hash = "sha256-5ZkQfGlW7MWYCJZSwK/u8x9jKrZEqupsNvW30DLipDM=";
+    hash = "sha256-gskGd+JKo3J9LFnV+xGZn8gBUsSZzPFmizmIxhZEOuc=";
   };
 
   goModules = (buildGo122Module {
     pname = "kitty-go-modules";
     inherit src version;
-    vendorHash = "sha256-NzDA9b3RAfMx+Jj7cSF8pEsKUkoBECBUXl2QFSmkmwM=";
+    vendorHash = "sha256-YN4sSdDNDIVgtcykg60H0bZEryRHJJfZ5rXWUMYXGr4=";
   }).goModules;
 
   buildInputs = [
@@ -75,7 +82,10 @@ in python3Packages.buildPythonApplication rec {
 
   nativeBuildInputs = [
     installShellFiles
+
+    fontconfig.bin
     ncurses
+    nerdfonts-kitty
     pkg-config
     go_1_22
   ] ++ (with python3Packages; [
