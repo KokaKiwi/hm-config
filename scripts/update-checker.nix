@@ -11,7 +11,7 @@ let
     "hub"
     # My own packages
     "cargo-shell" "mux" "xinspect"
-    "doll"
+    "doll" "szurubooru-cli"
     # Unstable packages
     "glances"
     # Haskell stuff
