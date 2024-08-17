@@ -39,6 +39,15 @@
       hash = "sha256-5xav3ak1EQfFTvT2/T/SlWj1NSmvszO0lYGDudMG5Eo=";
     };
   });
+  unearth = python3Packages.unearth.overridePythonAttrs (super: rec {
+    version = "0.17.0";
+
+    src = fetchPypi {
+      inherit (super) pname;
+      inherit version;
+      hash = "sha256-dxyicP7IvqJid0oLHOJ1JzkFbmUjRDQCjs6vRmy7oLY=";
+    };
+  });
 in python3Packages.buildPythonApplication rec {
   pname = "pdm";
   version = "2.18.1";
