@@ -10,9 +10,7 @@ in {
   };
   bitwarden-cli = callPackage ./bitwarden-cli { };
   cargo-about = callPackage ./development/tools/cargo-about { };
-  cargo-c-next = callPackage ./development/tools/rust/cargo-c {
-    rustPlatform = pkgs.fenixStableRustPlatform;
-  };
+  cargo-c-next = callPackage ./development/tools/rust/cargo-c { };
   cargo-deny = callPackage ./cargo-deny { };
   cargo-depgraph = callPackage ./cargo-depgraph { };
   cargo-expand = callPackage ./development/tools/rust/cargo-expand { };
@@ -52,10 +50,6 @@ in {
   minio-client = callPackage ./tools/networking/minio-client { };
   module-server = callPackage ./module-server { };
   mux = callPackage ./mux { };
-  nix-init = callPackage ./tools/nix/nix-init {
-    # nix-init needs libgit2 <1.8.0
-    libgit2 = pkgs.libgit2;
-  };
   nix-update = callPackage ./tools/package-management/nix-update {
     nixfmt = pkgs.nixfmt-rfc-style;
   };

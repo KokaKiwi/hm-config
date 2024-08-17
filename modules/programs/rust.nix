@@ -3,7 +3,7 @@ let
   llvmPackages = pkgs.llvmPackages_latest;
 
   mkStablePackage = drv: drv.override {
-    rustPlatform = pkgs.fenixStableRustPlatform;
+    inherit (pkgs.rustTools.rust) rustPlatform;
   };
 
   cargoPlugins = [

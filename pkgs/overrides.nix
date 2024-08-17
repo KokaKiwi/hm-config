@@ -1,5 +1,9 @@
 { pkgs, super }:
-{
+let
+  fixRustPackage = drv: drv.override {
+    inherit (pkgs.rustTools.rust_1_79) rustPlatform;
+  };
+in {
   glfw3 = super.glfw3.overrideAttrs (super: with pkgs; {
     postPatch = ''
       substituteInPlace src/wl_init.c \
@@ -17,4 +21,8 @@
       installManPage trash.1
     '';
   };
+
+  cargo-audit = fixRustPackage super.cargo-audit;
+  cargo-outdated = fixRustPackage super.cargo-outdated;
+  silicon = fixRustPackage super.silicon;
 }

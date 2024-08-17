@@ -2,8 +2,7 @@
 
 , fetchFromGitHub
 
-, fenixStableToolchain
-, makeRustPlatform
+, rustTools
 , writeText
 
 , luajit
@@ -27,12 +26,6 @@ let
       hash = "sha256-V3MtsHE6UwtR3EkOmEUtpJ3DGq1XnvKU0LCe7CwwM/Y=";
     };
   };
-  rustPlatform = makeRustPlatform {
-    rustc = fenixStableToolchain;
-    cargo = fenixStableToolchain;
-
-    inherit stdenv;
-  };
 
   cmakeGenerateVersion = writeText "GenerateVersion.cmake" ''
     if (NOT EXISTS ''${OUTPUT})
@@ -41,7 +34,7 @@ let
   '';
 
   tree-sitter = callPackage ./deps/tree-sitter.nix {
-    inherit rustPlatform;
+    inherit (rustTools.rust) rustPlatform;
   };
 in (neovim-unwrapped.override {
   inherit stdenv;

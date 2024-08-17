@@ -9,7 +9,7 @@ in {
   programs.bat = {
     enable = true;
     package = pkgs.bat.override {
-      rustPlatform = pkgs.fenixStableRustPlatform;
+      inherit (pkgs.rustTools.rust) rustPlatform;
     };
 
     config = {

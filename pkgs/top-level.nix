@@ -9,22 +9,6 @@ let
     inherit pkgs;
   };
 
-  makeRustPlatform = rustToolchain: pkgs.makeRustPlatform {
-    rustc = rustToolchain;
-    cargo = rustToolchain;
-  };
-
-  fenixStableToolchain = with pkgs.fenix; let
-    toolchain = toolchainOf {
-      channel = "1.80.0";
-      sha256 = "sha256-6eN/GKzjVSjEhGO9FhWObkRFaE1Jf+uqMSdQnb8lcB4=";
-    };
-  in combine [
-    toolchain.rustc
-    toolchain.cargo
-  ];
-  fenixStableRustPlatform = makeRustPlatform fenixStableToolchain;
-
   mkLLVMStdenv = llvmPackages: lib.pipe llvmPackages.stdenv [
     (adapters.overrideBintools llvmPackages.bintools)
     adapters.useLLDLinker
@@ -33,6 +17,7 @@ in {
   lib = super.lib // (importSub ./lib { });
 
   kiwiPackages = importSub ./kiwi-packages { };
+  rustTools = importSub ./rust.nix { };
 
   stdenv-adapters = adapters;
   inherit mkLLVMStdenv;
@@ -41,12 +26,11 @@ in {
   fenix = import sources.fenix {
     inherit pkgs lib;
   };
-  inherit fenixStableToolchain fenixStableRustPlatform;
 
   craneLib = import sources.crane {
     pkgs = super;
   };
-  craneLibStable = pkgs.craneLib.overrideToolchain fenixStableToolchain;
+  craneLibStable = pkgs.craneLib.overrideToolchain pkgs.rustTools.rust.rustPlatorm;
 
   nixgl = import sources.nixgl {
     inherit pkgs;
