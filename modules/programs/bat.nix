@@ -1,6 +1,10 @@
 { pkgs, lib, ... }:
 let
   mapSyntax = lib.mapAttrsToList (name: value: "${name}:${value}");
+
+  batdiff = pkgs.bat-extras.batdiff.overrideAttrs (super: {
+    doCheck = false;
+  });
 in {
   programs.bat = {
     enable = true;
@@ -26,7 +30,7 @@ in {
 
     extraPackages = with pkgs.bat-extras; [
       (pkgs.wrapProgramBin "batdiff" {
-        program = lib.getExe batdiff;
+        program = "${batdiff}/bin/batdiff";
         args = [
           "--set" "BATDIFF_USE_DELTA" "true"
         ];
