@@ -9,6 +9,7 @@ let
   updateChecker = import ./scripts/update-checker.nix (env // {
     inherit doWarn;
   });
+  duplicateChecker = import ./scripts/duplicate-checker.nix env;
 in pkgs.mkShell {
    packages = with pkgs; [
      git
@@ -45,6 +46,10 @@ in pkgs.mkShell {
 
     checkUpdates() {
       ${updateChecker}
+    }
+
+    checkDuplicate() {
+      ${duplicateChecker}
     }
   '';
 }

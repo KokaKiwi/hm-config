@@ -5,6 +5,7 @@ _default:
 _run-shell COMMAND *ARGS:
   nix-shell {{ARGS}} --run '{{COMMAND}}'
 
+run COMMAND *ARGS: (_run-shell COMMAND ARGS)
 init: (_run-shell 'init')
 list-packages: (_run-shell 'listPackages')
 check: (_run-shell 'checkUpdates' '--arg doWarn true')
