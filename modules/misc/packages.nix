@@ -46,7 +46,7 @@ let
       # nix = config.nix.package;
     };
     obsidian = opengl.wrapPackage pkgs.obsidian;
-    stockfish = pkgs.stockfish.override {
+    stockfish = pkgs.kiwiPackages.stockfish.override {
       stdenv = pkgs.llvmStdenv;
       targetArch = "x86-64-bmi2";
     };

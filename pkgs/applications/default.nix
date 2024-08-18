@@ -1,7 +1,8 @@
 { pkgs, sources }:
 let
   inherit (pkgs) libsForQt5;
-  inherit (pkgs.kiwiPackages) callPackage python3Packages;
+  inherit (pkgs.kiwiPackages) python3Packages;
+  callPackage = pkgs.kiwiPackages.callPackageIfNewer;
 in {
   agenix = callPackage "${sources.agenix}/pkgs/agenix.nix" { };
   ast-grep = callPackage ./ast-grep { };
@@ -73,7 +74,6 @@ in {
   sccache = callPackage ./development/tools/sccache { };
   skopeo = callPackage ./skopeo { };
   starship = callPackage ./starship { };
-  stockfish = callPackage ./games/stockfish { };
   szurubooru-cli = callPackage ./misc/booru-cli { };
   taplo = callPackage ./development/tools/taplo { };
   trunk = callPackage ./development/tools/trunk { };
