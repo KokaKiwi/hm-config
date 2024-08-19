@@ -115,6 +115,11 @@ in pkgs.nur.repos.kokakiwi.lib.mkUpdateChecker {
       use_max_tag = true;
       prefix = "v";
     };
+    npins = {
+      source = "github";
+      github = "andir/npins";
+      use_max_tag = true;
+    };
   };
   overrides = {
     aura.exclude_regex = "^$";
