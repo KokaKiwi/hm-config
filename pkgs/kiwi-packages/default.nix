@@ -9,11 +9,13 @@ rec {
   in if drv == null || lib.versionOlder drv.version drv'.version
   then drv' // {
     isLocal = true;
+    local = drv';
     remote = drv;
   }
   else drv // {
     isLocal = false;
     local = drv';
+    remote = drv;
   };
 
   python3 = pkgs.python312;
