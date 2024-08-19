@@ -27,14 +27,14 @@
 }:
 buildPythonPackage rec {
   pname = "yt-dlp";
-  version = "2024.08.01-unstable-2024-08-01";
+  version = "2024.08.06-unstable-2024-08-19";
   pyproject = true;
 
   src = fetchFromGitHub {
     owner = "yt-dlp";
     repo = "yt-dlp";
-    rev = "919540a9644e55deb78cdd6751757ec8fdaf76f4";
-    hash = "sha256-Nb6iZ6aXk7Hzc2VCv5Z5lkfCgnJ/9w4c0AXUTJwi+pY=";
+    rev = "bef1d4d6fc9493fda7f75e2289c07c507d10092f";
+    hash = "sha256-M5QqZQ5jStU8jUef6MmFym1wXHgbXjmpI4MeVfwg7gI=";
   };
 
   build-system = [
