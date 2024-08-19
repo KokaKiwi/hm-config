@@ -15,7 +15,7 @@ rustPlatform.buildRustPackage rec {
     sha256 = "sha256-piNKtmDssDeB+DznLl0uufT5BFiVCMmYGuRmBUr5QWQ=";
   };
 
-  cargoHash = "sha256-sIKan8LnGv4sGVrGOUOKSD3R4fNRu5yBFATm5MWDTSU=";
+  cargoHash = "sha256-UthI01fLC35BPp550LaDLoo1kjisUmQZqSud8JM/kqM=";
 
   meta = with lib; {
     description = "Cargo extension for building Android NDK projects";
