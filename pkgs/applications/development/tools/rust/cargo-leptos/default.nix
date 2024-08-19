@@ -6,16 +6,16 @@
 }:
 rustPlatform.buildRustPackage rec {
   pname = "cargo-leptos";
-  version = "0.2.18";
+  version = "0.2.19";
 
   src = fetchFromGitHub {
     owner = "leptos-rs";
     repo = pname;
     rev = "v${version}";
-    hash = "sha256-53T69yX+yllfZgHyKL6aydCtc2xIKG2f/Xgcb2yopxg=";
+    hash = "sha256-hQ1mGhLPYK4P2qbag/CSpHje7p+MLKwrij1Fti035WU=";
   };
 
-  cargoHash = "sha256-35QUaETifNitnIjaHRyZFdzsLRfQsoonHS5/TOkYIgU=";
+  cargoHash = "sha256-c3BwoCdxwETwDv8sZoSihxzO3J9IbLNAgtkYgHosUI0=";
 
   # https://github.com/leptos-rs/cargo-leptos#dependencies
   buildFeatures = [ "no_downloads" ]; # cargo-leptos will try to install missing dependencies on its own otherwise
