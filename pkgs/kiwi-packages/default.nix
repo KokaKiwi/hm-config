@@ -6,16 +6,13 @@ rec {
   callPackageIfNewer = path: args: let
     drv = super.${drv'.pname} or null;
     drv' = callPackage path args;
-  in if drv == null || lib.versionOlder drv.version drv'.version
-  then drv' // {
-    isLocal = true;
+
+    isNewer = drv == null || lib.versionOlder drv.version drv'.version;
+    finalDrv = if isNewer then drv' else drv;
+  in finalDrv // {
     local = drv';
     remote = drv;
-  }
-  else drv // {
-    isLocal = false;
-    local = drv';
-    remote = drv;
+    isLocal = isNewer;
   };
 
   python3 = pkgs.python312;
