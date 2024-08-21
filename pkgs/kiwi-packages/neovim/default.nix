@@ -17,7 +17,7 @@ let
   lua = luajit.override {
     inherit stdenv;
 
-    version = "0-unstable-2024-08-21";
+    version = "2.1.unstable";
 
     src = fetchFromGitHub {
       owner = "LuaJIT";
