@@ -34,6 +34,8 @@ update-package ATTR *ARGS:
   nix-update --commit pkgs.{{ATTR}} {{ARGS}}
 update-home-package ATTR *ARGS:
   nix-update --commit homePackages.{{ATTR}} {{ARGS}}
+update-local-package ATTR *ARGS:
+  nix-update --commit pkgs.{{ATTR}}.local {{ARGS}}
 
 update-neovim: (update-package 'kiwiPackages.neovim' '--version=branch=master')
 
