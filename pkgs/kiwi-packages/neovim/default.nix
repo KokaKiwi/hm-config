@@ -17,13 +17,13 @@ let
   lua = luajit.override {
     inherit stdenv;
 
-    version = "2.1.1724081603";
+    version = "2.1.1724174039";
 
     src = fetchFromGitHub {
       owner = "LuaJIT";
       repo = "LuaJIT";
-      rev = "fb5e1c9f0d449a2b987c2c4b29f6cc811242b0a1";
-      hash = "sha256-wznTPWNBq51VHGI38BoPQ/zXf3YfNxCf5nEiSo5RGgY=";
+      rev = "304da39cc5ee43491f7b1f4e0c9c52d477ce0d98";
+      hash = "sha256-zwkAumd9izV8SW04kEIoWkKbcFbD31277rKYJ8gYKis=";
     };
   };
 
@@ -45,8 +45,8 @@ in (neovim-unwrapped.override {
   src = fetchFromGitHub {
     owner = "neovim";
     repo = "neovim";
-    rev = "41859c2d8c11eeb7eb25bb4b313765b164b2651b";
-    hash = "sha256-qnprPkYRDtKXNC9dFdWFlghYwp9ds40KWdunBurC39s=";
+    rev = "6f7bb02e7f7b8ff8fe4d67a433cd3a2250df7a11";
+    hash = "sha256-iFaqK6SqzhHj/VeLvAIhjuAgM4Q6/wUadT3qDsLX/hM=";
   };
 
   inherit tree-sitter;
