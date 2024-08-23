@@ -1,0 +1,6 @@
+{ ... }:
+{
+  programs.treefmt = {
+    enable = true;
+  };
+}
