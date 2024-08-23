@@ -17,18 +17,6 @@ let
     opengl = config.lib.opengl;
     package = config.lib.package;
   in {
-    bun = let
-      bun = pkgs.bun;
-    in bun.overrideAttrs (self: super: {
-      version = "1.1.25";
-
-      buildInputs = [ ];
-
-      src = pkgs.fetchurl {
-        url = "https://github.com/oven-sh/bun/releases/download/bun-v${self.version}/bun-linux-x64.zip";
-        hash = "sha256-5w/frKlIFjgBEtDJHstoxCPmhmL77xSOukPo7nO5Rsk=";
-      };
-    });
     cool-retro-term = opengl.wrapPackage pkgs.cool-retro-term;
     imhex = let
       package = pkgs.nur.repos.kokakiwi.imhex.override {
@@ -65,6 +53,7 @@ in {
     trashy minisign mkcert doggo
     nix-binutils git-absorb pingu miniserve
     patool nix-prefetch kx-aspe-cli shellcheck
+    bun consul
     nixgl.nixGLIntel
     kiwiPackages.doll
   ]

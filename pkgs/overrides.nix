@@ -4,6 +4,7 @@ let
     inherit (pkgs.rustTools.rust_1_79) rustPlatform;
   };
 in {
+  # Fixed packages
   glfw3 = super.glfw3.overrideAttrs (super: with pkgs; {
     postPatch = ''
       substituteInPlace src/wl_init.c \
@@ -25,4 +26,16 @@ in {
   cargo-audit = fixRustPackage super.cargo-audit;
   cargo-outdated = fixRustPackage super.cargo-outdated;
   silicon = fixRustPackage super.silicon;
+
+  # Udated packages
+  bun = super.bun.overrideAttrs (self: prev: {
+    version = "1.1.25";
+
+    buildInputs = [ ];
+
+    src = pkgs.fetchurl {
+      url = "https://github.com/oven-sh/bun/releases/download/bun-v${self.version}/bun-linux-x64.zip";
+      hash = "sha256-5w/frKlIFjgBEtDJHstoxCPmhmL77xSOukPo7nO5Rsk=";
+    };
+  });
 }
