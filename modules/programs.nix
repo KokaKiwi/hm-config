@@ -30,7 +30,6 @@
     ./programs/starship.nix
     ./programs/taplo.nix
     ./programs/tmux.nix
-    ./programs/treefmt.nix
     ./programs/xh.nix
     ./programs/yazi.nix
   ];

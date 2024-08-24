@@ -47,7 +47,7 @@
     }
     // builtins.listToAttrs (map (name: lib.nameValuePair name sources.channels.${name}) names)
     // {
-      inherit (sources) crane fenix;
+      inherit (sources) crane fenix treefmt;
     };
     keepOldNixPath = false;
 

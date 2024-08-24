@@ -37,7 +37,6 @@
     ./programs/szurubooru-cli.nix
     ./programs/taplo.nix
     ./programs/tmux.nix
-    ./programs/treefmt.nix
     ./programs/xh.nix
 
     ./services/aria2.nix

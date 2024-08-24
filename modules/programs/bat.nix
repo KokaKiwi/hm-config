@@ -31,9 +31,9 @@ in {
     extraPackages = with pkgs.bat-extras; [
       (pkgs.wrapProgramBin "batdiff" {
         program = "${batdiff}/bin/batdiff";
-        args = [
-          "--set" "BATDIFF_USE_DELTA" "true"
-        ];
+        env = {
+          BATDIFF_USE_DELTA = true;
+        };
       })
       batman
     ];
