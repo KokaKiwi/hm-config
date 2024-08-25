@@ -42,14 +42,14 @@ let
   };
 in python3Packages.buildPythonApplication rec {
   pname = "kitty";
-  version = "0.36.0";
+  version = "0.36.1";
   format = "other";
 
   src = fetchFromGitHub {
     owner = "kovidgoyal";
     repo = "kitty";
     rev = "refs/tags/v${version}";
-    hash = "sha256-gskGd+JKo3J9LFnV+xGZn8gBUsSZzPFmizmIxhZEOuc=";
+    hash = "sha256-7+MxxgQQlAje7klfJvvEWe8CfxyN0oTGQJ/QOORFUsY=";
   };
 
   goModules = (buildGo122Module {
