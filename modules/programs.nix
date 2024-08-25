@@ -43,7 +43,6 @@
     glances.enable = true;
     glow.enable = true;
     hub.enable = true;
-    nix-index.enable = true;
     nix-init.enable = true;
     sccache.enable = true;
     szurubooru-cli.enable = true;

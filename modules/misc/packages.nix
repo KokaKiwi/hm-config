@@ -39,6 +39,9 @@ let
       targetArch = "x86-64-bmi2";
     };
     nomad = pkgs.nomad_1_8;
+    nix-update = pkgs.nix-update.override {
+      nix = config.nix.package;
+    };
   };
 in {
   home.packages = with pkgs; [
@@ -46,7 +49,7 @@ in {
     eza hexyl pdm pnpm-lock-export
     cargo-shell opentofu gleam mergerfs
     nix-info nurl nixos-option nixfmt-rfc-style
-    nix-output-monitor nixd nix-update
+    nix-output-monitor nixd
     procs skopeo dust rage
     onefetch tokei ast-grep trunk
     ponysay xinspect
