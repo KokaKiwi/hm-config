@@ -16,18 +16,6 @@
     };
   };
 
-  programs.fastfetch = {
-    enable = true;
-    package = pkgs.fastfetch.override {
-      x11Support = true;
-    };
-    settings = {
-      display = {
-        binaryPrefix = "si";
-      };
-    };
-  };
-
   xdg.configFile."neofetch/config".source = pkgs.substituteAll {
     src = config.lib.files.localConfigPath "neofetch.conf";
 
