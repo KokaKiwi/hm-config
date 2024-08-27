@@ -9,16 +9,16 @@
 let
   final = rustPlatform.buildRustPackage rec {
     pname = "tree-sitter";
-    version = "0.22.6";
+    version = "0.23.0";
 
     src = fetchFromGitHub {
       owner = "tree-sitter";
       repo = "tree-sitter";
       rev = "v${version}";
-      hash = "sha256-jBCKgDlvXwA7Z4GDBJ+aZc52zC+om30DtsZJuHado1s=";
+      hash = "sha256-QNi2u6/jtiMo1dLYoA8Ev1OvZfa8mXCMibSD70J4vVI=";
     };
 
-    cargoHash = "sha256-44FIO0kPso6NxjLwmggsheILba3r9GEhDld2ddt601g=";
+    cargoHash = "sha256-H4baEmGsQx+W9EXblt8R1CTYfkgR+dQDAsIwPVsqR68=";
 
     postPatch = ''
       # remove web interface
