@@ -22,6 +22,7 @@ let
   ] ++ (with pkgs; [
     rust-bindgen
     wasm-tools
+    wit-bindgen
   ]);
 in {
   home.packages = map (pluginName: pkgs."cargo-${pluginName}") cargoPlugins
