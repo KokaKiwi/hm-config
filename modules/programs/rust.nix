@@ -21,6 +21,7 @@ let
     (mkStablePackage pkgs.nur.repos.kokakiwi.streampager)
   ] ++ (with pkgs; [
     rust-bindgen
+    wasm-tools
   ]);
 in {
   home.packages = map (pluginName: pkgs."cargo-${pluginName}") cargoPlugins
