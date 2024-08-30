@@ -11,7 +11,7 @@ let
     "nextest" "expand" "deny" "outdated"
     "show-asm" "msrv" "depgraph" "udeps"
     "ndk" "tarpaulin" "pgrx"
-    "wipe" "sort" "leptos"
+    "wipe" "sort" "leptos" "component"
     "c-next" "make" "audit"
   ];
   extraPackages = [
