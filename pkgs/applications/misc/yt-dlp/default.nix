@@ -25,7 +25,20 @@
 , rtmpSupport ? true
 , withAlias ? false # Provides bin/youtube-dl for backcompat
 }:
-buildPythonPackage rec {
+let
+  websockets' = websockets.overridePythonAttrs rec {
+    version = "13.0.1";
+
+    src = fetchPypi {
+      inherit (websockets) pname;
+      inherit version;
+      hash = "sha256-TW7OZQmUEc/ZpI0TcB10ONnDT0eQRrNMUP9gu4g05D4=";
+    };
+
+    patchPhase = "";
+    doCheck = false;
+  };
+in buildPythonPackage rec {
   pname = "yt-dlp";
   version = "2024.08.06-unstable-2024-08-28";
   pyproject = true;
@@ -49,7 +62,7 @@ buildPythonPackage rec {
     requests
     secretstorage  # "optional", as in not in requirements.txt, needed for `--cookies-from-browser`
     urllib3
-    websockets
+    websockets'
   ];
 
   # Ensure these utilities are available in $PATH:
