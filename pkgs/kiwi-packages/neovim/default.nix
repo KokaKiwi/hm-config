@@ -27,6 +27,17 @@ let
     };
   };
 
+  utf8proc' = utf8proc.overrideAttrs {
+    version = "2.9.0-unstable";
+
+    src = fetchFromGitHub {
+      owner = "JuliaStrings";
+      repo = "utf8proc";
+      rev = "3de4596fbe28956855df2ecb3c11c0bbc3535838";
+      hash = "sha256-DNnrKLwks3hP83K56Yjh9P3cVbivzssblKIx4M/RKqw=";
+    };
+  };
+
   cmakeGenerateVersion = writeText "GenerateVersion.cmake" ''
     if (NOT EXISTS ''${OUTPUT})
       file(WRITE ''${OUTPUT} "")
@@ -64,7 +75,7 @@ in (neovim-unwrapped.override {
 
   nativeBuildInputs = super.nativeBuildInputs ++ [
     libiconv
-    utf8proc
+    utf8proc'
   ];
 
   preConfigure = (super.preConfigure or "") + ''
@@ -73,7 +84,7 @@ in (neovim-unwrapped.override {
       --subst-var-by NVIM_VERSION_PRERELEASE "-${final.version}"
   '';
 
-  cmakeFlagsArray = super.cmakeFlagsArray ++ [
+  cmakeFlags = super.cmakeFlags ++ [
     "-DENABLE_LTO=OFF"
   ];
 
