@@ -35,7 +35,8 @@
       background_opacity = "0.9";
 
       # Advanced
-      editor = "nvim";
+      editor = "${config.programs.neovim.finalPackage}/bin/nvim";
+      shell = "${config.home.shell.package}/bin/fish";
 
       allow_remote_control = "socket-only";
       listen_on = "unix:@kitty";
