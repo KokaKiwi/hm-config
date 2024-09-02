@@ -17,6 +17,7 @@
     ./misc/packages.nix
     ./misc/secrets.nix
     ./misc/systemd.nix
+    ./misc/xdg.nix
 
     ./programs.nix
     ./services.nix
