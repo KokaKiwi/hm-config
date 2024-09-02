@@ -56,8 +56,8 @@ in (neovim-unwrapped.override {
   src = fetchFromGitHub {
     owner = "neovim";
     repo = "neovim";
-    rev = "a8fc799e8bdd62b277de771ad80089dd58fbbeba";
-    hash = "sha256-TAtHTaSt5j6oCJ/zP9PTAAXGiFNli62clM2pzfdNGVE=";
+    rev = "ae9674704ac5586438f60c883e918d448ef0e237";
+    hash = "sha256-tRRSljYBy1GxQGaCvSywtCSJ+OQa6clYilJLMxTe+nM=";
   };
 
   inherit tree-sitter;
