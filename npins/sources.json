@@ -119,9 +119,9 @@
         "repo": "treefmt-nix"
       },
       "branch": "main",
-      "revision": "eebc332d1eeba66c46a3c9b8201cf0068dba892e",
-      "url": "https://github.com/numtide/treefmt-nix/archive/eebc332d1eeba66c46a3c9b8201cf0068dba892e.tar.gz",
-      "hash": "1qdb0vyrqd6rllk9fx8ynwar59fahlynxxaij4k4vdjqpsc49p1m"
+      "revision": "9fb342d14b69aefdf46187f6bb80a4a0d97007cd",
+      "url": "https://github.com/numtide/treefmt-nix/archive/9fb342d14b69aefdf46187f6bb80a4a0d97007cd.tar.gz",
+      "hash": "04afdry3plv1w1bdqs2diwdv5hz0dgyqvlv4g4d07zhf7mcv3jjm"
     }
   },
   "version": 3
