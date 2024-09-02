@@ -51,6 +51,7 @@ in {
   lan-mouse = callPackage ./lan-mouse { };
   mise = callPackage ./mise { };
   minio-client = callPackage ./tools/networking/minio-client { };
+  miniserve = callPackage ./tools/misc/miniserve { };
   module-server = callPackage ./module-server { };
   mux = callPackage ./mux { };
   nix-update = callPackage ./tools/package-management/nix-update {
