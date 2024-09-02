@@ -31,6 +31,7 @@
     ./programs/starship.nix
     ./programs/taplo.nix
     ./programs/tmux.nix
+    ./programs/vscode.nix
     ./programs/xh.nix
     ./programs/yazi.nix
   ];
