@@ -1,24 +1,22 @@
 { lib, stdenv
 
 , fetchFromGitHub
+
 , cmake
-, pkg-config
 , python3
+, pkg-config
+
 , zlib
 , libssh2
 , openssl
-, pcre
+, pcre2
 , http-parser
+
 , staticBuild ? stdenv.hostPlatform.isStatic
-# for passthru.tests
-, libgit2-glib
-, python3Packages
-, gitstatus
 }:
 stdenv.mkDerivation rec {
   pname = "libgit2";
   version = "1.8.1";
-  # also check the following packages for updates: python3Packages.pygit2 and libgit2-glib
 
   outputs = ["lib" "dev" "out"];
 
@@ -29,15 +27,16 @@ stdenv.mkDerivation rec {
     hash = "sha256-J2rCxTecyLbbDdsyBWn9w7r3pbKRMkI9E7RvRgAqBdY=";
   };
 
-  cmakeFlags = [
-    "-DUSE_HTTP_PARSER=system"
-    "-DUSE_SSH=ON"
-    "-DBUILD_SHARED_LIBS=${if staticBuild then "OFF" else "ON"}"
+  cmakeFlags = with lib.strings; [
+    (cmakeFeature "USE_HTTP_PARSER" "system")
+    (cmakeFeature "REGEX_BACKEND" "pcre2")
+    (cmakeBool "USE_SSH" true)
+    (cmakeBool "BUILD_SHARED_LIBS" (!staticBuild))
   ];
 
   nativeBuildInputs = [ cmake python3 pkg-config ];
 
-  buildInputs = [ zlib libssh2 openssl pcre http-parser ];
+  buildInputs = [ zlib libssh2 openssl pcre2 http-parser ];
 
   doCheck = true;
   checkPhase = ''
@@ -55,12 +54,6 @@ stdenv.mkDerivation rec {
       ./libgit2_tests ''${testArgs[@]}
     )
   '';
-
-  passthru.tests = {
-    inherit libgit2-glib;
-    inherit (python3Packages) pygit2;
-    inherit gitstatus;
-  };
 
   meta = with lib; {
     description = "Linkable library implementation of Git that you can use in your application";
