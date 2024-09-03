@@ -49,6 +49,7 @@ in {
   kitty-themes = callPackage ./terminal-emulators/kitty/themes.nix { };
   kubo = callPackage ./kubo { };
   lan-mouse = callPackage ./lan-mouse { };
+  litecli = callPackage ./development/tools/database/litecli { };
   mise = callPackage ./mise { };
   minio-client = callPackage ./tools/networking/minio-client { };
   miniserve = callPackage ./tools/misc/miniserve { };
