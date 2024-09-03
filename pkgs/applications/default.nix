@@ -55,6 +55,7 @@ in {
   miniserve = callPackage ./tools/misc/miniserve { };
   module-server = callPackage ./module-server { };
   mux = callPackage ./mux { };
+  ncmpcpp = callPackage ./audio/ncmpcpp { };
   nix-update = callPackage ./tools/package-management/nix-update {
     nixfmt = pkgs.nixfmt-rfc-style;
   };
