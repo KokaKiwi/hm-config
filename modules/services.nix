@@ -7,6 +7,7 @@
     ./services/nix-web.nix
     ./services/podman.nix
     ./services/pueue.nix
+    ./services/syncthing.nix
   ];
 
   services = {

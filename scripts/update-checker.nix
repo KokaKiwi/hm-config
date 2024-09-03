@@ -6,7 +6,7 @@
 let
   ignoredPackages = [
     # Let's nixpkgs handle these
-    "nixfmt"
+    "nixfmt" "nix-output-monitor"
     # Too old
     "hub"
     # My own packages
@@ -25,6 +25,7 @@ let
     config.home.shell.package
     pkgs.git-interactive-rebase-tool
     pkgs.nix-your-shell
+    pkgs.syncthing
   ];
   aliases = let
     mkUnstable = drv: drv.overrideAttrs (super: {
@@ -107,13 +108,6 @@ in pkgs.nur.repos.kokakiwi.lib.mkUpdateChecker {
       host = "git.lix.systems";
       gitea = "lix-project/lix";
       use_max_tag = true;
-    };
-    nix-output-monitor = {
-      source = "gitea";
-      host = "code.maralorn.de";
-      gitea = "maralorn/nix-output-monitor";
-      use_max_tag = true;
-      prefix = "v";
     };
     npins = {
       source = "github";

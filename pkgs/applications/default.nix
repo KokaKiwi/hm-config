@@ -77,6 +77,7 @@ in {
   sccache = callPackage ./development/tools/sccache { };
   skopeo = callPackage ./skopeo { };
   starship = callPackage ./starship { };
+  syncthing = callPackage ./networking/syncthing { };
   szurubooru-cli = callPackage ./misc/booru-cli { };
   taplo = callPackage ./development/tools/taplo { };
   trunk = callPackage ./development/tools/trunk { };
