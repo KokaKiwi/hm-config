@@ -41,7 +41,9 @@ in {
   git-absorb = callPackage ./version-management/git-absorb { };
   git-interactive-rebase-tool = callPackage ./version-management/git-interactive-rebase-tool { };
   gitui = callPackage ./gitui { };
-  glab = callPackage ./glab { };
+  glab = callPackage ./glab {
+    buildGoModule = pkgs.buildGo123Module;
+  };
   gleam = callPackage ./compilers/gleam { };
   glow = callPackage ./editors/glow { };
   jellyfin-media-player = libsForQt5.callPackage ./jellyfin-media-player { };
