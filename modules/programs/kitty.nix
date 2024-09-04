@@ -2,7 +2,12 @@
 {
   programs.kitty = {
     enable = true;
-    package = config.lib.opengl.wrapPackage pkgs.kitty;
+    package = let
+      kitty = pkgs.kitty.local.override {
+        go = pkgs.go_1_23;
+        buildGoModule = pkgs.buildGo123Module;
+      };
+    in config.lib.opengl.wrapPackage kitty;
 
     font = {
       name = "FiraCode Nerd Font Mono";
