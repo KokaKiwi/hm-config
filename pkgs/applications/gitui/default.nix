@@ -10,7 +10,6 @@
 , pkg-config
 , xclip
 }:
-
 rustPlatform.buildRustPackage rec {
   pname = "gitui";
   version = "0.26.3";
@@ -29,10 +28,10 @@ rustPlatform.buildRustPackage rec {
   buildInputs = [ openssl ]
     ++ lib.optional stdenv.isLinux xclip
     ++ lib.optionals stdenv.isDarwin [
-         libiconv
-         darwin.apple_sdk.frameworks.Security
-         darwin.apple_sdk.frameworks.AppKit
-       ];
+      libiconv
+      darwin.apple_sdk.frameworks.Security
+      darwin.apple_sdk.frameworks.AppKit
+    ];
 
   postPatch = ''
     # The cargo config overrides linkers for some targets, breaking the build
