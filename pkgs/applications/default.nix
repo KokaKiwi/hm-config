@@ -12,6 +12,7 @@ in {
   bitwarden-cli = callPackage ./bitwarden-cli { };
   cargo-about = callPackage ./development/tools/cargo-about { };
   cargo-c-next = callPackage ./development/tools/rust/cargo-c { };
+  cargo-component = callPackage ./development/tools/rust/cargo-component { };
   cargo-deny = callPackage ./cargo-deny { };
   cargo-depgraph = callPackage ./cargo-depgraph { };
   cargo-expand = callPackage ./development/tools/rust/cargo-expand { };
