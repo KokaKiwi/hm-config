@@ -14,6 +14,10 @@ let
       channel = "1.80.1";
       hash = "sha256-3jVIIf5XPnUU1CRaTyAiO0XHVbJl12MSx3eucTXCjtE=";
     };
+    rust_1_81 = {
+      channel = "1.81.0";
+      hash = "sha256-VZZnlyP69+Y3crrLHQyJirqlHrTtGTsyiSnZB8jEvVo=";
+    };
 
     rust = rust_1_80;
   };
