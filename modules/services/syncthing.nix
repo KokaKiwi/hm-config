@@ -1,15 +1,10 @@
-{ config, pkgs, lib, ... }:
+{ config, lib, ... }:
 let
   cfg = config.services.syncthing;
 in {
   services.syncthing = {
     enable = true;
-
-    tray = {
-      enable = true;
-      package = pkgs.qsyncthingtray;
-      command = "qsyncthingtray";
-    };
+    tray.enable = true;
   };
 
   systemd.user.services.${cfg.tray.package.pname} = {
