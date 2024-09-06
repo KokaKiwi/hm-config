@@ -1,6 +1,6 @@
 { pkgs, sources }:
 let
-  inherit (pkgs) libsForQt5;
+  inherit (pkgs) libsForQt5 kdePackages;
   inherit (pkgs.kiwiPackages) python3Packages;
   callPackage = pkgs.kiwiPackages.callPackageIfNewer;
 in {
@@ -86,6 +86,7 @@ in {
   skopeo = callPackage ./skopeo { };
   starship = callPackage ./starship { };
   syncthing = callPackage ./networking/syncthing { };
+  syncthingtray = kdePackages.callPackage ./misc/syncthingtray { };
   szurubooru-cli = callPackage ./misc/booru-cli { };
   taplo = callPackage ./development/tools/taplo { };
   trunk = callPackage ./development/tools/trunk { };
