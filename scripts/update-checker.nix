@@ -23,6 +23,7 @@ let
   extraPackages = [
     neovim.tree-sitter neovim.lua
     config.home.shell.package
+    config.services.syncthing.tray.package
     pkgs.git-interactive-rebase-tool
     pkgs.nix-your-shell
     pkgs.syncthing
