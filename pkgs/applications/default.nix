@@ -87,6 +87,7 @@ in {
   taplo = callPackage ./development/tools/taplo { };
   trunk = callPackage ./development/tools/trunk { };
   usage = callPackage ./usage { };
+  uv = callPackage ./development/tools/uv { };
   vesktop = callPackage ./vesktop { };
   xh = callPackage ./tools/networking/xh { };
   xinspect = callPackage ./xinspect { };
