@@ -48,7 +48,10 @@ in {
   gleam = callPackage ./compilers/gleam { };
   glow = callPackage ./editors/glow { };
   jellyfin-media-player = libsForQt5.callPackage ./jellyfin-media-player { };
-  kitty = callPackage ./terminal-emulators/kitty { };
+  kitty = callPackage ./terminal-emulators/kitty {
+    go = pkgs.go_1_23;
+    buildGoModule = pkgs.buildGo123Module;
+  };
   kitty-themes = callPackage ./terminal-emulators/kitty/themes.nix { };
   kubo = callPackage ./kubo { };
   lan-mouse = callPackage ./lan-mouse { };
