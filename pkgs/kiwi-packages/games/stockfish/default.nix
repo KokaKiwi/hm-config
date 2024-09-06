@@ -24,19 +24,19 @@ let
       url = "https://tests.stockfishchess.org/api/nn/${name}";
     };
   in lib.mapAttrsToList fetchNnueFile {
-    # https://github.com/official-stockfish/Stockfish/blob/sf_16.1/src/evaluate.h
-    "nn-b1a57edbea57.nnue" = "sha256-saV+2+pXTKi4jWg3RzhFeRvrU9iF+H+G1czdVln787I=";
-    "nn-baff1ede1f90.nnue" = "sha256-uv8e3h+Qwd0bT3cvHv8phIghgB6BhjRdp/DrQSG9b2M=";
+    # https://github.com/official-stockfish/Stockfish/blob/sf_17/src/evaluate.h
+    "nn-1111cefa1111.nnue" = "sha256-ERHO+hERa3cWG9SxTatMUPJuWSDHVvSGFZK+Pc1t4XQ=";
+    "nn-37f18f62d772.nnue" = "sha256-N/GPYtdy8xB+HWqso4mMEww8hvKrY+ZVX7vKIGNaiZ0=";
   };
 in stdenv.mkDerivation rec {
   pname = "stockfish";
-  version = "16.1";
+  version = "17";
 
   src = fetchFromGitHub {
     owner = "official-stockfish";
     repo = "Stockfish";
     rev = "sf_${version}";
-    sha256 = "sha256-xTtjfJgEHF0SQT9Fw/9RLZA0Quh00jrIbihr7IYCm2U=";
+    sha256 = "sha256-oXvLaC5TEUPlHjhm7tOxpNPY88QxYHFw+Cev3Q8NEeQ=";
   };
 
   postUnpack = ''
