@@ -93,6 +93,7 @@ in {
   usage = callPackage ./usage { };
   uv = callPackage ./development/tools/uv { };
   vesktop = callPackage ./vesktop { };
+  wit-bindgen = callPackage ./development/tools/rust/wit-bindgen { };
   xh = callPackage ./tools/networking/xh { };
   xinspect = callPackage ./xinspect { };
   yt-dlp = python3Packages.callPackage ./misc/yt-dlp { };
