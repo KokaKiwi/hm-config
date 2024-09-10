@@ -7,16 +7,16 @@
 }:
 buildGoModule rec {
   pname = "glab";
-  version = "1.46.0";
+  version = "1.46.1";
 
   src = fetchFromGitLab {
     owner=  "gitlab-org";
     repo = "cli";
     rev = "v${version}";
-    hash = "sha256-eG1sBHGrPAydB2yXLSYzD8eoe3YlQWhLNY6FXzsSdJo=";
+    hash = "sha256-0NR931w5XxJgN67iWIPf8gajeIlo0PA3mu1oAIut59M=";
   };
 
-  vendorHash = "sha256-kWVcUEdD6+0DgkTbCjAhx6HLMqRCxTtkA8BYpVFRPTQ=";
+  vendorHash = "sha256-BsJIxobdccg7sfhk72hjH2iQXQSBnBkibTBiIttknns=";
 
   ldflags = [
     "-s" "-w"
