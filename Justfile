@@ -38,6 +38,8 @@ update-local-package ATTR *ARGS:
   nix-update --commit pkgs.{{ATTR}}.local {{ARGS}}
 
 update-neovim: (update-package 'kiwiPackages.neovim' '--version=branch=master')
+update-vscode:
+  nix-update --commit config.programs.vscode.package --override-filename ./modules/programs/vscode.nix
 
 option PATH='':
   nixos-option \
