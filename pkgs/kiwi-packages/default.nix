@@ -23,6 +23,7 @@ rec {
     inherit go;
   };
 
+  cargo-pgrx = callPackage ./cargo-pgrx { };
   cargo-setup-project = callPackage ./cargo-setup-project { };
   doll = callPackage ./doll { };
   libgit2 = callPackage ./libgit2 { };

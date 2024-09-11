@@ -10,7 +10,7 @@ let
     "about" "binutils" "bloat" "cache" "criterion"
     "nextest" "expand" "deny" "outdated"
     "show-asm" "msrv" "depgraph" "udeps"
-    "ndk" "tarpaulin" "pgrx"
+    "ndk" "tarpaulin"
     "wipe" "sort" "leptos" "component"
     "c-next" "make" "audit"
   ];
@@ -23,6 +23,7 @@ let
     rust-bindgen
     wasm-tools
     wit-bindgen
+    kiwiPackages.cargo-pgrx
   ]);
 in {
   home.packages = map (pluginName: pkgs."cargo-${pluginName}") cargoPlugins
