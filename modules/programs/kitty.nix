@@ -53,4 +53,14 @@
       "map kitty_mod+page_down" = "next_tab";
     };
   };
+
+  xdg.desktopEntries.kitty = {
+    name = "kitty";
+    genericName = "Terminal emulator";
+    icon = "kitty";
+    comment = "Fast, feature-rich, GPU based terminal";
+    exec = "kitty --single-instance";
+    categories = [ "System" "TerminalEmulator" ];
+    startupNotify = true;
+  };
 }
