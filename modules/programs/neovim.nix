@@ -17,10 +17,12 @@
 
     python3Package = pkgs.python312;
 
-    tree-sitter = {
+    tree-sitter = let
+      cc = pkgs.stdenv.cc;
+    in {
       enable = true;
       package = pkgs.kiwiPackages.neovim.tree-sitter;
-      cc = "${pkgs.gcc}/bin/gcc";
+      cc = "${cc}/bin/cc";
       nodejs = pkgs.nodejs;
     };
   };
