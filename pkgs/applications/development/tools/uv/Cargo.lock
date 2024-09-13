@@ -4445,7 +4445,7 @@ checksum = "81dfa00651efa65069b0b6b651f4aaa31ba9e3c3ce0137aaad053604ee7e0314"
 
 [[package]]
 name = "uv"
-version = "0.4.9"
+version = "0.4.10"
 dependencies = [
  "anstream",
  "anyhow",
@@ -4464,6 +4464,7 @@ dependencies = [
  "flate2",
  "fs-err",
  "futures",
+ "http",
  "ignore",
  "indexmap",
  "indicatif",
@@ -4610,6 +4611,7 @@ name = "uv-cache-info"
 version = "0.0.1"
 dependencies = [
  "fs-err",
+ "globwalk",
  "schemars",
  "serde",
  "thiserror",
@@ -4700,7 +4702,6 @@ dependencies = [
  "anyhow",
  "cache-key",
  "clap",
- "distribution-types",
  "either",
  "pep508_rs",
  "platform-tags",
@@ -5237,7 +5238,7 @@ dependencies = [
 
 [[package]]
 name = "uv-version"
-version = "0.4.9"
+version = "0.4.10"
 
 [[package]]
 name = "uv-virtualenv"
