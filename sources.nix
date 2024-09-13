@@ -9,7 +9,7 @@ let
       ./npins/patches/catppuccin/0001-Expose-lib.ctp.patch
     ];
     home-manager = [
-      ./npins/patches/home-manager/0001-PR-4801-Add-a-podman-linux-module-for-containers-and.patch
+      ./npins/patches/home-manager/0001-PR-4801-Add-a-podman-module-for-containers-and-netwo.patch
     ];
   };
 

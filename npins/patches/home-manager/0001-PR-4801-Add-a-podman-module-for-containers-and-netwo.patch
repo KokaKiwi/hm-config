@@ -1,12 +1,51 @@
-From 2cd664858b7c75b991730802cc6b2ce74c2f3cd5 Mon Sep 17 00:00:00 2001
+From 877be3006d49c6146202067a89a3305ed6f456b1 Mon Sep 17 00:00:00 2001
 From: KokaKiwi <kokakiwi+git@kokakiwi.net>
-Date: Mon, 12 Aug 2024 11:11:52 +0200
-Subject: [PATCH] PR#4801: Add a podman linux module for containers and
- networks
+Date: Fri, 13 Sep 2024 11:53:57 +0200
+Subject: [PATCH] PR#4801: Add a podman module for containers and networks on
+ Linux
 
 Squashed commit of the following:
 
-commit 6df649c89a8637e07522d8cdaab486aca1c78509
+commit df5d577ff94303f7f4ffc58e83986274ecec924c
+Author: Nicholas Hassan <nick@hassan.host>
+Date:   Sun Aug 25 17:01:00 2024 +0930
+
+    podman: fix network unit newuidmap errors
+
+    newuidmap with setuid needs to be in PATH for podman, so adding common
+    places it can be found
+
+    Signed-off-by: Nicholas Hassan <nick@hassan.host>
+
+commit e7db1bae5e86a6d6c8efc14d6aae7db9cd83bbdb
+Author: Nicholas Hassan <nick@hassan.host>
+Date:   Sun Aug 18 13:52:28 2024 +0930
+
+    podman: fix incomplete linux platform guards
+
+    Imported modules which defined home config options were missing linux platform checks
+
+    Signed-off-by: Nicholas Hassan <nick@hassan.host>
+
+commit b41295bc05aaa4968faa91381b00a66594fb60e5
+Author: Nicholas Hassan <nick@hassan.host>
+Date:   Wed Aug 14 17:21:19 2024 +0930
+
+    podman: fix networkMode duplication
+
+    supplying networkMode options have a bunch of rules around them - for the meantime, treat networkMode and lists of bridge networks seperately.
+
+commit eb8926b645abc0cf31f768107c95c8fbae4b81d4
+Author: Nicholas Hassan <nick@hassan.host>
+Date:   Tue Aug 13 17:28:46 2024 +0930
+
+    podman: update assertions
+
+    Add network name assertions and prevent changing container service name to prevent foot-gunning when the activation script diffs the running resources against the manifest.
+
+    Signed-off-by: Nicholas Hassan <nick@hassan.host>
+
+commit 2cf4705dc0335d7269bb92fca18c57b4cefbf8e3
 Author: Nicholas Hassan <nick@hassan.host>
 Date:   Fri Dec 22 10:54:18 2023 +1030
 
@@ -19,19 +58,19 @@ Date:   Fri Dec 22 10:54:18 2023 +1030
 ---
  modules/lib/maintainers.nix                   |  10 +
  modules/modules.nix                           |   1 +
- modules/services/podman-linux/containers.nix  | 433 ++++++++++++++++++
+ modules/services/podman-linux/containers.nix  | 418 ++++++++++++++++++
  modules/services/podman-linux/default.nix     |  14 +
- .../services/podman-linux/install-quadlet.nix | 178 +++++++
- modules/services/podman-linux/networks.nix    |  60 +++
+ .../services/podman-linux/install-quadlet.nix | 182 ++++++++
+ modules/services/podman-linux/networks.nix    |  73 +++
  modules/services/podman-linux/options.nix     |  42 ++
- modules/services/podman-linux/podman-lib.nix  |  81 ++++
- modules/services/podman-linux/services.nix    |  56 +++
+ modules/services/podman-linux/podman-lib.nix  |  89 ++++
+ modules/services/podman-linux/services.nix    |  54 +++
  tests/default.nix                             |   1 +
  .../services/podman-linux/container.nix       |  70 +++
  .../modules/services/podman-linux/default.nix |   5 +
  .../services/podman-linux/manifest.nix        |  63 +++
- .../modules/services/podman-linux/network.nix |  29 ++
- 14 files changed, 1043 insertions(+)
+ .../modules/services/podman-linux/network.nix |  31 ++
+ 14 files changed, 1053 insertions(+)
  create mode 100644 modules/services/podman-linux/containers.nix
  create mode 100644 modules/services/podman-linux/default.nix
  create mode 100644 modules/services/podman-linux/install-quadlet.nix
@@ -45,7 +84,7 @@ Date:   Fri Dec 22 10:54:18 2023 +1030
  create mode 100644 tests/modules/services/podman-linux/network.nix
 
 diff --git a/modules/lib/maintainers.nix b/modules/lib/maintainers.nix
-index 9793d5c3..d276637d 100644
+index 832e025d..08b1d9ef 100644
 --- a/modules/lib/maintainers.nix
 +++ b/modules/lib/maintainers.nix
 @@ -276,6 +276,16 @@
@@ -58,7 +97,7 @@ index 9793d5c3..d276637d 100644
 +    github = "n-hass";
 +    githubId = 72363381;
 +    keys = [{
-+      longkeyid = "ed25519/0xA37159732728A6A6";
++      longkeyid = "rsa4096/0xFC95AB946A781EE7";
 +      fingerprint = "FDEE 6116 DBA7 8840 7323  4466 A371 5973 2728 A6A6";
 +    }];
 +  };
@@ -66,7 +105,7 @@ index 9793d5c3..d276637d 100644
      email = "sable@seyleri.us";
      name = "Sable Seyler";
 diff --git a/modules/modules.nix b/modules/modules.nix
-index dbeebfbf..b67a2c85 100644
+index 7223fb4b..4622a08e 100644
 --- a/modules/modules.nix
 +++ b/modules/modules.nix
 @@ -345,6 +345,7 @@ let
@@ -79,11 +118,11 @@ index dbeebfbf..b67a2c85 100644
      ./services/psd.nix
 diff --git a/modules/services/podman-linux/containers.nix b/modules/services/podman-linux/containers.nix
 new file mode 100644
-index 00000000..2acf6ce1
+index 00000000..41c44f88
 --- /dev/null
 +++ b/modules/services/podman-linux/containers.nix
-@@ -0,0 +1,433 @@
-+{ config, lib, ... }:
+@@ -0,0 +1,418 @@
++{ config, lib, pkgs, ... }:
 +
 +with lib;
 +
@@ -93,10 +132,7 @@ index 00000000..2acf6ce1
 +  createQuadletSource = name: containerDef:
 +    let
 +      ### Definitions
-+      serviceName = if containerDef.serviceName != null then
-+        containerDef.serviceName
-+      else
-+        name;
++      serviceName = name;
 +      containerName = name; # Use the submodule name as the container name
 +      mergedServiceConfig = podman-lib.serviceConfigDefaults
 +        // containerDef.serviceConfig;
@@ -164,11 +200,9 @@ index 00000000..2acf6ce1
 +        else
 +          "";
 +
-+      # TODO: check that the user hasn't supplied both networkMode and networks
-+      formatNetwork = containerDef:
-+        if containerDef.networkMode != null then
-+          "Network=${containerDef.networkMode}"
-+        else if containerDef.networks != [ ] then
++      # TODO: check this against networkMode option. IE, if 'host' there are no bridge networks, etc
++      formatBridgeNetworks = containerDef:
++        if containerDef.networks != [ ] then
 +          "Network=${concatStringsSep "," containerDef.networks}"
 +        else
 +          "";
@@ -195,7 +229,7 @@ index 00000000..2acf6ce1
 +      ###
 +
 +      configText = ''
-+        # Automatically generated by home-manager podman containers module
++        # Automatically generated by home-manager podman container configuration
 +        # DO NOT EDIT THIS FILE DIRECTLY
 +        #
 +        # ${serviceName}.container
@@ -228,7 +262,7 @@ index 00000000..2acf6ce1
 +        ${ifNotEmptyList containerDef.ports (formatPorts containerDef.ports)}
 +        ${ifNotNull containerDef.networkMode
 +        "Network=${containerDef.networkMode}"}
-+        ${formatNetwork containerDef}
++        ${formatBridgeNetworks containerDef}
 +        ${ifNotNull containerDef.ip4 "IP=${containerDef.ip4}"}
 +        ${ifNotNull containerDef.ip6 "IP6=${containerDef.ip6}"}
 +        ${ifNotEmptyList containerDef.volumes
@@ -266,17 +300,14 @@ index 00000000..2acf6ce1
 +  toQuadletInternal = name: containerDef:
 +    let
 +      allAssertions =
-+        (podman-lib.assertConfigTypes podman-lib.serviceConfigTypeRules
-+          containerDef.serviceConfig name)
-+        ++ (podman-lib.assertConfigTypes podman-lib.unitConfigTypeRules
-+          containerDef.unitConfig name);
++        (podman-lib.buildConfigAsserts name containerDef.serviceConfig
++          podman-lib.serviceConfigTypeRules)
++        ++ (podman-lib.buildConfigAsserts name containerDef.unitConfig
++          podman-lib.unitConfigTypeRules);
 +    in {
-+      serviceName = if containerDef.serviceName != null then
-+        containerDef.serviceName
-+      else
-+        "podman-${name}";
++      serviceName = "podman-${name}";
 +      source = createQuadletSource name containerDef;
-+      unitType = "container";
++      resourceType = "container";
 +      assertions = allAssertions;
 +    };
 +
@@ -284,13 +315,6 @@ index 00000000..2acf6ce1
 +  # Define the container user type as the user interface
 +  containerDefinitionType = types.submodule {
 +    options = {
-+      serviceName = mkOption {
-+        type = with types; nullOr str;
-+        description =
-+          "The name of the systemd service to generate for the container.";
-+        default = null;
-+      };
-+
 +      description = mkOption {
 +        type = with types; nullOr str;
 +        description = "The description of the container.";
@@ -506,10 +530,10 @@ index 00000000..2acf6ce1
 +  config = let
 +    containerQuadlets =
 +      mapAttrsToList toQuadletInternal config.services.podman.containers;
-+  in {
++  in mkIf pkgs.stdenv.isLinux {
 +    internal.podman-quadlet-definitions = containerQuadlets;
-+    assertions = lib.flatten (map (container: container.assertions)
-+      config.internal.podman-quadlet-definitions);
++    assertions =
++      flatten (map (container: container.assertions) containerQuadlets);
 +
 +    # manifest file
 +    home.file."${config.xdg.configHome}/podman/containers.manifest".text =
@@ -518,7 +542,7 @@ index 00000000..2acf6ce1
 +}
 diff --git a/modules/services/podman-linux/default.nix b/modules/services/podman-linux/default.nix
 new file mode 100644
-index 00000000..5ab5fd0b
+index 00000000..3159426f
 --- /dev/null
 +++ b/modules/services/podman-linux/default.nix
 @@ -0,0 +1,14 @@
@@ -530,24 +554,28 @@ index 00000000..5ab5fd0b
 +  imports =
 +    [ ./services.nix ./networks.nix ./containers.nix ./install-quadlet.nix ];
 +
-+  config = {
-+    meta.maintainers = [ maintainers.n-hass ];
++  config = mkIf pkgs.stdenv.isLinux {
++    meta.maintainers = [ hm.maintainers.n-hass ];
 +    assertions =
 +      [ (hm.assertions.assertPlatform "podman" pkgs platforms.linux) ];
 +  };
 +}
 diff --git a/modules/services/podman-linux/install-quadlet.nix b/modules/services/podman-linux/install-quadlet.nix
 new file mode 100644
-index 00000000..6be89059
+index 00000000..6a0827b3
 --- /dev/null
 +++ b/modules/services/podman-linux/install-quadlet.nix
-@@ -0,0 +1,178 @@
+@@ -0,0 +1,182 @@
 +{ config, lib, pkgs, ... }:
 +
 +with lib;
 +
 +let
++  podman-lib = import ./podman-lib.nix { inherit lib; };
++
 +  quadletActivationCleanupScript = ''
++    PATH=$PATH:${podman-lib.newuidmapPaths}
++
 +    resourceManifest=()
 +    # Define VERBOSE_ENABLED as a function
 +    VERBOSE_ENABLED() {
@@ -645,7 +673,7 @@ index 00000000..6be89059
 +  # derivation to build a single Podman quadlet, outputting its systemd unit files
 +  buildPodmanQuadlet = quadlet:
 +    pkgs.stdenv.mkDerivation {
-+      name = "home-${quadlet.unitType}-${quadlet.serviceName}";
++      name = "home-${quadlet.resourceType}-${quadlet.serviceName}";
 +
 +      buildInputs = [ config.services.podman.package ];
 +
@@ -659,7 +687,7 @@ index 00000000..6be89059
 +        mkdir -p $out/units
 +
 +        # Write the quadlet file
-+        echo -n "${quadlet.source}" > $out/quadlets/${quadlet.serviceName}.${quadlet.unitType}
++        echo -n "${quadlet.source}" > $out/quadlets/${quadlet.serviceName}.${quadlet.resourceType}
 +
 +        # Generate systemd unit file/s from the quadlet file
 +        export QUADLET_UNIT_DIRS=$out/quadlets
@@ -710,7 +738,7 @@ index 00000000..6be89059
 +in {
 +  imports = [ ./options.nix ];
 +
-+  config = {
++  config = mkIf pkgs.stdenv.isLinux {
 +    home.file = generateSystemdFileLinks allUnitFiles;
 +
 +    # if the length of builtQuadlets is 0, then we don't need register the activation script
@@ -722,20 +750,23 @@ index 00000000..6be89059
 +}
 diff --git a/modules/services/podman-linux/networks.nix b/modules/services/podman-linux/networks.nix
 new file mode 100644
-index 00000000..1b80ce63
+index 00000000..18c75304
 --- /dev/null
 +++ b/modules/services/podman-linux/networks.nix
-@@ -0,0 +1,60 @@
+@@ -0,0 +1,73 @@
 +{ config, lib, pkgs, ... }:
 +
 +with lib;
 +
 +let
++
 +  podman-lib = import ./podman-lib.nix { inherit lib; };
 +
 +  createQuadletSource = name: networkDef: ''
 +    # Automatically generated by home-manager for podman network configuration
 +    # DO NOT EDIT THIS FILE DIRECTLY
++    #
++    # ${name}.network
 +    [Network]
 +    Label=nix.home-manager.managed=true
 +    NetworkName=${name}
@@ -745,15 +776,25 @@ index 00000000..1b80ce63
 +    WantedBy=multi-user.target default.target
 +
 +    [Service]
-+    Environment="PATH=${pkgs.su}:${pkgs.shadow}:${pkgs.coreutils}"
++    Environment=PATH=${podman-lib.newuidmapPaths}:${
++      makeBinPath [ pkgs.su pkgs.coreutils ]
++    }
++    ExecStartPre=${pkgs.bash}/bin/bash -c 'until ${config.services.podman.package}/bin/podman unshare ${pkgs.coreutils}/bin/true; do sleep 1; done'
++    TimeoutStartSec=15
 +    RemainAfterExit=yes
 +  '';
++
++  networkConfigAssertions = name: networkDef: {
++    NetworkName = with types; enum [ "" name ];
++  };
 +
 +  toQuadletInternal = name: networkDef: {
 +    serviceName =
 +      "podman-${name}"; # becomes podman-<netname>-network.service because of quadlet
 +    source = createQuadletSource name networkDef;
-+    unitType = "network";
++    resourceType = "network";
++    assertions = podman-lib.buildConfigAsserts name networkDef
++      (networkConfigAssertions name networkDef);
 +  };
 +
 +in {
@@ -778,17 +819,17 @@ index 00000000..1b80ce63
 +  config = let
 +    networkQuadlets =
 +      mapAttrsToList toQuadletInternal config.services.podman.networks;
-+  in {
++  in mkIf pkgs.stdenv.isLinux {
 +    internal.podman-quadlet-definitions = networkQuadlets;
++    assertions = flatten (map (network: network.assertions) networkQuadlets);
 +
-+    # manifest file
 +    home.file."${config.xdg.configHome}/podman/networks.manifest".text =
 +      podman-lib.generateManifestText networkQuadlets;
 +  };
 +}
 diff --git a/modules/services/podman-linux/options.nix b/modules/services/podman-linux/options.nix
 new file mode 100644
-index 00000000..22075170
+index 00000000..41e80bdb
 --- /dev/null
 +++ b/modules/services/podman-linux/options.nix
 @@ -0,0 +1,42 @@
@@ -803,10 +844,10 @@ index 00000000..22075170
 +        description = "The name of the systemd service.";
 +      };
 +
-+      unitType = lib.mkOption {
++      resourceType = lib.mkOption {
 +        type = lib.types.str;
 +        default = "";
-+        description = "The type of the systemd unit.";
++        description = "The type of the podman Quadlet resource.";
 +      };
 +
 +      source = lib.mkOption {
@@ -836,10 +877,10 @@ index 00000000..22075170
 +}
 diff --git a/modules/services/podman-linux/podman-lib.nix b/modules/services/podman-linux/podman-lib.nix
 new file mode 100644
-index 00000000..8af36cad
+index 00000000..a5343efd
 --- /dev/null
 +++ b/modules/services/podman-linux/podman-lib.nix
-@@ -0,0 +1,81 @@
+@@ -0,0 +1,89 @@
 +{ lib, ... }:
 +
 +with lib;
@@ -875,11 +916,11 @@ index 00000000..8af36cad
 +  unitConfigDefaults = { After = null; };
 +  unitConfigType = with types; attrsOf (either primitive (listOf primitive));
 +
-+  assertConfigTypes = configTypeRules: config: containerName:
-+    lib.flatten (lib.mapAttrsToList (name: value:
-+      if lib.hasAttr name configTypeRules then [{
++  buildConfigAsserts = quadletName: config: configTypeRules:
++    flatten (mapAttrsToList (name: value:
++      if hasAttr name configTypeRules then [{
 +        assertion = configTypeRules.${name}.check value;
-+        message = "in '${containerName}' config. ${name}: '${
++        message = "in '${quadletName}' config. ${name}: '${
 +            toString value
 +          }' does not match expected type: ${
 +            configTypeRules.${name}.description
@@ -888,17 +929,16 @@ index 00000000..8af36cad
 +        [ ]) config);
 +
 +  formatExtraConfig = extraConfig:
-+    let
-+      nonNullConfig = lib.filterAttrs (name: value: value != null) extraConfig;
++    let nonNullConfig = filterAttrs (name: value: value != null) extraConfig;
 +    in concatStringsSep "\n"
 +    (mapAttrsToList (name: value: "${name}=${formatPrimitiveValue value}")
 +      nonNullConfig);
 +
-+  # input is expecting a list of quadletInternalType with all the same unitType
++  # input is expecting a list of quadletInternalType with all the same resourceType
 +  generateManifestText = quadlets:
 +    let
-+      # create a list of all unique quadlet.unitTypes in quadlets
-+      quadletTypes = unique (map (quadlet: quadlet.unitType) quadlets);
++      # create a list of all unique quadlet.resourceType in quadlets
++      quadletTypes = unique (map (quadlet: quadlet.resourceType) quadlets);
 +      # if quadletTypes is > 1, then all quadlets are not the same type
 +      allQuadletsSameType = length quadletTypes <= 1;
 +
@@ -912,7 +952,7 @@ index 00000000..8af36cad
 +        in {
 +          "container" = strippedName;
 +          "network" = strippedName;
-+        }."${quadlet.unitType}";
++        }."${quadlet.resourceType}";
 +    in if allQuadletsSameType then ''
 +      ${concatStringsSep "\n"
 +      (map (quadlet: formatServiceName quadlet) quadlets)}
@@ -920,13 +960,22 @@ index 00000000..8af36cad
 +      abort ''
 +        All quadlets must be of the same type.
 +        Quadlet types in this manifest: ${concatStringsSep ", " quadletTypes}'';
++
++  # podman requires setuid on newuidmad, so it cannot be provided by pkgs.shadow
++  # Including all possible locations in PATH for newuidmap is a workaround.
++  # NixOS provides a 'wrapped' variant at /run/wrappers/bin/newuidmap.
++  # Other distros must install the 'uidmap' package, ie for ubuntu: apt install uidmap.
++  # Extra paths are added to handle where distro package managers may put the uidmap binaries.
++  #
++  # Tracking for a potential solution: https://github.com/NixOS/nixpkgs/issues/138423
++  newuidmapPaths = "/run/wrappers/bin:/usr/bin:/bin:/usr/sbin:/sbin";
 +}
 diff --git a/modules/services/podman-linux/services.nix b/modules/services/podman-linux/services.nix
 new file mode 100644
-index 00000000..db76683c
+index 00000000..223d3958
 --- /dev/null
 +++ b/modules/services/podman-linux/services.nix
-@@ -0,0 +1,56 @@
+@@ -0,0 +1,54 @@
 +{ config, lib, pkgs, ... }:
 +
 +with lib;
@@ -934,7 +983,6 @@ index 00000000..db76683c
 +let cfg = config.services.podman;
 +in {
 +  options.services.podman = {
-+
 +    auto-update = {
 +      enable = mkOption {
 +        type = types.bool;
@@ -948,10 +996,9 @@ index 00000000..db76683c
 +        description = "Systemd OnCalendar expression for the update";
 +      };
 +    };
-+
 +  };
 +
-+  config = mkMerge [
++  config = mkIf pkgs.stdenv.isLinux (mkMerge [
 +    (mkIf cfg.auto-update.enable {
 +      systemd.user.services."podman-auto-update" = {
 +        Unit = {
@@ -981,10 +1028,10 @@ index 00000000..db76683c
 +        Install = { WantedBy = [ "timers.target" ]; };
 +      };
 +    })
-+  ];
++  ]);
 +}
 diff --git a/tests/default.nix b/tests/default.nix
-index 1c143716..b93436d6 100644
+index 82aa2f6c..fdcd3862 100644
 --- a/tests/default.nix
 +++ b/tests/default.nix
 @@ -263,6 +263,7 @@ in import nmtSrc {
@@ -997,7 +1044,7 @@ index 1c143716..b93436d6 100644
      ./modules/services/redshift-gammastep
 diff --git a/tests/modules/services/podman-linux/container.nix b/tests/modules/services/podman-linux/container.nix
 new file mode 100644
-index 00000000..8b4f7418
+index 00000000..af8d4a29
 --- /dev/null
 +++ b/tests/modules/services/podman-linux/container.nix
 @@ -0,0 +1,70 @@
@@ -1006,7 +1053,6 @@ index 00000000..8b4f7418
 +{
 +  config = {
 +    services.podman.containers."my-container" = {
-+      serviceName = "a-test-container";
 +      description = "home-manager test";
 +      autoupdate = "registry";
 +      autostart = true;
@@ -1032,41 +1078,42 @@ index 00000000..8b4f7418
 +
 +    nmt.script = ''
 +      configPath=home-files/.config/systemd/user
-+      assertFileExists $configPath/a-test-container.service
++      containerFile=$configPath/podman-my-container.service
++      assertFileExists $containerFile
 +
-+      assertFileContains $configPath/a-test-container.service \
-+        "a-test-container.container"
-+      assertFileContains $configPath/a-test-container.service \
++      assertFileContains $containerFile \
++        "my-container.container"
++      assertFileContains $containerFile \
 +        "Description=home-manager test"
-+      assertFileContains $configPath/a-test-container.service \
++      assertFileContains $containerFile \
 +        "AutoUpdate=registry"
-+      assertFileContains $configPath/a-test-container.service \
++      assertFileContains $containerFile \
 +        "Image=docker.io/alpine:latest"
-+      assertFileContains $configPath/a-test-container.service \
++      assertFileContains $containerFile \
 +        "PodmanArgs=--network-alias test-alias --entrypoint sleep 1000 --security-opt=no-new-privileges"
-+      assertFileContains $configPath/a-test-container.service \
++      assertFileContains $containerFile \
 +        "Environment=VAL_A=A VAL_B=2 VAL_C=false"
-+      assertFileContains $configPath/a-test-container.service \
++      assertFileContains $containerFile \
 +        "PublishPort=8080:80"
-+      assertFileContains $configPath/a-test-container.service \
++      assertFileContains $containerFile \
 +        "Volume=/tmp:/tmp"
-+      assertFileContains $configPath/a-test-container.service \
++      assertFileContains $containerFile \
 +        "AddDevice=/dev/null:/dev/null"
-+      assertFileContains $configPath/a-test-container.service \
++      assertFileContains $containerFile \
 +        "Network=mynet"
-+      assertFileContains $configPath/a-test-container.service \
++      assertFileContains $containerFile \
 +        "Requires=podman-mynet-network.service"
-+      assertFileContains $configPath/a-test-container.service \
++      assertFileContains $containerFile \
 +        "After=network.target podman-mynet-network.service"
-+      assertFileContains $configPath/a-test-container.service \
++      assertFileContains $containerFile \
 +        "ReadOnlyTmpfs=true"
-+      assertFileContains $configPath/a-test-container.service \
++      assertFileContains $containerFile \
 +        "Restart=on-failure"
-+      assertFileContains $configPath/a-test-container.service \
++      assertFileContains $containerFile \
 +        "Before=fake.target"
-+      assertFileContains $configPath/a-test-container.service \
++      assertFileContains $containerFile \
 +        "WantedBy=multi-user.target default.target"
-+      assertFileContains $configPath/a-test-container.service \
++      assertFileContains $containerFile \
 +        "Label=nix.home-manager.managed=true"
 +    '';
 +  };
@@ -1084,7 +1131,7 @@ index 00000000..c8b12bbd
 +}
 diff --git a/tests/modules/services/podman-linux/manifest.nix b/tests/modules/services/podman-linux/manifest.nix
 new file mode 100644
-index 00000000..00702759
+index 00000000..b571275e
 --- /dev/null
 +++ b/tests/modules/services/podman-linux/manifest.nix
 @@ -0,0 +1,63 @@
@@ -1143,7 +1190,7 @@ index 00000000..00702759
 +      }
 +
 +      assertFileContent $networkManifest ${
-+        pkgs.writeText "containers.expected" ''
++        pkgs.writeText "networks.expected" ''
 +          mynet-1
 +          mynet-2
 +        ''
@@ -1153,10 +1200,10 @@ index 00000000..00702759
 +}
 diff --git a/tests/modules/services/podman-linux/network.nix b/tests/modules/services/podman-linux/network.nix
 new file mode 100644
-index 00000000..c506c014
+index 00000000..a7ef7fca
 --- /dev/null
 +++ b/tests/modules/services/podman-linux/network.nix
-@@ -0,0 +1,29 @@
+@@ -0,0 +1,31 @@
 +{ ... }:
 +
 +{
@@ -1171,6 +1218,8 @@ index 00000000..c506c014
 +      networkFile=$configPath/podman-mynet-network.service
 +      assertFileExists $networkFile
 +
++      assertFileContains $networkFile \
++        "mynet.network"
 +      assertFileContains $networkFile \
 +        "Subnet=192.168.1.0/24"
 +      assertFileContains $networkFile \
