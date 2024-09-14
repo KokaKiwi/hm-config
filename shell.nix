@@ -1,23 +1,19 @@
-{ hostname
-, doWarn ? false
+{ doWarn ? false
 }:
 let
-  env = import ./default.nix {
-    inherit hostname;
-  };
+  module = import ./default.nix { };
 
-  inherit (env) config pkgs;
+  inherit (module) pkgs hosts;
   inherit (pkgs) lib;
 
-  updateChecker = import ./scripts/update-checker.nix (env // {
+  updateChecker = import ./scripts/update-checker.nix (hosts.kira // {
     inherit doWarn;
   });
-  duplicateChecker = import ./scripts/duplicate-checker.nix env;
 in pkgs.mkShell {
    packages = with pkgs; [
      git
      jq
-     config.nix.package
+     hosts.kira.config.nix.package
      nix-output-monitor
   ];
 
@@ -49,10 +45,6 @@ in pkgs.mkShell {
 
     checkUpdates() {
       ${updateChecker}
-    }
-
-    checkDuplicate() {
-      ${duplicateChecker}
     }
   '';
 }
