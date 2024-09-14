@@ -1,8 +1,6 @@
-{ pkgs, ... }:
+{ ... }:
 {
-  programs.kde = {
-    akonadi = {
-      postgresql = pkgs.postgresql_16;
-    };
-  };
+  imports = [
+    ./kde/akonadi.nix
+  ];
 }

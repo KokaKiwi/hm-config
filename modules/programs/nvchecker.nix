@@ -1,19 +1,28 @@
 { config, pkgs, lib, ... }:
-{
-  programs.nvchecker = {
-    enable = true;
-    package = let
-      python3Packages = pkgs.python312Packages;
-      nvchecker = python3Packages.nvchecker.overridePythonAttrs (super: rec {
-        version = "2.15.1";
+with lib;
+let
+  cfg = config.programs.nvchecker;
 
-        src = pkgs.fetchFromGitHub {
-          owner = "lilydjwg";
-          repo = "nvchecker";
-          rev = "v${version}";
-          hash = "sha256-dK3rZCoSukCzPOFVectQiF6qplUuDBh9qyN8JL0+j20=";
-        };
-      });
-    in config.lib.python.extendPackageEnv nvchecker (_: lib.flatten (lib.attrValues nvchecker.optional-dependencies));
+  keyfileFormat = pkgs.formats.toml {};
+in {
+  options.programs.nvchecker = {
+    enable = mkEnableOption "nvchecker";
+
+    package = mkPackageOption pkgs "nvchecker" { };
+
+    keyfile = mkOption {
+      type = with types; nullOr (either keyfileFormat.type path);
+      default = null;
+    };
+  };
+
+  config = mkIf cfg.enable {
+    home.packages = [ cfg.package ];
+
+    xdg.configFile."nvchecker/keyfile.toml" = mkIf (cfg.keyfile != null) {
+      source = if builtins.isAttrs cfg.keyfile
+        then keyfileFormat.generate "keyfile.toml" cfg.keyfile
+        else cfg.keyfile;
+    };
   };
 }

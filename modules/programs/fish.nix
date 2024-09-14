@@ -1,69 +1,85 @@
-{ pkgs, ... }:
-{
-  programs.fish = {
-    enable = true;
-    package = pkgs.fish.override {
-      stdenv = pkgs.llvmStdenv;
-      python3 = pkgs.python312;
+{ config, pkgs, lib, ... }:
+with lib;
+let
+  cfg = config.programs.fish;
 
-      useOperatingSystemEtc = false;
-    };
-
-    functions = {
-      copy = ''
-        if test (count $argv) -ge 1
-          cat $argv[1]
-        else
-          cat
-        end | ${pkgs.wl-clipboard}/bin/wl-copy -n -t text/plain
-      '';
-
-      issh = {
-        body = ''
-          ssh -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null $argv
-        '';
-        wraps = "ssh";
+  completionType = types.submodule {
+    options = {
+      content = mkOption {
+        type = with types; nullOr lines;
+        default = null;
       };
-      rssh = {
-        body = ''
-          ssh -t $argv -- sudo -s
-        '';
-        wraps = "ssh";
+      source = mkOption {
+        type = with types; nullOr path;
+        default = null;
       };
 
-      nix-repl = {
-        body = ''
-          nix repl --expr "import <nixpkgs> {}" $argv
-        '';
-        wraps = "nix repl";
+      builder = mkOption {
+        type = with types; nullOr lines;
+        default = null;
       };
     };
-
-    completions = {
-      batman = ''complete batman --wraps "man"'';
-    };
-
-    shellAbbrs = {
-      man = "batman";
-
-      systemctl = "systemctl --user";
-      journalctl = "journalctl --user";
-    };
-
-    # Fix weird stuff with babelfish generation
-    shellInit = ''
-      function resetup_hm_session_vars
-        set -q __hm_sess_vars_sourced_fish; and return
-        set -g __hm_sess_vars_sourced_fish 1
-        set __HM_SESS_VARS_SOURCED ""; setup_hm_session_vars
-      end
-      resetup_hm_session_vars
-    '';
-
-    interactiveShellInit = ''
-      set fish_greeting
-
-      ${pkgs.nix-your-shell}/bin/nix-your-shell fish | source
-    '';
   };
+in {
+  options = {
+    programs.fish = {
+      completions = mkOption {
+        type = with types; attrsOf (either lines completionType);
+        default = { };
+      };
+
+      conf = mkOption {
+        type = with types; attrsOf (either str lines);
+        default = { };
+      };
+
+      variables = mkOption {
+        type = with types; attrsOf (oneOf [ str int path ]);
+        default = { };
+      };
+    };
+  };
+
+  config = mkIf cfg.enable (mkMerge [
+    {
+      xdg.configFile = let
+        fromContent = name: content:
+          pkgs.writeText "${name}.fish" content;
+        fromBuilder = name: builder:
+          pkgs.runCommandLocal "${name}.fish" { } ''
+            (
+              ${builder}
+            ) > $out
+          '';
+
+        completions = mapAttrs (_: value:
+          if builtins.isAttrs value
+          then value
+          else { content = value; }
+        ) cfg.completions;
+      in mapAttrs' (name: {
+        content ? null,
+        source ? null,
+        builder ? null,
+      }: {
+        name = "fish/completions/${name}.fish";
+        value.source =
+          if content != null then fromContent name content
+          else if source != null then source
+          else if builder != null then fromBuilder name builder
+          else throw "Invalid completion definition"
+        ;
+      }) completions;
+    }
+    {
+      xdg.configFile = mapAttrs' (name: content: {
+        name = "fish/conf.d/${name}.fish";
+        value.text = content;
+      }) cfg.conf;
+    }
+    {
+      programs.fish.conf."10-variables" = mkIf (cfg.variables != { })
+        (concatLines (mapAttrsToList (name: value: ''set -x ${name} "${value}"'') cfg.variables));
+    }
+  ]);
 }

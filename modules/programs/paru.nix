@@ -1,39 +1,41 @@
-{ pkgs, ... }:
+{ config, pkgs, lib, ... }:
+with lib;
 let
-  makepkg = pkgs.writeShellScript "makepkg" ''
-    export CUSTOMIZEPKG_CONFIG="$HOME/.config/customizepkg"
+  cfg = config.programs.paru;
 
-    _pkgname=$(basename $(pwd))
-
-    # TODO: Replace with Nix-provided utilities
-    if ! grep -s "## $0 ##" PKGBUILD >/dev/null && test -f "$CUSTOMIZEPKG_CONFIG/$_pkgname"; then
-      /usr/bin/customizepkg --modify >&2
-
-      echo "\n## $0 ##" >> PKGBUILD
-    fi
-
-    exec /usr/bin/makepkg "$@"
-  '';
+  settings = concatLines (
+    (map (path: "Include = ${path}") cfg.include)
+    ++ optional (cfg.include != [ ]) ""
+    ++ [ cfg.extraSettings ]
+  );
 in {
-  programs.paru = {
-    enable = true;
-    package = pkgs.nur.repos.kokakiwi.paru;
+  options.programs.paru = {
+    enable = mkEnableOption "paru";
 
-    extraSettings = ''
-      [options]
-      BottomUp
-      SudoLoop
-      CleanAfter
-      NoCheck
-      CombinedUpgrade
-      BatchInstall
-      UpgradeMenu
-      SkipReview
-      SaveChanges
+    package = mkPackageOption pkgs "paru" {};
 
-      [bin]
-      Makepkg = ${makepkg}
-      # Pacman = /usr/bin/pacman
-    '';
+    includeBaseConfig = mkOption {
+      type = types.bool;
+      default = true;
+    };
+    include = mkOption {
+      type = with types; listOf str;
+      default = [ ];
+    };
+
+    extraSettings = mkOption {
+      type = types.lines;
+      default = "";
+    };
+  };
+
+  config = mkIf cfg.enable {
+    home.packages = [ cfg.package ];
+
+    programs.paru.include = mkIf cfg.includeBaseConfig [
+      "${cfg.package}/etc/paru.conf"
+    ];
+
+    xdg.configFile."paru/paru.conf".source = pkgs.writeText "paru.conf" settings;
   };
 }

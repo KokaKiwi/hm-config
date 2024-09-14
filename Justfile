@@ -1,9 +1,11 @@
+host := `hostname`
+
 nix-build := 'NIXPKGS_ALLOW_BROKEN=1 nom-build --keep-failed'
 
 _default:
 
 _run-shell COMMAND *ARGS:
-  nix-shell {{ARGS}} --run '{{COMMAND}}'
+  nix-shell --argstr hostname '{{host}}' {{ARGS}} --run '{{COMMAND}}'
 
 run COMMAND *ARGS: (_run-shell COMMAND ARGS)
 init: (_run-shell 'init')
@@ -11,7 +13,7 @@ list-packages: (_run-shell 'listPackages')
 check: (_run-shell 'checkUpdates' '--arg doWarn true')
 
 build:
-  nom-build
+  nom-build --argstr hostname '{{host}}'
 
 switch: build
   result/activate

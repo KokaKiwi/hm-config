@@ -1,81 +1,89 @@
-{ config, pkgs, lib, sources, ... }:
-{
-  imports = [
-    "${sources.declarative-cachix}/home-manager.nix"
+{ config, pkgs, lib, ... }:
+with lib;
+let
+  cfg = config.nix;
+
+  filterMap = cond: transform: set:
+    map transform (filter cond set);
+
+  nixBuilder = {
+    uri,
+    systems,
+    identityFile,
+    maxJobs,
+    speedFactor,
+    supportedSystemFeatures,
+    requiredSystemFeatures,
+    hostKey,
+  }:
+  let
+    nullOr = value: if value == null then "-" else (toString value);
+    emptyOr = value: if value == [ ] then "-" else (concatStringsSep "," value);
+  in concatStringsSep " " [
+    uri
+    (emptyOr systems)
+    (nullOr identityFile)
+    (nullOr maxJobs)
+    (nullOr speedFactor)
+    (emptyOr supportedSystemFeatures)
+    (emptyOr requiredSystemFeatures)
+    (nullOr hostKey)
   ];
 
-  home.packages = [
-    config.nix.package
-  ];
+  builderType = types.submodule {
+    options = {
+      enable = mkEnableOption "Enable builder" // { default = true; };
 
-  nix = {
-    package = pkgs.nix.override {
-      openssl = pkgs.quictls;
-      curl = pkgs.curlHTTP3;
-      python3 = pkgs.python312;
-    };
-
-    builders = {
-      nix-games = {
-        uri = "ssh-ng://nix-games";
-        systems = [ "x86_64-linux" "aarch64-linux" ];
-        identityFile = "/root/.ssh/id_nix";
-        maxJobs = 3;
-        speedFactor = 5;
+      uri = mkOption {
+        type = types.str;
       };
-      nix-alyx = {
-        enable = false;
-        uri = "ssh-ng://nix-alyx";
-        identityFile = "/root/.ssh/id_nix";
-        maxJobs = 1;
-        speedFactor = 1;
+
+      systems = mkOption {
+        type = with types; listOf str;
+        default = [ ];
+      };
+      identityFile = mkOption {
+        type = with types; nullOr (either str path);
+        default = null;
+      };
+      maxJobs = mkOption {
+        type = with types; nullOr ints.positive;
+        default = null;
+      };
+      speedFactor = mkOption {
+        type = with types; nullOr ints.positive;
+        default = null;
+      };
+      supportedSystemFeatures = mkOption {
+        type = with types; listOf str;
+        default = [ ];
+      };
+      requiredSystemFeatures = mkOption {
+        type = with types; listOf str;
+        default = [ ];
+      };
+      hostKey = mkOption {
+        type = with types; nullOr (either str path);
+        default = null;
       };
     };
-
-    gc = {
-      automatic = true;
-      options = toString [
-        "--delete-older-than" "15d"
-      ];
-    };
-
-    channels = let
-      names = [ "nixos-23.11" "nixos-24.05" ];
-    in {
-      nixpkgs = sources.nixpkgs;
-      nixpkgs-unstable = sources.nixpkgs;
-    }
-    // builtins.listToAttrs (map (name: lib.nameValuePair name sources.channels.${name}) names)
-    // {
-      inherit (sources) crane fenix treefmt;
-    };
-    keepOldNixPath = false;
-
-    settings = {
-      extra-platforms = [ "aarch64-linux" ];
-      experimental-features = [ "nix-command" "flakes" ];
-      use-xdg-base-directories = true;
+  };
+in {
+  options.nix = {
+    builders = mkOption {
+      type = with types; attrsOf builderType;
+      default = { };
     };
   };
 
-  caches = {
-    cachix = [
-      "nix-community"
-      "cachix"
-      "kokakiwi"
-      "niv"
-      "colmena"
-    ];
-
-    extraCaches = [
-      {
-        url = "https://attic.bismuth.it/kokakiwi";
-        key = "kokakiwi:e3jihe8aS1LCVYET8hAm79TM68DZ3RDsbzPLuvZYEKA=";
-      }
-      {
-        url = "https://cache.lix.systems";
-        key = "cache.lix.systems:aBnZUw8zA7H35Cz2RyKFVs3H4PlGTLawyY5KRbvJR8o=";
-      }
-    ];
+  config = mkIf cfg.enable {
+    nix.settings.builders =
+      let
+        builders' = filterMap
+          ({ enable ? true, ... }: enable)
+          (builder: nixBuilder (builtins.removeAttrs builder [ "enable" ]))
+          (builtins.attrValues cfg.builders);
+        machines = pkgs.writeText "machines" (concatLines builders');
+      in mkIf (builders' != []) "@${machines}";
   };
 }

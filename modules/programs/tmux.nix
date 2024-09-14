@@ -1,74 +1,51 @@
-{ config, pkgs, lib, sources, ... }:
+{ config, lib, ... }:
 with lib;
 let
-  tmux-loadavg = pkgs.tmuxPlugins.mkTmuxPlugin {
-    pluginName = "tmux-loadavg";
-    rtpFilePath = "tmux-loadavg.tmux";
-    version = builtins.substring 0 8 sources.tmux-loadavg.revision;
-    src = sources.tmux-loadavg;
-  };
+  cfg = config.programs.tmux;
+
+  tmuxConf = ''
+    ${optionalString (cfg.updateEnvironment != [ ]) ''
+      set-option -g update-environment "${concatStringsSep " " cfg.updateEnvironment}"
+    ''}
+  '';
 in {
-  programs.tmux = {
-    enable = true;
-    enableSystemd = true;
+  options = {
+    programs.tmux = {
+      enableSystemd = mkEnableOption "Enable user systemd service";
 
-    package = pkgs.tmux.override {
-      stdenv = pkgs.llvmStdenv;
+      updateEnvironment = mkOption {
+        type = with types; listOf str;
+        default = [ ];
+      };
     };
+  };
 
-    catppuccin = {
-      extraConfig = config.lib.tmux.formatOptions {
-        prefix = "catppuccin_";
-      } {
-        # Window
-        window_current_background = "#1e1e2d";
+  config = mkIf cfg.enable {
+    xdg.configFile."tmux/tmux.conf".text = mkOrder 700 tmuxConf;
 
-        window_left_separator = " █";
+    systemd.user.services."tmux" = mkIf cfg.enableSystemd {
+      Unit = {
+        Description = "Start tmux in detached session";
+        After = [ "systemd-tmpfiles-setup.service" ];
+      };
 
-        window_default_text = " #W ";
-        window_current_text = " #W ";
+      Service = {
+        Type = "forking";
+        ExecStart = "${getExe cfg.package} -2 new-session -s ${config.home.username} -dP";
+        ExecStop = "${getExe cfg.package} kill-session -t ${config.home.username}";
+      };
 
-        # Status
-        status_modules_left = concatStringsSep " " [
-          "session"
-        ];
-        status_modules_right = concatStringsSep " " [
-          "load"
-          "date_time"
-        ];
-        status_left_separator = " ";
-        status_right_separator = "";
-        status_connect_separator = "no";
-
-        date_time_text = "%H:%M";
+      Install = {
+        WantedBy = [ "environment.target" ];
       };
     };
 
-    terminal = "tmux-256color";
-    mouse = true;
-    aggressiveResize = true;
-    clock24 = true;
-    shortcut = "s";
-    escapeTime = 0;
-    historyLimit = 50000;
-    baseIndex = 1;
-
-    shell = config.home.shell.fullPath;
-
-    updateEnvironment = [
-      "SSH_AUTH_SOCK" "SSH_CONNECTION" "SSH_ASKPASS"
-      "GIT_ASKPASS"
-      "DISPLAY" "JAVA_HOME"
-      "KITTY_INSTALLATIOn_DIR" "KITTY_LISTEN_ON" "KITTY_PID" "KITTY_PUBLIC_KEY" "KITTY_WINDOW_ID"
-      "XAUTHORITY" "PINENTRY" "GTK_USE_PORTAL" "GTK_IM_MODULE" "QT_IM_MODULE"
-      "XMODIFIERS" "KDE_FULL_SESSION" "KDE_SESSION_UID"
-      "TERM" "TERM_PROGRAM"
-    ];
-
-    plugins = [
-      tmux-loadavg
-    ];
-
-    extraConfig = config.lib.files.readLocalConfig "tmux/tmux.conf";
+    lib.tmux = {
+      formatOptions = {
+        prefix ? "",
+      }: attrs: concatStringsSep "\n" (flip mapAttrsToList attrs (name: value:
+        ''set -g @${prefix}${name} "${value}"''
+      ));
+    };
   };
 }

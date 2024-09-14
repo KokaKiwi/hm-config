@@ -1,7 +1,10 @@
-{ doWarn ? false
+{ hostname
+, doWarn ? false
 }:
 let
-  env = import ./default.nix { };
+  env = import ./default.nix {
+    inherit hostname;
+  };
 
   inherit (env) config pkgs;
   inherit (pkgs) lib;

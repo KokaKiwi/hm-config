@@ -1,4 +1,4 @@
-{ ... }:
+{ hostname, ... }:
 let
   sources = import ./sources.nix;
 
@@ -25,16 +25,29 @@ let
     };
   };
 
+  hosts = import ./hosts { };
+  host = hosts.${hostname} or (throw "Host not configured: ${hostname}");
+
   module = import "${sources.home-manager}/modules" {
-    configuration = ./home.nix;
+    configuration = { lib, ... }: {
+      imports = [
+        ./modules
+        (host.configuration or ./hosts/${hostname}/home.nix)
+      ];
+
+      _module.args = {
+        pkgs = lib.mkForce pkgs;
+      };
+    };
 
     inherit pkgs;
     check = true;
 
     extraSpecialArgs = {
       inherit sources;
-      actualPkgs = pkgs;
-    };
+
+      secretsPath = ./secrets;
+    } // (host.extraSpecialArgs or { });
   };
 
   env = {

@@ -1,8 +1,8 @@
-result
-result-*
-secrets
+/result
+/result-*
+/secrets
 
-/modules/private
+/hosts/*/private
 
 .*
 !.gitignore

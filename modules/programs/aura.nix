@@ -1,14 +1,25 @@
-{ config, pkgs, ... }:
-{
-  programs.aura = {
-    enable = true;
-    package = pkgs.nur.repos.kokakiwi.aura;
+{ config, pkgs, lib, ... }:
+let
+  cfg = config.programs.aura;
 
-    settings = {
-      general = {
-        editor = "${config.programs.neovim.finalPackage}/bin/nvim";
-        language = "en-GB";
-      };
+  tomlFormat = pkgs.formats.toml { };
+in {
+  options.programs.aura = with lib; {
+    enable = mkEnableOption "aura";
+
+    package = mkPackageOption pkgs "aura" { };
+
+    settings = mkOption {
+      type = tomlFormat.type;
+      default = { };
+    };
+  };
+
+  config = with lib; mkIf cfg.enable {
+    home.packages = [ cfg.package ];
+
+    xdg.configFile."aura/config.toml" = mkIf (cfg.settings != { }) {
+      source = tomlFormat.generate "aura/config.toml" cfg.settings;
     };
   };
 }

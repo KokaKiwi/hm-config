@@ -1,50 +1,102 @@
-{ config, pkgs, ... }:
+{ config, pkgs, lib, ... }:
+with lib;
 let
-  cfg = config.programs.discord;
-in {
-  programs.discord = {
-    enable = true;
+  inherit (config.lib) ctp;
 
-    flavour = "vesktop";
-    package = config.lib.opengl.wrapPackage (pkgs.vesktop.override {
-      withTTS = false;
-      withSystemVencord = cfg.vesktop.vencord.useSystem;
-    });
+  cfg = config.programs.discord;
+
+  jsonFormat = pkgs.formats.json { };
+in {
+  options.programs.discord = {
+    enable = mkEnableOption "Discord";
+
+    flavour = mkOption {
+      type = types.enum [
+        "discord"
+        "vesktop"
+      ];
+      default = "discord";
+    };
+
+    package = mkPackageOption pkgs "discord" {
+      default = cfg.flavour;
+    };
 
     vesktop = {
-      settings = {
-        minimizeToTray = "on";
-        discordBranch = "stable";
-        arRPC = "on";
-        splashColor = "rgb(205, 214, 244)";
-        splashBackground = "rgb(30, 30, 46)";
-        enableMenu = false;
+      settings = mkOption {
+        type = jsonFormat.type;
+        default = { };
+        description = ''
+          Vesktop settings written to
+          {file}`$XDG_CONFIG_HOME/vesktop/settings.json`. See
+          <https://github.com/Vencord/Vesktop/blob/main/src/shared/settings.d.ts>
+          for available options
+        '';
       };
 
       vencord = {
-        theme = ''
-          @import "https://discordstyles.github.io/RadialStatus/dist/RadialStatus.css";
+        useSystem = mkEnableOption "Vencord package from nixpkgs";
 
-          :root {
-            --rs-small-spacing: 2px;
-            --rs-medium-spacing: 3px;
-            --rs-large-spacing: 4px;
-            --rs-small-width: 2px;
-            --rs-medium-width: 3px;
-            --rs-large-width: 4px;
-            --rs-avatar-shape: 50%;
-            --rs-online-color: #43b581;
-            --rs-idle-color: #faa61a;
-            --rs-dnd-color: #f04747;
-            --rs-offline-color: #636b75;
-            --rs-streaming-color: #643da7;
-            --rs-invisible-color: #747f8d;
-            --rs-self-speaking-color: #57d39b;
-            --rs-phone-color: var(--rs-online-color);
-            --rs-phone-visible: block;
-          }
-        '';
+        catppuccin = ctp.mkCatppuccinOpt {
+          name = "vencord";
+        } // {
+          accent = ctp.mkAccentOpt "vencord";
+        };
+
+        settings = mkOption {
+          type = jsonFormat.type;
+          default = { };
+          description = ''
+            Vencord settings written to
+            {file}`$XDG_CONFIG_HOME/vesktop/settings/settings.json`. See
+            <https://github.com/Vendicated/Vencord/blob/main/src/api/Settings.ts>
+            for available options.
+          '';
+        };
+
+        theme = mkOption {
+          type = with types; nullOr (either lines path);
+          default = null;
+        };
       };
     };
   };
+
+  config = mkIf cfg.enable (mkMerge [
+    (mkIf (cfg.flavour == "discord") {
+      home.packages = [
+        cfg.package
+      ];
+    })
+    (mkIf (cfg.flavour == "vesktop") {
+      home.packages = [
+        (cfg.package.override {
+          withSystemVencord = cfg.vesktop.vencord.useSystem;
+        })
+      ];
+
+      xdg.configFile = {
+        "vesktop/settings.json" = mkIf (cfg.vesktop.settings != { }) {
+          source = jsonFormat.generate "vesktop-settings.json" cfg.vesktop.settings;
+        };
+        "vesktop/settings/settings.json" = mkIf (cfg.vesktop.vencord.settings != { }) {
+          source = jsonFormat.generate "vencord-settings.json" cfg.vesktop.vencord.settings;
+        };
+      };
+    })
+    (mkIf (cfg.flavour == "vesktop" && cfg.vesktop.vencord.theme != null) {
+      programs.discord.vesktop.settings.enabledThemes = [ "theme.css" ];
+      xdg.configFile."vesktop/themes/theme.css".source =
+        if builtins.isPath cfg.vesktop.vencord.theme || isStorePath cfg.vesktop.vencord.theme
+        then cfg.vesktop.vencord.theme
+        else pkgs.writeText "vesktop-theme.css" cfg.vesktop.vencord.theme;
+    })
+    (mkIf (cfg.flavour == "vesktop" && cfg.vesktop.vencord.catppuccin.enable) {
+      programs.discord.vesktop.vencord.theme = let
+        catppuccin = config.programs.discord.vesktop.vencord.catppuccin;
+      in ''
+        @import"https://catppuccin.github.io/discord/dist/catppuccin-${catppuccin.flavor}-${catppuccin.accent}.theme.css";
+      '';
+    })
+  ]);
 }

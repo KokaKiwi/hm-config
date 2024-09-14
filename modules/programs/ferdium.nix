@@ -1,17 +1,15 @@
-{ config, pkgs, ... }:
+{ config, pkgs, lib, ... }:
+with lib;
 let
-  packageLib = config.lib.package;
+  cfg = config.programs.ferdium;
 in {
-  programs.ferdium = {
-    enable = true;
-    package = let
-      ferdium = pkgs.nur.repos.kokakiwi.ferdium;
-      launcher = pkgs.writeShellScript "ferdium" ''
-        ELECTRON_IS_DEV=0 exec /usr/bin/electron ${ferdium}/share/ferdium "$@"
-      '';
-    in packageLib.wrapPackage ferdium { } ''
-      rm -f $out/bin/ferdium
-      cp -T ${launcher} $out/bin/ferdium
-    '';
+  options.programs.ferdium = {
+    enable = mkEnableOption "Ferdium";
+
+    package = mkPackageOption pkgs "ferdium" {};
+  };
+
+  config = mkIf cfg.enable {
+    home.packages = [ cfg.package ];
   };
 }
