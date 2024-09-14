@@ -9,6 +9,7 @@
 , neovim-unwrapped
 
 , libiconv
+, libuv
 , utf8proc
 }:
 let
@@ -38,6 +39,14 @@ let
     };
   };
 
+  libuv' = libuv.override {
+    inherit stdenv;
+  };
+
+  unibilium = callPackage ./deps/unibilium.nix {
+    inherit stdenv;
+  };
+
   cmakeGenerateVersion = writeText "GenerateVersion.cmake" ''
     if (NOT EXISTS ''${OUTPUT})
       file(WRITE ''${OUTPUT} "")
@@ -49,6 +58,8 @@ let
   };
 in (neovim-unwrapped.override {
   inherit stdenv;
+  inherit unibilium;
+  libuv = libuv';
   inherit lua tree-sitter;
 }).overrideAttrs (final: super: {
   version = "nightly-unstable-2024-09-13";
