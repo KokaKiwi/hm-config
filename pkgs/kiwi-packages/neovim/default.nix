@@ -11,6 +11,8 @@
 , libiconv
 , libuv
 , utf8proc
+
+, buildArch ? null
 }:
 let
   stdenv = llvmStdenv;
@@ -73,13 +75,16 @@ in (neovim-unwrapped.override {
 
   inherit tree-sitter;
 
-  env.NIX_CFLAGS_COMPILE = toString [
-    "-O2" "-march=skylake"
-    "-flto=full"
-    "-mllvm" "-polly"
-    "-mllvm" "-polly-parallel"
-    "-mllvm" "-polly-num-threads=8"
-  ];
+  env.NIX_CFLAGS_COMPILE = let
+    flags = [
+      "-O2"
+      "-flto=full"
+      "-mllvm" "-polly"
+      "-mllvm" "-polly-parallel"
+      "-mllvm" "-polly-num-threads=8"
+    ]
+    ++ lib.optional (buildArch != null) "-march=${buildArch}";
+  in toString flags;
   env.NIX_CFLAGS_LINK = toString [
     "-lgomp"
   ];
