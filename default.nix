@@ -15,9 +15,6 @@ let
 
     config = {
       allowUnfree = true;
-      permittedInsecurePackages = [
-        "jitsi-meet-1.0.8043"
-      ];
     };
 
     localSystem = {
