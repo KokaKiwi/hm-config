@@ -24,11 +24,13 @@ let
   inherit (pkgs) lib;
 
   mkModule = hostname: host: let
+    configuration = host.configuration or ./hosts/${hostname}/home.nix;
+
     module = import "${sources.home-manager}/modules" {
       configuration = { lib, ... }: {
         imports = [
           ./modules
-          (host.configuration or ./hosts/${hostname}/home.nix)
+          configuration
         ];
 
         _module.args = {
