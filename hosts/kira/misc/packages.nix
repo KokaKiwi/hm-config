@@ -56,7 +56,7 @@ in {
     trashy minisign mkcert doggo
     nix-binutils git-absorb pingu miniserve
     patool nix-prefetch kx-aspe-cli shellcheck
-    bun consul uv
+    bun consul uv b3sum b2sum
     nixgl.nixGLIntel
     kiwiPackages.doll
   ]
