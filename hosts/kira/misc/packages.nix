@@ -58,12 +58,14 @@ in {
     patool nix-prefetch kx-aspe-cli shellcheck
     bun consul uv b3sum b2sum
     nixgl.nixGLIntel
-    kiwiPackages.doll
   ]
   ++ (with nur.repos; [
     kokakiwi.enquirer
     kokakiwi.go-mod-upgrade
     kokakiwi.lddtree
+  ])
+  ++ (with pkgs.kiwiPackages; [
+    doll
   ])
   ++ (lib.attrValues packages);
 
