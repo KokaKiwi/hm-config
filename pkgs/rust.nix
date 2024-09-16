@@ -19,7 +19,7 @@ let
       hash = "sha256-VZZnlyP69+Y3crrLHQyJirqlHrTtGTsyiSnZB8jEvVo=";
     };
 
-    rust = rust_1_80;
+    rust = rust_1_81;
   };
 
   rustToolchains = let
