@@ -5,6 +5,7 @@ let
   callPackage = pkgs.kiwiPackages.callPackageIfNewer;
 in {
   agenix = callPackage "${sources.agenix}/pkgs/agenix.nix" { };
+  amber-lang = callPackage ./development/compilers/amber-lang { };
   ast-grep = callPackage ./development/tools/ast-grep { };
   attic-client = callPackage ./tools/networking/attic-client {
     nix = pkgs.nixVersions.nix_2_18_upstream;
