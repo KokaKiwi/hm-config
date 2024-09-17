@@ -58,6 +58,9 @@ in {
     patool nix-prefetch kx-aspe-cli shellcheck
     bun consul uv b3sum b2sum
     nixgl.nixGLIntel
+
+    # Data
+    b612 fira-code-nerdfont
   ]
   ++ (with nur.repos; [
     kokakiwi.enquirer
