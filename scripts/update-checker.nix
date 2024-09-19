@@ -16,6 +16,8 @@ let
     "glances"
     # Haskell stuff
     "ShellCheck"
+    # TODO
+    "slack"
   ];
 
   neovim = config.programs.neovim.package;
