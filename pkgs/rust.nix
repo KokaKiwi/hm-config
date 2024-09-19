@@ -46,7 +46,10 @@ let
   ) versions;
 in {
   inherit rustToolchains rustPlatforms;
-} // lib.mapAttrs (name: attrs: {
+} // lib.mapAttrs (name: attrs: rec {
   rustPlatform = rustPlatforms.${name};
   rustToolchain = rustToolchains.${name};
+
+  rustc = rustToolchain;
+  cargo = rustToolchain;
 }) versions

@@ -9,19 +9,21 @@
 , cmake
 , installShellFiles
 , pkg-config
+, rustc
+, cargo
 
 , libiconv
 }:
 python3Packages.buildPythonApplication rec {
   pname = "uv";
-  version = "0.4.12";
+  version = "0.4.13";
   pyproject = true;
 
   src = fetchFromGitHub {
     owner = "astral-sh";
     repo = "uv";
     rev = "refs/tags/${version}";
-    hash = "sha256-eOSLln3UdyfrJBpjAetuIIcbszEC+dI/1++8fyadWDM=";
+    hash = "sha256-LWpeWKcoGSsGLyi3uwDpq4ij/UrKVB5bEy2xlT3/Mjk=";
   };
 
   cargoDeps = rustPlatform.importCargoLock {
@@ -38,6 +40,7 @@ python3Packages.buildPythonApplication rec {
     cmake
     installShellFiles
     pkg-config
+    rustc cargo
     rustPlatform.cargoSetupHook
     rustPlatform.maturinBuildHook
   ];

@@ -1,6 +1,6 @@
 { pkgs, sources }:
 let
-  inherit (pkgs) libsForQt5 kdePackages;
+  inherit (pkgs) libsForQt5 kdePackages rustTools;
   inherit (pkgs.kiwiPackages) python3Packages;
   callPackage = pkgs.kiwiPackages.callPackageIfNewer;
 in {
@@ -92,7 +92,9 @@ in {
   taplo = callPackage ./development/tools/taplo { };
   trunk = callPackage ./development/tools/trunk { };
   usage = callPackage ./tools/usage { };
-  uv = callPackage ./development/tools/uv { };
+  uv = callPackage ./development/tools/uv {
+    inherit (rustTools.rust_1_81) rustPlatform rustc cargo;
+  };
   vesktop = callPackage ./misc/vesktop { };
   wit-bindgen = callPackage ./development/tools/rust/wit-bindgen { };
   xh = callPackage ./tools/networking/xh { };
