@@ -12,21 +12,16 @@
 }:
 rustPlatform.buildRustPackage rec {
   pname = "onefetch";
-  version = "2.21.0";
+  version = "2.22.0";
 
   src = fetchFromGitHub {
     owner = "o2sh";
     repo = "onefetch";
     rev = version;
-    hash = "sha256-KQs7b+skXQhHbfHIJkgowNY2FB6oS2V8TQFdkmElC/k=";
+    hash = "sha256-Gk1hoC6qsLYm7DbbaRSur6GdC9yXQe+mYLUJklXIwZ4=";
   };
 
-  cargoPatches = [
-    # enable pkg-config feature of zstd
-    ./0001-enable-pkg-config-feature-of-zstd.patch
-  ];
-
-  cargoHash = "sha256-gKA1MMahoaDFia8LR33GG3jRttZzHwpUpFawlCQcy7g=";
+  cargoHash = "sha256-iaC7iGRRy/QQQbpWjXUoS9Qx7L8ECG9y6qWJ6f7cqm4=";
 
   nativeBuildInputs = [ cmake installShellFiles pkg-config ];
 
@@ -35,6 +30,8 @@ rustPlatform.buildRustPackage rec {
   nativeCheckInputs = [
     git
   ];
+
+  env.ZSTD_SYS_USE_PKG_CONFIG = 1;
 
   preCheck = ''
     git init
