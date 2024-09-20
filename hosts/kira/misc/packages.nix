@@ -58,7 +58,7 @@ in {
     nix-binutils git-absorb pingu miniserve
     patool nix-prefetch kx-aspe-cli shellcheck
     bun consul uv b3sum b2sum
-    amber-lang wrangler fastly
+    amber-lang fastly
     nixgl.nixGLIntel
 
     # Data
