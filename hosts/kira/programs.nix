@@ -5,6 +5,7 @@
     ./programs/bat.nix
     ./programs/bpython.nix
     ./programs/discord.nix
+    ./programs/element.nix
     ./programs/ferdium.nix
     ./programs/fish.nix
     ./programs/gdb.nix
@@ -38,7 +39,6 @@
 
   programs = {
     aura.enable = true;
-    element.enable = true;
     fd.enable = true;
     gitui.enable = true;
     glab.enable = true;
