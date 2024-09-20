@@ -1,5 +1,8 @@
 {
   imports = [
+    ./lib/package.nix
+    ./lib/python.nix
+
     ./misc/data.nix
     ./misc/env.nix
     ./misc/home.nix

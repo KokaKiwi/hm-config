@@ -1,9 +1,6 @@
 { pkgs, lib, ... }:
 {
   imports = [
-    ./lib/package.nix
-    ./lib/python.nix
-
     ./misc/catppuccin.nix
     ./misc/deuxfleurs.nix
     ./misc/editorconfig.nix
