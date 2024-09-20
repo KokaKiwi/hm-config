@@ -8,18 +8,18 @@
 }:
 buildNpmPackage rec {
   pname = "bitwarden-cli";
-  version = "2024.8.2";
+  version = "2024.9.0";
 
   src = fetchFromGitHub {
     owner = "bitwarden";
     repo = "clients";
     rev = "cli-v${version}";
-    hash = "sha256-F/UbaNKkyf8AoTSa0B0Ipdr5Z8qAkbk7tJ0Cdq7gk+U=";
+    hash = "sha256-o5nRG2j73qheDOyeFfSga64D8HbTn1EUrCiN0W+Xn0w=";
   };
 
   inherit nodejs;
 
-  npmDepsHash = "sha256-SnrK26QaxHYKX0532rGBASjx9PwxKSsVFRzZ3Cs2GPk=";
+  npmDepsHash = "sha256-L7/frKCNlq0xr6T+aSqyEQ44yrIXwcpdU/djrhCJNNk=";
 
   nativeBuildInputs = [
     python3
