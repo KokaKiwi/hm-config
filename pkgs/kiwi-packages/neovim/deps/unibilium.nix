@@ -28,7 +28,7 @@ stdenv.mkDerivation (finalAttrs: {
   meta = with lib; {
     description = "A terminfo library";
     homepage = "https://github.com/neovim/unibilium";
-    changelog = "https://github.com/neovim/unibilium/blob/${src.rev}/Changes";
+    changelog = "https://github.com/neovim/unibilium/blob/${finalAttrs.src.rev}/Changes";
     license = licenses.lgpl3Plus;
     platforms = platforms.linux ++ platforms.darwin;
   };

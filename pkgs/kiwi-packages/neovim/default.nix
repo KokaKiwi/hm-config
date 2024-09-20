@@ -104,6 +104,10 @@ in (neovim-unwrapped.override {
     "-DENABLE_LTO=OFF"
   ];
 
+  passthru = {
+    inherit unibilium;
+  };
+
   meta = super.meta // {
     description = "${super.meta.description} (Kiwi Edition)";
   };
