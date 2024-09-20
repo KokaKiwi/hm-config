@@ -16,7 +16,7 @@ let
   '';
 in {
   programs.paru = {
-    enable = true;
+    enable = false;
     package = pkgs.nur.repos.kokakiwi.paru;
 
     extraSettings = ''
