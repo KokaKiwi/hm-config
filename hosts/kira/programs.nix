@@ -21,6 +21,7 @@
     ./programs/mux.nix
     ./programs/neovim.nix
     ./programs/nix-index.nix
+    ./programs/nushell.nix
     ./programs/nvchecker.nix
     ./programs/paru.nix
     ./programs/password-store.nix
