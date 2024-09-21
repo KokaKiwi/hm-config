@@ -10,9 +10,12 @@
 
   nix = {
     package = pkgs.nix.override {
+      stdenv = pkgs.llvmStdenv;
+
       openssl = pkgs.quictls;
       curl = pkgs.curlHTTP3;
       python3 = pkgs.python312;
+      llvmPackages = pkgs.llvmPackages_18;
     };
 
     builders = {
