@@ -42,7 +42,7 @@ option PATH='':
     {{PATH}}
 
 repl:
-  nix repl --expr '(import ./default.nix { })'
+  nix repl -f default.nix
 
 update *NAMES:
   npins update {{NAMES}}
