@@ -59,7 +59,9 @@ in {
   litecli = callPackage ./development/tools/database/litecli { };
   mise = callPackage ./development/tools/mise { };
   minio-client = callPackage ./tools/networking/minio-client { };
-  miniserve = callPackage ./tools/misc/miniserve { };
+  miniserve = callPackage ./tools/misc/miniserve {
+    inherit (rustTools.rust_1_81) rustPlatform;
+  };
   module-server = callPackage ./misc/module-server { };
   mux = callPackage ./misc/mux { };
   ncmpcpp = callPackage ./audio/ncmpcpp { };
