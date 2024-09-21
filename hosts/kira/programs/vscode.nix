@@ -43,7 +43,7 @@
           platforms = [ "x86_64-linux" "x86_64-darwin" "aarch64-linux" "aarch64-darwin" "armv7l-linux" ];
         };
       };
-    in config.lib.opengl.wrapPackage vscode;
+    in config.lib.opengl.wrapPackage vscode { };
 
     extensions = with pkgs.vscode-extensions; [
       catppuccin.catppuccin-vsc

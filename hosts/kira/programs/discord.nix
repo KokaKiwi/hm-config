@@ -1,15 +1,19 @@
 { config, pkgs, ... }:
 let
   cfg = config.programs.discord;
+
+  inherit (config.lib) opengl;
 in {
   programs.discord = {
     enable = true;
 
     flavour = "vesktop";
-    package = config.lib.opengl.wrapPackage (pkgs.vesktop.override {
-      withTTS = false;
-      withSystemVencord = cfg.vesktop.vencord.useSystem;
-    });
+    package = let
+      discord = pkgs.vesktop.override {
+        withTTS = false;
+        withSystemVencord = cfg.vesktop.vencord.useSystem;
+      };
+    in opengl.wrapPackage discord { };
 
     vesktop = {
       settings = {

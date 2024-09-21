@@ -7,7 +7,7 @@
         go = pkgs.go_1_23;
         buildGoModule = pkgs.buildGo123Module;
       };
-    in config.lib.opengl.wrapPackage kitty;
+    in config.lib.opengl.wrapPackage kitty { };
 
     font = {
       name = "FiraCode Nerd Font Mono";
