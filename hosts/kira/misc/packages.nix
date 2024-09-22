@@ -29,9 +29,6 @@ let
     } ''
       mv $out/bin/mc $out/bin/mcli
     '';
-    npins = pkgs.npins.override {
-      # nix = config.nix.package;
-    };
     obsidian = opengl.wrapPackage pkgs.obsidian { };
     slack = opengl.wrapPackage pkgs.slack { };
     stockfish = pkgs.kiwiPackages.stockfish.override {
@@ -57,7 +54,7 @@ in {
     nix-binutils git-absorb pingu miniserve
     patool nix-prefetch kx-aspe-cli shellcheck
     bun consul uv b3sum b2sum
-    amber-lang fastly
+    amber-lang fastly npins
     nixgl.nixGLIntel
 
     # Data
