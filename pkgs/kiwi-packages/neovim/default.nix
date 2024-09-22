@@ -13,6 +13,7 @@
 , utf8proc
 
 , buildArch ? null
+, extraCompileFlags ? [ ]
 }:
 let
   stdenv = llvmStdenv;
@@ -83,7 +84,8 @@ in (neovim-unwrapped.override {
       "-mllvm" "-polly-parallel"
       "-mllvm" "-polly-num-threads=8"
     ]
-    ++ lib.optional (buildArch != null) "-march=${buildArch}";
+    ++ lib.optional (buildArch != null) "-march=${buildArch}"
+    ++ extraCompileFlags;
   in toString flags;
   env.NIX_CFLAGS_LINK = toString [
     "-lgomp"
