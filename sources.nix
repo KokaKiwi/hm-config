@@ -10,10 +10,6 @@ let
     ];
     catppuccin = [
       ./npins/patches/catppuccin/0001-Expose-lib.ctp.patch
-      (pkgs.fetchpatch {
-        url = "https://github.com/catppuccin/nix/pull/337.patch";
-        hash = "sha256-/p86ah92DVj3CfwuAySvET+5b9G+a9nebE4diJiMCU4=";
-      })
     ];
     home-manager = [
       ./npins/patches/home-manager/0001-PR-4801-Add-a-podman-module-for-containers-and-netwo.patch
