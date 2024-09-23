@@ -4,6 +4,7 @@ let
   inherit (pkgs.kiwiPackages) python3Packages;
   callPackage = pkgs.kiwiPackages.callPackageIfNewer;
 in {
+  act = callPackage ./development/tools/act { };
   agenix = callPackage "${sources.agenix}/pkgs/agenix.nix" { };
   amber-lang = callPackage ./development/compilers/amber-lang { };
   ast-grep = callPackage ./development/tools/ast-grep { };
