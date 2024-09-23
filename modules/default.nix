@@ -10,6 +10,7 @@
     ./misc/opengl.nix
     ./misc/upgrade-diff.nix
 
+    ./programs/act.nix
     ./programs/aura.nix
     ./programs/bpython.nix
     ./programs/discord.nix
