@@ -10,7 +10,7 @@ let
     "about" "binutils" "bloat" "cache" "criterion"
     "nextest" "expand" "deny" "outdated"
     "show-asm" "msrv" "depgraph" "udeps"
-    "ndk" "tarpaulin"
+    "ndk" "tarpaulin" "cross"
     "wipe" "sort" "leptos" "component"
     "c-next" "make" "audit"
   ];
