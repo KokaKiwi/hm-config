@@ -3,11 +3,11 @@ with lib;
 let
   git = let
     git = pkgs.git.overrideAttrs (self: prev: {
-      version = "2.46.1";
+      version = "2.46.2";
 
       src = pkgs.fetchurl {
         url = "https://www.kernel.org/pub/software/scm/git/git-${self.version}.tar.xz";
-        hash = "sha256-iIyvuL1qtMu+vBaAQKiFDrCI+B3DrCYXGVz8CHfw9UM=";
+        hash = "sha256-XuihxoU2CUpPf5UV7cFUsSonW4pX3aTCHs+/GvuuLKM=";
       };
 
       env.NIX_CFLAGS_LINK = toString (prev.NIX_CFLAGS_LINK or "") + " -fuse-ld=lld";
