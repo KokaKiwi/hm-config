@@ -59,9 +59,9 @@
         "repo": "fenix"
       },
       "branch": "main",
-      "revision": "88cc292eb3c689073c784d6aecc0edbd47e12881",
-      "url": "https://github.com/nix-community/fenix/archive/88cc292eb3c689073c784d6aecc0edbd47e12881.tar.gz",
-      "hash": "06qddnf4a7aldb9jrmfmq346lf1mdckakb0n7ip6az45148s8jfn"
+      "revision": "4306d494985e00719573bbdeb863c27c6d83dc9c",
+      "url": "https://github.com/nix-community/fenix/archive/4306d494985e00719573bbdeb863c27c6d83dc9c.tar.gz",
+      "hash": "0scbalnahwrm8sy6pvlmff5s081ivdxxhwln8ihrmha993xdjn6m"
     },
     "home-manager": {
       "type": "Git",
@@ -71,9 +71,9 @@
         "repo": "home-manager"
       },
       "branch": "master",
-      "revision": "04213d1ce4221f5d9b40bcee30706ce9a91d148d",
-      "url": "https://github.com/nix-community/home-manager/archive/04213d1ce4221f5d9b40bcee30706ce9a91d148d.tar.gz",
-      "hash": "12pkv5mq167gnvqy6p6xnm2x1c51d0zqd0cm9s27lqzl9lmwd4rl"
+      "revision": "21c021862fa696c8199934e2153214ab57150cb6",
+      "url": "https://github.com/nix-community/home-manager/archive/21c021862fa696c8199934e2153214ab57150cb6.tar.gz",
+      "hash": "1ihdc17198yzjprvs8mbqgrp7ya261n870vvzd1nng8k38ayz0hi"
     },
     "nixgl": {
       "type": "Git",
@@ -95,9 +95,9 @@
         "repo": "nixpkgs"
       },
       "branch": "nixpkgs-unstable",
-      "revision": "a1d92660c6b3b7c26fb883500a80ea9d33321be2",
-      "url": "https://github.com/NixOS/nixpkgs/archive/a1d92660c6b3b7c26fb883500a80ea9d33321be2.tar.gz",
-      "hash": "02ipaz5zmxf4mk4m9wpwmjigwcv4xcrnikhpxl2lahpjs5yyk4jp"
+      "revision": "568bfef547c14ca438c56a0bece08b8bb2b71a9c",
+      "url": "https://github.com/NixOS/nixpkgs/archive/568bfef547c14ca438c56a0bece08b8bb2b71a9c.tar.gz",
+      "hash": "1xs8msc87xbigrdja137nbjzhrgcy2spj0sc8ia1idpc2d7crhb4"
     },
     "tmux-loadavg": {
       "type": "Git",
@@ -119,9 +119,9 @@
         "repo": "treefmt-nix"
       },
       "branch": "main",
-      "revision": "ee41a466c2255a3abe6bc50fc6be927cdee57a9f",
-      "url": "https://github.com/numtide/treefmt-nix/archive/ee41a466c2255a3abe6bc50fc6be927cdee57a9f.tar.gz",
-      "hash": "0v1gfziy6hcdw2r0wbcnzql4ak0f3mz9pzz2s9djqf8wj0xzjham"
+      "revision": "35dfece10c642eb52928a48bee7ac06a59f93e9a",
+      "url": "https://github.com/numtide/treefmt-nix/archive/35dfece10c642eb52928a48bee7ac06a59f93e9a.tar.gz",
+      "hash": "16wii3pqgjbhdzcj2bm2fnpy7kjjs7lk95797la2089l0yn6i6c2"
     }
   },
   "version": 3
