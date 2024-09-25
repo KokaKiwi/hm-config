@@ -45,20 +45,20 @@ let
   inherit (python3Packages) python;
 in python3Packages.buildPythonApplication rec {
   pname = "kitty";
-  version = "0.36.2";
+  version = "0.36.3";
   format = "other";
 
   src = fetchFromGitHub {
     owner = "kovidgoyal";
     repo = "kitty";
     rev = "refs/tags/v${version}";
-    hash = "sha256-a8nFxLs1VYzVEcNCgZNsJYZ4t/+Gobs98LM0GM8F2S0=";
+    hash = "sha256-P+gaeZQAyVyc4R3WEuxljhfTJ0SeOg/7ccaAF5MtwCA=";
   };
 
   goModules = (buildGoModule {
     pname = "kitty-go-modules";
     inherit src version;
-    vendorHash = "sha256-8bdBw9iDZhoFtng5FSMmNwHAmPziNIxz5WPw+ytUFPM=";
+    vendorHash = "sha256-8hsQH7OdsxeVG6pomuxdmTXNmQYBROoUUxoC10LeLFo=";
   }).goModules;
 
   patches = [
