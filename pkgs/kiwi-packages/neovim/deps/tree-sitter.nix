@@ -1,10 +1,13 @@
-{ lib
+{ lib, stdenv
 
 , fetchFromGitHub
 
 , rustPlatform
+, cmake
 
 , tree-sitter
+
+, withWasm ? true, wasmtime-c-api
 }:
 let
   final = rustPlatform.buildRustPackage rec {
@@ -29,11 +32,31 @@ let
           -i cli/src/main.rs
     '';
 
+    nativeBuildInputs = [
+      stdenv.cc
+    ] ++ lib.optionals withWasm [
+      cmake
+    ];
+
+    buildInputs = lib.optionals withWasm [
+      wasmtime-c-api
+    ];
+
+    buildFeatures = lib.optional withWasm "wasm";
+    cargoBuildFlags = [ "-p" "tree-sitter-cli" ];
+
     doCheck = false;
 
-    postInstall = ''
-      make install PREFIX=$out
-      rm $out/lib/*.so{,.*}
+    postInstall = let
+      cFlags = lib.optionals withWasm [
+        "-DTREE_SITTER_FEATURE_WASM"
+      ];
+    in ''
+      make install \
+        PREFIX=$out \
+        CC="${stdenv.cc}/bin/cc" \
+        CFLAGS="$NIX_CFLAGS_COMPILE ${toString cFlags}" \
+        LDFLAGS="$NIX_LDFLAGS"
     '';
 
     passthru = {

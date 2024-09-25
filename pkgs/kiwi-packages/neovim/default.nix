@@ -9,11 +9,11 @@
 , neovim-unwrapped
 
 , libiconv
-, libuv
 , utf8proc
 
 , buildArch ? null
 , extraCompileFlags ? [ ]
+, withWasm ? true
 }:
 let
   stdenv = llvmStdenv;
@@ -42,12 +42,17 @@ let
     };
   };
 
-  libuv' = libuv.override {
+  libuv = callPackage ./deps/libuv.nix {
     inherit stdenv;
   };
 
   unibilium = callPackage ./deps/unibilium.nix {
     inherit stdenv;
+  };
+
+  wasmtime-c-api = callPackage ./deps/wasmtime-c-api.nix {
+    inherit stdenv;
+    inherit (rustTools.rust) rustPlatform cargo rustc;
   };
 
   cmakeGenerateVersion = writeText "GenerateVersion.cmake" ''
@@ -57,12 +62,14 @@ let
   '';
 
   tree-sitter = callPackage ./deps/tree-sitter.nix {
+    inherit stdenv;
     inherit (rustTools.rust) rustPlatform;
+
+    inherit withWasm wasmtime-c-api;
   };
 in (neovim-unwrapped.override {
   inherit stdenv;
-  inherit unibilium;
-  libuv = libuv';
+  inherit unibilium libuv;
   inherit lua tree-sitter;
 }).overrideAttrs (final: super: {
   version = "nightly-unstable-2024-09-25";
@@ -70,8 +77,8 @@ in (neovim-unwrapped.override {
   src = fetchFromGitHub {
     owner = "neovim";
     repo = "neovim";
-    rev = "8ba9f0468d1ed1112b0ff0ffe17849bf94f46234";
-    hash = "sha256-ndvkkK7fQwvCqTW7ZdBZCSe+z5GTl4bC8ZI+JPIfLOY=";
+    rev = "069451bb214bd9d97273ac92b37a25054df0f1a8";
+    hash = "sha256-THzzdFDqa89mbKET+zpZuGig5tMxqE9znVflUdh3hto=";
   };
 
   inherit tree-sitter;
@@ -94,6 +101,8 @@ in (neovim-unwrapped.override {
   nativeBuildInputs = super.nativeBuildInputs ++ [
     libiconv
     utf8proc'
+  ] ++ lib.optionals withWasm [
+    wasmtime-c-api
   ];
 
   preConfigure = (super.preConfigure or "") + ''
@@ -104,10 +113,12 @@ in (neovim-unwrapped.override {
 
   cmakeFlags = super.cmakeFlags ++ [
     "-DENABLE_LTO=OFF"
+  ] ++ lib.optionals withWasm [
+    "-DENABLE_WASMTIME=ON"
   ];
 
   passthru = {
-    inherit unibilium;
+    inherit unibilium libuv wasmtime-c-api;
   };
 
   meta = super.meta // {
