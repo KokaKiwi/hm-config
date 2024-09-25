@@ -24,6 +24,7 @@ let
       };
     in opengl.wrapPackage package { };
     jellyfin-media-player = opengl.wrapPackage pkgs.jellyfin-media-player { };
+    localsend = opengl.wrapPackage pkgs.localsend { };
     minio-client = package.wrapPackage pkgs.minio-client {
       suffix = "-arch";
     } ''
