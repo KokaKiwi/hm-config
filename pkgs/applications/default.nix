@@ -82,6 +82,7 @@ in {
   pdm = callPackage ./development/tools/pdm { };
   pgcli = python3Packages.callPackage ./development/tools/pgcli { };
   ponysay = callPackage ./misc/ponysay { };
+  pre-commit = callPackage ./tools/misc/pre-commit { };
   procs = callPackage ./tools/admin/procs { };
   ptpython = python3Packages.callPackage ./development/tools/ptpython { };
   pueue = callPackage ./misc/pueue { };
