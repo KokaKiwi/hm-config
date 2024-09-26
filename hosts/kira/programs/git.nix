@@ -83,4 +83,8 @@ in {
       lfs."https://gitlab.kokakiwi.net".locksverify = true;
     };
   };
+
+  home.packages = with pkgs; [
+    git-cliff
+  ];
 }
