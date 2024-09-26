@@ -87,6 +87,7 @@ in {
   pueue = callPackage ./misc/pueue { };
   rustup = callPackage ./development/tools/rustup { };
   sccache = callPackage ./development/tools/sccache { };
+  silicon = callPackage ./misc/silicon { };
   skopeo = callPackage ./tools/misc/skopeo { };
   starship = callPackage ./tools/misc/starship { };
   syncthing = callPackage ./networking/syncthing { };
