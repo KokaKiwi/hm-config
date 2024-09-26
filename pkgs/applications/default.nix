@@ -42,6 +42,10 @@ in {
   fd = callPackage ./misc/fd { };
   gh = callPackage ./version-management/gh { };
   git-absorb = callPackage ./version-management/git-absorb { };
+  git-cliff = callPackage ./version-management/git-cliff {
+    _overwrite = true;
+    inherit (rustTools.rust) rustPlatform;
+  };
   git-interactive-rebase-tool = callPackage ./version-management/git-interactive-rebase-tool { };
   gitui = callPackage ./misc/gitui { };
   glab = callPackage ./misc/glab {

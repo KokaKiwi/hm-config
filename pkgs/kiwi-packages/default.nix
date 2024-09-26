@@ -5,10 +5,12 @@ rec {
   });
   callPackageIfNewer = path: args: let
     drv = super.${drv'.pname} or null;
-    drv' = callPackage path args;
+    drv' = callPackage path (builtins.removeAttrs args [ "_overwrite" ]);
+
+    overwrite = args._overwrite or false;
 
     isNewer = drv == null || lib.versionOlder drv.version drv'.version;
-    finalDrv = if isNewer then drv' else drv;
+    finalDrv = if (isNewer || overwrite) then drv' else drv;
   in finalDrv // {
     local = drv';
     remote = drv;
