@@ -56,7 +56,7 @@ in {
     patool nix-prefetch kx-aspe-cli shellcheck
     bun consul uv b3sum b2sum
     amber-lang fastly npins
-    devenv
+    devenv pre-commit
     nixgl.nixGLIntel
 
     # Data
