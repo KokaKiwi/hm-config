@@ -99,6 +99,7 @@ in {
   syncthingtray = kdePackages.callPackage ./misc/syncthingtray { };
   szurubooru-cli = callPackage ./misc/booru-cli { };
   taplo = callPackage ./development/tools/taplo { };
+  tmux = callPackage ./tools/misc/tmux { };
   trunk = callPackage ./development/tools/trunk { };
   usage = callPackage ./tools/usage { };
   uv = callPackage ./development/tools/uv {
