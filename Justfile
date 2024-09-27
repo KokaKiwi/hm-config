@@ -56,6 +56,9 @@ update-channels:
   npins -d npins/channels update
   -git add npins/channels && git commit -m 'chore: Update channels'
 
+upload-cache:
+  attic push kokakiwi result/home-path/
+
 push:
   git push -f origin main
 
