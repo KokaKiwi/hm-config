@@ -1,4 +1,4 @@
-{ pkgs, ... }:
+{ config, pkgs, ... }:
 {
   programs.neovim = {
     enable = true;
@@ -32,4 +32,8 @@
       nodejs = pkgs.nodejs;
     };
   };
+
+  home.packages = [
+    config.programs.neovim.tree-sitter.package
+  ];
 }
