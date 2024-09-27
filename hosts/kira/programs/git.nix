@@ -33,6 +33,10 @@ let
     withLibsecret = true;
   };
 in {
+  imports = [
+    ./git/git-cliff.nix
+  ];
+
   programs.git = {
     enable = true;
     package = git;
@@ -83,8 +87,4 @@ in {
       lfs."https://gitlab.kokakiwi.net".locksverify = true;
     };
   };
-
-  home.packages = with pkgs; [
-    git-cliff
-  ];
 }
