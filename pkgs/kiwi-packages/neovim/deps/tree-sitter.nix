@@ -17,11 +17,11 @@ let
     src = fetchFromGitHub {
       owner = "tree-sitter";
       repo = "tree-sitter";
-      rev = "90efa346081013ab76697859790ee53304dcef0a";
-      hash = "sha256-rsLMBqvHPddMUno2UYkdZBMQFEjQEddMUR91NW1eCtM=";
+      rev = "31f24395b48865d808665e78dc1504769e07737d";
+      hash = "sha256-WauijaBkJ02Sm3n/Ddy0HRvzYeHkn5OF5xCmNrm19gs=";
     };
 
-    cargoHash = "sha256-w5FSC8N7T2td95GuSRRqcjpiYG0SqbGBJelDHWpUGA0=";
+    cargoHash = "sha256-zQx2R8dV4U8X5WMbEsgs+dojhgAV3/X/CyYzDNhE5m4=";
 
     nativeBuildInputs = lib.optionals withWasm [ cmake ];
 
