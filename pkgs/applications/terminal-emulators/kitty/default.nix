@@ -45,14 +45,14 @@ let
   inherit (python3Packages) python;
 in python3Packages.buildPythonApplication rec {
   pname = "kitty";
-  version = "0.36.3";
+  version = "0.36.4";
   format = "other";
 
   src = fetchFromGitHub {
     owner = "kovidgoyal";
     repo = "kitty";
     rev = "refs/tags/v${version}";
-    hash = "sha256-P+gaeZQAyVyc4R3WEuxljhfTJ0SeOg/7ccaAF5MtwCA=";
+    hash = "sha256-nN0y2VKK5UNaozpHQNPN7AYkto9z6rJNpYRJhvLPtVQ=";
   };
 
   goModules = (buildGoModule {
