@@ -12,31 +12,18 @@
 let
   final = rustPlatform.buildRustPackage rec {
     pname = "tree-sitter";
-    version = "0.23.0";
+    version = "0.23.0-unstable-2024-09-27";
 
     src = fetchFromGitHub {
       owner = "tree-sitter";
       repo = "tree-sitter";
-      rev = "v${version}";
-      hash = "sha256-QNi2u6/jtiMo1dLYoA8Ev1OvZfa8mXCMibSD70J4vVI=";
+      rev = "90efa346081013ab76697859790ee53304dcef0a";
+      hash = "sha256-rsLMBqvHPddMUno2UYkdZBMQFEjQEddMUR91NW1eCtM=";
     };
 
-    cargoHash = "sha256-H4baEmGsQx+W9EXblt8R1CTYfkgR+dQDAsIwPVsqR68=";
+    cargoHash = "sha256-w5FSC8N7T2td95GuSRRqcjpiYG0SqbGBJelDHWpUGA0=";
 
-    postPatch = ''
-      # remove web interface
-      sed -e '/pub mod playground/d' \
-          -i cli/src/lib.rs
-      sed -e 's/playground,//' \
-          -e 's/playground::serve(&grammar_path.*$/println!("ERROR: web-ui is not available in this nixpkgs build; enable the webUISupport"); std::process::exit(1);/' \
-          -i cli/src/main.rs
-    '';
-
-    nativeBuildInputs = [
-      stdenv.cc
-    ] ++ lib.optionals withWasm [
-      cmake
-    ];
+    nativeBuildInputs = lib.optionals withWasm [ cmake ];
 
     buildInputs = lib.optionals withWasm [
       wasmtime-c-api
@@ -52,11 +39,14 @@ let
         "-DTREE_SITTER_FEATURE_WASM"
       ];
     in ''
-      make install \
+      make all \
         PREFIX=$out \
+        LIBDIR=lib INCLUDEDIR=include \
         CC="${stdenv.cc}/bin/cc" \
         CFLAGS="$NIX_CFLAGS_COMPILE ${toString cFlags}" \
         LDFLAGS="$NIX_LDFLAGS"
+
+      make install PREFIX=$out
     '';
 
     passthru = {
