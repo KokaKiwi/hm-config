@@ -57,6 +57,7 @@ in {
     bun consul uv b3sum b2sum
     amber-lang fastly npins
     devenv pre-commit
+    oha drill
     nixgl.nixGLIntel
 
     # Data
