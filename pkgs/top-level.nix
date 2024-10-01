@@ -13,15 +13,17 @@ let
     (adapters.overrideBintools llvmPackages.bintools)
     adapters.useLLDLinker
   ];
-in {
-  lib = super.lib // (importSub ./lib { });
 
   kiwiPackages = importSub ./kiwi-packages { };
   rustTools = importSub ./rust.nix { };
+in {
+  lib = super.lib // (importSub ./lib { });
+
+  inherit kiwiPackages rustTools;
 
   stdenv-adapters = adapters;
   inherit mkLLVMStdenv;
-  llvmStdenv = mkLLVMStdenv pkgs.llvmPackages_18;
+  llvmStdenv = mkLLVMStdenv kiwiPackages.llvmPackages;
 
   fenix = import sources.fenix {
     inherit pkgs lib;

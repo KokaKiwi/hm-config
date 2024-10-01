@@ -31,4 +31,7 @@ rec {
   libgit2 = callPackage ./libgit2 { };
   neovim = callPackage ./neovim { };
   stockfish = callPackage ./games/stockfish { };
+
+  llvm = pkgs.llvm_19;
+  llvmPackages = pkgs.llvmPackages_19;
 }

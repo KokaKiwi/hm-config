@@ -15,7 +15,7 @@
       openssl = pkgs.quictls;
       curl = pkgs.curlHTTP3;
       python3 = pkgs.python312;
-      llvmPackages = pkgs.llvmPackages_18;
+      inherit (pkgs.kiwiPackages) llvmPackages;
     };
 
     builders = {
