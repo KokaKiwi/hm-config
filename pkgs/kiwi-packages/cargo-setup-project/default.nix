@@ -13,6 +13,7 @@ let
     };
     ".neoconf.json" = {
       src = ./neoconf.json;
+      overwrite = false;
     };
     "Justfile" = {
       src = substituteAll {
