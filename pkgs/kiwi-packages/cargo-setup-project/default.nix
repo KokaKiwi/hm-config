@@ -11,6 +11,9 @@ let
       src = ./mise.toml;
       overwrite = false;
     };
+    ".neoconf.json" = {
+      src = ./neoconf.json;
+    };
     "Justfile" = {
       src = substituteAll {
         src = ./Justfile.base;
