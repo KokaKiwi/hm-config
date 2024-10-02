@@ -9,8 +9,8 @@
     "nixos-24.05": {
       "type": "Channel",
       "name": "nixos-24.05",
-      "url": "https://releases.nixos.org/nixos/24.05/nixos-24.05.5366.fbca5e745367/nixexprs.tar.xz",
-      "hash": "0az60wyj4jj1vhvpn5yw04n8x5ldbmh5sk39321357bybz4pal9h"
+      "url": "https://releases.nixos.org/nixos/24.05/nixos-24.05.5385.1719f27dd95f/nixexprs.tar.xz",
+      "hash": "0f7i315g1z8kjh10hvj2zv7y2vfqxmwvd96hwlcrr8aig6qq5gzm"
     }
   },
   "version": 3
