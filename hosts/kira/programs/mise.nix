@@ -24,6 +24,7 @@
 
       experimental = true;
       legacy_version_file = false;
+      pipx_uvx = true;
     };
   };
 }
