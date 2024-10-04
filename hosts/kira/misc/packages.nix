@@ -64,6 +64,7 @@ in {
     b612 fira-code-nerdfont
   ]
   ++ (with nur.repos; [
+    kokakiwi.agree
     kokakiwi.enquirer
     kokakiwi.go-mod-upgrade
     kokakiwi.lddtree
