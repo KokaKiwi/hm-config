@@ -39,6 +39,7 @@ in {
   fastfetch = callPackage ./misc/fastfetch {
     stdenv = pkgs.llvmStdenv;
   };
+  fastly = callPackage ./misc/fastly { };
   fd = callPackage ./misc/fd { };
   gh = callPackage ./version-management/gh { };
   git-absorb = callPackage ./version-management/git-absorb { };
