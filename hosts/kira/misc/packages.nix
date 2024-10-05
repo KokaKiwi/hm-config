@@ -44,7 +44,7 @@ let
 in {
   home.packages = with pkgs; [
     attic-client colmena bitwarden-cli
-    eza hexyl pdm pnpm-lock-export
+    eza hexyl pdm
     cargo-shell opentofu gleam mergerfs
     nix-info nurl nixos-option nixfmt-rfc-style
     nix-output-monitor nixd
