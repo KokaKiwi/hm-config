@@ -1,4 +1,4 @@
-{ config, pkgs, ... }:
+{ config, pkgs, lib, ... }:
 {
   programs.kitty = {
     enable = true;
@@ -41,7 +41,7 @@
 
       # Advanced
       editor = "${config.programs.neovim.finalPackage}/bin/nvim";
-      shell = "${config.home.shell.package}/bin/fish";
+      shell = config.home.shell.fullPath;
 
       allow_remote_control = "socket-only";
       listen_on = "unix:@kitty";

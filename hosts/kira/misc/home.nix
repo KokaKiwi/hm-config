@@ -25,7 +25,10 @@
     elfcomment = "readelf -p .comment";
   };
 
-  home.shell.package = config.programs.fish.package;
+  home.shell = {
+    package = config.programs.fish.package;
+    exeName = "fish";
+  };
 
   fonts.fontconfig.enable = true;
 }

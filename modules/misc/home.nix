@@ -1,28 +1,20 @@
-{ pkgs, lib, ... }:
-{
-  options.home = with lib; {
-    shell = mkOption {
-      type = types.submodule ({ config, ... }: {
-        options = {
-          package = mkPackageOption pkgs "bash" { };
-          exeName = mkOption {
-            type = with types; nullOr str;
-            default = null;
-          };
+{ config, pkgs, lib, ... }:
+let
+  cfg = config.home.shell;
+in {
+  options.home.shell = with lib; {
+    package = mkPackageOption pkgs "bash" { };
+    exeName = mkOption {
+      type = with types; nullOr str;
+      default = null;
+    };
 
-          fullPath = mkOption {
-            type = types.str;
-            readOnly = true;
-          };
-        };
-
-        config = {
-          fullPath = if config.exeName != null
-            then "${config.package}/bin/${config.exeName}"
-            else lib.getExe config.package;
-        };
-      });
-      default = { };
+    fullPath = mkOption {
+      type = types.str;
+      readOnly = true;
+      default = if cfg.exeName != null
+        then "${cfg.package}/bin/${cfg.exeName}"
+        else lib.getExe cfg.package;
     };
   };
 }
