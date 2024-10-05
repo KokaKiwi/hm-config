@@ -48,5 +48,6 @@
     ./services/module-server.nix
     ./services/nix-web.nix
     ./services/sccache.nix
+    ./services/solaar.nix
   ];
 }
