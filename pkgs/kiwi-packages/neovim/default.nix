@@ -88,15 +88,14 @@ in (neovim-unwrapped.override {
       "-O2"
       "-flto=full"
       "-mllvm" "-polly"
+      "-mllvm" "-polly-omp-backend=LLVM"
       "-mllvm" "-polly-parallel"
-      "-mllvm" "-polly-num-threads=8"
+      "-mllvm" "-polly-num-threads=0"
+      "-mllvm" "-polly-vectorizer=stripmine"
     ]
     ++ lib.optional (buildArch != null) "-march=${buildArch}"
     ++ extraCompileFlags;
   in toString flags;
-  env.NIX_CFLAGS_LINK = toString [
-    "-lgomp"
-  ];
 
   nativeBuildInputs = super.nativeBuildInputs ++ [
     libiconv
