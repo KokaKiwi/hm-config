@@ -17,8 +17,8 @@ let
     src = fetchFromGitHub {
       owner = "tree-sitter";
       repo = "tree-sitter";
-      rev = "c611e15a310d9af2ed18172ef1faafaf18506176";
-      hash = "sha256-buVKxC2x8LNTRfONW3ulNzW6Q120bW+bmpzwmUx7E6k=";
+      rev = "079c69313fa14b9263739b494a47efacc1c91cdc";
+      hash = "sha256-LGZwuuxcU8oBJrTys6VHooO8RuIj2D1D0wKlZLeRh9o=";
     };
 
     cargoHash = "sha256-fDauLNrIYmQXpKGz9ElRnI+zXh7LXo7r+mWpvlp6giY=";
@@ -39,14 +39,11 @@ let
         "-DTREE_SITTER_FEATURE_WASM"
       ];
     in ''
-      make all \
+      make install \
         PREFIX=$out \
-        LIBDIR=lib INCLUDEDIR=include \
         CC="${stdenv.cc}/bin/cc" \
         CFLAGS="$NIX_CFLAGS_COMPILE ${toString cFlags}" \
         LDFLAGS="$NIX_LDFLAGS"
-
-      make install PREFIX=$out
     '';
 
     passthru = {
