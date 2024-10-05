@@ -59,9 +59,9 @@
         "repo": "fenix"
       },
       "branch": "main",
-      "revision": "440a2fbf280a5e7805520b81e9a69104c1545646",
-      "url": "https://github.com/nix-community/fenix/archive/440a2fbf280a5e7805520b81e9a69104c1545646.tar.gz",
-      "hash": "10wnwmin8hwl90rc4pdjkdhmr2xhnmg2bd90bn8x58l5x49f4rk5"
+      "revision": "cdfd7bf3e3edaf9e3f6d1e397d3ee601e513613c",
+      "url": "https://github.com/nix-community/fenix/archive/cdfd7bf3e3edaf9e3f6d1e397d3ee601e513613c.tar.gz",
+      "hash": "1h9p1s3bkrilyafx15qzb5y5m6wdip9iiykv5mgbl48vhvgip2c3"
     },
     "home-manager": {
       "type": "Git",
@@ -71,9 +71,9 @@
         "repo": "home-manager"
       },
       "branch": "master",
-      "revision": "30e04f3d477256de3eb6a7cff608e220087537d4",
-      "url": "https://github.com/nix-community/home-manager/archive/30e04f3d477256de3eb6a7cff608e220087537d4.tar.gz",
-      "hash": "0lrmnf8n6zg2spncz7vm2w5g9asdqbqlfvxj1qv4fjk3rllalqfy"
+      "revision": "509dbf8d45606b618e9ec3bbe4e936b7c5bc6c1e",
+      "url": "https://github.com/nix-community/home-manager/archive/509dbf8d45606b618e9ec3bbe4e936b7c5bc6c1e.tar.gz",
+      "hash": "1sibwpxml8nzp4rm9n5qml48mnrizj55n1w4xl7xb4vd4am64yfk"
     },
     "nixgl": {
       "type": "Git",
@@ -95,9 +95,9 @@
         "repo": "nixpkgs"
       },
       "branch": "nixpkgs-unstable",
-      "revision": "75b209227dff3cbfac19f510a62f9446c92beac4",
-      "url": "https://github.com/NixOS/nixpkgs/archive/75b209227dff3cbfac19f510a62f9446c92beac4.tar.gz",
-      "hash": "166varzdamn2kkw5zslarzl6026q87wjnss1hlhdsq89hwvfgd2d"
+      "revision": "eeeb90a1dd3c9bea3afdbc76fd34d0fb2a727c7a",
+      "url": "https://github.com/NixOS/nixpkgs/archive/eeeb90a1dd3c9bea3afdbc76fd34d0fb2a727c7a.tar.gz",
+      "hash": "01c17c4y7jmjwp82djrap8hp7w2a46vy4sg8f62f5cpynngscyr5"
     },
     "tmux-loadavg": {
       "type": "Git",
