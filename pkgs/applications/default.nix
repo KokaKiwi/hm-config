@@ -107,6 +107,7 @@ in {
     inherit (rustTools.rust_1_81) rustPlatform rustc cargo;
   };
   vesktop = callPackage ./misc/vesktop { };
+  wasm-tools = callPackage ./tools/misc/wasm-tools { };
   wit-bindgen = callPackage ./development/tools/rust/wit-bindgen { };
   xh = callPackage ./tools/networking/xh { };
   xinspect = callPackage ./development/tools/xinspect { };
