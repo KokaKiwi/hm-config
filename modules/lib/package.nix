@@ -13,6 +13,7 @@
       ] ++ nativeBuildInputs;
 
       separateDebugInfo = false;
+      preferLocalBuild = true;
 
       buildCommand = ''
         set -eo pipefail
