@@ -112,5 +112,6 @@ in {
   xh = callPackage ./tools/networking/xh { };
   xinspect = callPackage ./development/tools/xinspect { };
   yt-dlp = python3Packages.callPackage ./misc/yt-dlp { };
+  ziggy = callPackage ./development/tools/ziggy { };
   zoxide = callPackage ./tools/misc/zoxide { };
 }
