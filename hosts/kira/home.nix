@@ -29,9 +29,10 @@
 
   targets.genericLinux.enable = true;
 
-  xdg.enable = true;
-  programs.man.enable = false;
-  xdg.mime.enable = false;
+  xdg = {
+    enable = true;
+    mime.enable = false;
+  };
 
   nix.gc.automatic = true;
 
