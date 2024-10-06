@@ -58,6 +58,7 @@ in {
     amber-lang fastly npins
     devenv pre-commit sq
     oha drill deno
+    ziggy
     nixgl.nixGLIntel
 
     # Data
