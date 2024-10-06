@@ -39,6 +39,11 @@ in {
     enable32bits = false;
   };
 
+  zigpkgs = import sources.zig-overlay {
+    inherit pkgs;
+    inherit (pkgs) system;
+  };
+
   nur = import sources.nur {
     nurpkgs = pkgs;
     inherit pkgs;

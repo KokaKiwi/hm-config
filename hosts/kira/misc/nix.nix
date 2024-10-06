@@ -50,7 +50,7 @@
     }
     // builtins.listToAttrs (map (name: lib.nameValuePair name sources.channels.${name}) names)
     // {
-      inherit (sources) crane fenix treefmt;
+      inherit (sources) crane fenix treefmt zig-overlay;
     };
     keepOldNixPath = false;
 
@@ -68,6 +68,7 @@
       "kokakiwi"
       "niv"
       "colmena"
+      "zig2nix"
     ];
 
     extraCaches = [
