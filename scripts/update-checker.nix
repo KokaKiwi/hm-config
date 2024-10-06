@@ -118,6 +118,11 @@ in pkgs.nur.repos.kokakiwi.lib.mkUpdateChecker {
       github = "andir/npins";
       use_max_tag = true;
     };
+    man-db = {
+      source = "gitlab";
+      gitlab = "man-db/man-db";
+      use_max_tag = true;
+    };
   };
   overrides = {
     aura.exclude_regex = "^$";

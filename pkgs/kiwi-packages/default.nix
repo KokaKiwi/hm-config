@@ -29,6 +29,7 @@ rec {
   cargo-setup-project = callPackage ./cargo-setup-project { };
   doll = callPackage ./doll { };
   libgit2 = callPackage ./libgit2 { };
+  man-db = callPackage ./man-db { };
   neovim = callPackage ./neovim { };
   stockfish = callPackage ./games/stockfish { };
 
