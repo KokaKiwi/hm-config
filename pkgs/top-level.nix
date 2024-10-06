@@ -1,28 +1,22 @@
-{ pkgs, super, lib
+{ pkgs, super
 
 , sources
 
 , importSub
 }:
-let
-  adapters = import ./stdenv/adapters.nix {
-    inherit pkgs;
-  };
-
-  mkLLVMStdenv = llvmPackages: lib.pipe llvmPackages.stdenv [
-    (adapters.overrideBintools llvmPackages.bintools)
-    adapters.useLLDLinker
-  ];
+rec {
+  lib = super.lib // (importSub ./lib { });
 
   kiwiPackages = importSub ./kiwi-packages { };
   rustTools = importSub ./rust.nix { };
-in {
-  lib = super.lib // (importSub ./lib { });
 
-  inherit kiwiPackages rustTools;
-
-  stdenv-adapters = adapters;
-  inherit mkLLVMStdenv;
+  stdenv-adapters = import ./stdenv/adapters.nix {
+    inherit pkgs;
+  };
+  mkLLVMStdenv = llvmPackages: lib.pipe llvmPackages.stdenv [
+    (stdenv-adapters.overrideBintools llvmPackages.bintools)
+    stdenv-adapters.useLLDLinker
+  ];
   llvmStdenv = mkLLVMStdenv kiwiPackages.llvmPackages;
 
   fenix = import sources.fenix {
@@ -32,7 +26,7 @@ in {
   craneLib = import sources.crane {
     pkgs = super;
   };
-  craneLibStable = pkgs.craneLib.overrideToolchain pkgs.rustTools.rust.rustPlatorm;
+  craneLibStable = craneLib.overrideToolchain rustTools.rust.rustPlatorm;
 
   nixgl = import sources.nixgl {
     inherit pkgs;
