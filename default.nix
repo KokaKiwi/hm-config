@@ -57,7 +57,9 @@ let
     inherit env;
   };
 
-  hosts = import ./hosts { };
+  hosts = import ./hosts {
+    inherit pkgs lib;
+  };
 in {
   inherit pkgs lib;
 
