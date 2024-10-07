@@ -1,12 +1,21 @@
-From 877be3006d49c6146202067a89a3305ed6f456b1 Mon Sep 17 00:00:00 2001
+From d642205165ad7894f4a3d3235a0e8c0163898689 Mon Sep 17 00:00:00 2001
 From: KokaKiwi <kokakiwi+git@kokakiwi.net>
-Date: Fri, 13 Sep 2024 11:53:57 +0200
-Subject: [PATCH] PR#4801: Add a podman module for containers and networks on
- Linux
+Date: Mon, 7 Oct 2024 11:17:11 +0200
+Subject: [PATCH 2/3] PR#4801: podman: init module
 
 Squashed commit of the following:
 
-commit df5d577ff94303f7f4ffc58e83986274ecec924c
+commit 6aa79fd47e5d657257ebc4756dd2fdbe3aadabe8
+Author: Nicholas Hassan <nick@hassan.host>
+Date:   Wed Oct 2 22:33:04 2024 +0930
+
+    podman: map basic network options
+
+    Provides some of the basic network options from quadlets as attribute options directly on the network. Remaining options are configured with "extraNetworkConfig"
+
+    Signed-off-by: Nicholas Hassan <nick@hassan.host>
+
+commit 18c7777436820265a3a3941af12bebf0a8db202d
 Author: Nicholas Hassan <nick@hassan.host>
 Date:   Sun Aug 25 17:01:00 2024 +0930
 
@@ -17,7 +26,7 @@ Date:   Sun Aug 25 17:01:00 2024 +0930
 
     Signed-off-by: Nicholas Hassan <nick@hassan.host>
 
-commit e7db1bae5e86a6d6c8efc14d6aae7db9cd83bbdb
+commit c5d92ae17205f406e88b0eb1b15007ba6bebf631
 Author: Nicholas Hassan <nick@hassan.host>
 Date:   Sun Aug 18 13:52:28 2024 +0930
 
@@ -27,7 +36,7 @@ Date:   Sun Aug 18 13:52:28 2024 +0930
 
     Signed-off-by: Nicholas Hassan <nick@hassan.host>
 
-commit b41295bc05aaa4968faa91381b00a66594fb60e5
+commit 2023e7df9caecc50be0ee4de665ba24074680563
 Author: Nicholas Hassan <nick@hassan.host>
 Date:   Wed Aug 14 17:21:19 2024 +0930
 
@@ -35,7 +44,7 @@ Date:   Wed Aug 14 17:21:19 2024 +0930
 
     supplying networkMode options have a bunch of rules around them - for the meantime, treat networkMode and lists of bridge networks seperately.
 
-commit eb8926b645abc0cf31f768107c95c8fbae4b81d4
+commit 774b25bf54cadcca28df652df110ec0f61990634
 Author: Nicholas Hassan <nick@hassan.host>
 Date:   Tue Aug 13 17:28:46 2024 +0930
 
@@ -45,7 +54,7 @@ Date:   Tue Aug 13 17:28:46 2024 +0930
 
     Signed-off-by: Nicholas Hassan <nick@hassan.host>
 
-commit 2cf4705dc0335d7269bb92fca18c57b4cefbf8e3
+commit b49a75df3f8d6e9dd6827a6e546df8c9a165352e
 Author: Nicholas Hassan <nick@hassan.host>
 Date:   Fri Dec 22 10:54:18 2023 +1030
 
@@ -58,19 +67,19 @@ Date:   Fri Dec 22 10:54:18 2023 +1030
 ---
  modules/lib/maintainers.nix                   |  10 +
  modules/modules.nix                           |   1 +
- modules/services/podman-linux/containers.nix  | 418 ++++++++++++++++++
+ modules/services/podman-linux/containers.nix  | 411 ++++++++++++++++++
  modules/services/podman-linux/default.nix     |  14 +
  .../services/podman-linux/install-quadlet.nix | 182 ++++++++
- modules/services/podman-linux/networks.nix    |  73 +++
+ modules/services/podman-linux/networks.nix    | 111 +++++
  modules/services/podman-linux/options.nix     |  42 ++
- modules/services/podman-linux/podman-lib.nix  |  89 ++++
+ modules/services/podman-linux/podman-lib.nix  | 101 +++++
  modules/services/podman-linux/services.nix    |  54 +++
  tests/default.nix                             |   1 +
  .../services/podman-linux/container.nix       |  70 +++
  .../modules/services/podman-linux/default.nix |   5 +
  .../services/podman-linux/manifest.nix        |  63 +++
- .../modules/services/podman-linux/network.nix |  31 ++
- 14 files changed, 1053 insertions(+)
+ .../modules/services/podman-linux/network.nix |  39 ++
+ 14 files changed, 1104 insertions(+)
  create mode 100644 modules/services/podman-linux/containers.nix
  create mode 100644 modules/services/podman-linux/default.nix
  create mode 100644 modules/services/podman-linux/install-quadlet.nix
@@ -84,12 +93,12 @@ Date:   Fri Dec 22 10:54:18 2023 +1030
  create mode 100644 tests/modules/services/podman-linux/network.nix
 
 diff --git a/modules/lib/maintainers.nix b/modules/lib/maintainers.nix
-index 832e025d..08b1d9ef 100644
+index 70f480d0..4d18d0fa 100644
 --- a/modules/lib/maintainers.nix
 +++ b/modules/lib/maintainers.nix
-@@ -276,6 +276,16 @@
-     github = "nilp0inter";
-     githubId = 1224006;
+@@ -282,6 +282,16 @@
+     github = "NitroSniper";
+     githubId = 44097331;
    };
 +  n-hass = {
 +    name = "Nicholas Hassan";
@@ -105,10 +114,10 @@ index 832e025d..08b1d9ef 100644
      email = "sable@seyleri.us";
      name = "Sable Seyler";
 diff --git a/modules/modules.nix b/modules/modules.nix
-index 7223fb4b..4622a08e 100644
+index 28bfe436..e3d5d5d5 100644
 --- a/modules/modules.nix
 +++ b/modules/modules.nix
-@@ -345,6 +345,7 @@ let
+@@ -347,6 +347,7 @@ let
      ./services/plan9port.nix
      ./services/playerctld.nix
      ./services/plex-mpv-shim.nix
@@ -118,10 +127,10 @@ index 7223fb4b..4622a08e 100644
      ./services/psd.nix
 diff --git a/modules/services/podman-linux/containers.nix b/modules/services/podman-linux/containers.nix
 new file mode 100644
-index 00000000..41c44f88
+index 00000000..8cb79f8b
 --- /dev/null
 +++ b/modules/services/podman-linux/containers.nix
-@@ -0,0 +1,418 @@
+@@ -0,0 +1,411 @@
 +{ config, lib, pkgs, ... }:
 +
 +with lib;
@@ -141,9 +150,9 @@ index 00000000..41c44f88
 +      ###
 +
 +      ### Helpers
-+      ifNotNull = condition: text: if condition != null then text else "";
-+      ifNotEmptyList = list: text: if list != [ ] then text else "";
-+      ifNotEmptySet = set: text: if set != { } then text else "";
++      ifNotNull = podman-lib.sourceHelpers.ifNotNull;
++      ifNotEmptyList = podman-lib.sourceHelpers.ifNotEmptyList;
++      ifNotEmptySet = podman-lib.sourceHelpers.ifNotEmptySet;
 +      ###
 +
 +      ### Formatters
@@ -227,75 +236,66 @@ index 00000000..41c44f88
 +        else
 +          "";
 +      ###
-+
-+      configText = ''
-+        # Automatically generated by home-manager podman container configuration
-+        # DO NOT EDIT THIS FILE DIRECTLY
-+        #
-+        # ${serviceName}.container
-+        [Unit]
-+        Description=${
-+          if containerDef.description != null then
-+            containerDef.description
-+          else
-+            "Service for container ${containerName}"
-+        }
-+        After=network.target ${formatNetworkDependencies containerDef.networks}
-+        ${ifNotEmptyList containerDef.networks
-+        "Requires=${formatNetworkDependencies containerDef.networks}"}
-+        ${formatExtraConfig mergedUnitConfig}
-+
-+        [Container]
-+        ContainerName=${containerName}
-+        Image=${containerDef.image}
-+        Label=nix.home-manager.managed=true
-+        ${ifNotEmptySet containerDef.environment
-+        "Environment=${formatEnvironment containerDef.environment}"}
-+        ${ifNotNull containerDef.environmentFile
-+        "EnvironmentFile=${containerDef.environmentFile}"}
-+        ${ifNotNull containerDef.command "Exec=${containerDef.command}"}
-+        ${ifNotNull containerDef.user
-+        "User=${formatPrimitiveValue containerDef.user}"}
-+        ${ifNotNull containerDef.userNS "UserNS=${containerDef.userNS}"}
-+        ${ifNotNull containerDef.group
-+        "Group=${formatPrimitiveValue containerDef.group}"}
-+        ${ifNotEmptyList containerDef.ports (formatPorts containerDef.ports)}
-+        ${ifNotNull containerDef.networkMode
-+        "Network=${containerDef.networkMode}"}
-+        ${formatBridgeNetworks containerDef}
-+        ${ifNotNull containerDef.ip4 "IP=${containerDef.ip4}"}
-+        ${ifNotNull containerDef.ip6 "IP6=${containerDef.ip6}"}
-+        ${ifNotEmptyList containerDef.volumes
-+        (formatVolumes containerDef.volumes)}
-+        ${ifNotEmptyList containerDef.devices
-+        (formatDevices containerDef.devices)}
-+        ${formatAutoUpdate containerDef.autoupdate}
-+        ${ifNotEmptyList containerDef.addCapabilities
-+        (formatCapabilities "Add" containerDef.addCapabilities)}
-+        ${ifNotEmptyList containerDef.dropCapabilities
-+        (formatCapabilities "Drop" containerDef.dropCapabilities)}
-+        ${ifNotEmptyList containerDef.labels (formatLabels containerDef.labels)}
-+        ${formatPodmanArgs containerDef}
-+        ${formatExtraConfig containerDef.extraContainerConfig}
-+
-+        [Service]
-+        Environment="PATH=/run/wrappers/bin:/run/current-system/sw/bin:${config.home.homeDirectory}/.nix-profile/bin"
-+        ${formatExtraConfig mergedServiceConfig}
-+
-+        [Install]
-+        ${if containerDef.autostart then
-+          "WantedBy=multi-user.target default.target"
++    in ''
++      # Automatically generated by home-manager podman container configuration
++      # DO NOT EDIT THIS FILE DIRECTLY
++      #
++      # ${serviceName}.container
++      [Unit]
++      Description=${
++        if containerDef.description != null then
++          containerDef.description
 +        else
-+          ""}
-+      '';
++          "Service for container ${containerName}"
++      }
++      After=network.target ${formatNetworkDependencies containerDef.networks}
++      ${ifNotEmptyList containerDef.networks
++      "Requires=${formatNetworkDependencies containerDef.networks}"}
++      ${formatExtraConfig mergedUnitConfig}
 +
-+      removeBlankLines = text:
-+        let
-+          lines = splitString "\n" text;
-+          nonEmptyLines = filter (line: line != "") lines;
-+        in concatStringsSep "\n" nonEmptyLines;
++      [Container]
++      Label=nix.home-manager.managed=true
++      ContainerName=${containerName}
++      Image=${containerDef.image}
++      ${ifNotEmptySet containerDef.environment
++      "Environment=${formatEnvironment containerDef.environment}"}
++      ${ifNotNull containerDef.environmentFile
++      "EnvironmentFile=${containerDef.environmentFile}"}
++      ${ifNotNull containerDef.command "Exec=${containerDef.command}"}
++      ${ifNotNull containerDef.user
++      "User=${formatPrimitiveValue containerDef.user}"}
++      ${ifNotNull containerDef.userNS "UserNS=${containerDef.userNS}"}
++      ${ifNotNull containerDef.group
++      "Group=${formatPrimitiveValue containerDef.group}"}
++      ${ifNotEmptyList containerDef.ports (formatPorts containerDef.ports)}
++      ${ifNotNull containerDef.networkMode
++      "Network=${containerDef.networkMode}"}
++      ${formatBridgeNetworks containerDef}
++      ${ifNotNull containerDef.ip4 "IP=${containerDef.ip4}"}
++      ${ifNotNull containerDef.ip6 "IP6=${containerDef.ip6}"}
++      ${ifNotEmptyList containerDef.volumes
++      (formatVolumes containerDef.volumes)}
++      ${ifNotEmptyList containerDef.devices
++      (formatDevices containerDef.devices)}
++      ${formatAutoUpdate containerDef.autoupdate}
++      ${ifNotEmptyList containerDef.addCapabilities
++      (formatCapabilities "Add" containerDef.addCapabilities)}
++      ${ifNotEmptyList containerDef.dropCapabilities
++      (formatCapabilities "Drop" containerDef.dropCapabilities)}
++      ${ifNotEmptyList containerDef.labels (formatLabels containerDef.labels)}
++      ${formatPodmanArgs containerDef}
++      ${formatExtraConfig containerDef.extraContainerConfig}
 +
-+    in removeBlankLines configText;
++      [Service]
++      Environment="PATH=/run/wrappers/bin:/run/current-system/sw/bin:${config.home.homeDirectory}/.nix-profile/bin"
++      ${formatExtraConfig mergedServiceConfig}
++
++      [Install]
++      ${if containerDef.autostart then
++        "WantedBy=multi-user.target default.target"
++      else
++        ""}
++    '';
 +
 +  toQuadletInternal = name: containerDef:
 +    let
@@ -305,8 +305,10 @@ index 00000000..41c44f88
 +        ++ (podman-lib.buildConfigAsserts name containerDef.unitConfig
 +          podman-lib.unitConfigTypeRules);
 +    in {
-+      serviceName = "podman-${name}";
-+      source = createQuadletSource name containerDef;
++      serviceName =
++        "podman-${name}"; # quadlet generater leaves systemd name as 'podman-<name>.service'
++      source =
++        podman-lib.removeBlankLines (createQuadletSource name containerDef);
 +      resourceType = "container";
 +      assertions = allAssertions;
 +    };
@@ -750,17 +752,20 @@ index 00000000..6a0827b3
 +}
 diff --git a/modules/services/podman-linux/networks.nix b/modules/services/podman-linux/networks.nix
 new file mode 100644
-index 00000000..18c75304
+index 00000000..f2a2e914
 --- /dev/null
 +++ b/modules/services/podman-linux/networks.nix
-@@ -0,0 +1,73 @@
+@@ -0,0 +1,111 @@
 +{ config, lib, pkgs, ... }:
 +
 +with lib;
 +
 +let
-+
 +  podman-lib = import ./podman-lib.nix { inherit lib; };
++
++  ifNotNull = podman-lib.sourceHelpers.ifNotNull;
++  ifNotEmptyList = podman-lib.sourceHelpers.ifNotEmptyList;
++  ifNotEmptySet = podman-lib.sourceHelpers.ifNotEmptySet;
 +
 +  createQuadletSource = name: networkDef: ''
 +    # Automatically generated by home-manager for podman network configuration
@@ -770,7 +775,10 @@ index 00000000..18c75304
 +    [Network]
 +    Label=nix.home-manager.managed=true
 +    NetworkName=${name}
-+    ${podman-lib.formatExtraConfig networkDef}
++    ${ifNotNull networkDef.driver "Driver=${networkDef.driver}"}
++    ${ifNotNull networkDef.subnet "Subnet=${networkDef.subnet}"}
++    ${ifNotNull networkDef.gateway "Gateway=${networkDef.gateway}"}
++    ${podman-lib.formatExtraConfig networkDef.extraNetworkConfig}
 +
 +    [Install]
 +    WantedBy=multi-user.target default.target
@@ -790,28 +798,60 @@ index 00000000..18c75304
 +
 +  toQuadletInternal = name: networkDef: {
 +    serviceName =
-+      "podman-${name}"; # becomes podman-<netname>-network.service because of quadlet
-+    source = createQuadletSource name networkDef;
++      "podman-${name}"; # quadlet generater makes systemd name 'podman-<name>-network.service'
++    source = podman-lib.removeBlankLines (createQuadletSource name networkDef);
 +    resourceType = "network";
 +    assertions = podman-lib.buildConfigAsserts name networkDef
 +      (networkConfigAssertions name networkDef);
 +  };
 +
 +in {
-+  options = {
++  options = let
++    networkDefinitionType = types.submodule {
++      options = {
++
++        driver = mkOption {
++          type = with types; nullOr str;
++          default = null;
++          description = "The network driver to use.";
++          example = "bridge";
++        };
++
++        subnet = mkOption {
++          type = with types; nullOr str;
++          default = null;
++          description = "The subnet to use for the network.";
++          example = "192.168.20.0/24";
++        };
++
++        gateway = mkOption {
++          type = with types; nullOr str;
++          default = null;
++          description = "The gateway IP to use for the network.";
++          example = "192.168.20.1";
++        };
++
++        extraNetworkConfig = mkOption {
++          type = podman-lib.primitiveAttrs;
++          default = { };
++          description =
++            "Extra configuration for the network, in Podman Quadlet format.";
++          example = literalMD ''
++            ```
++            extraNetworkConfig = {
++              IPv6 = true;
++              Options = "isolate=true";
++              PodmanArgs = [ "--dns=192.168.55.1" ];
++            };
++            ```
++          '';
++        };
++      };
++    };
++  in {
 +    services.podman.networks = mkOption {
-+      type = types.attrsOf (podman-lib.primitiveAttrs);
++      type = types.attrsOf networkDefinitionType;
 +      default = { };
-+      example = literalMD ''
-+        ```
-+        {
-+          mynetwork = {
-+            Subnet = "192.168.1.0/24";
-+            Gateway = "192.168.1.1";
-+          };
-+        }
-+        ```
-+      '';
 +      description = "Defines Podman network quadlet configurations.";
 +    };
 +  };
@@ -877,10 +917,10 @@ index 00000000..41e80bdb
 +}
 diff --git a/modules/services/podman-linux/podman-lib.nix b/modules/services/podman-linux/podman-lib.nix
 new file mode 100644
-index 00000000..a5343efd
+index 00000000..71694c84
 --- /dev/null
 +++ b/modules/services/podman-linux/podman-lib.nix
-@@ -0,0 +1,89 @@
+@@ -0,0 +1,101 @@
 +{ lib, ... }:
 +
 +with lib;
@@ -969,6 +1009,18 @@ index 00000000..a5343efd
 +  #
 +  # Tracking for a potential solution: https://github.com/NixOS/nixpkgs/issues/138423
 +  newuidmapPaths = "/run/wrappers/bin:/usr/bin:/bin:/usr/sbin:/sbin";
++
++  sourceHelpers = {
++    ifNotNull = condition: text: if condition != null then text else "";
++    ifNotEmptyList = list: text: if list != [ ] then text else "";
++    ifNotEmptySet = set: text: if set != { } then text else "";
++  };
++
++  removeBlankLines = text:
++    let
++      lines = splitString "\n" text;
++      nonEmptyLines = filter (line: line != "") lines;
++    in concatStringsSep "\n" nonEmptyLines;
 +}
 diff --git a/modules/services/podman-linux/services.nix b/modules/services/podman-linux/services.nix
 new file mode 100644
@@ -1031,10 +1083,10 @@ index 00000000..223d3958
 +  ]);
 +}
 diff --git a/tests/default.nix b/tests/default.nix
-index 82aa2f6c..fdcd3862 100644
+index 4d17da1e..5db4d7db 100644
 --- a/tests/default.nix
 +++ b/tests/default.nix
-@@ -263,6 +263,7 @@ in import nmtSrc {
+@@ -265,6 +265,7 @@ in import nmtSrc {
      ./modules/services/pbgopy
      ./modules/services/picom
      ./modules/services/playerctld
@@ -1131,7 +1183,7 @@ index 00000000..c8b12bbd
 +}
 diff --git a/tests/modules/services/podman-linux/manifest.nix b/tests/modules/services/podman-linux/manifest.nix
 new file mode 100644
-index 00000000..b571275e
+index 00000000..37ddaba5
 --- /dev/null
 +++ b/tests/modules/services/podman-linux/manifest.nix
 @@ -0,0 +1,63 @@
@@ -1166,12 +1218,12 @@ index 00000000..b571275e
 +    };
 +
 +    services.podman.networks."mynet-1" = {
-+      Subnet = "192.168.1.0/24";
-+      Gateway = "192.168.1.1";
++      subnet = "192.168.1.0/24";
++      gateway = "192.168.1.1";
 +    };
 +    services.podman.networks."mynet-2" = {
-+      Subnet = "192.168.2.0/24";
-+      Gateway = "192.168.2.1";
++      subnet = "192.168.2.0/24";
++      gateway = "192.168.2.1";
 +    };
 +
 +    nmt.script = ''
@@ -1200,17 +1252,21 @@ index 00000000..b571275e
 +}
 diff --git a/tests/modules/services/podman-linux/network.nix b/tests/modules/services/podman-linux/network.nix
 new file mode 100644
-index 00000000..a7ef7fca
+index 00000000..844d016b
 --- /dev/null
 +++ b/tests/modules/services/podman-linux/network.nix
-@@ -0,0 +1,31 @@
+@@ -0,0 +1,39 @@
 +{ ... }:
 +
 +{
 +  config = {
-+    services.podman.networks."mynet" = {
-+      Subnet = "192.168.1.0/24";
-+      Gateway = "192.168.1.1";
++    services.podman.networks.mynet = {
++      subnet = "192.168.1.0/24";
++      gateway = "192.168.1.1";
++      extraNetworkConfig = {
++        Options = "isolate=true";
++        PodmanArgs = [ "--dns=192.168.55.1" "--log-level=debug" ];
++      };
 +    };
 +
 +    nmt.script = ''
@@ -1225,6 +1281,10 @@ index 00000000..a7ef7fca
 +      assertFileContains $networkFile \
 +        "Gateway=192.168.1.1"
 +      assertFileContains $networkFile \
++        "PodmanArgs=--dns=192.168.55.1 --log-level=debug"
++      assertFileContains $networkFile \
++        "Options=isolate=true"
++      assertFileContains $networkFile \
 +        "NetworkName=mynet"
 +      assertFileContains $networkFile \
 +        "WantedBy=multi-user.target default.target"
@@ -1236,5 +1296,5 @@ index 00000000..a7ef7fca
 +  };
 +}
 -- 
-2.46.0
+2.46.2
 

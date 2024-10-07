@@ -6,13 +6,15 @@ let
 
   patches = {
     agenix = [
-      ./npins/patches/agenix/0001-Fix-rekey.patch
+      "0001-Fix-rekey.patch"
     ];
     catppuccin = [
-      ./npins/patches/catppuccin/0001-Expose-lib.ctp.patch
+      "0001-Expose-lib.ctp.patch"
     ];
     home-manager = [
-      ./npins/patches/home-manager/0001-PR-4801-Add-a-podman-module-for-containers-and-netwo.patch
+      "0001-PR-5643-programs.nix-your-shell-add-module.patch"
+      "0002-PR-4801-podman-init-module.patch"
+      "0003-PR-5905-Nushell-generator.patch"
     ];
   };
 
@@ -23,12 +25,15 @@ let
   lix = callPackage ./pkgs/lix.nix { };
 
   applyPatches = lib.mapAttrs (name: source: let
-    sourcePatches = patches.${name} or [ ];
+    sourcePatches = map (fileName:
+      ./npins/patches/${name}/${fileName}
+    ) (patches.${name} or [ ]);
   in if sourcePatches == [ ] then source
   else pkgs.srcOnly {
     inherit name;
     src = source;
     patches = sourcePatches;
+    preferLocalBuild = true;
   });
 in applyPatches main // nur // {
   inherit channels lix;
