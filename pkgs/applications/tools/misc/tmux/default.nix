@@ -25,7 +25,7 @@ let
   };
 in stdenv.mkDerivation (finalAttrs: {
   pname = "tmux";
-  version = "3.5";
+  version = "3.5a";
 
   outputs = [ "out" "man" ];
 
@@ -33,7 +33,7 @@ in stdenv.mkDerivation (finalAttrs: {
     owner = "tmux";
     repo = "tmux";
     rev = finalAttrs.version;
-    hash = "sha256-8CRZj7UyBhuB5QO27Y+tHG62S/eGxPOHWrwvh1aBqq0=";
+    hash = "sha256-Z9XHpyh4Y6iBI4+SfFBCGA8huFJpRFZy9nEB7+WQVJE=";
   };
 
   nativeBuildInputs = [
