@@ -5,6 +5,9 @@ let
   callPackage = pkgs.kiwiPackages.callPackageIfNewer;
 in {
   act = callPackage ./development/tools/act { };
+  activate-linux = callPackage ./misc/activate-linux {
+    _overwrite = true;
+  };
   agenix = callPackage "${sources.agenix}/pkgs/agenix.nix" { };
   amber-lang = callPackage ./development/compilers/amber-lang { };
   ast-grep = callPackage ./development/tools/ast-grep { };
