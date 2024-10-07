@@ -5,11 +5,11 @@
     package = let
       vscode = pkgs.callPackage "${sources.nixpkgs}/pkgs/applications/editors/vscode/generic.nix" rec {
         pname = "vscodium";
-        version = "1.93.1.24256";
+        version = "1.94.0.24281";
 
         src = pkgs.fetchurl {
           url = "https://github.com/VSCodium/vscodium/releases/download/${version}/VSCodium-linux-x64-${version}.tar.gz";
-          sha256 = "sha256-rtn7mGa3qQjC0atA4IDrFs9OtMb1NIiovnCuf2iJ+JI=";
+          sha256 = "sha256-/Aer0ejidB2ylVL6Fci3b/j/lMIMw+v98tWixMZyE0E=";
         };
 
         sourceRoot = ".";
