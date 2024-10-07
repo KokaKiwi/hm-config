@@ -15,6 +15,7 @@ let
       "0001-PR-5643-programs.nix-your-shell-add-module.patch"
       "0002-PR-4801-podman-init-module.patch"
       "0003-PR-5905-Nushell-generator.patch"
+      "0004-Fixups.patch"
     ];
   };
 

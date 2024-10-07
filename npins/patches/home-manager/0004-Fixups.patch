@@ -1,0 +1,27 @@
+From 4679a11a95429e55eb894b86498b7c9205438429 Mon Sep 17 00:00:00 2001
+From: KokaKiwi <kokakiwi+git@kokakiwi.net>
+Date: Mon, 7 Oct 2024 11:38:38 +0200
+Subject: [PATCH 4/4] Fixups
+
+---
+ modules/programs/nix-your-shell.nix | 4 ++++
+ 1 file changed, 4 insertions(+)
+
+diff --git a/modules/programs/nix-your-shell.nix b/modules/programs/nix-your-shell.nix
+index c69c3cf4..6ab78174 100644
+--- a/modules/programs/nix-your-shell.nix
++++ b/modules/programs/nix-your-shell.nix
+@@ -39,6 +39,10 @@ in {
+ 
+       nushell = mkIf cfg.enableNushellIntegration {
+         extraEnv = ''
++          let nix_your_shell_cache = "${config.xdg.cacheHome}/nix-your-shell"
++          if not ($nix_your_shell_cache | path exists) {
++            mkdir $nix_your_shell_cache
++          }
+           ${cfg.package}/bin/nix-your-shell nu | save --force ${config.xdg.cacheHome}/nix-your-shell/init.nu
+         '';
+ 
+-- 
+2.46.2
+

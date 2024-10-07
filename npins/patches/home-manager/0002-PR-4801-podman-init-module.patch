@@ -1,7 +1,7 @@
 From d642205165ad7894f4a3d3235a0e8c0163898689 Mon Sep 17 00:00:00 2001
 From: KokaKiwi <kokakiwi+git@kokakiwi.net>
 Date: Mon, 7 Oct 2024 11:17:11 +0200
-Subject: [PATCH 2/3] PR#4801: podman: init module
+Subject: [PATCH 2/4] PR#4801: podman: init module
 
 Squashed commit of the following:
 
