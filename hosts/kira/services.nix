@@ -1,6 +1,7 @@
 { ... }:
 {
   imports = [
+    ./services/activate-linux.nix
     ./services/aria2.nix
     ./services/gpg-agent.nix
     ./services/kubo.nix
