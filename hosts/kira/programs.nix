@@ -49,6 +49,7 @@
     glow.enable = true;
     hub.enable = true;
     nix-init.enable = true;
+    nix-your-shell.enable = true;
     sccache.enable = true;
     szurubooru-cli.enable = true;
     yt-dlp.enable = true;
