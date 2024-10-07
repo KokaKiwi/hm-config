@@ -31,7 +31,8 @@ let
         imports = [
           ./modules
           configuration
-        ];
+        ]
+        ++ pkgs.nur.repos.kokakiwi.modules.home-manager.all-modules;
 
         _module.args = {
           pkgs = lib.mkForce pkgs;
