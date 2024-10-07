@@ -1,48 +1,9 @@
-{ config, pkgs, lib, sources, ... }:
+{ config, pkgs, ... }:
 {
   programs.vscode = {
     enable = true;
     package = let
-      vscode = pkgs.callPackage "${sources.nixpkgs}/pkgs/applications/editors/vscode/generic.nix" rec {
-        pname = "vscodium";
-        version = "1.94.0.24281";
-
-        src = pkgs.fetchurl {
-          url = "https://github.com/VSCodium/vscodium/releases/download/${version}/VSCodium-linux-x64-${version}.tar.gz";
-          sha256 = "sha256-/Aer0ejidB2ylVL6Fci3b/j/lMIMw+v98tWixMZyE0E=";
-        };
-
-        sourceRoot = ".";
-        commandLineArgs = "";
-        useVSCodeRipgrep = false;
-
-        executableName = "codium";
-        longName = "VSCodium";
-        shortName = "vscodium";
-
-        updateScript = null;
-
-        meta = with lib; {
-          description = ''
-            Open source source code editor developed by Microsoft for Windows,
-            Linux and macOS (VS Code without MS branding/telemetry/licensing)
-          '';
-          longDescription = ''
-            Open source source code editor developed by Microsoft for Windows,
-            Linux and macOS. It includes support for debugging, embedded Git
-            control, syntax highlighting, intelligent code completion, snippets,
-            and code refactoring. It is also customizable, so users can change the
-            editor's theme, keyboard shortcuts, and preferences
-          '';
-          homepage = "https://github.com/VSCodium/vscodium";
-          downloadPage = "https://github.com/VSCodium/vscodium/releases";
-          license = licenses.mit;
-          sourceProvenance = with sourceTypes; [ binaryNativeCode ];
-          maintainers = with maintainers; [ synthetica bobby285271 ludovicopiero ];
-          mainProgram = "codium";
-          platforms = [ "x86_64-linux" "x86_64-darwin" "aarch64-linux" "aarch64-darwin" "armv7l-linux" ];
-        };
-      };
+      vscode = pkgs.kiwiPackages.vscodium;
     in config.lib.opengl.wrapPackage vscode { };
 
     extensions = with pkgs.vscode-extensions; [

@@ -32,6 +32,7 @@ rec {
   man-db = callPackage ./man-db { };
   neovim = callPackage ./neovim { };
   stockfish = callPackage ./games/stockfish { };
+  vscodium = callPackage ./vscodium { };
 
   llvm = pkgs.llvm_19;
   llvmPackages = pkgs.llvmPackages_19;

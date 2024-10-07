@@ -33,7 +33,7 @@ update-package ATTR *ARGS:
 
 update-neovim: (update-package 'kiwiPackages.neovim' '--version=branch=master')
 update-vscode:
-  nix-update --commit hosts.kira.config.programs.vscode.package --override-filename ./hosts/kira/programs/vscode.nix
+  nix-update --commit hosts.kira.config.programs.vscode.package --override-filename ./pkgs/kiwi-packages/vscodium/default.nix
 
 option PATH='':
   nixos-option \
