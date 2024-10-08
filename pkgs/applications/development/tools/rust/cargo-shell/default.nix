@@ -4,17 +4,17 @@
 }:
 rustPlatform.buildRustPackage {
   pname = "cargo-shell";
-  version = "0-unstable-2024-08-09";
+  version = "0-unstable-2024-10-08";
 
   src = fetchFromGitLab {
     domain = "gitlab.kokakiwi.net";
     owner = "rusted/tools";
     repo = "cargo-shell";
-    rev = "0a3a2ae6393688f9c24deef9510e4df523a48f48";
-    hash = "sha256-o5MQp1mlUBKFYSssF+Q4CV84AEwEGylEa1WkpUgPyB0=";
+    rev = "09a2e1b70c4a12d3cd86c46c2bb6a26755d04902";
+    hash = "sha256-zyza/W0wz5AfUgx9hPQxGVw87gcseV0MxfL4qmi79kY=";
   };
 
-  cargoHash = "sha256-YrpZhNtA/yAejL6Dn6OSsb3CohRCMhXgroQNP1tFvCc=";
+  cargoHash = "sha256-Z2qKkvdn/AlN0rcTkB6MstpkpP3baKSg1xWOEP6obv0=";
 
   meta = {
     mainProgram = "cargo-shell";
