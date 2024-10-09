@@ -34,6 +34,7 @@ in {
   colmena = callPackage ./networking/cluster/colmena { };
   consul = callPackage ./tools/admin/consul { };
   delta = callPackage ./version-management/delta { };
+  deno = callPackage ./development/deno { };
   docker-credential-helpers = callPackage ./misc/docker-credential-helpers { };
   doggo = callPackage ./networking/doggo { };
   du-dust = pkgs.dust;
