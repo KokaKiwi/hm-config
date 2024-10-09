@@ -32,21 +32,21 @@ let
   };
 in python3Packages.buildPythonApplication {
   pname = "module-server";
-  version = "0.1.0";
+  version = "0.1.1-unstable-2024-10-09";
   format = "pyproject";
 
   src = fetchFromGitLab {
     domain = "gitlab.kokakiwi.net";
     owner = "web";
     repo = "module-server";
-    rev = "a9fbe0b66fc93e74dc67b422798e48b0cd3a340b";
-    hash = "sha256-Uo1O12a9h4YfU+HAXiTkAsGGaZvlWvBYOScO2tn+ReU=";
+    rev = "7b8d206d381e8ec843e9009cf701fd6c00ef6891";
+    hash = "sha256-sfKwS89T6Dhp0VTtkBYIM8+abzAtXjomDDa4UbTKcRg=";
   };
 
   nativeBuildInputs = with python3Packages; [
     makeWrapper
 
-    pdm-backend
+    hatchling
   ];
   propagatedBuildInputs = with python3Packages; [
     aiohttp
