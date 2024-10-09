@@ -18,7 +18,7 @@
 }:
 python3Packages.buildPythonApplication rec {
   pname = "pre-commit";
-  version = "4.0.0";
+  version = "4.0.1";
   format = "setuptools";
 
   disabled = python3Packages.pythonOlder "3.9";
@@ -27,7 +27,7 @@ python3Packages.buildPythonApplication rec {
     owner = "pre-commit";
     repo = "pre-commit";
     rev = "refs/tags/v${version}";
-    hash = "sha256-yNxByBCrLfxsXAfyrvcAxjGE0BOQXPQAzlHQtd9PHQs=";
+    hash = "sha256-qMNnzAxJOS7mabHmGYZ/VkDrpaZbqTJyETSCxq/OrGQ=";
   };
 
   patches = [
