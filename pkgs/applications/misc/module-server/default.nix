@@ -39,8 +39,8 @@ in python3Packages.buildPythonApplication {
     domain = "gitlab.kokakiwi.net";
     owner = "web";
     repo = "module-server";
-    rev = "82c048855fb640cbb898ee4eb1276e2faced8c81";
-    hash = "sha256-yDXWiuWbAay1xFLGCFw8Hm6uqqymg3WSn88hDv1PeWI=";
+    rev = "dc621bcf02056365e2eadf867a2cd632e1f7e668";
+    hash = "sha256-rZT7sm/AQlEyOfFzKSQn7pPoEBnaurfCcsLrNCifJW0=";
   };
 
   nativeBuildInputs = with python3Packages; [
