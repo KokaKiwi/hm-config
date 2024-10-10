@@ -24,6 +24,7 @@ let
 
   extraPackages = [
     neovim.tree-sitter neovim.lua
+    neovim.wasmtime-c-api neovim.unibilium neovim.libuv
     config.home.shell.package
     config.services.nextcloud-client.package
     config.services.syncthing.tray.package
