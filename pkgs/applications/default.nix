@@ -82,7 +82,8 @@ in {
     llvmPackages = pkgs.llvmPackages_16;
     nix = pkgs.nixVersions.nix_2_19;
   };
-  nomad_1_8 = callPackage ./networking/cluster/nomad { };
+  nomad_1_8 = callPackage ./networking/cluster/nomad/1_8.nix { };
+  nomad_1_9 = callPackage ./networking/cluster/nomad/1_9.nix { };
   npins = callPackage ./development/tools/npins { };
   obsidian = callPackage ./misc/obsidian { };
   onefetch = callPackage ./misc/onefetch { };

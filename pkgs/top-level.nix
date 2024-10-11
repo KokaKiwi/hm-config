@@ -4,7 +4,13 @@
 
 , importSub
 }:
-rec {
+let
+  nur-kokakiwi = let
+    devMode = true;
+  in if devMode
+  then ../../nur-packages
+  else sources."nur/kokakiwi";
+in rec {
   lib = super.lib // (importSub ./lib { });
 
   kiwiPackages = importSub ./kiwi-packages { };
@@ -42,7 +48,7 @@ rec {
     nurpkgs = pkgs;
     inherit pkgs;
     repoOverrides = {
-      kokakiwi = import sources."nur/kokakiwi" {
+      kokakiwi = import nur-kokakiwi {
         inherit pkgs;
       };
     };
