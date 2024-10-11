@@ -26,8 +26,8 @@ let
     src = fetchFromGitHub {
       owner = "LuaJIT";
       repo = "LuaJIT";
-      rev = "2240d84464cc3dcb22fd976f1db162b36b5b52d5";
-      hash = "sha256-MREC85l6sk/wf7WWbrG97fqPbc7pUXQf7avriJAz9PY=";
+      rev = "97813fb924edf822455f91a5fbbdfdb349e5984f";
+      hash = "sha256-OcmPF7G/T2+8aaT+uEZx8Q6JPYY55pof9oP33fXpcys=";
     };
   };
 
