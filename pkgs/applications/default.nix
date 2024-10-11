@@ -97,7 +97,6 @@ in {
   ptpython = python3Packages.callPackage ./development/tools/ptpython { };
   pueue = callPackage ./misc/pueue { };
   rustup = callPackage ./development/tools/rustup { };
-  sccache = callPackage ./development/tools/sccache { };
   silicon = callPackage ./misc/silicon { };
   skopeo = callPackage ./tools/misc/skopeo { };
   starship = callPackage ./tools/misc/starship { };

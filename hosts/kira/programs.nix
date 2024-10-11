@@ -30,6 +30,7 @@
     ./programs/pgcli.nix
     ./programs/ptpython.nix
     ./programs/rust.nix
+    ./programs/sccache.nix
     ./programs/silicon.nix
     ./programs/ssh.nix
     ./programs/starship.nix
@@ -50,7 +51,6 @@
     hub.enable = true;
     nix-init.enable = true;
     nix-your-shell.enable = true;
-    sccache.enable = true;
     szurubooru-cli.enable = true;
     yt-dlp.enable = true;
     zoxide.enable = true;
