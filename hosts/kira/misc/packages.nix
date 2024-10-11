@@ -36,7 +36,7 @@ let
       stdenv = pkgs.llvmStdenv;
       targetArch = "x86-64-bmi2";
     };
-    nomad = pkgs.nomad_1_8;
+    nomad = pkgs.nomad_1_9;
     nix-update = pkgs.nix-update.override {
       nix = config.nix.package;
     };
