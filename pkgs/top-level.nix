@@ -6,7 +6,7 @@
 }:
 let
   nur-kokakiwi = let
-    devMode = true;
+    devMode = false;
   in if devMode
   then ../../nur-packages
   else sources."nur/kokakiwi";

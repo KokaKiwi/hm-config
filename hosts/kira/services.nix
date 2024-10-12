@@ -3,6 +3,7 @@
   imports = [
     ./services/activate-linux.nix
     ./services/aria2.nix
+    ./services/espanso.nix
     ./services/gpg-agent.nix
     ./services/kubo.nix
     ./services/nextcloud.nix
