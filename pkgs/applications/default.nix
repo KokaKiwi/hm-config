@@ -3,7 +3,7 @@ let
   inherit (pkgs) libsForQt5 kdePackages rustTools;
   inherit (pkgs.kiwiPackages) python3Packages;
   callPackage = pkgs.kiwiPackages.callPackageIfNewer;
-in {
+in rec {
   act = callPackage ./development/tools/act { };
   activate-linux = callPackage ./misc/activate-linux {
     _overwrite = true;
@@ -39,6 +39,11 @@ in {
   doggo = callPackage ./networking/doggo { };
   du-dust = pkgs.dust;
   dust = callPackage ./misc/dust { };
+  espanso = callPackage ./office/espanso { };
+  espanso-wayland = espanso.override {
+    x11Support = false;
+    waylandSupport = true;
+  };
   eza = callPackage ./misc/eza { };
   fastfetch = callPackage ./misc/fastfetch {
     stdenv = pkgs.llvmStdenv;
