@@ -3,6 +3,11 @@ let
   makeRustPlatform = rustToolchain: pkgs.makeRustPlatform {
     rustc = rustToolchain;
     cargo = rustToolchain;
+  } // {
+    override = args: pkgs.makeRustPlatform (args // {
+      rustc = rustToolchain;
+      cargo = rustToolchain;
+    });
   };
 
   versions = rec {
@@ -19,7 +24,8 @@ let
       hash = "sha256-VZZnlyP69+Y3crrLHQyJirqlHrTtGTsyiSnZB8jEvVo=";
     };
 
-    rust = rust_1_81;
+    stable = rust_1_81;
+    rust = stable;
   };
 
   rustToolchains = let
