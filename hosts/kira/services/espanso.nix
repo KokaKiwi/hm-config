@@ -1,12 +1,10 @@
-{ config, pkgs, ... }:
+{ pkgs, ... }:
 {
   services.espanso = {
-    enable = true;
-    package = with config.lib; let
-      espanso = pkgs.espanso-wayland.override {
-        inherit (pkgs.rustTools.stable) rustPlatform;
-      };
-    in opengl.wrapPackage espanso { };
+    enable = false; # Broken :(
+    package = pkgs.espanso-wayland.override {
+      inherit (pkgs.rustTools.stable) rustPlatform;
+    };
 
     configs = {
       default = {
@@ -18,6 +16,10 @@
 
     matches = {
       base = { };
+      kitty = {
+        filter_class = "kitty";
+        enable = false;
+      };
     };
   };
 }
