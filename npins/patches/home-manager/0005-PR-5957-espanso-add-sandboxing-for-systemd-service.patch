@@ -1,0 +1,84 @@
+From 97ec4f29acbfc57e9210f3c70649fb9f812bf665 Mon Sep 17 00:00:00 2001
+From: KokaKiwi <kokakiwi+git@kokakiwi.net>
+Date: Sat, 12 Oct 2024 12:36:08 +0200
+Subject: [PATCH 5/5] PR#5957: espanso: add sandboxing for systemd service
+
+Squashed commit of the following:
+
+commit ff2f6b3f09ec14d0734b7fb40ef2510ef8a07de9
+Author: Muhammad Talal Anwar <talalanwar@outlook.com>
+Date:   Sat Oct 12 09:32:23 2024 +0200
+
+    espanso: remove `Type` and add `RestartSec`
+
+    This conforms the systemd service as it is defined by source:
+    https://github.com/espanso/espanso/blob/b421bcf73fa13506938d62425459d6c16c6a8d0a/espanso/src/res/linux/systemd.service#L5-L7C1
+
+commit e4fe675467af5ad1934d7d580e28451aef06a3e5
+Author: Muhammad Talal Anwar <talalanwar@outlook.com>
+Date:   Sat Oct 12 05:39:05 2024 +0200
+
+    espanso: add sandboxing for systemd service
+
+commit cb32df1a4ae508adc91acd953d819e0e2f74684e
+Author: Muhammad Talal Anwar <talalanwar@outlook.com>
+Date:   Sat Oct 12 05:29:35 2024 +0200
+
+    espanso: use `launcher` command on Linux
+
+    The source uses `launcher` instead of `daemon`:
+    https://github.com/espanso/espanso/blob/b421bcf73fa13506938d62425459d6c16c6a8d0a/espanso/src/res/linux/systemd.service#L5
+---
+ modules/services/espanso.nix                        | 13 +++++++++++--
+ .../services/espanso/basic-configuration.service    |  9 ++++++++-
+ 2 files changed, 19 insertions(+), 3 deletions(-)
+
+diff --git a/modules/services/espanso.nix b/modules/services/espanso.nix
+index f6e27e79..00136c83 100644
+--- a/modules/services/espanso.nix
++++ b/modules/services/espanso.nix
+@@ -121,9 +121,18 @@ in {
+     systemd.user.services.espanso = {
+       Unit = { Description = "Espanso: cross platform text expander in Rust"; };
+       Service = {
+-        Type = "exec";
+-        ExecStart = "${cfg.package}/bin/espanso daemon";
++        ExecStart = "${cfg.package}/bin/espanso launcher";
+         Restart = "on-failure";
++        RestartSec = 3;
++
++        # Sandboxing.
++        LockPersonality = true;
++        MemoryDenyWriteExecute = true;
++        NoNewPrivileges = true;
++        PrivateUsers = true;
++        RestrictNamespaces = true;
++        SystemCallArchitectures = "native";
++        SystemCallFilter = "@system-service";
+       };
+       Install = { WantedBy = [ "default.target" ]; };
+     };
+diff --git a/tests/modules/services/espanso/basic-configuration.service b/tests/modules/services/espanso/basic-configuration.service
+index 593196e5..998d9dcf 100644
+--- a/tests/modules/services/espanso/basic-configuration.service
++++ b/tests/modules/services/espanso/basic-configuration.service
+@@ -3,8 +3,15 @@ WantedBy=default.target
+ 
+ [Service]
+ ExecStart=@espanso@/bin/espanso daemon
++LockPersonality=true
++MemoryDenyWriteExecute=true
++NoNewPrivileges=true
++PrivateUsers=true
+ Restart=on-failure
+-Type=exec
++RestartSec=3
++RestrictNamespaces=true
++SystemCallArchitectures=native
++SystemCallFilter=@system-service
+ 
+ [Unit]
+ Description=Espanso: cross platform text expander in Rust
+-- 
+2.47.0
+

@@ -1,7 +1,7 @@
-From d642205165ad7894f4a3d3235a0e8c0163898689 Mon Sep 17 00:00:00 2001
+From 69b7c1879281df2a291bd1a5ce8ad4a1c07a7b41 Mon Sep 17 00:00:00 2001
 From: KokaKiwi <kokakiwi+git@kokakiwi.net>
 Date: Mon, 7 Oct 2024 11:17:11 +0200
-Subject: [PATCH 2/4] PR#4801: podman: init module
+Subject: [PATCH 2/5] PR#4801: podman: init module
 
 Squashed commit of the following:
 
@@ -93,10 +93,10 @@ Date:   Fri Dec 22 10:54:18 2023 +1030
  create mode 100644 tests/modules/services/podman-linux/network.nix
 
 diff --git a/modules/lib/maintainers.nix b/modules/lib/maintainers.nix
-index 70f480d0..4d18d0fa 100644
+index 501917ff..1cbb0888 100644
 --- a/modules/lib/maintainers.nix
 +++ b/modules/lib/maintainers.nix
-@@ -282,6 +282,16 @@
+@@ -288,6 +288,16 @@
      github = "NitroSniper";
      githubId = 44097331;
    };
@@ -114,10 +114,10 @@ index 70f480d0..4d18d0fa 100644
      email = "sable@seyleri.us";
      name = "Sable Seyler";
 diff --git a/modules/modules.nix b/modules/modules.nix
-index 28bfe436..e3d5d5d5 100644
+index 07004701..d96ea9f8 100644
 --- a/modules/modules.nix
 +++ b/modules/modules.nix
-@@ -347,6 +347,7 @@ let
+@@ -349,6 +349,7 @@ let
      ./services/plan9port.nix
      ./services/playerctld.nix
      ./services/plex-mpv-shim.nix
@@ -1083,10 +1083,10 @@ index 00000000..223d3958
 +  ]);
 +}
 diff --git a/tests/default.nix b/tests/default.nix
-index 4d17da1e..5db4d7db 100644
+index 35a8634d..8b91c13c 100644
 --- a/tests/default.nix
 +++ b/tests/default.nix
-@@ -265,6 +265,7 @@ in import nmtSrc {
+@@ -267,6 +267,7 @@ in import nmtSrc {
      ./modules/services/pbgopy
      ./modules/services/picom
      ./modules/services/playerctld
@@ -1296,5 +1296,5 @@ index 00000000..844d016b
 +  };
 +}
 -- 
-2.46.2
+2.47.0
 

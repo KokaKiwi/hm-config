@@ -1,7 +1,7 @@
-From 36a0606c0586d7427bfde8769a948773025bd7a0 Mon Sep 17 00:00:00 2001
+From 5b7d76df86463f39f481256610e7a813d31b93ea Mon Sep 17 00:00:00 2001
 From: KokaKiwi <kokakiwi+git@kokakiwi.net>
 Date: Mon, 7 Oct 2024 11:16:44 +0200
-Subject: [PATCH 1/4] PR#5643: programs.nix-your-shell: add module
+Subject: [PATCH 1/5] PR#5643: programs.nix-your-shell: add module
 
 Squashed commit of the following:
 
@@ -22,10 +22,10 @@ Date:   Thu Jul 18 14:15:10 2024 +0200
  create mode 100644 tests/modules/programs/nix-your-shell/enable-shells.nix
 
 diff --git a/modules/modules.nix b/modules/modules.nix
-index ed2e177f..28bfe436 100644
+index b6880e62..07004701 100644
 --- a/modules/modules.nix
 +++ b/modules/modules.nix
-@@ -172,6 +172,7 @@ let
+@@ -173,6 +173,7 @@ let
      ./programs/newsboat.nix
      ./programs/nheko.nix
      ./programs/nix-index.nix
@@ -95,7 +95,7 @@ index 00000000..c69c3cf4
 +  };
 +}
 diff --git a/tests/default.nix b/tests/default.nix
-index 4117ea8e..4d17da1e 100644
+index 90371aaf..35a8634d 100644
 --- a/tests/default.nix
 +++ b/tests/default.nix
 @@ -116,6 +116,7 @@ in import nmtSrc {
@@ -168,5 +168,5 @@ index 00000000..ab8c6909
 +  '';
 +}
 -- 
-2.46.2
+2.47.0
 
