@@ -40,14 +40,14 @@ let
   };
 in buildPythonPackage rec {
   pname = "yt-dlp";
-  version = "2024.08.06-unstable-2024-09-24";
+  version = "2024.10.07-unstable-2024-10-13";
   pyproject = true;
 
   src = fetchFromGitHub {
     owner = "yt-dlp";
     repo = "yt-dlp";
-    rev = "fa2be9a7c63babede07480151363e54eee5702bd";
-    hash = "sha256-Tu1/5t7qSKWLes4ZlQ9k2itCysDRDDn4TILyUisG7OU=";
+    rev = "cba7868502f04175fecf9ab3e363296aee7ebec2";
+    hash = "sha256-gIdTqY7y6uhFR4SXsoB2p068s/XWJyDGZ8hDqZfgYmA=";
   };
 
   build-system = [
