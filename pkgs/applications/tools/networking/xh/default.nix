@@ -21,11 +21,13 @@ rustPlatform.buildRustPackage rec {
 
   cargoHash = "sha256-5V27ZV+5jWFoGMFe5EXmLdX2BjPuWDMdn4DK54ZIfUY=";
 
-  buildFeatures = lib.optional withNativeTls "native-tls";
-
   nativeBuildInputs = [ installShellFiles pkg-config ];
 
   buildInputs = lib.optionals withNativeTls [ openssl ];
+
+  buildNoDefaultFeatures = true;
+  buildFeatures = [ "rustls" ]
+    ++ lib.optional withNativeTls "native-tls";
 
   # Get openssl-sys to use pkg-config
   OPENSSL_NO_VENDOR = 1;
@@ -43,10 +45,20 @@ rustPlatform.buildRustPackage rec {
     ln -s $out/bin/xh $out/bin/xhs
   '';
 
-  # Nix build happens in sandbox without internet connectivity
-  # disable tests as some of them require internet due to nature of application
-  doCheck = false;
-  doInstallCheck = true;
+  checkFlags = let
+    skippedTests = [
+      "cases::logging::checked_status_is_printed_with_single_quiet"
+      "cases::logging::warning_for_invalid_redirect"
+      "cases::logging::warning_for_non_utf8_redirect"
+      "check_status_warning"
+      "nested_json_type_error"
+      "unsupported_tls_version_rustls"
+
+      # ???
+      "warn_for_filename_tag_on_body"
+    ];
+  in lib.map (test: "--skip=${test}") skippedTests;
+
   postInstallCheck = ''
     $out/bin/xh --help > /dev/null
     $out/bin/xhs --help > /dev/null
