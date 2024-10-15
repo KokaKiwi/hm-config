@@ -7,7 +7,7 @@
     };
 
     config = {
-      text-title = "Activate NixArchOS";
+      text-title = "Activate Nix/Arch::OS";
       text-message = "8098 is a good bot";
 
       scale = 1.3;
