@@ -22,6 +22,8 @@ dry-activate: build
 
 build-package ATTR:
   {{nix-build}} -A pkgs.{{ATTR}}
+build-host-package ATTR:
+  {{nix-build}} -A hosts.{{host}}.config.{{ATTR}}
 
 copy-package SRC DST:
   mkdir -p $(dirname pkgs/{{DST}})
