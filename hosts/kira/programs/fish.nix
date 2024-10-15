@@ -9,6 +9,8 @@
       useOperatingSystemEtc = false;
     };
 
+    generateCompletions = false;
+
     functions = {
       copy = ''
         if test (count $argv) -ge 1
