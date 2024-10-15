@@ -90,6 +90,7 @@ in rec {
   nomad_1_8 = callPackage ./networking/cluster/nomad/1_8.nix { };
   nomad_1_9 = callPackage ./networking/cluster/nomad/1_9.nix { };
   npins = callPackage ./development/tools/npins { };
+  nushell = callPackage ./shells/nushell { };
   obsidian = callPackage ./misc/obsidian { };
   onefetch = callPackage ./misc/onefetch { };
   opentofu = callPackage ./networking/cluster/opentofu { };
