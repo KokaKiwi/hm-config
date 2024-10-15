@@ -154,9 +154,9 @@ dependencies = [
 
 [[package]]
 name = "async-compression"
-version = "0.4.14"
+version = "0.4.15"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "998282f8f49ccd6116b0ed8a4de0fbd3151697920e7c7533416d6e25e76434a7"
+checksum = "e26a9844c659a2a293d239c7910b752f8487fe122c6c8bd1659bf85a6507c302"
 dependencies = [
  "bzip2",
  "flate2",
@@ -4096,7 +4096,7 @@ checksum = "81dfa00651efa65069b0b6b651f4aaa31ba9e3c3ce0137aaad053604ee7e0314"
 
 [[package]]
 name = "uv"
-version = "0.4.21"
+version = "0.4.22"
 dependencies = [
  "anstream",
  "anyhow",
@@ -4106,6 +4106,7 @@ dependencies = [
  "base64 0.22.1",
  "byteorder",
  "clap",
+ "console",
  "ctrlc",
  "etcetera",
  "filetime",
@@ -4149,6 +4150,7 @@ dependencies = [
  "uv-cli",
  "uv-client",
  "uv-configuration",
+ "uv-console",
  "uv-dispatch",
  "uv-distribution",
  "uv-distribution-filename",
@@ -4172,8 +4174,10 @@ dependencies = [
  "uv-scripts",
  "uv-settings",
  "uv-shell",
+ "uv-static",
  "uv-tool",
  "uv-types",
+ "uv-version",
  "uv-virtualenv",
  "uv-warnings",
  "uv-workspace",
@@ -4256,7 +4260,6 @@ dependencies = [
  "uv-pep508",
  "uv-pubgrub",
  "uv-pypi-types",
- "uv-version",
  "uv-warnings",
  "walkdir",
  "zip",
@@ -4283,12 +4286,14 @@ dependencies = [
  "toml_edit",
  "tracing",
  "uv-configuration",
+ "uv-distribution",
  "uv-distribution-types",
  "uv-fs",
  "uv-pep440",
  "uv-pep508",
  "uv-pypi-types",
  "uv-python",
+ "uv-static",
  "uv-types",
  "uv-virtualenv",
 ]
@@ -4314,6 +4319,7 @@ dependencies = [
  "uv-fs",
  "uv-normalize",
  "uv-pypi-types",
+ "uv-static",
  "walkdir",
 ]
 
@@ -4361,6 +4367,7 @@ dependencies = [
  "uv-python",
  "uv-resolver",
  "uv-settings",
+ "uv-static",
  "uv-version",
  "uv-warnings",
 ]
@@ -4412,6 +4419,7 @@ dependencies = [
  "uv-pep508",
  "uv-platform-tags",
  "uv-pypi-types",
+ "uv-static",
  "uv-version",
  "uv-warnings",
 ]
@@ -4440,6 +4448,7 @@ dependencies = [
  "uv-pep508",
  "uv-platform-tags",
  "uv-pypi-types",
+ "uv-static",
  "which",
 ]
 
@@ -4487,6 +4496,7 @@ dependencies = [
  "uv-pypi-types",
  "uv-python",
  "uv-settings",
+ "uv-static",
  "uv-workspace",
  "walkdir",
 ]
@@ -4669,6 +4679,8 @@ dependencies = [
  "uv-auth",
  "uv-cache-key",
  "uv-fs",
+ "uv-static",
+ "which",
 ]
 
 [[package]]
@@ -4739,6 +4751,7 @@ dependencies = [
  "uv-platform-tags",
  "uv-pypi-types",
  "uv-python",
+ "uv-static",
  "uv-types",
  "uv-warnings",
  "walkdir",
@@ -4899,6 +4912,7 @@ dependencies = [
  "uv-fs",
  "uv-metadata",
  "uv-pypi-types",
+ "uv-static",
  "uv-warnings",
 ]
 
@@ -4972,6 +4986,7 @@ dependencies = [
  "uv-platform-tags",
  "uv-pypi-types",
  "uv-state",
+ "uv-static",
  "uv-warnings",
  "which",
  "windows-registry",
@@ -5090,6 +5105,7 @@ dependencies = [
  "uv-pypi-types",
  "uv-python",
  "uv-requirements-txt",
+ "uv-static",
  "uv-types",
  "uv-warnings",
  "uv-workspace",
@@ -5138,6 +5154,7 @@ dependencies = [
  "uv-pypi-types",
  "uv-python",
  "uv-resolver",
+ "uv-static",
  "uv-warnings",
 ]
 
@@ -5150,6 +5167,7 @@ dependencies = [
  "same-file",
  "tracing",
  "uv-fs",
+ "uv-static",
  "winreg",
 ]
 
@@ -5162,6 +5180,10 @@ dependencies = [
  "fs-err",
  "tempfile",
 ]
+
+[[package]]
+name = "uv-static"
+version = "0.0.1"
 
 [[package]]
 name = "uv-tool"
@@ -5185,6 +5207,7 @@ dependencies = [
  "uv-python",
  "uv-settings",
  "uv-state",
+ "uv-static",
  "uv-virtualenv",
 ]
 
@@ -5210,7 +5233,7 @@ dependencies = [
 
 [[package]]
 name = "uv-version"
-version = "0.4.21"
+version = "0.4.22"
 
 [[package]]
 name = "uv-virtualenv"
@@ -5270,6 +5293,7 @@ dependencies = [
  "uv-pep440",
  "uv-pep508",
  "uv-pypi-types",
+ "uv-static",
  "uv-warnings",
 ]
 
