@@ -17,6 +17,7 @@ let
       "0003-PR-5905-Nushell-generator.patch"
       "0004-Fixups.patch"
       "0005-PR-5957-espanso-add-sandboxing-for-systemd-service.patch"
+      "0006-PR-5003-programs.fish-Configurable-generation-of-com.patch"
     ];
   };
 

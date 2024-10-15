@@ -1,7 +1,7 @@
-From ae5f71431596d6c4e7340606db1395e6362108e7 Mon Sep 17 00:00:00 2001
+From 29ffd994206d6dc4c2fad653dbf1d6052fd38c6d Mon Sep 17 00:00:00 2001
 From: KokaKiwi <kokakiwi+git@kokakiwi.net>
 Date: Mon, 7 Oct 2024 11:18:38 +0200
-Subject: [PATCH 3/5] PR#5905: Nushell generator
+Subject: [PATCH 3/6] PR#5905: Nushell generator
 MIME-Version: 1.0
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
