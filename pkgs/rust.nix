@@ -1,12 +1,18 @@
 { pkgs, lib }:
 let
-  makeRustPlatform = rustToolchain: pkgs.makeRustPlatform {
-    rustc = rustToolchain;
-    cargo = rustToolchain;
+  makeRustPlatform = rustToolchain: let
+    rustToolchain' = rustToolchain // {
+      targetPlatforms = rustToolchain.targetPlatforms or pkgs.rustc.targetPlatforms;
+      tier1TargetPlatforms = rustToolchain.tier1TargetPlatforms or pkgs.rustc.tier1TargetPlatforms;
+      badTargetPlatforms = rustToolchain.badTargetPlatforms or pkgs.rustc.badTargetPlatforms;
+    };
+  in pkgs.makeRustPlatform {
+    rustc = rustToolchain';
+    cargo = rustToolchain';
   } // {
     override = args: pkgs.makeRustPlatform (args // {
-      rustc = rustToolchain;
-      cargo = rustToolchain;
+      rustc = rustToolchain';
+      cargo = rustToolchain';
     });
   };
 

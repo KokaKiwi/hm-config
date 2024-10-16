@@ -63,7 +63,7 @@ let
 
   tree-sitter = callPackage ./deps/tree-sitter.nix {
     inherit stdenv;
-    inherit (rustTools.rust) rustPlatform;
+    inherit (rustTools.stable) rustPlatform;
 
     inherit withWasm wasmtime-c-api;
   };
