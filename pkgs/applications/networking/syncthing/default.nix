@@ -9,16 +9,16 @@
 }:
 buildGoModule rec {
   pname = "syncthing";
-  version = "1.27.12";
+  version = "1.28.0";
 
   src = fetchFromGitHub {
     owner = "syncthing";
     repo = "syncthing";
     rev = "v${version}";
-    hash = "sha256-/HPq71KkWUE0vG7qUBD3JON4N5KBkuRWc4SvX/JA2nQ=";
+    hash = "sha256-JW78n/3hssH600uXn4YLxcIJylPbSpEZICtKmqfqamI=";
   };
 
-  vendorHash = "sha256-R5GlsCkfoMc5km+NaV+TNUlM3Ot1ARcXfEFimcZOLI4=";
+  vendorHash = "sha256-9/PfiOSCInduQXZ47KbrD3ca9O0Zt+TP7XoX+HjwQgs=";
 
   doCheck = false;
 
