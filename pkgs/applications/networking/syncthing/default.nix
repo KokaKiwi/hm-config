@@ -1,4 +1,4 @@
-{ lib, stdenv
+{ lib
 , pkgsBuildBuild
 
 , fetchFromGitHub
@@ -27,12 +27,13 @@ buildGoModule rec {
 
   buildPhase = ''
     runHook preBuild
+
     (
       export GOOS="${pkgsBuildBuild.go.GOOS}" GOARCH="${pkgsBuildBuild.go.GOARCH}" CC=$CC_FOR_BUILD
       go build build.go
-      go generate github.com/syncthing/syncthing/lib/api/auto github.com/syncthing/syncthing/cmd/strelaypoolsrv/auto
     )
     ./build -goos ${go.GOOS} -goarch ${go.GOARCH} -no-upgrade -version v${version} build syncthing
+
     runHook postBuild
   '';
 
@@ -51,16 +52,15 @@ buildGoModule rec {
       install -Dm644 "$mf" "$mandir/$(basename "$mf")"
     done
 
-  '' + lib.optionalString (stdenv.isLinux) ''
     mkdir -p $out/lib/systemd/{system,user}
 
     substitute etc/linux-systemd/system/syncthing@.service \
                $out/lib/systemd/system/syncthing@.service \
-               --replace /usr/bin/syncthing $out/bin/syncthing
+               --replace-warn /usr/bin/syncthing $out/bin/syncthing
 
     substitute etc/linux-systemd/user/syncthing.service \
                $out/lib/systemd/user/syncthing.service \
-               --replace /usr/bin/syncthing $out/bin/syncthing
+               --replace-warn /usr/bin/syncthing $out/bin/syncthing
   '';
 
   meta = with lib; {
