@@ -15,6 +15,7 @@
     ./programs/bpython.nix
     ./programs/discord.nix
     ./programs/element.nix
+    ./programs/eza.nix
     ./programs/ferdium.nix
     ./programs/fish.nix
     ./programs/glab.nix

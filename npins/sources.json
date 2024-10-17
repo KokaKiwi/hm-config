@@ -51,6 +51,18 @@
       "url": "https://github.com/jonascarpay/declarative-cachix/archive/800c308a85b964eb3447a3cb07e8190fb74dcf59.tar.gz",
       "hash": "1ik6niiwv3a2i02w3pgacf8pmsylx0zv90rdkzq5gblmrlhgxli6"
     },
+    "eza-themes": {
+      "type": "Git",
+      "repository": {
+        "type": "GitHub",
+        "owner": "eza-community",
+        "repo": "eza-themes"
+      },
+      "branch": "main",
+      "revision": "302f4783dcd84a8221f1da8223d1ea0885fd26e3",
+      "url": "https://github.com/eza-community/eza-themes/archive/302f4783dcd84a8221f1da8223d1ea0885fd26e3.tar.gz",
+      "hash": "07djsl0mdas95rrnzzz44wgl6sr9n02469l2zyqhz9nlpl2lmpvm"
+    },
     "fenix": {
       "type": "Git",
       "repository": {
