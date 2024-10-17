@@ -1,7 +1,11 @@
-{ ... }:
-{
+{ config, lib, ... }:
+let
+  cfg = config.programs.starship;
+in {
   programs.starship = {
     enable = true;
+
+    enableFishIntegration = false;
 
     transience = {
       enable = true;
@@ -43,4 +47,11 @@
       };
     };
   };
+
+  programs.fish.interactiveShellInit = ''
+    if test "$TERM" != "dumb"
+      ${config.home.profileDirectory}/bin/starship init fish | source
+      ${lib.optionalString cfg.enableTransience "enable_transience"}
+    end
+  '';
 }
