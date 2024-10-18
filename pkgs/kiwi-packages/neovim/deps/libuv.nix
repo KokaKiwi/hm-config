@@ -8,14 +8,14 @@
 , pkg-config
 }:
 stdenv.mkDerivation (finalAttrs: {
-  version = "1.49.1";
+  version = "1.49.2";
   pname = "libuv";
 
   src = fetchFromGitHub {
     owner = "libuv";
     repo = "libuv";
     rev = "v${finalAttrs.version}";
-    hash = "sha256-S1vHNLnGy5djEci7kPcfuIB7et1E6iTUkJy2U2OGZSE=";
+    hash = "sha256-hNXW3cQVW8VGMQrHFkezRI2OqYF7Qf1riD8sHy66qxg=";
   };
 
   outputs = [ "out" "dev" ];
