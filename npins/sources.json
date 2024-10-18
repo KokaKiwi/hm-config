@@ -143,9 +143,9 @@
         "repo": "zig-overlay"
       },
       "branch": "main",
-      "revision": "47cd5d29cbb8a9e590ed5e8e7387326d5a082526",
-      "url": "https://github.com/mitchellh/zig-overlay/archive/47cd5d29cbb8a9e590ed5e8e7387326d5a082526.tar.gz",
-      "hash": "148qd6xanpsjcinyazx0yp7nzrmrcjjfj4aaanfnvwk885yclf4y"
+      "revision": "9e394110c194a39eb3120845a2d9a1ffaea01394",
+      "url": "https://github.com/mitchellh/zig-overlay/archive/9e394110c194a39eb3120845a2d9a1ffaea01394.tar.gz",
+      "hash": "0ig3syap642r2d03ma2a8s7fzzxk97rz4jyg9cl9v501f2nbqxq1"
     }
   },
   "version": 3
