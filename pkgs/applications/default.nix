@@ -80,6 +80,7 @@ in rec {
   module-server = callPackage ./misc/module-server { };
   mux = callPackage ./misc/mux { };
   ncmpcpp = callPackage ./audio/ncmpcpp { };
+  nextcloud-client = callPackage ./networking/nextcloud-client { };
   nix-update = callPackage ./tools/package-management/nix-update {
     nixfmt = pkgs.nixfmt-rfc-style;
   };
