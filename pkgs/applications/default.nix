@@ -12,7 +12,7 @@ in rec {
   amber-lang = callPackage ./development/compilers/amber-lang { };
   ast-grep = callPackage ./development/tools/ast-grep { };
   attic-client = callPackage ./tools/networking/attic-client {
-    nix = pkgs.nixVersions.nix_2_18_upstream;
+    nix = pkgs.nixVersions.nix_2_18;
   };
   bitwarden-cli = callPackage ./misc/bitwarden-cli { };
   cargo-about = callPackage ./development/tools/cargo-about { };
