@@ -12,7 +12,7 @@
 , xorg
 
 , withDefaultFeatures ? true
-, additionalFeatures ? [ ]
+, additionalFeatures ? (p: [ ])
 }:
 rustPlatform.buildRustPackage rec {
   pname = "nushell";
@@ -34,7 +34,7 @@ rustPlatform.buildRustPackage rec {
     ++ lib.optionals (withDefaultFeatures && stdenv.hostPlatform.isLinux) [ xorg.libX11 ];
 
   buildNoDefaultFeatures = !withDefaultFeatures;
-  buildFeatures = additionalFeatures;
+  buildFeatures = additionalFeatures [ ];
 
   checkPhase = ''
     runHook preCheck
