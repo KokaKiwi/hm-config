@@ -83,9 +83,9 @@ dependencies = [
 
 [[package]]
 name = "anyhow"
-version = "1.0.89"
+version = "1.0.90"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "86fdf8605db99b54d3cd748a44c6d04df638eb5dafb219b135d0149bd0db01f6"
+checksum = "37bf3594c4c988a53154954629820791dde498571819ae4ca50ca811e060cc95"
 
 [[package]]
 name = "arrayref"
@@ -154,9 +154,9 @@ dependencies = [
 
 [[package]]
 name = "async-compression"
-version = "0.4.16"
+version = "0.4.17"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "103db485efc3e41214fe4fda9f3dbeae2eb9082f48fd236e6095627a9422066e"
+checksum = "0cb8f1d480b0ea3783ab015936d2a55c87e219676f0c0b7dec61494043f21857"
 dependencies = [
  "bzip2",
  "flate2",
@@ -2449,9 +2449,9 @@ dependencies = [
 
 [[package]]
 name = "proc-macro2"
-version = "1.0.87"
+version = "1.0.88"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "b3e4daa0dcf6feba26f985457cdf104d4b4256fc5a09547140f3631bb076b19a"
+checksum = "7c3a7fc5db1e57d5a779a352c8cdb57b29aa4c40cc69c3a68a7fedc815fbf2f9"
 dependencies = [
  "unicode-ident",
 ]
@@ -2479,7 +2479,7 @@ dependencies = [
 [[package]]
 name = "pubgrub"
 version = "0.2.1"
-source = "git+https://github.com/astral-sh/pubgrub?rev=19c77268c0ad5f69d7e12126e0cfacfbba466481#19c77268c0ad5f69d7e12126e0cfacfbba466481"
+source = "git+https://github.com/astral-sh/pubgrub?rev=7243f4faf8e54837aa8a401a18406e7173de4ad5#7243f4faf8e54837aa8a401a18406e7173de4ad5"
 dependencies = [
  "indexmap",
  "log",
@@ -2771,7 +2771,7 @@ dependencies = [
 [[package]]
 name = "reqwest-middleware"
 version = "0.3.3"
-source = "git+https://github.com/astral-sh/reqwest-middleware?rev=5e3eaf254b5bd481c75d2710eed055f95b756913#5e3eaf254b5bd481c75d2710eed055f95b756913"
+source = "git+https://github.com/TrueLayer/reqwest-middleware?rev=d95ec5a99fcc9a4339e1850d40378bbfe55ab121#d95ec5a99fcc9a4339e1850d40378bbfe55ab121"
 dependencies = [
  "anyhow",
  "async-trait",
@@ -2785,7 +2785,7 @@ dependencies = [
 [[package]]
 name = "reqwest-retry"
 version = "0.7.1"
-source = "git+https://github.com/astral-sh/reqwest-middleware?rev=5e3eaf254b5bd481c75d2710eed055f95b756913#5e3eaf254b5bd481c75d2710eed055f95b756913"
+source = "git+https://github.com/TrueLayer/reqwest-middleware?rev=d95ec5a99fcc9a4339e1850d40378bbfe55ab121#d95ec5a99fcc9a4339e1850d40378bbfe55ab121"
 dependencies = [
  "anyhow",
  "async-trait",
@@ -3191,9 +3191,9 @@ dependencies = [
 
 [[package]]
 name = "serde_json"
-version = "1.0.128"
+version = "1.0.132"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "6ff5456707a1de34e7e37f2a6fd3d3f808c318259cbd01ab6377795054b483d8"
+checksum = "d726bfaff4b320266d395898905d0eba0345aae23b54aee3a737e260fd46db03"
 dependencies = [
  "itoa",
  "memchr",
@@ -3422,9 +3422,9 @@ dependencies = [
 
 [[package]]
 name = "syn"
-version = "2.0.79"
+version = "2.0.82"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "89132cd0bf050864e1d38dc3bbc07a0eb8e7530af26344d3d2bbbef83499f590"
+checksum = "83540f837a8afc019423a8edb95b52a8effe46957ee402287f4292fae35be021"
 dependencies = [
  "proc-macro2",
  "quote",
@@ -4096,7 +4096,7 @@ checksum = "f8c5f0a0af699448548ad1a2fbf920fb4bee257eae39953ba95cb84891a0446a"
 
 [[package]]
 name = "uv"
-version = "0.4.24"
+version = "0.4.25"
 dependencies = [
  "anstream",
  "anyhow",
@@ -5237,7 +5237,7 @@ dependencies = [
 
 [[package]]
 name = "uv-version"
-version = "0.4.24"
+version = "0.4.25"
 
 [[package]]
 name = "uv-virtualenv"
