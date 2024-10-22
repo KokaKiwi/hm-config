@@ -7,7 +7,7 @@ rec {
     drv = super.${drv'.pname} or null;
     drv' = callPackage path (builtins.removeAttrs args [ "_overwrite" ]);
 
-    overwrite = args._overwrite or false;
+    overwrite = args._overwrite or args._override or false;
 
     isNewer = drv == null || lib.versionOlder drv.version drv'.version;
     finalDrv = if (isNewer || overwrite) then drv' else drv;

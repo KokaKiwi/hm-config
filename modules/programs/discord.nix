@@ -14,6 +14,7 @@ in {
       type = types.enum [
         "discord"
         "vesktop"
+        "dorion"
       ];
       default = "discord";
     };
@@ -60,20 +61,28 @@ in {
         };
       };
     };
+
+    dorion = {
+      config = mkOption {
+        type = jsonFormat.type;
+        default = { };
+      };
+    };
   };
 
   config = mkIf cfg.enable (mkMerge [
+    # Vanilla desktop
     (mkIf (cfg.flavour == "discord") {
-      home.packages = [
-        cfg.package
-      ];
+      home.packages = [ cfg.package ];
     })
+
+    # Vesktop
     (mkIf (cfg.flavour == "vesktop") {
-      home.packages = [
-        (cfg.package.override {
+      home.packages = let
+        finalPackage = cfg.package.override {
           withSystemVencord = cfg.vesktop.vencord.useSystem;
-        })
-      ];
+        };
+      in [ finalPackage ];
 
       xdg.configFile = {
         "vesktop/settings.json" = mkIf (cfg.vesktop.settings != { }) {
@@ -97,6 +106,17 @@ in {
       in ''
         @import"https://catppuccin.github.io/discord/dist/catppuccin-${catppuccin.flavor}-${catppuccin.accent}.theme.css";
       '';
+    })
+
+    # Dorion
+    (mkIf (cfg.flavour == "dorion") {
+      home.packages = [ cfg.package ];
+
+      xdg.configFile = {
+        "dorion/config.json" = mkIf (cfg.dorion.config != { }) {
+          source = jsonFormat.generate "dorion-config.json" cfg.dorion.config;
+        };
+      };
     })
   ]);
 }

@@ -37,6 +37,9 @@ in rec {
   deno = callPackage ./development/deno { };
   docker-credential-helpers = callPackage ./misc/docker-credential-helpers { };
   doggo = callPackage ./networking/doggo { };
+  dorion = callPackage ./networking/instant-messengers/dorion {
+    _overwrite = true;
+  };
   du-dust = pkgs.dust;
   dust = callPackage ./misc/dust { };
   espanso = callPackage ./office/espanso { };

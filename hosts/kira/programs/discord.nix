@@ -1,18 +1,13 @@
 { config, pkgs, ... }:
 let
-  cfg = config.programs.discord;
-
   inherit (config.lib) opengl;
 in {
   programs.discord = {
     enable = true;
 
-    flavour = "vesktop";
+    flavour = "dorion";
     package = let
-      discord = pkgs.vesktop.override {
-        withTTS = false;
-        withSystemVencord = cfg.vesktop.vencord.useSystem;
-      };
+      discord = pkgs.dorion;
     in opengl.wrapPackage discord { };
 
     vesktop = {
