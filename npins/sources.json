@@ -107,9 +107,9 @@
         "repo": "nixpkgs"
       },
       "branch": "nixpkgs-unstable",
-      "revision": "ccc0c2126893dd20963580b6478d1a10a4512185",
-      "url": "https://github.com/NixOS/nixpkgs/archive/ccc0c2126893dd20963580b6478d1a10a4512185.tar.gz",
-      "hash": "1sm9mgz970p5mbxh8ws5xdqkb6w46di58binb4lpjfzclbxhhx70"
+      "revision": "ca30f584e18024baf39c395001262ed936f27ebd",
+      "url": "https://github.com/NixOS/nixpkgs/archive/ca30f584e18024baf39c395001262ed936f27ebd.tar.gz",
+      "hash": "0h79z53amzmxd9k0fzl9vmvg6l56sxx5wsqfd085jrivwrikzgn5"
     },
     "tmux-loadavg": {
       "type": "Git",
@@ -131,9 +131,9 @@
         "repo": "treefmt-nix"
       },
       "branch": "main",
-      "revision": "d986489c1c757f6921a48c1439f19bfb9b8ecab5",
-      "url": "https://github.com/numtide/treefmt-nix/archive/d986489c1c757f6921a48c1439f19bfb9b8ecab5.tar.gz",
-      "hash": "0avwdblf4mxdjdjxj74m9h569hanqir6z144k4bv4wpn3ddr4dga"
+      "revision": "aac86347fb5063960eccb19493e0cadcdb4205ca",
+      "url": "https://github.com/numtide/treefmt-nix/archive/aac86347fb5063960eccb19493e0cadcdb4205ca.tar.gz",
+      "hash": "0ysg99zcbq50ghjyqfkd6qkjdh74vn2ikv817rgp9mfnhfwayqsw"
     },
     "zig-overlay": {
       "type": "Git",
@@ -143,9 +143,9 @@
         "repo": "zig-overlay"
       },
       "branch": "main",
-      "revision": "5aa48f75dcfd6a4f46bd6e0a1cb263652e25e4ec",
-      "url": "https://github.com/mitchellh/zig-overlay/archive/5aa48f75dcfd6a4f46bd6e0a1cb263652e25e4ec.tar.gz",
-      "hash": "173hj45g8fkqj10h0nj531y2d4vb6bfxpa3cf65xd3rqhvy4mc0k"
+      "revision": "c463bd580cda64316100a109b69527440ccf740c",
+      "url": "https://github.com/mitchellh/zig-overlay/archive/c463bd580cda64316100a109b69527440ccf740c.tar.gz",
+      "hash": "0r7vap9snbqlfb4gkb2jn22lwcfain65qqlmim0r7yg960im8saa"
     }
   },
   "version": 3
