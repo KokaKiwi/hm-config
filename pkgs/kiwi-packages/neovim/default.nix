@@ -77,9 +77,13 @@ in (neovim-unwrapped.override {
   src = fetchFromGitHub {
     owner = "neovim";
     repo = "neovim";
-    rev = "573bcb2aaf3e2421e0d2593b048f684ee05251a6";
-    hash = "sha256-wyI8ghnl8bcr9/a56HX3KlUIobG5qVV87292uwPQeuc=";
+    rev = "4c25e60767508a3f8bc0631d280407a08f24a67e";
+    hash = "sha256-GuB+h0rRaSJzPgJXD8xFEaSRsJFXp6PzCEB+dyTCWX4=";
   };
+
+  patches = super.patches or [ ] ++ [
+    ./patches/relax-wasmtime-dep.patch
+  ];
 
   inherit tree-sitter;
 
