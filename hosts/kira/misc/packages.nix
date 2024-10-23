@@ -58,7 +58,7 @@ in {
     amber-lang fastly npins
     pre-commit sq oxipng
     oha drill deno
-    ziggy gitnr
+    ziggy gitnr binaryen
     nixgl.nixGLIntel
 
     # Data
