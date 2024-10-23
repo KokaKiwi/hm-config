@@ -3,6 +3,7 @@ cargo-all-features := env_var_or_default('CARGO_ALL_FEATURES', '0')
 cargo-features := env_var_or_default('CARGO_FEATURES', '')
 cargo-use-workspace := env_var_or_default('CARGO_WORKSPACE', '0')
 cargo-target := env_var_or_default('CARGO_TARGET', '')
+cargo-profile := env_var_or_default('CARGO_PROFILE', '')
 
 cargo-flags := ''
 
@@ -18,6 +19,12 @@ cargo-target-flag := if cargo-target != '' {
   ''
 }
 
+cargo-profile-flag := if cargo-profile != '' {
+  '--profile ' + cargo-profile
+} else {
+  ''
+}
+
 cargo-features-flag := if cargo-all-features == '1' {
   '--all-features'
 } else if cargo-features != '' {
@@ -26,7 +33,20 @@ cargo-features-flag := if cargo-all-features == '1' {
   ''
 }
 
-cargo-flags-all := trim(cargo-flags + ' ' + cargo-features-flag + ' ' + cargo-workspace-flag + ' ' + cargo-target-flag)
+cargo-flags-all := trim(
+  cargo-flags
+  + ' ' + cargo-features-flag
+  + ' ' + cargo-workspace-flag
+  + ' ' + cargo-target-flag
+  + ' ' + cargo-profile-flag
+)
+
+cargo-flags-doc := trim(
+  cargo-flags
+  + ' ' + cargo-features-flag
+  + ' ' + cargo-workspace-flag
+  + ' ' + cargo-target-flag
+)
 
 alias check := clippy
 
@@ -42,7 +62,7 @@ cargo COMMAND *ARGS: (_cargo COMMAND cargo-flags-all ARGS)
 # Build crate
 build: (cargo 'build')
 # Generate doc
-doc: (cargo 'doc' '--document-private-items')
+doc: (_cargo 'doc' cargo-flags-doc '--document-private-items')
 
 # Run tests
 test *ARGS: (cargo 'nextest run' ARGS)
