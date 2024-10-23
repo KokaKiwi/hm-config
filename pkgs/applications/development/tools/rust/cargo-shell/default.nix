@@ -10,8 +10,8 @@ rustPlatform.buildRustPackage {
     domain = "gitlab.kokakiwi.net";
     owner = "rusted/tools";
     repo = "cargo-shell";
-    rev = "b7d8d8ac64c88c643475681167ebdfce0725338c";
-    hash = "sha256-6QSCQ2tITB1SroYmfV7oF/j0TfxuboMDEY8G9jvwTqM=";
+    rev = "b2dcb27c3043b66cf07085c119726e6cf003f289";
+    hash = "sha256-7DhiRiW2pq+YxklMe9k9xZns7KvcT+y+VEUKwdnHEW4=";
   };
 
   cargoHash = "sha256-xrf3TLsMQ8NrwQS9h6uTQwcrYAQ28B7F7MgYPpPswtg=";
