@@ -67,6 +67,7 @@ in rec {
   };
   gleam = callPackage ./compilers/gleam { };
   glow = callPackage ./editors/glow { };
+  hyfetch = callPackage ./tools/misc/hyfetch { };
   jellyfin-media-player = libsForQt5.callPackage ./misc/jellyfin-media-player { };
   kitty = callPackage ./terminal-emulators/kitty {
     go = pkgs.go_1_23;
