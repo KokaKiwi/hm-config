@@ -32,6 +32,7 @@ in rec {
   cargo-udeps = callPackage ./development/tools/rust/cargo-udeps { };
   catppuccin-cursors = callPackage ./misc/catppuccin-cursors { };
   colmena = callPackage ./networking/cluster/colmena { };
+  commitizen = callPackage ./development/tools/commitizen { };
   consul = callPackage ./tools/admin/consul { };
   delta = callPackage ./version-management/delta { };
   deno = callPackage ./development/deno { };
