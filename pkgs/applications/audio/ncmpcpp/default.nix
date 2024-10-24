@@ -3,9 +3,7 @@
 , fetchFromGitHub
 
 , pkg-config
-, autoconf
-, automake
-, libtool
+, autoreconfHook
 
 , boost
 , libmpdclient
@@ -22,35 +20,33 @@
 }:
 stdenv.mkDerivation (finalAttrs: {
   pname = "ncmpcpp";
-  version = "0.10";
+  version = "0.10.1";
 
   src = fetchFromGitHub {
     owner = "ncmpcpp";
     repo = "ncmpcpp";
     rev = finalAttrs.version;
-    hash = "sha256-HRJQ+IOQ8xP1QkPlLI+VtDUWaI2m0Aw0fCDWHhgsOLY=";
+    hash = "sha256-w3deSy71SWWD2kZKREowZh3KMNCBfBJbrjM0vW4/GrI=";
   };
 
   enableParallelBuilding = true;
-
   strictDeps = true;
 
-  preConfigure = ''
-    ./autogen.sh
-  '';
-
-  configureFlags = [ "BOOST_LIB_SUFFIX=" ]
-    ++ lib.optional outputsSupport "--enable-outputs"
-    ++ lib.optional visualizerSupport "--enable-visualizer --with-fftw"
-    ++ lib.optional clockSupport "--enable-clock"
-    ++ lib.optional taglibSupport "--with-taglib";
-
-  nativeBuildInputs = [ pkg-config autoconf automake libtool ]
+  nativeBuildInputs = [ pkg-config autoreconfHook ]
     ++ lib.optional taglibSupport taglib;
 
   buildInputs = [ boost libmpdclient ncurses readline libiconv icu curl ]
     ++ lib.optional visualizerSupport fftw
     ++ lib.optional taglibSupport taglib;
+
+  configureFlags = [
+    "BOOST_LIB_SUFFIX="
+    (lib.enableFeature outputsSupport "outputs")
+    (lib.enableFeature visualizerSupport "visualizer")
+    (lib.withFeature visualizerSupport "fftw")
+    (lib.enableFeature clockSupport "clock")
+    (lib.enableFeature taglibSupport "taglib")
+  ];
 
   meta = with lib; {
     description = "Featureful ncurses based MPD client inspired by ncmpc";
