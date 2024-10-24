@@ -29,6 +29,7 @@ copy-package SRC DST:
   mkdir -p $(dirname pkgs/{{DST}})
   cp -Tr ~/.local/state/nix/defexpr/50-home-manager/nixpkgs-unstable/pkgs/{{SRC}} pkgs/{{DST}}
   chmod -R +w pkgs/{{DST}}
+copy-application SRC DST: (copy-package (SRC) ('applications/' + DST))
 
 update-package ATTR *ARGS:
   nix-update --commit pkgs.{{ATTR}} {{ARGS}}
