@@ -2,9 +2,6 @@
 {
   programs.hyfetch = {
     enable = true;
-    package = pkgs.hyfetch.override {
-      python3 = pkgs.python312;
-    };
 
     settings = {
       mode = "rgb";
