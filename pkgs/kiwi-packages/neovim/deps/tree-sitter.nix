@@ -12,16 +12,16 @@
 let
   final = rustPlatform.buildRustPackage rec {
     pname = "tree-sitter";
-    version = "0.24.3-unstable-2024-10-19";
+    version = "0.24.3-unstable-2024-10-24";
 
     src = fetchFromGitHub {
       owner = "tree-sitter";
       repo = "tree-sitter";
-      rev = "60c5057617c0b2ca3804a362594c484728e3e5bf";
-      hash = "sha256-XTTQUPwdy9gUEvyaONDTG13pBpIy6eA5qAEEawSS9H8=";
+      rev = "66cd81a4f8ff0dc8310740d9847ef78af5575eb5";
+      hash = "sha256-IfuRs9+HFkMjwVzLMdqGH52/eyVKc6I17MDTKrid568=";
     };
 
-    cargoHash = "sha256-kIHJxV4kdfuMz8/mcsfyiErux7z3aBkv2zda8vxrG+o=";
+    cargoHash = "sha256-AcesFyxDjkCiEsCQJHRN2VUOJ638t4FfRfPHxqwEac4=";
 
     nativeBuildInputs = lib.optionals withWasm [ cmake ];
 
