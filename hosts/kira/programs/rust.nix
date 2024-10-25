@@ -49,7 +49,7 @@ in {
         incremental = true;
         codegen-units = 512;
       };
-      profile.release = {
+      profile.release-plus = {
         opt-level = 3;
         lto = "thin";
         incremental = false;
