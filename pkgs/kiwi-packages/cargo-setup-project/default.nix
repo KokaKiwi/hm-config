@@ -8,7 +8,10 @@
 let
   files = {
     ".mise.toml" = {
-      src = ./mise.toml;
+      src = substituteAll {
+        src = ./mise.toml;
+        inherit cargo;
+      };
       overwrite = false;
     };
     ".neoconf.json" = {
@@ -16,10 +19,7 @@ let
       overwrite = false;
     };
     "Justfile" = {
-      src = substituteAll {
-        src = ./Justfile.base;
-        inherit cargo;
-      };
+      src = ./Justfile.base;
     };
   };
 in writeShellScriptBin "cargo-setup-project" ''

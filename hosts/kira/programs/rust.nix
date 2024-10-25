@@ -1,5 +1,7 @@
-{ pkgs, lib, ... }:
+{ config, pkgs, lib, ... }:
 let
+  cfg = config.programs.rust;
+
   llvmPackages = pkgs.llvmPackages_latest;
 
   mkStablePackage = drv: drv.override {
@@ -80,13 +82,23 @@ in {
       enable = true;
       package = mkStablePackage pkgs.cargo-mommy;
 
-      enableAlias = true;
-
       config = {
         roles = "mxtress";
         pronouns = "their";
-        little = [ "drone" "doll" "toy" ];
+        little = [ "bot" "drone" "doll" "toy" ];
       };
+    };
+  };
+
+  programs.fish = {
+    functions = {
+      cargo = ''
+        if test "$SAFE_CARGO" = "1"
+          command cargo $argv
+        else
+          ${cfg.cargo-mommy.package}/bin/cargo-mommy $argv
+        end
+      '';
     };
   };
 }

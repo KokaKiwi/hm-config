@@ -1,4 +1,5 @@
 [env]
+CARGO_BIN = '@cargo@'
 CARGO_ALL_FEATURES = '0'
 CARGO_FEATURES = ''
 CARGO_WORKSPACE = '0'

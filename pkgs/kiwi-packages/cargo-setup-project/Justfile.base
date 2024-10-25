@@ -1,4 +1,4 @@
-cargo := env_var_or_default('CARGO_BIN', '@cargo@')
+cargo := env_var_or_default('CARGO_BIN', 'cargo')
 cargo-all-features := env_var_or_default('CARGO_ALL_FEATURES', '0')
 cargo-features := env_var_or_default('CARGO_FEATURES', '')
 cargo-use-workspace := env_var_or_default('CARGO_WORKSPACE', '0')
