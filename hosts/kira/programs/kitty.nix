@@ -1,4 +1,4 @@
-{ config, pkgs, lib, ... }:
+{ config, pkgs, ... }:
 {
   programs.kitty = {
     enable = true;
@@ -52,6 +52,10 @@
       "map kitty_mod+page_up" = "previous_tab";
       "map kitty_mod+page_down" = "next_tab";
     };
+
+    extraConfig = ''
+      mouse_map shift+left click ungrabbed no-op
+    '';
   };
 
   xdg.desktopEntries.kitty = {
