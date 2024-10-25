@@ -25,6 +25,7 @@ in rec {
   cargo-generate = callPackage ./development/tools/rust/cargo-generate { };
   cargo-leptos = callPackage ./development/tools/rust/cargo-leptos { };
   cargo-make = callPackage ./development/tools/rust/cargo-make { };
+  cargo-msrv = callPackage ./development/tools/rust/cargo-msrv { };
   cargo-ndk = callPackage ./development/tools/rust/cargo-ndk { };
   cargo-nextest = callPackage ./development/tools/rust/cargo-nextest { };
   cargo-shell = callPackage ./development/tools/rust/cargo-shell { };
