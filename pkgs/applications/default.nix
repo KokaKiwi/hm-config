@@ -101,6 +101,7 @@ in rec {
   npins = callPackage ./development/tools/npins { };
   nushell = callPackage ./shells/nushell { };
   obsidian = callPackage ./misc/obsidian { };
+  oha = callPackage ./tools/networking/oha { };
   onefetch = callPackage ./misc/onefetch { };
   opentofu = callPackage ./networking/cluster/opentofu { };
   patool = callPackage ./misc/patool { };
