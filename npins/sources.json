@@ -20,9 +20,9 @@
         "repo": "nix"
       },
       "branch": "main",
-      "revision": "f99984a7f4e2a7f92893443dc1d1971d0ff1fe23",
-      "url": "https://github.com/catppuccin/nix/archive/f99984a7f4e2a7f92893443dc1d1971d0ff1fe23.tar.gz",
-      "hash": "0f0lhvavyy3mb7mgjmy5rksnxk31kzazgbwa693rc5fsisl55pd3"
+      "revision": "0b7bf04628414a402d255924f65e9a0d1a53d92b",
+      "url": "https://github.com/catppuccin/nix/archive/0b7bf04628414a402d255924f65e9a0d1a53d92b.tar.gz",
+      "hash": "13xl82scsg9gxyxw8ccsbh07a85lm67vpqkkgb08wnksnb7rpzdf"
     },
     "crane": {
       "type": "GitRelease",
@@ -59,9 +59,9 @@
         "repo": "eza-themes"
       },
       "branch": "main",
-      "revision": "302f4783dcd84a8221f1da8223d1ea0885fd26e3",
-      "url": "https://github.com/eza-community/eza-themes/archive/302f4783dcd84a8221f1da8223d1ea0885fd26e3.tar.gz",
-      "hash": "07djsl0mdas95rrnzzz44wgl6sr9n02469l2zyqhz9nlpl2lmpvm"
+      "revision": "74be26bbd2ce76b29c37250a2fb7cb5d6644c964",
+      "url": "https://github.com/eza-community/eza-themes/archive/74be26bbd2ce76b29c37250a2fb7cb5d6644c964.tar.gz",
+      "hash": "0qjj9z84b2xfgivjdfffhg0sir1skrak4ahbilm618zd1zwbbk8s"
     },
     "fenix": {
       "type": "Git",
@@ -71,9 +71,9 @@
         "repo": "fenix"
       },
       "branch": "main",
-      "revision": "5fa09829e74070c1e83b2aaa50b71bbc6da3f37c",
-      "url": "https://github.com/nix-community/fenix/archive/5fa09829e74070c1e83b2aaa50b71bbc6da3f37c.tar.gz",
-      "hash": "1aln51akrkmni33k6liv8ayv5svwm81n3dsgwwrksj1dlb4285sh"
+      "revision": "482b57f3f27a9336e0fbc62fa99ee0f624ccf4d0",
+      "url": "https://github.com/nix-community/fenix/archive/482b57f3f27a9336e0fbc62fa99ee0f624ccf4d0.tar.gz",
+      "hash": "1v4q5qyfjn35va1das2m1zs884lzh3lwf9hvj5k5yqzszryx3yxr"
     },
     "home-manager": {
       "type": "Git",
@@ -131,9 +131,9 @@
         "repo": "treefmt-nix"
       },
       "branch": "main",
-      "revision": "aac86347fb5063960eccb19493e0cadcdb4205ca",
-      "url": "https://github.com/numtide/treefmt-nix/archive/aac86347fb5063960eccb19493e0cadcdb4205ca.tar.gz",
-      "hash": "0ysg99zcbq50ghjyqfkd6qkjdh74vn2ikv817rgp9mfnhfwayqsw"
+      "revision": "bae131e525cc8718da22fbeb8d8c7c43c4ea502a",
+      "url": "https://github.com/numtide/treefmt-nix/archive/bae131e525cc8718da22fbeb8d8c7c43c4ea502a.tar.gz",
+      "hash": "1cn360l1hbfwkn2ayyja5dlilampfln70afa8vr24wpwccb6vlv3"
     },
     "zig-overlay": {
       "type": "Git",
@@ -143,9 +143,9 @@
         "repo": "zig-overlay"
       },
       "branch": "main",
-      "revision": "a09e3892b79a7dab0c034d03de7f1cd31a22cf7b",
-      "url": "https://github.com/mitchellh/zig-overlay/archive/a09e3892b79a7dab0c034d03de7f1cd31a22cf7b.tar.gz",
-      "hash": "06kf71am4gfnmflkbn3wlqdhxcl7fqcb9xxvnr826fwhsbzd079p"
+      "revision": "1e8057e6644d4e11ec63dead68a91ba61c8d32f9",
+      "url": "https://github.com/mitchellh/zig-overlay/archive/1e8057e6644d4e11ec63dead68a91ba61c8d32f9.tar.gz",
+      "hash": "0ysi19ana95wkk9ih0fib3gs41fvk22wizmmi0fb5m70i7s2i2ak"
     }
   },
   "version": 3
