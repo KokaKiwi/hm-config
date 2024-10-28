@@ -12,16 +12,16 @@
 }:
 rustPlatform.buildRustPackage rec {
   pname = "cargo-pgrx";
-  version = "0.12.6";
+  version = "0.12.7";
 
   src = fetchFromGitHub {
     owner = "pgcentralfoundation";
     repo = "pgrx";
     rev = "v${version}";
-    hash = "sha256-3GdnfysTf8XugTuQQ/pVtepNHlGriq+XltLtbYcr+VA=";
+    hash = "sha256-msvmhUg7iPgwG04d4OuAMFoEYA/VsDKwKj/gHWg3SCc=";
   };
 
-  cargoHash = "sha256-6rCvZ2hIjBaE6v1HNc/Wzt1gwp+c6qNniVMYzF+U4xU=";
+  cargoHash = "sha256-IYvvEDWRwsQqyBH9QYQLFcKLBAtRzkOr3SEFXA4I0K4=";
 
   cargoBuildFlags = [ "-p" "cargo-pgrx" ];
   cargoTestFlags = cargoBuildFlags;
