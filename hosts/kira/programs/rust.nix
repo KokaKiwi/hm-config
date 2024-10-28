@@ -25,6 +25,7 @@ let
     rust-bindgen
     wasm-tools
     wit-bindgen
+    worker-build
     kiwiPackages.cargo-pgrx
   ]);
 in {
