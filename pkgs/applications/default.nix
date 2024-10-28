@@ -129,6 +129,7 @@ in rec {
   vesktop = callPackage ./misc/vesktop { };
   wasm-tools = callPackage ./tools/misc/wasm-tools { };
   wit-bindgen = callPackage ./development/tools/rust/wit-bindgen { };
+  worker-build = callPackage ./development/tools/worker-build { };
   xh = callPackage ./tools/networking/xh { };
   xinspect = callPackage ./development/tools/xinspect { };
   yt-dlp = python3Packages.callPackage ./misc/yt-dlp { };
