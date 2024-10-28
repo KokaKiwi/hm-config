@@ -5,6 +5,8 @@ cargo-use-workspace := env_var_or_default('CARGO_WORKSPACE', '0')
 cargo-target := env_var_or_default('CARGO_TARGET', '')
 cargo-profile := env_var_or_default('CARGO_PROFILE', '')
 
+workspace-prefix := env_var_or_default('CARGO_WORKSPACE_PREFIX', '')
+
 cargo-flags := ''
 
 cargo-workspace-flag := if cargo-use-workspace == '1' {
@@ -87,7 +89,7 @@ flamegraph *ARGS: (cargo 'flamegraph' ARGS)
 
 # Create new workspace crate (under crates/ directory)
 new NAME *ARGS:
-  {{cargo}} new {{ARGS}} --name {{NAME}} crates/{{NAME}}
+  {{cargo}} new {{ARGS}} --name {{workspace-prefix}}{{NAME}} crates/{{NAME}}
 
 @expand PACKAGE MODULE='':
   CARGO_TARGET_DIR='target/expand' cargo expand -p {{PACKAGE}} {{cargo-features-flag}} {{cargo-target-flag}} {{MODULE}} | bat -l 'Rust'
