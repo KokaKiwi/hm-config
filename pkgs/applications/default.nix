@@ -70,6 +70,7 @@ in rec {
   };
   gleam = callPackage ./compilers/gleam { };
   glow = callPackage ./editors/glow { };
+  hexyl = callPackage ./tools/misc/hexyl { };
   hyfetch = callPackage ./tools/misc/hyfetch { };
   jellyfin-media-player = libsForQt5.callPackage ./misc/jellyfin-media-player { };
   kitty = callPackage ./terminal-emulators/kitty {
