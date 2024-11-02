@@ -27,7 +27,7 @@ _@exeName@() {
     _store_cache _usage_@exeName@_spec spec
   fi
 
-  _arguments '*: :($(@usageBin@ complete-word -s "$spec" -- "${words[@]}" ))'
+  _arguments '*: :($(@usageBin@ complete-word --shell zsh -s "$spec" -- "${words[@]}" ))'
   return 0
 }
 
