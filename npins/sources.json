@@ -20,9 +20,9 @@
         "repo": "nix"
       },
       "branch": "main",
-      "revision": "0b7bf04628414a402d255924f65e9a0d1a53d92b",
-      "url": "https://github.com/catppuccin/nix/archive/0b7bf04628414a402d255924f65e9a0d1a53d92b.tar.gz",
-      "hash": "13xl82scsg9gxyxw8ccsbh07a85lm67vpqkkgb08wnksnb7rpzdf"
+      "revision": "191fbf2d81a63fad8f62f1233c0051f09b75d0ad",
+      "url": "https://github.com/catppuccin/nix/archive/191fbf2d81a63fad8f62f1233c0051f09b75d0ad.tar.gz",
+      "hash": "0v29myg0d7sq1zqrmi7qfn2iwxnf848ar55ji7fpdmr72jk943r5"
     },
     "crane": {
       "type": "GitRelease",
@@ -83,9 +83,9 @@
         "repo": "home-manager"
       },
       "branch": "master",
-      "revision": "8ca921e5a806b5b6171add542defe7bdac79d189",
-      "url": "https://github.com/nix-community/home-manager/archive/8ca921e5a806b5b6171add542defe7bdac79d189.tar.gz",
-      "hash": "04v4jvc7afnmap0sh9cnnvh9gh6rssiamy4dx80ihyqsbyjc01yh"
+      "revision": "1743615b61c7285976f85b303a36cdf88a556503",
+      "url": "https://github.com/nix-community/home-manager/archive/1743615b61c7285976f85b303a36cdf88a556503.tar.gz",
+      "hash": "0zqgx0r0xh4izks458xrkwm146z5ys0ca1xgvx1wyl0frh79bw02"
     },
     "nixgl": {
       "type": "Git",
@@ -143,9 +143,9 @@
         "repo": "zig-overlay"
       },
       "branch": "main",
-      "revision": "20b4dafc348320f8deefeed627de70e403742c05",
-      "url": "https://github.com/mitchellh/zig-overlay/archive/20b4dafc348320f8deefeed627de70e403742c05.tar.gz",
-      "hash": "0l4js2wqaw9lwwnhkrq3daifynpw4hi30rmp8r7s6c4j6ff2zap8"
+      "revision": "e7c3b240db1875be67d3dd5da96011bde608a06a",
+      "url": "https://github.com/mitchellh/zig-overlay/archive/e7c3b240db1875be67d3dd5da96011bde608a06a.tar.gz",
+      "hash": "0krh8xwv807bd9fh32bm4hzbckzsv0rjg24zswz8a4f3r19sp3lw"
     }
   },
   "version": 3
