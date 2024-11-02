@@ -28,10 +28,12 @@ let
     config.home.shell.package
     config.services.nextcloud-client.package
     config.services.syncthing.tray.package
-    pkgs.git-interactive-rebase-tool
-    pkgs.nix-your-shell
-    pkgs.syncthing
-  ];
+  ] ++ (with pkgs; [
+    git-interactive-rebase-tool
+    nix-your-shell
+    syncthing
+    usage
+  ]);
   aliases = let
     mkUnstable = drv: drv.overrideAttrs (super: {
       name = "${drv.name}-unstable";
