@@ -13,9 +13,8 @@ let
     ];
     home-manager = [
       "0001-PR-5643-programs.nix-your-shell-add-module.patch"
-      "0002-PR-4801-podman-init-module.patch"
-      "0003-Fixups.patch"
-      "0004-PR-5957-espanso-add-sandboxing-for-systemd-service.patch"
+      "0002-Fixups.patch"
+      "0003-PR-5957-espanso-add-sandboxing-for-systemd-service.patch"
     ];
   };
 

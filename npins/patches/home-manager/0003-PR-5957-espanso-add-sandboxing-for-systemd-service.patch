@@ -1,7 +1,7 @@
-From 534f8a578774da82af0f8cee804a1717b6f0f5a6 Mon Sep 17 00:00:00 2001
+From 9759af4dd99aa662077b8de417a3b6f27a215ca3 Mon Sep 17 00:00:00 2001
 From: KokaKiwi <kokakiwi+git@kokakiwi.net>
 Date: Sat, 12 Oct 2024 12:36:08 +0200
-Subject: [PATCH 4/4] PR#5957: espanso: add sandboxing for systemd service
+Subject: [PATCH 3/3] PR#5957: espanso: add sandboxing for systemd service
 
 Squashed commit of the following:
 

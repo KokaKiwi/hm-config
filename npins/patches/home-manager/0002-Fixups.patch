@@ -1,7 +1,7 @@
-From f987e26c884be3eb37600209896fdd5aacd4ac01 Mon Sep 17 00:00:00 2001
+From 28af582b463dce900ac8c69521fcc9590c948f68 Mon Sep 17 00:00:00 2001
 From: KokaKiwi <kokakiwi+git@kokakiwi.net>
 Date: Mon, 7 Oct 2024 11:38:38 +0200
-Subject: [PATCH 3/4] Fixups
+Subject: [PATCH 2/3] Fixups
 
 ---
  modules/programs/nix-your-shell.nix | 4 ++++
