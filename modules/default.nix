@@ -18,6 +18,7 @@
     ./programs/eza.nix
     ./programs/ferdium.nix
     ./programs/fish.nix
+    ./programs/gajim.nix
     ./programs/glab.nix
     ./programs/glances.nix
     ./programs/glow.nix

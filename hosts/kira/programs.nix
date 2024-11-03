@@ -9,6 +9,7 @@
     ./programs/element.nix
     ./programs/ferdium.nix
     ./programs/fish.nix
+    ./programs/gajim.nix
     ./programs/gdb.nix
     ./programs/gh.nix
     ./programs/git.nix
