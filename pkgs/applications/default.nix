@@ -113,6 +113,7 @@ in rec {
   procs = callPackage ./tools/admin/procs { };
   ptpython = python3Packages.callPackage ./development/tools/ptpython { };
   pueue = callPackage ./misc/pueue { };
+  rage = callPackage ./tools/crypto/rage { };
   rustup = callPackage ./development/tools/rustup { };
   silicon = callPackage ./misc/silicon { };
   skopeo = callPackage ./tools/misc/skopeo { };
