@@ -1,8 +1,8 @@
 { pkgs, sources }:
 let
-  inherit (pkgs) libsForQt5 kdePackages rustTools;
-  inherit (pkgs.kiwiPackages) python3Packages;
-  callPackage = pkgs.kiwiPackages.callPackageIfNewer;
+  inherit (pkgs) kiwiPackages;
+  inherit (pkgs) libsForQt5 kdePackages python3Packages rustTools;
+  callPackage = kiwiPackages.callPackageIfNewer;
 in rec {
   act = callPackage ./development/tools/act { };
   activate-linux = callPackage ./misc/activate-linux {
