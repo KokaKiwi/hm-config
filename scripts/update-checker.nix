@@ -62,12 +62,14 @@ in pkgs.nur.repos.kokakiwi.lib.mkUpdateChecker {
 
   configs = {
     aria2.prefix = "release-";
+    binaryen.include_regex = "version_.*";
     bitwarden-cli.include_regex = "cli-v.*";
     bitwarden-cli.prefix = "cli-v";
     bun.include_regex = "bun-v.*";
     bun.prefix = "bun-v";
     cargo-nextest.include_regex = "cargo-nextest-.*";
     cargo-nextest.prefix = "cargo-nextest-";
+    dorion.prefix = "v";
     gleam.prefix = "v";
     imhex.prefix = "v";
     kitty.prefix = "v";
@@ -88,6 +90,12 @@ in pkgs.nur.repos.kokakiwi.lib.mkUpdateChecker {
     cargo-depgraph = {
       source = "github";
       github = "jplatte/cargo-depgraph";
+      use_max_tag = true;
+    };
+    gajim = {
+      source = "gitlab";
+      host = "dev.gajim.org";
+      gitlab = "gajim/gajim";
       use_max_tag = true;
     };
     git-with-svn = {
@@ -129,6 +137,7 @@ in pkgs.nur.repos.kokakiwi.lib.mkUpdateChecker {
   };
   overrides = {
     aura.exclude_regex = "^$";
+    binaryen.prefix = "version_";
     lix.exclude_regex = "^$";
     pgcli.use_latest_tag = true;
   };
