@@ -17,6 +17,7 @@ in rec {
   binaryen = callPackage ./development/compilers/binaryen { };
   bitwarden-cli = callPackage ./misc/bitwarden-cli { };
   cargo-about = callPackage ./development/tools/cargo-about { };
+  cargo-audit = callPackage ./development/tools/rust/cargo-audit { };
   cargo-c-next = callPackage ./development/tools/rust/cargo-c { };
   cargo-component = callPackage ./development/tools/rust/cargo-component { };
   cargo-deny = callPackage ./development/tools/rust/cargo-deny { };
