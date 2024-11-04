@@ -9,13 +9,4 @@
       hash = "sha256-S8AA/1CWxTSHZ60E2ZNQXyEAOalYgCc6dte9CvD8Lx8=";
     };
   });
-
-  gnupg24 = super.gnupg24.overrideAttrs (self: prev: {
-    version = "2.4.6";
-
-    src = pkgs.fetchurl {
-      url = "mirror://gnupg/gnupg/${self.pname}-${self.version}.tar.bz2";
-      hash = "sha256-laz6/acASSSm9ckBZ38VrBvaJ1RRHZc7tFI+jdhA4Xo=";
-    };
-  });
 }

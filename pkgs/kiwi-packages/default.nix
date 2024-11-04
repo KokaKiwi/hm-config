@@ -36,4 +36,13 @@ rec {
 
   llvm = pkgs.llvm_19;
   llvmPackages = pkgs.llvmPackages_19;
+
+  gnupg = super.gnupg24.overrideAttrs (self: prev: {
+    version = "2.4.6";
+
+    src = pkgs.fetchurl {
+      url = "mirror://gnupg/gnupg/${self.pname}-${self.version}.tar.bz2";
+      hash = "sha256-laz6/acASSSm9ckBZ38VrBvaJ1RRHZc7tFI+jdhA4Xo=";
+    };
+  });
 }
