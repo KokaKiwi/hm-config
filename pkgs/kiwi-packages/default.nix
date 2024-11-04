@@ -14,6 +14,16 @@ rec {
   in finalDrv // {
     local = drv';
     remote = drv;
+    isLocal = isNewer || overwrite;
+  };
+  overrideAttrsIfNewer = drv: fnOrAttrs: let
+    drv' = drv.overrideAttrs fnOrAttrs;
+
+    isNewer = lib.versionOlder drv.version drv'.version;
+    finalDrv = if isNewer then drv' else drv;
+  in finalDrv // {
+    local = drv';
+    remote = drv;
     isLocal = isNewer;
   };
 
@@ -37,7 +47,7 @@ rec {
   llvm = pkgs.llvm_19;
   llvmPackages = pkgs.llvmPackages_19;
 
-  gnupg = super.gnupg24.overrideAttrs (self: prev: {
+  gnupg = overrideAttrsIfNewer super.gnupg24 (self: prev: {
     version = "2.4.6";
 
     src = pkgs.fetchurl {
