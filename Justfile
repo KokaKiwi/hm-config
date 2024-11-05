@@ -15,10 +15,11 @@ check: (_run-shell 'checkUpdates' '--arg doWarn true')
 build:
   nom-build -A hosts.{{host}}
 
-switch: build
+activate:
   result/activate
 dry-activate: build
   DRY_RUN=1 result/activate
+switch: build activate
 
 build-package ATTR:
   {{nix-build}} -A pkgs.{{ATTR}}
