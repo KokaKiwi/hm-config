@@ -31,6 +31,7 @@ let
   in if sourcePatches == [ ] then source
   else pkgs.srcOnly {
     inherit name;
+    stdenv = pkgs.stdenvNoCC;
     src = source;
     patches = sourcePatches;
     preferLocalBuild = true;

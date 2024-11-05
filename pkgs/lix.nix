@@ -1,4 +1,4 @@
-{ lib
+{ lib, stdenvNoCC
 
 , fetchpatch
 , fetchzip
@@ -40,6 +40,8 @@ let
     ++ patches;
 
   in srcOnly {
+    stdenv = stdenvNoCC;
+
     name = "${repo}-source";
 
     src = fetchzip {

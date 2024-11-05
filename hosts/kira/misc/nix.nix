@@ -25,6 +25,9 @@
         identityFile = "/root/.ssh/id_nix";
         maxJobs = 3;
         speedFactor = 5;
+        supportedSystemFeatures = [
+          "big-parallel"
+        ];
       };
       nix-alyx = {
         enable = false;

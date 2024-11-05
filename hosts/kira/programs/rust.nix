@@ -74,7 +74,7 @@ in {
             leptos = { };
           };
         in lib.mapAttrs (name: config: {
-          path = toString ../../files/cargo-templates/${name};
+          path = toString ../files/cargo-templates/${name};
         }) templates;
       };
     };

@@ -62,7 +62,7 @@ let
     inherit pkgs lib;
   };
 in {
-  inherit pkgs lib;
+  inherit sources pkgs lib;
 
   hosts = lib.mapAttrs mkModule hosts;
 }
