@@ -11,12 +11,12 @@ static_loader! {
 
 #[component]
 pub fn App() -> impl IntoView {
-    leptos_fluent::leptos_fluent!({
+    leptos_fluent::leptos_fluent! {
         locales: "./locales",
         translations: [TRANSLATIONS],
         #[cfg(debug_assertions)]
         check_translations: "./src/**/*.rs",
-    });
+    };
 
     provide_meta_context();
 

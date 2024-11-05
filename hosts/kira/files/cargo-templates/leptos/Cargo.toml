@@ -3,6 +3,10 @@ name = "{{project-name}}"
 version = "0.1.0"
 edition = "2021"
 
+[[bin]]
+name = "praise"
+required-features = ["ssr"]
+
 [lib]
 crate-type = ["cdylib", "rlib"]
 
@@ -11,10 +15,10 @@ leptos = "0.6.12"
 leptos-fluent = "0.1.8"
 leptos_meta = "0.6.12"
 leptos_router = "0.6.12"
-leptos-use = "0.10.10"
+leptos-use = "0.13.7"
 wasm-bindgen = "0.2.92"
 
-fluent-templates = "0.9.4"
+fluent-templates = "0.11.0"
 http = "1.1.0"
 tailwind_fuse = { version = "0.3.1", features = ["variant"] }
 
@@ -26,8 +30,8 @@ console_error_panic_hook = { version = "0.1", optional = true }
 axum = { version = "0.7.5", optional = true }
 leptos_axum = { version = "0.6.12", optional = true }
 tokio = { version = "1.38.0", features = ["rt-multi-thread"], optional = true }
-tower = { version = "0.4.13", optional = true }
-tower-http = { version = "0.5.2", features = ["fs"], optional = true }
+tower = { version = "0.5.1", optional = true }
+tower-http = { version = "0.6.1", features = ["fs"], optional = true }
 tracing = { version = "0.1.40", optional = true }
 
 [features]
