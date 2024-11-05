@@ -59,6 +59,7 @@ in {
     pre-commit sq oxipng
     oha drill deno
     ziggy gitnr binaryen
+    just
     nixgl.nixGLIntel
 
     # Data
