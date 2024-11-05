@@ -1,5 +1,18 @@
-{ pkgs, super }:
-{
+{ pkgs, super, sources }:
+let
+  opkgs = import sources.nixpkgs {};
+in {
+  # Fixup deps
+  webkitgtk_4_0 = super.webkitgtk_4_0.override {
+    inherit (opkgs) geoclue2;
+  };
+  webkitgtk_4_1 = super.webkitgtk_4_1.override {
+    inherit (opkgs) geoclue2;
+  };
+  webkitgtk_6_0 = super.webkitgtk_6_0.override {
+    inherit (opkgs) geoclue2;
+  };
+
   # Udated packages
   bun = super.bun.overrideAttrs (self: prev: {
     version = "1.1.34";
