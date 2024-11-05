@@ -1,6 +1,14 @@
+use clap::Parser;
+
+mod log;
 mod static_files;
 
-#[cfg(feature = "ssr")]
+#[derive(Debug, clap::Parser)]
+struct Options {
+    #[arg(long, value_enum, default_value_t)]
+    log_format: log::LogFormat,
+}
+
 #[tokio::main]
 async fn main() -> miette::Result<()> {
     use axum::Router;
@@ -9,6 +17,9 @@ async fn main() -> miette::Result<()> {
     use miette::IntoDiagnostic;
 
     use {{crate_name}}::app::App;
+
+    let opts = Options::parse();
+    log::setup_logger(opts.log_format);
 
     let leptos_options = leptos::get_configuration(None)
         .await
@@ -26,13 +37,11 @@ async fn main() -> miette::Result<()> {
     let listener = tokio::net::TcpListener::bind(&listen_addr)
         .await
         .into_diagnostic()?;
-    logging::log!("listening on http://{}", listen_addr);
+    tracing::info!("Listening on http://{listen_addr}");
+
     axum::serve(listener, app.into_make_service())
         .await
         .into_diagnostic()?;
 
     Ok(())
 }
-
-#[cfg(not(feature = "ssr"))]
-fn main() {}
