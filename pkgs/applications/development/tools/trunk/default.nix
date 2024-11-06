@@ -10,16 +10,16 @@
 }:
 rustPlatform.buildRustPackage rec {
   pname = "trunk";
-  version = "0.21.2";
+  version = "0.21.3";
 
   src = fetchFromGitHub {
     owner = "trunk-rs";
     repo = "trunk";
     rev = "v${version}";
-    hash = "sha256-+QcHmV6VJI7OH8AGGNrzd8I6s+eT1afZEIPfXh3OZE4=";
+    hash = "sha256-IRLXn6Z1HYHJiJs6qIa+A2Dwm8rx/7DuJnCoZYInWf0=";
   };
 
-  cargoHash = "sha256-Xkz2V9NlfKPWiqIFtGw5cDS8W33z2AS+Uxhvz4drXaA=";
+  cargoHash = "sha256-5bnhRMA1yt/6csjhCZ4/5a+ga9eF5Eof1P7QEpNI+PE=";
 
   nativeBuildInputs = [ pkg-config ];
   buildInputs = [ openssl ];
