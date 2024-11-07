@@ -15,13 +15,13 @@
 }:
 rustPlatform.buildRustPackage {
   pname = "attic-client";
-  version = "0-unstable-2024-10-30";
+  version = "0-unstable-2024-11-06";
 
   src = fetchFromGitHub {
     owner = "zhaofengli";
     repo = "attic";
-    rev = "48c8b395bfbc6b76c7eae74df6c74351255a095c";
-    hash = "sha256-OQl+aAsKiyygvpzck1u0sZf/R4T9zM903CgNDFmmzA8=";
+    rev = "d0b66cf897e4d55f03d341562c9821dc4e566e54";
+    hash = "sha256-tBuyb8jWBSHHgcIrOfiyQJZGY1IviMzH2V74t7gWfgI=";
   };
 
   cargoLock = {
