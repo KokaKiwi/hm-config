@@ -59,6 +59,11 @@ in {
         user = "kokakiwi";
         identityFile = "~/.ssh/id_ed25519";
       };
+      isaac = {
+        hostname = "isaac.kokakiwi.net";
+        user = "nixos";
+        identityFile = "~/.ssh/id_ed25519";
+      };
       mel = {
         hostname = "mel.kokakiwi.net";
         user = "nixos";

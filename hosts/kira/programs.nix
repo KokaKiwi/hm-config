@@ -13,7 +13,7 @@
     ./programs/gdb.nix
     ./programs/gh.nix
     ./programs/git.nix
-    ./programs/gpg.nix
+    ./programs/gnupg.nix
     ./programs/hyfetch.nix
     ./programs/kde.nix
     ./programs/kitty.nix
@@ -26,6 +26,7 @@
     ./programs/nix-index.nix
     ./programs/nushell.nix
     ./programs/nvchecker.nix
+    ./programs/openssh.nix
     ./programs/paru.nix
     ./programs/password-store.nix
     ./programs/pgcli.nix
@@ -33,7 +34,6 @@
     ./programs/rust.nix
     ./programs/sccache.nix
     ./programs/silicon.nix
-    ./programs/ssh.nix
     ./programs/starship.nix
     ./programs/taplo.nix
     ./programs/tmux.nix
