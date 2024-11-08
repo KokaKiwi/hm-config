@@ -111,18 +111,6 @@
       "url": "https://github.com/NixOS/nixpkgs/archive/85f7e662eda4fa3a995556527c87b2524b691933.tar.gz",
       "hash": "1p8qam6pixcin63wai3y55bcyfi1i8525s1hh17177cqchh1j117"
     },
-    "tmux-loadavg": {
-      "type": "Git",
-      "repository": {
-        "type": "GitHub",
-        "owner": "jamesoff",
-        "repo": "tmux-loadavg"
-      },
-      "branch": "master",
-      "revision": "91319eff74ee677efb77c882dcc8e3b8780dc3a2",
-      "url": "https://github.com/jamesoff/tmux-loadavg/archive/91319eff74ee677efb77c882dcc8e3b8780dc3a2.tar.gz",
-      "hash": "1raz3m5bpwwc1q4q269c4anff7pq8a25k9shjh5k5j3bnpywwvr5"
-    },
     "treefmt": {
       "type": "Git",
       "repository": {

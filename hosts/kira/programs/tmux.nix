@@ -1,12 +1,6 @@
-{ config, pkgs, lib, sources, ... }:
-with lib;
+{ config, pkgs, lib, ... }:
 let
-  tmux-loadavg = pkgs.tmuxPlugins.mkTmuxPlugin {
-    pluginName = "tmux-loadavg";
-    rtpFilePath = "tmux-loadavg.tmux";
-    version = builtins.substring 0 8 sources.tmux-loadavg.revision;
-    src = sources.tmux-loadavg;
-  };
+  inherit (config.lib) files tmux;
 in {
   programs.tmux = {
     enable = true;
@@ -17,30 +11,26 @@ in {
     };
 
     catppuccin = {
-      extraConfig = config.lib.tmux.formatOptions {
-        prefix = "catppuccin_";
+      extraConfig = tmux.formatOptions {
+        prefix = "@catppuccin_";
       } {
         # Window
-        window_current_background = "#1e1e2d";
+        window_current_number_color = "#{@thm_green}";
 
-        window_left_separator = " █";
+        window_status_style = "basic";
 
-        window_default_text = " #W ";
+        window_text = " #W ";
         window_current_text = " #W ";
 
         # Status
-        status_modules_left = concatStringsSep " " [
-          "session"
-        ];
-        status_modules_right = concatStringsSep " " [
-          "load"
-          "date_time"
-        ];
         status_left_separator = " ";
+        status_middle_separator = "";
         status_right_separator = "";
         status_connect_separator = "no";
 
-        date_time_text = "%H:%M";
+        date_time_text = " %H:%M ";
+        load_text = " #(${lib.getExe pkgs.tmux-mem-cpu-load} --interval 2) ";
+        session_text = " #S ";
       };
     };
 
@@ -65,10 +55,23 @@ in {
       "TERM" "TERM_PROGRAM"
     ];
 
-    plugins = [
-      tmux-loadavg
-    ];
+    extraOptions = {
+      status-right-length = toString 100;
+      status-left-length = toString 120;
+    };
 
-    extraConfig = config.lib.files.readLocalConfig "tmux/tmux.conf";
+    extraConfig = let
+      baseConfig = files.readLocalConfig "tmux/tmux.conf";
+
+      catppuccinStatusModules = lib.concatMapStrings (name: "#{E:@catppuccin_status_${name}}");
+
+      leftModules = [ "session" ];
+      rightModules = [ "load" "date_time" ];
+    in ''
+      ${baseConfig}
+
+      set -g status-left "${catppuccinStatusModules leftModules} "
+      set -g status-right "${catppuccinStatusModules rightModules}"
+    '';
   };
 }
