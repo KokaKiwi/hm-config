@@ -7,57 +7,27 @@
 
 , runtimeShell
 }: let
-  pdm-build-locked = python3Packages.buildPythonPackage rec {
-    pname = "pdm-build-locked";
-    version = "0.3.0";
-    pyproject = true;
+  resolvelib = python3Packages.resolvelib.overridePythonAttrs (super: rec {
+    version = "1.1.0";
 
     src = fetchPypi {
-      pname = "pdm_build_locked";
+      pname = "resolvelib";
       inherit version;
-      hash = "sha256-Wzx8UH8H6O+T9r/Pv2cIwTYa2egMOvFcychvsPNZKr0=";
+      hash = "sha256-toWR73SPWMHioqwo0JYbNYauiyX2CwuppeTz2Hwdank=";
     };
 
-    build-system = with python3Packages; [
-      pdm-backend
-    ];
-
-    meta = with lib; {
-      homepage = "https://pdm-project.org";
-      changelog = "https://github.com/pdm-project/pdm-build-locked/releases/tag/${version}";
-      description = "a pdm plugin to publish locked dependencies as optional-dependencies";
-      license = licenses.mit;
-    };
-  };
-
-  dep-logic = python3Packages.dep-logic.overridePythonAttrs (super: rec {
-    version = "0.4.4";
-
-    src = fetchPypi {
-      pname = "dep_logic";
-      inherit version;
-      hash = "sha256-5xav3ak1EQfFTvT2/T/SlWj1NSmvszO0lYGDudMG5Eo=";
-    };
-  });
-  unearth = python3Packages.unearth.overridePythonAttrs (super: rec {
-    version = "0.17.0";
-
-    src = fetchPypi {
-      inherit (super) pname;
-      inherit version;
-      hash = "sha256-dxyicP7IvqJid0oLHOJ1JzkFbmUjRDQCjs6vRmy7oLY=";
-    };
+    doCheck = false;
   });
 in python3Packages.buildPythonApplication rec {
   pname = "pdm";
-  version = "2.19.3";
+  version = "2.20.0.post1";
   pyproject = true;
 
   disabled = python3Packages.pythonOlder "3.8";
 
   src = fetchPypi {
     inherit pname version;
-    hash = "sha256-qcx/IHjNOyWsZF/7Xsqdaz1d/NeI6t37YINDLaccl8I=";
+    hash = "sha256-6XbJo0bdtYAqU7cClfnvSwr2F8ZUALQXZGlrAAHNruM=";
   };
 
   nativeBuildInputs = [
