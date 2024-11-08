@@ -10,16 +10,16 @@
 }:
 rustPlatform.buildRustPackage rec {
   pname = "miniserve";
-  version = "0.28.0-unstable-2024-11-01";
+  version = "0.28.0-unstable-2024-11-07";
 
   src = fetchFromGitHub {
     owner = "svenstaro";
     repo = "miniserve";
-    rev = "4b2e54ea37f52002b8c4a9c8771d160067048374";
-    hash = "sha256-Rbcah3Hjh6OovT3MaCuJRnpKzh6ojZNN/3I89xdlRbI=";
+    rev = "807e8d74877fbe342e79d6e985be61fba2fb787e";
+    hash = "sha256-zz232sJclt+WwKow5tldEfijnq7wc35SCEFSmYTGd1w=";
   };
 
-  cargoHash = "sha256-H61CBjV5m8TLkeccYOmuFe+ogtpteyvuoh6CPmq6q+Q=";
+  cargoHash = "sha256-btiGnepseXaTQ8PBLI+1020y0WD5ROTTGXR1xBcX9JM=";
 
   nativeBuildInputs = [
     installShellFiles
