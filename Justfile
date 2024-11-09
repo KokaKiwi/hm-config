@@ -34,6 +34,8 @@ copy-application SRC DST: (copy-package (SRC) ('applications/' + DST))
 
 update-package ATTR *ARGS:
   nix-update --commit pkgs.{{ATTR}} {{ARGS}}
+update-kiwi-package ATTR *ARGS:
+  nix-update --commit pkgs.kiwiPackages.{{ATTR}} {{ARGS}}
 
 update-neovim: (update-package 'kiwiPackages.neovim' '--version=branch=master')
 update-vscode:
