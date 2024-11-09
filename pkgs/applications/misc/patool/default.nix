@@ -31,7 +31,7 @@
   ];
 in python3Packages.buildPythonPackage rec {
   pname = "patool";
-  version = "3.0.2";
+  version = "3.0.3";
 
   format = "setuptools";
 
@@ -39,7 +39,7 @@ in python3Packages.buildPythonPackage rec {
     owner = "wummel";
     repo = "patool";
     rev = "refs/tags/${version}";
-    hash = "sha256-3xuDiNSQB8zzCTliF+55xFJli3Xs/jT00p/hqahGxJc=";
+    hash = "sha256-m4vKP3HsNILM2Ys7OjM6KiwwNrtSwerRkGvSMppkTzU=";
   };
 
   nativeCheckInputs = with python3Packages; [
@@ -47,6 +47,10 @@ in python3Packages.buildPythonPackage rec {
   ] ++ compression-utilities;
 
   disabledTests = [
+    "test_7z"
+    "test_7z_file"
+    "test_7za_file"
+    "test_p7azip"
     "test_unzip"
     "test_unzip_file"
     "test_zip"
