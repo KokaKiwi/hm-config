@@ -24,9 +24,8 @@ in {
 
         # Status
         status_left_separator = " ";
-        status_middle_separator = "";
-        status_right_separator = "";
-        status_connect_separator = "no";
+        status_right_separator = "";
+        status_connect_separator = "yes";
 
         date_time_text = " %H:%M ";
         load_text = " #(${lib.getExe pkgs.tmux-mem-cpu-load} --interval 2) ";
