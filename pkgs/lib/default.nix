@@ -1,5 +1,5 @@
 { callPackage }:
 rec {
-  version = callPackage ./version.nix {};
-  inherit (version) gitVersion;
+  versionTools = callPackage ./version.nix {};
+  inherit (versionTools) gitVersion;
 }
