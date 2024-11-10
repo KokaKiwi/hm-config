@@ -2,29 +2,28 @@
 
 , fetchFromGitHub
 
-, bison
-, boost182
-, flex
-, fmt
-, gtest
-, libbacktrace
-, lit
-, llvmPackages
 , meson
 , ninja
-, nix
-, nixpkgs-fmt
+, python312
 , pkg-config
+
+, lit
+
+, nix
+, gtest
+, boost182
+, llvmPackages
+, nlohmann_json
 }:
 stdenv.mkDerivation (finalAttrs: {
   pname = "nixd";
-  version = "2.4.0";
+  version = "2.5.0";
 
   src = fetchFromGitHub {
     owner = "nix-community";
     repo = "nixd";
     rev = finalAttrs.version;
-    hash = "sha256-8F97zAu+icDC9ZYS7m+Y58oZQ7R3gVuXMvzAfgkVmJo=";
+    hash = "sha256-dFPjQcY3jtHIsdR0X1s0qbHtBFroRhHoy/NldEFxlZ0=";
   };
 
   mesonBuildType = "release";
@@ -32,23 +31,20 @@ stdenv.mkDerivation (finalAttrs: {
   nativeBuildInputs = [
     meson
     ninja
+    python312
     pkg-config
-    bison
-    flex
   ];
 
   nativeCheckInputs = [
     lit
-    nixpkgs-fmt
   ];
 
   buildInputs = [
-    libbacktrace
     nix
-    fmt
     gtest
     boost182
     llvmPackages.llvm
+    nlohmann_json
   ];
 
   env.CXXFLAGS = "-include ${nix.dev}/include/nix/config.h";
@@ -66,6 +62,7 @@ stdenv.mkDerivation (finalAttrs: {
 
   checkPhase = ''
     runHook preCheck
+
     dirs=(store var var/nix var/log/nix etc home)
 
     for dir in $dirs; do
@@ -82,16 +79,17 @@ stdenv.mkDerivation (finalAttrs: {
     # Disable nixd regression tests, because it uses some features provided by
     # nix, and does not correctly work in the sandbox
     meson test --print-errorlogs  unit/libnixf/Basic unit/libnixf/Parse unit/libnixt
+
     runHook postCheck
   '';
 
-  meta = {
+  meta = with lib; {
     description = "Nix language server";
     homepage = "https://github.com/nix-community/nixd";
     changelog = "https://github.com/nix-community/nixd/releases/tag/${finalAttrs.version}";
-    license = lib.licenses.lgpl3Plus;
-    maintainers = with lib.maintainers; [ inclyc Ruixi-rebirth ];
+    license = licenses.lgpl3Plus;
+    maintainers = with maintainers; [ inclyc ];
     mainProgram = "nixd";
-    platforms = lib.platforms.unix;
+    platforms = platforms.unix;
   };
 })
