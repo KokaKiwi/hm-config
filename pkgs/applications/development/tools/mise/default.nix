@@ -6,10 +6,14 @@
 , addUsageCompletion
 , rustPlatform
 
-, bash
-, coreutils
-, direnv
 , pkg-config
+
+, coreutils
+, bash
+, direnv
+, gnused
+, git
+, gawk
 , openssl
 }: rustPlatform.buildRustPackage rec {
   pname = "mise";
@@ -25,26 +29,39 @@
   cargoHash = "sha256-lFZESiQwOBSqhMqJ2aw+mGPwTLnGRL1toHc7ndiEbCs=";
 
   nativeBuildInputs = [ addUsageCompletion installShellFiles pkg-config ];
-  buildInputs = [ openssl ];
+  buildInputs = [
+    coreutils
+    bash
+    direnv
+    gnused
+    git
+    gawk
+    openssl
+  ];
 
-  postPatch = ''
-    patchShebangs --build \
-      ./test/data/plugins/**/bin/* \
-      ./src/fake_asdf.rs \
-      ./src/cli/reshim.rs \
-      ./test/cwd/.mise/tasks/filetask
-
+  prePatch = ''
+    substituteInPlace ./src/test.rs ./test/data/plugins/**/bin/* \
+      --replace-warn '/usr/bin/env bash' '${bash}/bin/bash'
+    substituteInPlace ./src/fake_asdf.rs ./src/cli/generate/git_pre_commit.rs ./src/cli/generate/snapshots/*.snap \
+      --replace-warn '/bin/sh' '${bash}/bin/sh'
     substituteInPlace ./src/env_diff.rs \
       --replace-warn '"bash"' '"${bash}/bin/bash"'
-
     substituteInPlace ./src/cli/direnv/exec.rs \
       --replace-warn '"env"' '"${coreutils}/bin/env"' \
       --replace-warn 'cmd!("direnv"' 'cmd!("${direnv}/bin/direnv"'
+    substituteInPlace ./src/git.rs ./src/test.rs \
+      --replace-warn '"git"' '"${git}/bin/git"'
   '';
 
-  doCheck = false;
   cargoTestFlags = [ "--all-features" ];
-  useNextest = true;
+  dontUseCargoParallelTests = true;
+  checkFlags = let
+    skipTests = [
+      "cli::plugins::ls::tests::test_plugin_list_urls"
+      "tera::tests::test_last_modified"
+      "plugins::core::ruby::tests::test_list_versions_matching"
+    ];
+  in map (name: "--skip=${name}") skipTests;
 
   postInstall = ''
     installManPage ./man/man1/mise.1
@@ -57,11 +74,11 @@
       --zsh ./completions/_mise
   '';
 
-  meta = {
+  meta = with lib; {
     homepage = "https://mise.jdx.dev";
     description = "The front-end to your dev env";
     changelog = "https://github.com/jdx/mise/releases/tag/v${version}";
-    license = lib.licenses.mit;
+    license = licenses.mit;
     mainProgram = "mise";
   };
 }
