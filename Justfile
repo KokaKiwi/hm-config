@@ -2,6 +2,9 @@ host := `hostname`
 
 nix-build := 'NIXPKGS_ALLOW_BROKEN=1 nom-build'
 
+alias upp := update-package
+alias upk := update-kiwi-package
+
 _default:
 
 _run-shell COMMAND *ARGS:
