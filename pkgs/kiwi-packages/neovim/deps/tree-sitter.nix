@@ -17,8 +17,8 @@ let
     src = fetchFromGitHub {
       owner = "tree-sitter";
       repo = "tree-sitter";
-      rev = "18e4a2405b52ecd3cb9aefdd05d6554e76823473";
-      hash = "sha256-wUCDq3fvZtjP0D29DV1/a7QZH9GWDGAqOWhr+PcXYmA=";
+      rev = "738c956a3e6078fc1c1165cca984d0698785eef5";
+      hash = "sha256-G7m75K1X7CDiQU7NiLA5PzfodgX3U6CpK8rt7Od/WGM=";
     };
 
     cargoHash = "sha256-xnZlqkBP/yO2ujKGiIcDGiYbE/bBHgXl2ynLCKxrctc=";
