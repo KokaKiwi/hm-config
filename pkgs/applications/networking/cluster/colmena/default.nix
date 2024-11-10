@@ -9,16 +9,16 @@
 }:
 rustPlatform.buildRustPackage {
   pname = "colmena";
-  version = "0.4.0-unstable-2024-11-08";
+  version = "0.4.0-unstable-2024-11-10";
 
   src = fetchFromGitHub {
     owner = "zhaofengli";
     repo = "colmena";
-    rev = "c4d72269affff3abbe7175d363e6c0edf1b0e167";
-    hash = "sha256-n1UeNT2PrbOlLNa+EhFMrniUN4BtGqCw9R9/qWpzNEA=";
+    rev = "a2193487bcf70bbb998ad1a25a4ff02b8d55db7a";
+    hash = "sha256-04iOZoJ0D+y3xhZtaCgSBOz8T4hED7oMVkuAOzXT8vU=";
   };
 
-  cargoHash = "sha256-McqaSVgy2aEotxXaFB2BB/1lWwoU5OmWr/cUX0wyY2Y=";
+  cargoHash = "sha256-cuZu1DTodIOgcQ3Wb1m3ECNyZnzrPtcFOljVQjGodGY=";
 
   nativeBuildInputs = [ installShellFiles ];
 
