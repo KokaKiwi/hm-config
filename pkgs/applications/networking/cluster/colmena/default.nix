@@ -14,11 +14,11 @@ rustPlatform.buildRustPackage {
   src = fetchFromGitHub {
     owner = "zhaofengli";
     repo = "colmena";
-    rev = "03f1a18a6fba9ad9c4edb1cc7cf394390c304198";
-    hash = "sha256-N8gaV5bngMQPGyuo/RVdEsHTXvOeqjUhhxXpGea12DE=";
+    rev = "c4d72269affff3abbe7175d363e6c0edf1b0e167";
+    hash = "sha256-n1UeNT2PrbOlLNa+EhFMrniUN4BtGqCw9R9/qWpzNEA=";
   };
 
-  cargoHash = "sha256-RwZNQhfpU2yGg4Nz3Yc7NBb4Eg3LeFX+HQzBknCIAIk=";
+  cargoHash = "sha256-McqaSVgy2aEotxXaFB2BB/1lWwoU5OmWr/cUX0wyY2Y=";
 
   nativeBuildInputs = [ installShellFiles ];
 
