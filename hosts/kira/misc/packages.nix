@@ -59,7 +59,7 @@ in {
     pre-commit sq oxipng
     oha drill deno
     ziggy gitnr binaryen
-    just
+    just sqlx-cli sea-orm-cli
     nixgl.nixGLIntel
 
     # Data
