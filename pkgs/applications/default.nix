@@ -116,6 +116,7 @@ in rec {
   pueue = callPackage ./misc/pueue { };
   rage = callPackage ./tools/crypto/rage { };
   rustup = callPackage ./development/tools/rustup { };
+  sea-orm-cli = callPackage ./development/tools/sea-orm-cli { };
   silicon = callPackage ./misc/silicon { };
   skopeo = callPackage ./tools/misc/skopeo { };
   starship = callPackage ./tools/misc/starship { };
