@@ -51,7 +51,6 @@
     glow.enable = true;
     hub.enable = true;
     nix-init.enable = true;
-    nix-your-shell.enable = true;
     szurubooru-cli.enable = true;
     yt-dlp.enable = true;
     zoxide.enable = true;
