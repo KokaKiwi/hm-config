@@ -3,6 +3,7 @@
   imports = [
     ./programs/act.nix
     ./programs/aura.nix
+    ./programs/bash.nix
     ./programs/bat.nix
     ./programs/bpython.nix
     ./programs/discord.nix
