@@ -33,6 +33,7 @@ let
     nix-your-shell
     syncthing
     usage
+    viceroy
   ]);
   aliases = let
     mkUnstable = drv: drv.overrideAttrs (super: {
