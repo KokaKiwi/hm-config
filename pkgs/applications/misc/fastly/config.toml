@@ -47,14 +47,14 @@ description = "A basic expressly starter kit that demonstrates simple GET, POST,
 path = "https://github.com/fastly/compute-starter-kit-javascript-expressly"
 
 [[starter-kits.javascript]]
-name = "Fanout forwarding starter kit for JavaScript"
-description = "Enables Fanout on a service, forwarding to a backend."
-path = "https://github.com/fastly/compute-starter-kit-javascript-fanout-forward"
-
-[[starter-kits.javascript]]
 name = "OpenAPI Validation (JS)"
 description = "Application template for validating requests against an OpenAPI document."
 path = "https://github.com/fastly/compute-starter-kit-javascript-openapi-validation"
+
+[[starter-kits.javascript]]
+name = "Fanout forwarding starter kit for JavaScript"
+description = "Enables Fanout on a service, forwarding to a backend."
+path = "https://github.com/fastly/compute-starter-kit-javascript-fanout-forward"
 
 [[starter-kits.javascript]]
 name = "Queuing / Waiting room (JS)"

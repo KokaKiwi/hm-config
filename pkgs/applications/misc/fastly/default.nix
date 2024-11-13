@@ -1,6 +1,5 @@
 { lib
 
-, fetchurl
 , fetchFromGitHub
 
 , installShellFiles
@@ -26,6 +25,7 @@ buildGoModule rec {
     leaveDotGit = true;
     postFetch = ''
       cd "$out"
+
       git rev-parse --short HEAD > $out/COMMIT
       find "$out" -name .git -print0 | xargs -0 rm -rf
     '';
@@ -51,6 +51,7 @@ buildGoModule rec {
     "-X github.com/fastly/cli/pkg/revision.GoHostOS=${go.GOHOSTOS}"
     "-X github.com/fastly/cli/pkg/revision.GoHostArch=${go.GOHOSTARCH}"
   ];
+
   preBuild = ''
     cp ${./config.toml} ./pkg/config/config.toml
     ldflags+=" -X github.com/fastly/cli/pkg/revision.GitCommit=$(cat COMMIT)"
