@@ -50,6 +50,8 @@
 
       systemctl = "systemctl --user";
       journalctl = "journalctl --user";
+
+      makepkg-remote = "pkgctl build --offload --worker 1";
     };
 
     # Fix weird stuff with babelfish generation
