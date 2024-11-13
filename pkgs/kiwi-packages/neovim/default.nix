@@ -21,13 +21,13 @@ let
   lua = luajit.override {
     inherit stdenv;
 
-    version = "2.1.ROLLING-unstable-2024-10-02";
+    version = "2.1.ROLLING-unstable-2024-11-13";
 
     src = fetchFromGitHub {
       owner = "LuaJIT";
       repo = "LuaJIT";
-      rev = "97813fb924edf822455f91a5fbbdfdb349e5984f";
-      hash = "sha256-OcmPF7G/T2+8aaT+uEZx8Q6JPYY55pof9oP33fXpcys=";
+      rev = "69bbf3c1b01de8239444b0c430a89fa868978fea";
+      hash = "sha256-vqis7ic6RKDbHwBoJxoOzRLlRUpbb16kA9N75Biw/kE=";
     };
   };
 
