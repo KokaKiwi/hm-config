@@ -4,8 +4,10 @@ rec {
     inherit (pkgs.kiwiPackages) libgit2;
   });
   callPackageIfNewer = path: args: let
+    newArgs = builtins.removeAttrs args [ "_overwrite" "_override" ];
+
     drv = super.${drv'.pname} or null;
-    drv' = callPackage path (builtins.removeAttrs args [ "_overwrite" ]);
+    drv' = callPackage path newArgs;
 
     overwrite = args._overwrite or args._override or false;
 
