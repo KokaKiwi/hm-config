@@ -6,7 +6,7 @@ let
 in rec {
   act = callPackage ./development/tools/act { };
   activate-linux = callPackage ./misc/activate-linux {
-    _overwrite = true;
+    _override = true;
   };
   agenix = callPackage "${sources.agenix}/pkgs/agenix.nix" { };
   amber-lang = callPackage ./development/compilers/amber-lang { };
@@ -42,7 +42,7 @@ in rec {
   docker-credential-helpers = callPackage ./misc/docker-credential-helpers { };
   doggo = callPackage ./networking/doggo { };
   dorion = callPackage ./networking/instant-messengers/dorion {
-    _overwrite = true;
+    _override = true;
   };
   du-dust = pkgs.dust;
   dust = callPackage ./misc/dust { };
@@ -60,7 +60,7 @@ in rec {
   gh = callPackage ./version-management/gh { };
   git-absorb = callPackage ./version-management/git-absorb { };
   git-cliff = callPackage ./version-management/git-cliff {
-    _overwrite = true;
+    _override = true;
     inherit (rustTools.rust) rustPlatform;
   };
   git-interactive-rebase-tool = callPackage ./version-management/git-interactive-rebase-tool { };
@@ -95,8 +95,13 @@ in rec {
     nixfmt = pkgs.nixfmt-rfc-style;
   };
   nixd = callPackage ./development/tools/nixd {
+    _override = true;
+
     llvmPackages = pkgs.llvmPackages_16;
-    nix = pkgs.nixVersions.nix_2_24;
+
+    _overrideArgs = {
+      nix = pkgs.nixVersions.stable_upstream;
+    };
   };
   nomad_1_8 = callPackage ./networking/cluster/nomad/1_8.nix { };
   nomad_1_9 = callPackage ./networking/cluster/nomad/1_9.nix { };

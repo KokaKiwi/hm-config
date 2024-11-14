@@ -4,19 +4,25 @@ rec {
     inherit (pkgs.kiwiPackages) libgit2;
   });
   callPackageIfNewer = path: args: let
-    newArgs = builtins.removeAttrs args [ "_overwrite" "_override" ];
+    newArgs = builtins.removeAttrs args [ "_override" "_overrideArgs" ];
+    overrideArgs = args._overrideArgs or { };
 
-    drv = super.${drv'.pname} or null;
-    drv' = callPackage path newArgs;
+    drv = let
+      base = super.${drv'.pname} or null;
+    in if base != null then base.override overrideArgs else null;
 
-    overwrite = args._overwrite or args._override or false;
+    drv' = let
+      finalArgs = overrideArgs // newArgs;
+    in callPackage path finalArgs;
+
+    override = args._override or false;
 
     isNewer = drv == null || lib.versionOlder drv.version drv'.version;
-    finalDrv = if (isNewer || overwrite) then drv' else drv;
+    finalDrv = if (isNewer || override) then drv' else drv;
   in finalDrv // {
     local = drv';
     remote = drv;
-    isLocal = isNewer || overwrite;
+    isLocal = isNewer || override;
   };
   overrideAttrsIfNewer = drv: fnOrAttrs: let
     drv' = drv.overrideAttrs fnOrAttrs;

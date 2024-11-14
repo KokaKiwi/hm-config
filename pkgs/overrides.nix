@@ -13,6 +13,10 @@ in {
     inherit (opkgs) geoclue2;
   };
 
+  nixt = super.nixt.override {
+    nix = pkgs.nixVersions.stable_upstream;
+  };
+
   # Udated packages
   bun = super.bun.overrideAttrs (self: prev: {
     version = "1.1.34";
