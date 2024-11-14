@@ -7,6 +7,7 @@ let
   ignoredPackages = [
     # Let's nixpkgs handle these
     "nixfmt" "nix-output-monitor"
+    "bash"
     # Too old
     "hub"
     # My own packages
