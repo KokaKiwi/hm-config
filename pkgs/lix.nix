@@ -5,10 +5,11 @@
 , srcOnly
 }:
 let
-  version = "2.91.1";
+  lixVersion = "2.91.1";
 
   fetchSource = {
     repo,
+    version ? lixVersion,
     hash ? lib.fakeHash,
 
     patches ? [ ],
@@ -59,13 +60,7 @@ in {
   };
   nixos-module = fetchSource {
     repo = "nixos-module";
-    hash = "sha256-slp0zWHKvbCzhiBwwe6VX6jODEY+PKhHyiAoHgM5Bdc=";
-
-    cherryPicks = [
-      {
-        id = "81d9ff97c93289bb1592ae702d11173724a643fa";
-        hash = "sha256-vjK/C0RrpFCSoG3QiH0Fh8H1eXq0oBT8NVq2WNMNnWI=";
-      }
-    ];
+    version = "${lixVersion}-1";
+    hash = "sha256-6U0CyPycIBc04hbYy2hBINnVso58n/ZyywY2BD3hu+s=";
   };
 }
