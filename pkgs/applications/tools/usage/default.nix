@@ -1,16 +1,16 @@
 { fetchFromGitHub, rustPlatform}:
 rustPlatform.buildRustPackage rec {
   pname = "usage";
-  version = "1.3.0";
+  version = "1.3.1";
 
   src = fetchFromGitHub {
     owner = "jdx";
     repo = "usage";
     rev = "v${version}";
-    hash = "sha256-pV37KRjPUgQVm9855sAgFhNrEWX4MC7qeMnmHoUj23k=";
+    hash = "sha256-TQYWXXbZYvoavC7hWSani+LpQbqYHMXdigJtNGwANbU=";
   };
 
-  cargoHash = "sha256-x68MZnQXQS1qKQQ2zdCI3KcpD1+At7oeVdBHa+4UeV4=";
+  cargoHash = "sha256-Xf4P0OUP8z5Keerv6MDzbYXxuUE+8tqYLkn7Pt4rK8E=";
 
   checkFlags = [
     "--skip=complete_word_mounted"
