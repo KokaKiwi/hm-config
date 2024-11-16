@@ -87,6 +87,18 @@
       "url": "https://github.com/nix-community/home-manager/archive/1d0862ee2d7c6f6cd720d6f32213fa425004be10.tar.gz",
       "hash": "0hqmxdp6wz8z305w7pb582ardsyn45wgr55mck2isk43jrjriba2"
     },
+    "nix-vscode-extensions": {
+      "type": "Git",
+      "repository": {
+        "type": "GitHub",
+        "owner": "nix-community",
+        "repo": "nix-vscode-extensions"
+      },
+      "branch": "master",
+      "revision": "32e3b124252161fcd7e0623c6e6faf9d535c1a3f",
+      "url": "https://github.com/nix-community/nix-vscode-extensions/archive/32e3b124252161fcd7e0623c6e6faf9d535c1a3f.tar.gz",
+      "hash": "1bvnr2s9ljga6bdy5p7ac6bxlvbf6gfj756fw0fg9slfxaar47ss"
+    },
     "nixgl": {
       "type": "Git",
       "repository": {

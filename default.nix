@@ -7,6 +7,7 @@ let
       (import "${sources.lix.nixos-module}/overlay.nix" {
         inherit (sources.lix) lix;
       })
+      ((import sources.nix-vscode-extensions).overlays.default)
       (self: super: import ./pkgs {
         pkgs = self;
         inherit super sources;
