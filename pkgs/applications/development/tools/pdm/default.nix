@@ -18,6 +18,22 @@
 
     doCheck = false;
   });
+  # pdm wants an outdated version of hishel
+  hishel = python3Packages.hishel.overridePythonAttrs (super: rec {
+    version = "0.0.33";
+
+    src = fetchPypi {
+      pname = "hishel";
+      inherit version;
+      hash = "sha256-q1smYdXiJS8wX9D7IOjHa/qz6nNFjyDyWRxTw3snAIk=";
+    };
+
+    dependencies = super.dependencies ++ (with python3Packages; [
+      typing-extensions
+    ]);
+
+    doCheck = false;
+  });
 in python3Packages.buildPythonApplication rec {
   pname = "pdm";
   version = "2.20.1";
