@@ -31,7 +31,7 @@
   ];
 in python3Packages.buildPythonPackage rec {
   pname = "patool";
-  version = "3.0.3";
+  version = "3.1.0";
 
   format = "setuptools";
 
@@ -39,7 +39,7 @@ in python3Packages.buildPythonPackage rec {
     owner = "wummel";
     repo = "patool";
     rev = "refs/tags/${version}";
-    hash = "sha256-m4vKP3HsNILM2Ys7OjM6KiwwNrtSwerRkGvSMppkTzU=";
+    hash = "sha256-mt/GUIRJHB2/Rritc+uNkolZzguYy2G/NKnSKNxKsLk=";
   };
 
   nativeCheckInputs = with python3Packages; [
