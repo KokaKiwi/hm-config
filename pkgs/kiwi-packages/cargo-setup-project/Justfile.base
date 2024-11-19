@@ -4,6 +4,7 @@ cargo-features := env_var_or_default('CARGO_FEATURES', '')
 cargo-use-workspace := env_var_or_default('CARGO_WORKSPACE', '0')
 cargo-target := env_var_or_default('CARGO_TARGET', '')
 cargo-profile := env_var_or_default('CARGO_PROFILE', '')
+cargo-bench-backend := env_var_or_default('CARGO_BENCH_BACKEND', 'bench')
 
 workspace-prefix := env_var_or_default('CARGO_WORKSPACE_PREFIX', '')
 
@@ -68,6 +69,9 @@ doc: (_cargo 'doc' cargo-flags-doc '--document-private-items')
 
 # Run tests
 test *ARGS: (cargo 'nextest run' ARGS)
+
+# Run benchmark
+bench *ARGS: (cargo cargo-bench-backend ARGS)
 
 # Run cargo clippy
 clippy *ARGS: (cargo 'clippy' ARGS)
