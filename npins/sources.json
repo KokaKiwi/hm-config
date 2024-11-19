@@ -34,10 +34,10 @@
       "pre_releases": false,
       "version_upper_bound": null,
       "release_prefix": "v",
-      "version": "v0.19.1",
-      "revision": "8075cee52557720ddd62a3315d92dde01088843b",
-      "url": "https://api.github.com/repos/ipetkov/crane/tarball/v0.19.1",
-      "hash": "1y6dh5xl4i9h59zjh80lrh42sddq6zbg3rphl63q2ihaqy69a4vx"
+      "version": "v0.19.3",
+      "revision": "de4b20b7b4919e01b84d394bdc6313ea0b3923d9",
+      "url": "https://api.github.com/repos/ipetkov/crane/tarball/v0.19.3",
+      "hash": "0vy6ws4iy8hg10n1yz56aj31wwbw69k34m7fkq96qvdc2lc65f6g"
     },
     "declarative-cachix": {
       "type": "Git",
@@ -71,9 +71,9 @@
         "repo": "fenix"
       },
       "branch": "main",
-      "revision": "e10ba121773f754a30d31b6163919a3e404a434f",
-      "url": "https://github.com/nix-community/fenix/archive/e10ba121773f754a30d31b6163919a3e404a434f.tar.gz",
-      "hash": "042avds56swf77zkd9d7nggr2x3a94jxndgzs8vvvmapv5ry31dl"
+      "revision": "3a8ac5fe1052d1ebe0cfee036aab71cce110b713",
+      "url": "https://github.com/nix-community/fenix/archive/3a8ac5fe1052d1ebe0cfee036aab71cce110b713.tar.gz",
+      "hash": "03whzicv8wg59msy4l150pn3fpqr6rg9yw0bbq7skip8yvnc494z"
     },
     "home-manager": {
       "type": "Git",
@@ -83,9 +83,9 @@
         "repo": "home-manager"
       },
       "branch": "master",
-      "revision": "f3a2ff69586f3a54b461526e5702b1a2f81e740a",
-      "url": "https://github.com/nix-community/home-manager/archive/f3a2ff69586f3a54b461526e5702b1a2f81e740a.tar.gz",
-      "hash": "17wic7qq5h8r8yd4s3fksy2myfyazmfkdzayf5i852hq3gywl3mv"
+      "revision": "a42fa14b53ceab66274a21da480c9f8e06204173",
+      "url": "https://github.com/nix-community/home-manager/archive/a42fa14b53ceab66274a21da480c9f8e06204173.tar.gz",
+      "hash": "0hdc0dh1ax3zlk1p5cqndz7ikmfdi1gnih44pryd64yf8k0c457s"
     },
     "nix-vscode-extensions": {
       "type": "Git",
@@ -95,9 +95,9 @@
         "repo": "nix-vscode-extensions"
       },
       "branch": "master",
-      "revision": "0982ffd1c37d8ef1a202d920e33b27b59ff30ca7",
-      "url": "https://github.com/nix-community/nix-vscode-extensions/archive/0982ffd1c37d8ef1a202d920e33b27b59ff30ca7.tar.gz",
-      "hash": "0p5myn86wx90vgl83l4mrav2g2qva2gjxa5pm93lxyy4n0fxa7hw"
+      "revision": "6f1845dd71ddeb7463856750c5e0cb6c122bb87a",
+      "url": "https://github.com/nix-community/nix-vscode-extensions/archive/6f1845dd71ddeb7463856750c5e0cb6c122bb87a.tar.gz",
+      "hash": "12lbwykjvskrnw2la1k9mrn291x8q1hc9hgdcz5y62mpk8scaw0j"
     },
     "nixgl": {
       "type": "Git",
@@ -119,9 +119,9 @@
         "repo": "nixpkgs"
       },
       "branch": "nixpkgs-unstable",
-      "revision": "0a14706530dcb90acecb81ce0da219d88baaae75",
-      "url": "https://github.com/NixOS/nixpkgs/archive/0a14706530dcb90acecb81ce0da219d88baaae75.tar.gz",
-      "hash": "1b3gycpfsjlyrjiy83mhlnci37l0ssd0l26ingcz2qifq0jbb5z7"
+      "revision": "5083ec887760adfe12af64830a66807423a859a7",
+      "url": "https://github.com/NixOS/nixpkgs/archive/5083ec887760adfe12af64830a66807423a859a7.tar.gz",
+      "hash": "0sr45csfh2ff8w7jpnkkgl22aa89sza4jlhs6wq0368dpmklsl8g"
     },
     "treefmt": {
       "type": "Git",
@@ -131,9 +131,9 @@
         "repo": "treefmt-nix"
       },
       "branch": "main",
-      "revision": "746901bb8dba96d154b66492a29f5db0693dbfcc",
-      "url": "https://github.com/numtide/treefmt-nix/archive/746901bb8dba96d154b66492a29f5db0693dbfcc.tar.gz",
-      "hash": "18lrzsgksq58xlbnkaavs9r139z2rp5js9b3pc6x9mxavb9rmbxw"
+      "revision": "675d4a7fc531799ae8dfca1986b79be7660559e2",
+      "url": "https://github.com/numtide/treefmt-nix/archive/675d4a7fc531799ae8dfca1986b79be7660559e2.tar.gz",
+      "hash": "0b0lpc2mfh3la2nvgcf11ib8wd9zjvl0l8746rg6n70by8jr9jq2"
     },
     "zig-overlay": {
       "type": "Git",
@@ -143,9 +143,9 @@
         "repo": "zig-overlay"
       },
       "branch": "main",
-      "revision": "ca008b5635935f40a7672e762720803f6c570fb3",
-      "url": "https://github.com/mitchellh/zig-overlay/archive/ca008b5635935f40a7672e762720803f6c570fb3.tar.gz",
-      "hash": "1nz25lwv4bp2bp2y1aw28zscw9a90r1kipqhb278sx74w2bflkhc"
+      "revision": "2a4977969a8fa3a7527826c2959b7ff950a67c5c",
+      "url": "https://github.com/mitchellh/zig-overlay/archive/2a4977969a8fa3a7527826c2959b7ff950a67c5c.tar.gz",
+      "hash": "0vb06y1n39k9r0k09jvhicga7ymx2zsvwd8kaanyh2gm8lvwqvm1"
     }
   },
   "version": 3
