@@ -71,7 +71,7 @@ doc: (_cargo 'doc' cargo-flags-doc '--document-private-items')
 test *ARGS: (cargo 'nextest run' ARGS)
 
 # Run benchmark
-bench *ARGS: (cargo cargo-bench-backend ARGS)
+bench *ARGS: (_cargo cargo-bench-backend ARGS)
 
 # Run cargo clippy
 clippy *ARGS: (cargo 'clippy' ARGS)
