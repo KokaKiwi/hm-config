@@ -91,6 +91,7 @@ in rec {
   mux = callPackage ./misc/mux { };
   ncmpcpp = callPackage ./audio/ncmpcpp { };
   nextcloud-client = callPackage ./networking/nextcloud-client { };
+  nitrokey-app2 = kdePackages.callPackage ./tools/security/nitrokey-app2 { };
   nix-update = callPackage ./tools/package-management/nix-update {
     nixfmt = pkgs.nixfmt-rfc-style;
   };
