@@ -86,14 +86,12 @@ in {
         inherit (machines.kiwi-games) hostname;
         user = "nixos";
         identityFile = "~/.ssh/id_ed25519";
-        port = 2222;
       };
 
       arch-games = {
         inherit (machines.kiwi-games) hostname;
         user = "arch";
         identityFile = "~/.ssh/id_ed25519";
-        port = 2223;
       };
     };
 
