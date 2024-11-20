@@ -59,6 +59,7 @@ in {
     oha drill deno
     ziggy gitnr binaryen
     just sqlx-cli sea-orm-cli
+    nitrokey-app2 pynitrokey
     nixgl.nixGLIntel
 
     # Data
