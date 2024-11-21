@@ -8,13 +8,13 @@
 }:
 stdenv.mkDerivation (finalAttrs: {
   pname = "wasmtime-c-api";
-  version = "26.0.1";
+  version = "27.0.0";
 
   src = fetchFromGitHub {
     owner = "bytecodealliance";
     repo = "wasmtime";
     rev = "refs/tags/v${finalAttrs.version}";
-    hash = "sha256-jGe8HXiXG4/UxpxWjBBwGJjUSyC69jSizaxxU3OILy8=";
+    hash = "sha256-uM5MVCl+v9IzgZPC0J3hpT1/Erox8S1CkY1ExIOiHSA=";
   };
 
   nativeBuildInputs = [
@@ -27,7 +27,7 @@ stdenv.mkDerivation (finalAttrs: {
 
   cargoDeps = rustPlatform.fetchCargoTarball {
     inherit (finalAttrs) src;
-    hash = "sha256-enJ6XhtrbS5fYBnWMxW1dkyqxPIK4aRuq5E8fQnNroc=";
+    hash = "sha256-mHlDnv1MCeexOi1+SWO1XOJHpiRd/ElRWYzRauJX1Fc=";
   };
 
   cmakeDir = "../crates/c-api";
