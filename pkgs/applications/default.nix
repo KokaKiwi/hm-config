@@ -74,6 +74,7 @@ in rec {
   hexyl = callPackage ./tools/misc/hexyl { };
   hyfetch = callPackage ./tools/misc/hyfetch { };
   jellyfin-media-player = libsForQt5.callPackage ./misc/jellyfin-media-player { };
+  just = callPackage ./tools/just { };
   kitty = callPackage ./terminal-emulators/kitty {
     go = pkgs.go_1_23;
     buildGoModule = pkgs.buildGo123Module;
