@@ -64,6 +64,7 @@ in rec {
     inherit (rustTools.rust) rustPlatform;
   };
   git-interactive-rebase-tool = callPackage ./version-management/git-interactive-rebase-tool { };
+  git-lfs = callPackage ./version-management/git-lfs { };
   gitnr = callPackage ./version-management/gitnr { };
   gitui = callPackage ./misc/gitui { };
   glab = callPackage ./misc/glab {
