@@ -56,7 +56,7 @@ in {
     bun consul uv b3sum b2sum
     amber-lang fastly npins
     pre-commit sq oxipng
-    oha drill deno
+    oha drill
     ziggy gitnr binaryen
     just sqlx-cli sea-orm-cli
     nitrokey-app2 pynitrokey

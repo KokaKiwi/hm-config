@@ -7,6 +7,7 @@
       tools = {
         cmake = "system";
         crystal = "latest";
+        deno = "latest";
         golang = "system";
         gradle = "latest";
         java = "system";
