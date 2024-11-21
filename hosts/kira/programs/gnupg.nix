@@ -4,7 +4,7 @@
     enable = true;
     package = pkgs.kiwiPackages.gnupg;
     settings = {
-      keyserver = "keyserver.ubuntu.com";
+      keyserver = "hkps://keys.openpgp.org";
     };
   };
 }
