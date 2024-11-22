@@ -11,6 +11,12 @@
       "name": "nixos-24.05",
       "url": "https://releases.nixos.org/nixos/24.05/nixos-24.05.6668.e8c38b73aeb2/nixexprs.tar.xz",
       "hash": "0lhh36z3fvd3b64dz7an08y3c3shb67aj17ny9z28bs21i3dc5yh"
+    },
+    "nixos-24.11": {
+      "type": "Channel",
+      "name": "nixos-24.11",
+      "url": "https://releases.nixos.org/nixos/24.11/nixos-24.11beta708443.057f63b6dc1a/nixexprs.tar.xz",
+      "hash": "0zarpl4m3vzd0q1xivbdlxjnpbbhr85dvf3cw7s15fmabywysxh2"
     }
   },
   "version": 3
