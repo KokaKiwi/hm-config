@@ -131,9 +131,9 @@
         "repo": "treefmt-nix"
       },
       "branch": "main",
-      "revision": "37f8f47cb618eddee0c0dd31a582b1cd3013c7f6",
-      "url": "https://github.com/numtide/treefmt-nix/archive/37f8f47cb618eddee0c0dd31a582b1cd3013c7f6.tar.gz",
-      "hash": "1bqg5l027f2f6lvppl08p73p32s5xpnsh46acwnpcg7ghncvdmax"
+      "revision": "705df92694af7093dfbb27109ce16d828a79155f",
+      "url": "https://github.com/numtide/treefmt-nix/archive/705df92694af7093dfbb27109ce16d828a79155f.tar.gz",
+      "hash": "1716bc7vhphb2qiafyx5kjia8458wvcfalrbpdy7pg9qrs1sfr75"
     },
     "zig-overlay": {
       "type": "Git",
