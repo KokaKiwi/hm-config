@@ -9,17 +9,17 @@
 }:
 rustPlatform.buildRustPackage {
   pname = "mux";
-  version = "0.1-unstable-2024-10-08";
+  version = "0.1-unstable-2024-11-23";
 
   src = fetchFromGitLab {
     domain = "gitlab.kokakiwi.net";
     owner = "rusted/sys";
     repo = "mux";
-    rev = "8fd46d75cdcdaa30e03b56dd90b8c096de7fbc25";
-    hash = "sha256-wPDxpSF9mUDVrsY2Snj0pDUKdHs0eNMc7NchLBfRRRY=";
+    rev = "9b98177f18fcbe60763b773e1b83f638363e5d34";
+    hash = "sha256-/6Prxys2l3JVXu8ljJKZnkwtnXNwiFF8wXLKEOt1UdI=";
   };
 
-  cargoHash = "sha256-LOElqAwolmtycFbhhnVqT+cVpe34zyOs7ij5lf46gJI=";
+  cargoHash = "sha256-xXyKDuqsdV96cWY25Llz1oZv5G01zAow8ToCZO3OyWw=";
 
   nativeBuildInputs = [ makeWrapper ];
 
