@@ -21,10 +21,6 @@ in {
   programs.ssh = {
     enable = true;
     matchBlocks = {
-      "gitlab.kokakiwi.net" = {
-        identityFile = "~/.ssh/id_ed25519";
-      };
-
       aur = {
         host = "aur aur.archlinux.org";
         hostname = "aur.archlinux.org";
@@ -32,20 +28,8 @@ in {
         identityFile = "~/.ssh/id_aur";
       };
 
-      "alma*" = {
-        user = "root";
-        identityFile = "~/.ssh/id_ed25519";
-      };
-      alma = hm.dag.entryAfter [ "alma*" ] {
-        hostname = "192.168.1.42";
-      };
-      "alma.ygg" = hm.dag.entryAfter [ "alma*" ] {
-        hostname = "201:f51e:16e4:d0e5:d4eb:53b2:5449:517";
-      };
-
       "kiwivault*" = {
         user = "nixos";
-        identityFile = "~/.ssh/id_ed25519";
       };
       kiwivault = hm.dag.entryAfter [ "kiwivault*" ] {
         hostname = "192.168.1.80";
@@ -57,17 +41,14 @@ in {
       alyx = {
         hostname = "alyx.kokakiwi.net";
         user = "kokakiwi";
-        identityFile = "~/.ssh/id_ed25519";
       };
       isaac = {
         hostname = "isaac.kokakiwi.net";
         user = "nixos";
-        identityFile = "~/.ssh/id_ed25519";
       };
       mel = {
         hostname = "mel.kokakiwi.net";
         user = "nixos";
-        identityFile = "~/.ssh/id_ed25519";
       };
 
       archrepo = {
@@ -91,7 +72,6 @@ in {
       arch-games = {
         inherit (machines.kiwi-games) hostname;
         user = "arch";
-        identityFile = "~/.ssh/id_ed25519";
       };
     };
 
