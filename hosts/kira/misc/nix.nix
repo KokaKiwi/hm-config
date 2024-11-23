@@ -46,7 +46,7 @@
     };
 
     channels = let
-      names = [ "nixos-23.11" "nixos-24.05" ];
+      names = [ "nixos-23.11" "nixos-24.05" "nixos-24.11" ];
     in {
       nixpkgs = sources.nixpkgs;
       nixpkgs-unstable = sources.nixpkgs;
