@@ -10,20 +10,20 @@
 }:
 rustPlatform.buildRustPackage rec {
   pname = "gleam";
-  version = "1.6.1";
+  version = "1.6.2";
 
   src = fetchFromGitHub {
     owner = "gleam-lang";
     repo = pname;
     rev = "refs/tags/v${version}";
-    hash = "sha256-SiP9h0m2Y+eRicRWTmwjqXpmgizoUadofgSMmRYEFg0=";
+    hash = "sha256-r+iN6eLmy6qnrhvHKUQufd/4mvZL9TCVaqLqEPcLu1E=";
   };
 
   nativeBuildInputs = [ gitMinimal pkg-config ];
 
   buildInputs = [ openssl ];
 
-  cargoHash = "sha256-MQX0hQlucaOgX42XHw55QCsIADAib7cKs4PeMc7Za4s=";
+  cargoHash = "sha256-+kKKdNAvr8sTaFvzCCpY1bVS779DgJbHI9kUUIi4lXE=";
 
   meta = with lib; {
     description = "A statically typed language for the Erlang VM";
