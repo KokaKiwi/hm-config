@@ -102,4 +102,10 @@ in {
       Ciphers ${concatStringsSep "," ciphers}
     '';
   };
+
+  home.sessionVariables = {
+    SSH_ASKPASS = "/usr/bin/ksshaskpass";
+    SSH_ASKPASS_REQUIRE = "force";
+    GIT_ASKPASS = "/usr/bin/ksshaskpass";
+  };
 }

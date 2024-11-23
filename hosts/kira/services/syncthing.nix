@@ -12,6 +12,7 @@ in {
         jsSupport = false;
         plasmoidSupport = false;
       };
+      command = "syncthingtray --wait";
     };
   };
 
