@@ -32,6 +32,13 @@ let
     withSsh = true;
     withLibsecret = true;
   };
+
+  signingDirectories = [
+    "~/projects/contrib/tor/"
+    "~/projects/nix/"
+    "~/projects/pro/edgee/"
+    "~/projects/rust/hex/.git"
+  ];
 in {
   imports = [
     ./git/git-cliff.nix
@@ -54,7 +61,6 @@ in {
 
     signing = {
       key = "BECD152B6BAA1FA0FB5E00EF42C5CC9D07DF3288";
-      signByDefault = true;
     };
 
     lfs.enable = true;
@@ -86,6 +92,15 @@ in {
 
       lfs."https://gitlab.kokakiwi.net".locksverify = true;
     };
+
+    includes = map (path: {
+      condition = "gitdir:${path}";
+
+      contents = {
+        commit.gpgSign = true;
+        tag.gpgSign = true;
+      };
+    }) signingDirectories;
   };
 
   home.packages = with pkgs; [
