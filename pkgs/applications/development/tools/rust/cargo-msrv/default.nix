@@ -12,16 +12,16 @@
 }:
 rustPlatform.buildRustPackage rec {
   pname = "cargo-msrv";
-  version = "0.17.0";
+  version = "0.17.1";
 
   src = fetchFromGitHub {
     owner = "foresterre";
     repo = pname;
     rev = "v${version}";
-    sha256 = "sha256-lcIzRtpp3OkRI//VbUyABrl5YItRCJ2HJ4FQ+Ske6uw=";
+    sha256 = "sha256-cRdnx9K+EkVEKtPxQk+gXK6nkgkpWhpYij/5e7pFzMU=";
   };
 
-  cargoHash = "sha256-UKGJhS3vTupLCzwijCmO32YZ2m7dCZr/XSIfVkVxgqE=";
+  cargoHash = "sha256-Hs/bdDpJFQ0w+Ds2L5at06Sw3F+5bXu5HU798gR9/9Q=";
 
   # Integration tests fail
   doCheck = false;
