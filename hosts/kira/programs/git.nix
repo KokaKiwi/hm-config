@@ -37,7 +37,7 @@ let
     "~/projects/contrib/tor/"
     "~/projects/nix/"
     "~/projects/pro/edgee/"
-    "~/projects/rust/hex/.git"
+    "~/projects/langs/rust/hex/.git"
   ];
 in {
   imports = [
@@ -93,14 +93,10 @@ in {
       lfs."https://gitlab.kokakiwi.net".locksverify = true;
     };
 
-    includes = map (path: {
-      condition = "gitdir:${path}";
-
-      contents = {
-        commit.gpgSign = true;
-        tag.gpgSign = true;
-      };
-    }) signingDirectories;
+    pathConfigs = lib.listToAttrs (map (path: lib.nameValuePair path {
+      commit.gpgSign = true;
+      tag.gpgSign = true;
+    }) signingDirectories);
   };
 
   home.packages = with pkgs; [

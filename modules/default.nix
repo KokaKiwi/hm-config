@@ -19,6 +19,7 @@
     ./programs/ferdium.nix
     ./programs/fish.nix
     ./programs/gajim.nix
+    ./programs/git.nix
     ./programs/glab.nix
     ./programs/glances.nix
     ./programs/glow.nix
