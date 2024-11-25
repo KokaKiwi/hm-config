@@ -6,18 +6,19 @@
 }:
 python3Packages.buildPythonApplication rec {
   pname = "litecli";
-  version = "1.13.0";
+  version = "1.13.2";
   pyproject = true;
 
   src = fetchFromGitHub {
     owner = "dbcli";
     repo = "litecli";
     rev = "v${version}";
-    hash = "sha256-B6H2OjyuADEU0+vsyEOKiTydcSSsCeuxL9Hk4PFunPk=";
+    hash = "sha256-ZSNmeE1klidJkjL8LqsBplTmTiP0c0IwpjvOZoX0wjU=";
   };
 
   build-system = with python3Packages; [
     setuptools
+    setuptools-scm
   ];
 
   dependencies = with python3Packages; [
