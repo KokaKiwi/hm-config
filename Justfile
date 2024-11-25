@@ -39,6 +39,8 @@ update-package ATTR *ARGS:
   nix-update --commit pkgs.{{ATTR}} {{ARGS}}
 update-kiwi-package ATTR *ARGS:
   nix-update --commit pkgs.kiwiPackages.{{ATTR}} {{ARGS}}
+update-config-package ATTR *ARGS:
+  nix-update --commit hosts.{{host}}.config.{{ATTR}} {{ARGS}}
 
 update-neovim: (update-package 'kiwiPackages.neovim' '--version=branch=master')
 update-vscode:
