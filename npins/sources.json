@@ -71,9 +71,9 @@
         "repo": "fenix"
       },
       "branch": "main",
-      "revision": "39603febfbb0b494a368905a5c5c1b13bd6e1e53",
-      "url": "https://github.com/nix-community/fenix/archive/39603febfbb0b494a368905a5c5c1b13bd6e1e53.tar.gz",
-      "hash": "1n4pg19wzvnlqs3hcg332gvy3vm42pjz066n0bw8kgg98iid2dci"
+      "revision": "e0d44b70dcd2b98dd77857b4c5c7b1dc6b1ef56d",
+      "url": "https://github.com/nix-community/fenix/archive/e0d44b70dcd2b98dd77857b4c5c7b1dc6b1ef56d.tar.gz",
+      "hash": "0nkwf4vhxw53la0gbgpf2bch1bkbby0424akgx52jydi8jfjszrw"
     },
     "home-manager": {
       "type": "Git",
@@ -95,9 +95,9 @@
         "repo": "nix-vscode-extensions"
       },
       "branch": "master",
-      "revision": "b376bfa567fd25f9f22b6f51ffaa4f84d0b7c72f",
-      "url": "https://github.com/nix-community/nix-vscode-extensions/archive/b376bfa567fd25f9f22b6f51ffaa4f84d0b7c72f.tar.gz",
-      "hash": "06aazybv7c88bpsrzllfvswwr8z7pdfj8sgzw85j12qdk2p7j3qz"
+      "revision": "733e320a9cdd8dd2cad073ef9e4f4ceee3bd5976",
+      "url": "https://github.com/nix-community/nix-vscode-extensions/archive/733e320a9cdd8dd2cad073ef9e4f4ceee3bd5976.tar.gz",
+      "hash": "1gwb999ga344281rvajwd342dz6sdg4kwxvnfmjcr2mxzpr4z1az"
     },
     "nixgl": {
       "type": "Git",
@@ -143,9 +143,9 @@
         "repo": "zig-overlay"
       },
       "branch": "main",
-      "revision": "b7f09ab4c8316833ed54f942d7a4a6d296554aa4",
-      "url": "https://github.com/mitchellh/zig-overlay/archive/b7f09ab4c8316833ed54f942d7a4a6d296554aa4.tar.gz",
-      "hash": "038xybhk576wc1l8ig28mg34h58c51massiyqy7hvqmg4xr9dn72"
+      "revision": "665ab9acb56da1a5c5dea5ed992b64c953b3f277",
+      "url": "https://github.com/mitchellh/zig-overlay/archive/665ab9acb56da1a5c5dea5ed992b64c953b3f277.tar.gz",
+      "hash": "0h52s8a2pj48l50x5yygggz7sy7y28x2fg31v32i0shzdwf1cpgx"
     }
   },
   "version": 3
