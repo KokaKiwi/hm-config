@@ -127,6 +127,7 @@ in rec {
   sea-orm-cli = callPackage ./development/tools/sea-orm-cli { };
   silicon = callPackage ./misc/silicon { };
   skopeo = callPackage ./tools/misc/skopeo { };
+  sq = callPackage ./development/tools/sq { };
   starship = callPackage ./tools/misc/starship { };
   syncthing = callPackage ./networking/syncthing { };
   syncthingtray = kdePackages.callPackage ./misc/syncthingtray { };
