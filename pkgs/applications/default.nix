@@ -14,6 +14,7 @@ in rec {
   attic-client = callPackage ./tools/networking/attic-client {
     nix = pkgs.nixVersions.nix_2_24;
   };
+  b3sum = callPackage ./tools/b3sum { };
   binaryen = callPackage ./development/compilers/binaryen { };
   bitwarden-cli = callPackage ./misc/bitwarden-cli { };
   cargo-about = callPackage ./development/tools/cargo-about { };
