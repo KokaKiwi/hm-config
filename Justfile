@@ -57,7 +57,7 @@ repl:
 
 update *NAMES:
   npins update {{NAMES}}
-  git add npins/sources.json && git commit -m 'chore: Update pinned sources'
+  -git add npins/sources.json && git commit -m 'chore: Update pinned sources'
 
 update-nur:
   npins -d npins/nur update
