@@ -160,9 +160,9 @@ dependencies = [
 
 [[package]]
 name = "async-compression"
-version = "0.4.17"
+version = "0.4.18"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "0cb8f1d480b0ea3783ab015936d2a55c87e219676f0c0b7dec61494043f21857"
+checksum = "df895a515f70646414f4b45c0b79082783b80552b373a68283012928df56f522"
 dependencies = [
  "bzip2",
  "flate2",
@@ -1398,9 +1398,9 @@ checksum = "e5274423e17b7c9fc20b6e7e208532f9b19825d82dfd615708b70edd83df41f1"
 
 [[package]]
 name = "hashbrown"
-version = "0.15.1"
+version = "0.15.2"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "3a9bfc1af68b1726ea47d3d5109de126281def866b33970e10fbab11b5dafab3"
+checksum = "bf151400ff0baff5465007dd2f3e717f3fe502074ca563069ce3a6629d07b289"
 dependencies = [
  "allocator-api2",
  "equivalent",
@@ -1751,7 +1751,7 @@ source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "707907fe3c25f5424cce2cb7e1cbcafee6bdbe735ca90ef77c29e84591e5b9da"
 dependencies = [
  "equivalent",
- "hashbrown 0.15.1",
+ "hashbrown 0.15.2",
  "serde",
 ]
 
@@ -2620,9 +2620,9 @@ dependencies = [
 
 [[package]]
 name = "proc-macro2"
-version = "1.0.89"
+version = "1.0.92"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "f139b0662de085916d1fb67d2b4169d1addddda1919e696f3252b740b629986e"
+checksum = "37d3544b3f2748c54e147655edb5025752e2303145b5aefb3c3ea2c78b973bb0"
 dependencies = [
  "unicode-ident",
 ]
@@ -2673,7 +2673,7 @@ dependencies = [
 [[package]]
 name = "pubgrub"
 version = "0.2.1"
-source = "git+https://github.com/astral-sh/pubgrub?rev=57afc831bf2551f164617a10383cf288bf5d190d#57afc831bf2551f164617a10383cf288bf5d190d"
+source = "git+https://github.com/astral-sh/pubgrub?rev=9cd9049a64c7352de2ff3b525b9ae36421b0cc18#9cd9049a64c7352de2ff3b525b9ae36421b0cc18"
 dependencies = [
  "indexmap",
  "log",
@@ -3656,9 +3656,9 @@ dependencies = [
 
 [[package]]
 name = "syn"
-version = "2.0.87"
+version = "2.0.89"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "25aa4ce346d03a6dcd68dd8b4010bcb74e54e62c90c573f394c46eae99aba32d"
+checksum = "44d46482f1c1c87acd84dea20c1bf5ebff4c757009ed6bf19cfd36fb10e92c4e"
 dependencies = [
  "proc-macro2",
  "quote",
@@ -4319,9 +4319,9 @@ checksum = "8ecb6da28b8a351d773b68d5825ac39017e680750f980f3a1a85cd8dd28a47c1"
 
 [[package]]
 name = "url"
-version = "2.5.3"
+version = "2.5.4"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "8d157f1b96d14500ffdc1f10ba712e780825526c03d9a49b4d0324b0d9113ada"
+checksum = "32f8b686cadd1473f4bd0117a5d28d36b1ade384ea9b5069a1c40aefed7fda60"
 dependencies = [
  "form_urlencoded",
  "idna",
@@ -4400,7 +4400,7 @@ checksum = "f8c5f0a0af699448548ad1a2fbf920fb4bee257eae39953ba95cb84891a0446a"
 
 [[package]]
 name = "uv"
-version = "0.5.4"
+version = "0.5.5"
 dependencies = [
  "anstream",
  "anyhow",
@@ -4430,7 +4430,6 @@ dependencies = [
  "owo-colors",
  "petgraph",
  "predicates",
- "rayon",
  "regex",
  "reqwest",
  "rkyv",
@@ -4746,6 +4745,7 @@ dependencies = [
  "clap",
  "either",
  "fs-err 3.0.0",
+ "rayon",
  "rustc-hash",
  "schemars",
  "serde",
@@ -4958,6 +4958,7 @@ dependencies = [
  "tokio",
  "tokio-util",
  "tracing",
+ "uv-configuration",
  "uv-distribution-filename",
  "uv-pypi-types",
  "xz2",
@@ -5256,7 +5257,7 @@ name = "uv-pypi-types"
 version = "0.0.1"
 dependencies = [
  "anyhow",
- "hashbrown 0.15.1",
+ "hashbrown 0.15.2",
  "indexmap",
  "itertools 0.13.0",
  "jiff",
@@ -5396,7 +5397,6 @@ dependencies = [
  "uv-normalize",
  "uv-pep508",
  "uv-pypi-types",
- "uv-warnings",
 ]
 
 [[package]]
@@ -5408,7 +5408,7 @@ dependencies = [
  "dashmap",
  "either",
  "futures",
- "hashbrown 0.15.1",
+ "hashbrown 0.15.2",
  "indexmap",
  "insta",
  "itertools 0.13.0",
@@ -5592,7 +5592,7 @@ dependencies = [
 
 [[package]]
 name = "uv-version"
-version = "0.5.4"
+version = "0.5.5"
 
 [[package]]
 name = "uv-virtualenv"
@@ -5666,7 +5666,7 @@ checksum = "830b7e5d4d90034032940e4ace0d9a9a057e7a45cd94e6c007832e39edb82f6d"
 [[package]]
 name = "version-ranges"
 version = "0.1.1"
-source = "git+https://github.com/astral-sh/pubgrub?rev=57afc831bf2551f164617a10383cf288bf5d190d#57afc831bf2551f164617a10383cf288bf5d190d"
+source = "git+https://github.com/astral-sh/pubgrub?rev=9cd9049a64c7352de2ff3b525b9ae36421b0cc18#9cd9049a64c7352de2ff3b525b9ae36421b0cc18"
 dependencies = [
  "smallvec",
 ]
