@@ -11,7 +11,7 @@
 
     font = {
       name = "FiraCode Nerd Font Mono";
-      package = pkgs.fira-code-nerdfont;
+      package = pkgs.nerd-fonts.fira-code;
       size = 9.5;
     };
 

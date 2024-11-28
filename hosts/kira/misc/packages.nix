@@ -63,7 +63,8 @@ in {
     nixgl.nixGLIntel
 
     # Data
-    b612 fira-code-nerdfont
+    b612
+    nerd-fonts.fira-code
   ]
   ++ (with nur.repos; [
     kokakiwi.agree

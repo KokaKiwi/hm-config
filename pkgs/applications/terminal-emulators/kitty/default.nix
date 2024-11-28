@@ -11,7 +11,7 @@
 , pkg-config
 , go
 , fontconfig
-, nerdfonts
+, nerd-fonts
 , imagemagick
 , libicns
 , wayland-scanner
@@ -83,9 +83,7 @@ in python3Packages.buildPythonApplication rec {
     pkg-config
     go
     fontconfig
-    (nerdfonts.override {
-      fonts = [ "NerdFontsSymbolsOnly" ];
-    })
+    nerd-fonts.symbols-only
 
     sphinx
     furo
