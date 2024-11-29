@@ -28,6 +28,7 @@
     ./programs/kitty.nix
     ./programs/lan-mouse.nix
     ./programs/litecli.nix
+    ./programs/mise.nix
     ./programs/mux.nix
     ./programs/neovim.nix
     ./programs/nix-init.nix
