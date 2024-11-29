@@ -56,11 +56,11 @@ rec {
   llvmPackages = pkgs.llvmPackages_19;
 
   gnupg = overrideAttrsIfNewer super.gnupg24 (self: prev: {
-    version = "2.4.6";
+    version = "2.4.7";
 
     src = pkgs.fetchurl {
       url = "mirror://gnupg/gnupg/${self.pname}-${self.version}.tar.bz2";
-      hash = "sha256-laz6/acASSSm9ckBZ38VrBvaJ1RRHZc7tFI+jdhA4Xo=";
+      hash = "sha256-eyRwbk2n4OOwbKBoIxAnQB8jgQLEHJCWMTSdzDuF60Y=";
     };
   });
 }
