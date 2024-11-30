@@ -33,8 +33,12 @@ let
       channel = "1.82.0";
       hash = "sha256-yMuSb5eQPO/bHv+Bcf/US8LVMbf/G/0MSfiPwBhiPpk=";
     };
+    rust_1_83 = {
+      channel = "1.83.0";
+      hash = "sha256-s1RPtyvDGJaX/BisLT+ifVfuhDT1nZkZ1NcK8sbwELM=";
+    };
 
-    stable = rust_1_82;
+    stable = rust_1_83;
     rust = stable;
   };
 
