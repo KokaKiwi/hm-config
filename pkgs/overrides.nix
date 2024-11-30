@@ -19,11 +19,11 @@ in {
 
   # Udated packages
   bun = super.bun.overrideAttrs (self: prev: {
-    version = "1.1.37";
+    version = "1.1.38";
 
     src = pkgs.fetchurl {
       url = "https://github.com/oven-sh/bun/releases/download/bun-v${self.version}/bun-linux-x64.zip";
-      hash = "sha256-zHpTkX7cm2V3i6zfyiHprPvR8vaXQtYWmAN3p4Yg6XQ=";
+      hash = "sha256-ph2lNX4o1Jd/zNSFH+1i/02j6jOFMAXH3ZPayAvFOTI=";
     };
   });
 }
