@@ -116,6 +116,7 @@ in rec {
   oha = callPackage ./tools/networking/oha { };
   onefetch = callPackage ./misc/onefetch { };
   opentofu = callPackage ./networking/cluster/opentofu { };
+  oxipng = callPackage ./tools/oxipng { };
   patool = callPackage ./misc/patool { };
   pdm = callPackage ./development/tools/pdm { };
   pgcli = python3Packages.callPackage ./development/tools/pgcli { };
