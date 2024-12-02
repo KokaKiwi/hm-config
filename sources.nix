@@ -12,9 +12,8 @@ let
       "0001-Expose-lib.ctp.patch"
     ];
     home-manager = [
-      "0001-PR-5643-programs.nix-your-shell-add-module.patch"
-      "0002-Fixups.patch"
-      "0003-PR-5957-espanso-add-sandboxing-for-systemd-service.patch"
+      "0001-Fixups.patch"
+      "0002-PR-5957-espanso-add-sandboxing-for-systemd-service.patch"
     ];
   };
 
