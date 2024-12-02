@@ -143,6 +143,7 @@ in rec {
     inherit (rustTools.rust_1_81) rustPlatform rustc cargo;
   };
   vesktop = callPackage ./misc/vesktop { };
+  viceroy = callPackage ./development/tools/viceroy { };
   wasm-tools = callPackage ./tools/misc/wasm-tools { };
   wit-bindgen = callPackage ./development/tools/rust/wit-bindgen { };
   worker-build = callPackage ./development/tools/worker-build { };
