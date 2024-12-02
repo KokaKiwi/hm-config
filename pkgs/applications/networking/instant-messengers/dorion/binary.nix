@@ -15,11 +15,11 @@
 }:
 stdenv.mkDerivation (finalAttrs: {
   pname = "dorion";
-  version = "6.2.0";
+  version = "6.3.0";
 
   src = fetchurl {
     url = "https://github.com/SpikeHD/Dorion/releases/download/v${finalAttrs.version }/Dorion_${finalAttrs.version}_amd64.deb";
-    hash = "sha256-eTSuV57AQaRtWHdTH/xs9SD7W9Gi9YOh66PXuLn1/0E=";
+    hash = "sha256-GqVUcHL7aIZGWY+J7K4IreF3T3rZCMDnY84qlPeQ+v8=";
   };
 
   unpackCmd = ''
