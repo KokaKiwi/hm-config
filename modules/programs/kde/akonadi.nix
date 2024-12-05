@@ -6,6 +6,7 @@ let
   iniFormat = pkgs.formats.ini { };
 in {
   options.programs.kde.akonadi = {
+    enable = mkEnableOption "akonadi";
     postgresql = mkPackageOption pkgs "postgresql" { };
 
     dataDir = mkOption {
@@ -14,7 +15,7 @@ in {
     };
   };
 
-  config = {
+  config = mkIf cfg.enable {
     xdg.configFile."akonadi/akonadiserverrc".source = iniFormat.generate "akonadiserverrc" {
       Debug = {
         Tracer = "dbus";

@@ -1,4 +1,4 @@
-host := `hostname`
+host := `cat /etc/hostname`
 
 nix-build := 'NIXPKGS_ALLOW_BROKEN=1 nom-build'
 
