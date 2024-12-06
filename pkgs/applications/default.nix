@@ -144,6 +144,7 @@ in rec {
   };
   vesktop = callPackage ./misc/vesktop { };
   viceroy = callPackage ./development/tools/viceroy { };
+  wasm-bindgen-cli = callPackage ./development/tools/wasm-bindgen-cli { };
   wasm-tools = callPackage ./tools/misc/wasm-tools { };
   wit-bindgen = callPackage ./development/tools/rust/wit-bindgen { };
   worker-build = callPackage ./development/tools/worker-build { };
