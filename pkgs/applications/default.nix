@@ -30,6 +30,9 @@ in rec {
   cargo-msrv = callPackage ./development/tools/rust/cargo-msrv { };
   cargo-ndk = callPackage ./development/tools/rust/cargo-ndk { };
   cargo-nextest = callPackage ./development/tools/rust/cargo-nextest { };
+  cargo-outdated = callPackage ./development/tools/rust/cargo-outdated {
+    _override = true;
+  };
   cargo-release = callPackage ./development/tools/rust/cargo-release { };
   cargo-shell = callPackage ./development/tools/rust/cargo-shell { };
   cargo-show-asm = callPackage ./development/tools/cargo-show-asm { };
