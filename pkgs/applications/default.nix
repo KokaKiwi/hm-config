@@ -17,7 +17,7 @@ in rec {
   b3sum = callPackage ./tools/b3sum { };
   binaryen = callPackage ./development/compilers/binaryen { };
   bitwarden-cli = callPackage ./misc/bitwarden-cli { };
-  cargo-about = callPackage ./development/tools/cargo-about { };
+  cargo-about = callPackage ./development/tools/rust/cargo-about { };
   cargo-audit = callPackage ./development/tools/rust/cargo-audit { };
   cargo-c-next = callPackage ./development/tools/rust/cargo-c { };
   cargo-component = callPackage ./development/tools/rust/cargo-component { };
@@ -33,7 +33,7 @@ in rec {
   cargo-outdated = callPackage ./development/tools/rust/cargo-outdated { };
   cargo-release = callPackage ./development/tools/rust/cargo-release { };
   cargo-shell = callPackage ./development/tools/rust/cargo-shell { };
-  cargo-show-asm = callPackage ./development/tools/cargo-show-asm { };
+  cargo-show-asm = callPackage ./development/tools/rust/cargo-show-asm { };
   cargo-tarpaulin = callPackage ./development/tools/analysis/cargo-tarpaulin { };
   cargo-udeps = callPackage ./development/tools/rust/cargo-udeps { };
   catppuccin-cursors = callPackage ./misc/catppuccin-cursors { };
