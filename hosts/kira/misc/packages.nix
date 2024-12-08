@@ -30,7 +30,6 @@ let
       mv $out/bin/mc $out/bin/mcli
     '';
     obsidian = opengl.wrapPackage pkgs.obsidian { };
-    slack = opengl.wrapPackage pkgs.slack { };
     stockfish = pkgs.kiwiPackages.stockfish.override {
       stdenv = pkgs.llvmStdenv;
       targetArch = "x86-64-bmi2";
