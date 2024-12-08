@@ -59,6 +59,7 @@ in {
     ziggy gitnr binaryen
     just sqlx-cli sea-orm-cli
     nitrokey-app2 pynitrokey wasm-bindgen-cli
+    catppuccin-catwalk catppuccin-whiskers
     nixgl.nixGLIntel
 
     # Data
