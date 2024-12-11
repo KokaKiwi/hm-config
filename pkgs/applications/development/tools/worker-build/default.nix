@@ -6,13 +6,13 @@
 }:
 rustPlatform.buildRustPackage rec {
   pname = "worker-build";
-  version = "0.4.2";
+  version = "0.5.0";
 
   src = fetchFromGitHub {
     owner = "cloudflare";
     repo = "workers-rs";
     rev = "refs/tags/v${version}";
-    hash = "sha256-B9iOaX2enj4PhqRMmC55aW15otfaMLcBUuR2PWQ9EsY=";
+    hash = "sha256-eMuuEqHBiwgz7DKimYuK9MUPT4vnOU8rLOIIq8zsTao=";
   };
 
   cargoLock = {
