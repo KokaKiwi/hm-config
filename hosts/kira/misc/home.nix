@@ -12,9 +12,7 @@
   };
 
   home.sessionPath = [
-    "$HOME/.local/bin"
-    "$HOME/.cargo/bin"
-    "$HOME/go/bin"
+    "/usr/lib/rustup/bin"
   ];
 
   home.shellAliases = {
