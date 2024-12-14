@@ -17,8 +17,6 @@ in {
   };
 
   config = with lib; {
-    home.packages = [ pkgs.rustup ];
-
     home.file.".cargo/config.toml" = mkIf (cfg.cargoConfig != { }) {
       source = toml.generate "cargo-config.toml" cfg.cargoConfig;
     };

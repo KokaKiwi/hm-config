@@ -127,7 +127,6 @@ in rec {
   ptpython = python3Packages.callPackage ./development/tools/ptpython { };
   pueue = callPackage ./misc/pueue { };
   rage = callPackage ./tools/crypto/rage { };
-  rustup = callPackage ./development/tools/rustup { };
   sea-orm-cli = callPackage ./development/tools/sea-orm-cli { };
   silicon = callPackage ./misc/silicon { };
   skopeo = callPackage ./tools/misc/skopeo { };

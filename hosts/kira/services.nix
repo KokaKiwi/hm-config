@@ -15,7 +15,6 @@
 
   services = {
     module-server.enable = true;
-    sccache.enable = true;
     solaar.enable = true;
   };
 }

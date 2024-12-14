@@ -38,7 +38,6 @@
     ./programs/powerline.nix
     ./programs/ptpython.nix
     ./programs/rust.nix
-    ./programs/sccache.nix
     ./programs/silicon.nix
     ./programs/ssh.nix
     ./programs/starship.nix
@@ -51,7 +50,6 @@
     ./services/kubo.nix
     ./services/module-server.nix
     ./services/nix-web.nix
-    ./services/sccache.nix
     ./services/solaar.nix
   ];
 }

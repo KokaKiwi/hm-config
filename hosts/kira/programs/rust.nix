@@ -37,6 +37,8 @@ in {
     cargoConfig = {
       build = {
         jobs = 6;
+
+        rustc-wrapper = "${config.programs.sccache.package}/bin/sccache";
       };
 
       alias = {
