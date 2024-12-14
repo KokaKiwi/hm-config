@@ -141,7 +141,7 @@ in rec {
   trunk = callPackage ./development/tools/trunk { };
   usage = callPackage ./tools/usage { };
   uv = callPackage ./development/tools/uv {
-    inherit (rustTools.rust_1_81) rustPlatform rustc cargo;
+    inherit (rustTools.rust_1_83) rustPlatform rustc cargo;
   };
   vesktop = callPackage ./misc/vesktop { };
   viceroy = callPackage ./development/tools/viceroy { };
