@@ -32,6 +32,7 @@ in rec {
   cargo-nextest = callPackage ./development/tools/rust/cargo-nextest { };
   cargo-outdated = callPackage ./development/tools/rust/cargo-outdated { };
   cargo-release = callPackage ./development/tools/rust/cargo-release { };
+  cargo-semver-checks = callPackage ./development/tools/rust/cargo-semver-checks { };
   cargo-shell = callPackage ./development/tools/rust/cargo-shell { };
   cargo-show-asm = callPackage ./development/tools/rust/cargo-show-asm { };
   cargo-tarpaulin = callPackage ./development/tools/analysis/cargo-tarpaulin { };
