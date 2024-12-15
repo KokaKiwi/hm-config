@@ -72,13 +72,13 @@ in (neovim-unwrapped.override {
   inherit unibilium libuv;
   inherit lua tree-sitter;
 }).overrideAttrs (final: super: {
-  version = "nightly-unstable-2024-12-13";
+  version = "nightly-unstable-2024-12-15";
 
   src = fetchFromGitHub {
     owner = "neovim";
     repo = "neovim";
-    rev = "f9dd6826210335d8b37455002d767d1b37c09ce4";
-    hash = "sha256-+lQLT04Z6Et+C0qwbd1bmaFM77sHoGc8KZ4hPLxXeQI=";
+    rev = "852b6a6bcee56dc3d6c0f18f3e0119e3ffd682cc";
+    hash = "sha256-gT5JE4FhITlvjuc7KMKnt/lfqXYaWUz4suN/02fyvWM=";
   };
 
   patches = super.patches or [ ] ++ [
