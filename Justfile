@@ -75,3 +75,5 @@ push:
 
 clean:
   -rm result*
+
+import? 'Justfile.local'
