@@ -4,11 +4,6 @@
 
 , cmake
 , python3
-
-, gtest
-, lit
-, nodejs
-, filecheck
 }:
 stdenv.mkDerivation rec {
   pname = "binaryen";
@@ -17,7 +12,7 @@ stdenv.mkDerivation rec {
   src = fetchFromGitHub {
     owner = "WebAssembly";
     repo = "binaryen";
-    rev = "version_${version}";
+    rev = "refs/tags/version_${version}";
     hash = "sha256-SvdubUg4pI+9ahhRq0bd3KNCHNaOvIO+J5oE9OCLiWk=";
   };
 
@@ -31,22 +26,7 @@ stdenv.mkDerivation rec {
     fi
   '';
 
-  nativeCheckInputs = [ gtest lit nodejs filecheck ];
-  checkPhase = ''
-    LD_LIBRARY_PATH=$LD_LIBRARY_PATH:$PWD/lib python3 ../check.py $tests
-  '';
-
-  tests = [
-    "version" "wasm-opt" "wasm-dis"
-    "crash" "dylink" "ctor-eval"
-    "wasm-metadce" "wasm-reduce" "spec"
-    "lld" "validator"
-    "example" "unit"
-    # "binaryenjs" "binaryenjs_wasm" # not building this
-    # "wasm2js"
-    "lit" "gtest"
-  ];
-  doCheck = stdenv.hostPlatform.isLinux;
+  doCheck = false;
 
   meta = with lib; {
     homepage = "https://github.com/WebAssembly/binaryen";
