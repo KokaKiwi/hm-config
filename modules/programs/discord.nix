@@ -38,7 +38,7 @@ in {
       vencord = {
         useSystem = mkEnableOption "Vencord package from nixpkgs";
 
-        catppuccin = ctp.mkCatppuccinOpt {
+        catppuccin = ctp.mkCatppuccinOption {
           name = "vencord";
         } // {
           accent = ctp.mkAccentOpt "vencord";

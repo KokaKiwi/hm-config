@@ -34,7 +34,7 @@ in {
 
     package = mkPackageOption pkgs "glow" { };
 
-    catppuccin = ctp.mkCatppuccinOpt {
+    catppuccin = ctp.mkCatppuccinOption {
       name = "glow";
     };
 

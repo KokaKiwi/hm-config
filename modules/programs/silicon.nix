@@ -23,7 +23,7 @@ in {
 
     package = mkPackageOption pkgs "silicon" { };
 
-    catppuccin = ctp.mkCatppuccinOpt {
+    catppuccin = ctp.mkCatppuccinOption {
       name = "silicon";
     };
 

@@ -1,25 +1,25 @@
-From 8692c215d01c512a50d6522d1d291b9a9feda50b Mon Sep 17 00:00:00 2001
+From d6fde691e397769fc04e23aac2aa6cf15f92ecba Mon Sep 17 00:00:00 2001
 From: KokaKiwi <kokakiwi+git@kokakiwi.net>
 Date: Mon, 13 May 2024 23:56:30 +0200
 Subject: [PATCH] Expose lib.ctp
 
 ---
- modules/home-manager/globals.nix | 4 ++++
+ modules/global.nix | 4 ++++
  1 file changed, 4 insertions(+)
 
-diff --git a/modules/home-manager/globals.nix b/modules/home-manager/globals.nix
-index ddb54c7..3bbf72b 100644
---- a/modules/home-manager/globals.nix
-+++ b/modules/home-manager/globals.nix
-@@ -33,4 +33,8 @@
+diff --git a/modules/global.nix b/modules/global.nix
+index 7e30dee..a685e93 100644
+--- a/modules/global.nix
++++ b/modules/global.nix
+@@ -46,4 +46,8 @@ in
          description = "Port sources used across all options";
        };
    };
 +
 +  config.lib = {
-+    inherit (lib) ctp;
++    ctp = catppuccinLib;
 +  };
  }
 -- 
-2.45.2
+2.47.1
 

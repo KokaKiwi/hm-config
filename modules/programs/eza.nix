@@ -10,7 +10,7 @@ in {
       default = null;
     };
 
-    catppuccin = ctp.mkCatppuccinOpt {
+    catppuccin = ctp.mkCatppuccinOption {
       name = "eza";
     };
   };
