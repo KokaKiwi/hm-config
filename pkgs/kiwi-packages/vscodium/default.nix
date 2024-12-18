@@ -5,11 +5,11 @@
 }:
 callPackage "${pkgs.path}/pkgs/applications/editors/vscode/generic.nix" rec {
   pname = "vscodium";
-  version = "1.96.0.24352";
+  version = "1.96.1.24353";
 
   src = fetchurl {
     url = "https://github.com/VSCodium/vscodium/releases/download/${version}/VSCodium-linux-x64-${version}.tar.gz";
-    sha256 = "sha256-2+OxMSjYKcwAQdBYEXcdbj3mzg4afhvCY1DOdtLLTPE=";
+    sha256 = "sha256-KOJE2XV7PHh8BHn1HvYLveWkClMuQS7nrnJauyB7clc=";
   };
 
   sourceRoot = ".";
