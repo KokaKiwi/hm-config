@@ -8,8 +8,6 @@
 
     defaultEditor = true;
 
-    catppuccin.enable = false;
-
     withRuby = false;
 
     wrapRc = false;
@@ -32,6 +30,8 @@
       nodejs = pkgs.nodejs;
     };
   };
+
+  catppuccin.nvim.enable = false;
 
   home.packages = [
     config.programs.neovim.tree-sitter.package

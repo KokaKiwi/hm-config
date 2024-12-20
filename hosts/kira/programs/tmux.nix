@@ -10,29 +10,6 @@ in {
       stdenv = pkgs.llvmStdenv;
     };
 
-    catppuccin = {
-      extraConfig = tmux.formatOptions {
-        prefix = "@catppuccin_";
-      } {
-        # Window
-        window_current_number_color = "#{@thm_green}";
-
-        window_status_style = "basic";
-
-        window_text = " #W ";
-        window_current_text = " #W ";
-
-        # Status
-        status_left_separator = " ";
-        status_right_separator = "";
-        status_connect_separator = "yes";
-
-        date_time_text = " %H:%M ";
-        load_text = " #(${lib.getExe pkgs.tmux-mem-cpu-load} --interval 2) ";
-        session_text = " #S ";
-      };
-    };
-
     terminal = "tmux-256color";
     mouse = true;
     aggressiveResize = true;
@@ -72,5 +49,28 @@ in {
       set -g status-left "${catppuccinStatusModules leftModules} "
       set -g status-right "${catppuccinStatusModules rightModules}"
     '';
+  };
+
+  catppuccin.tmux = {
+    extraConfig = tmux.formatOptions {
+      prefix = "@catppuccin_";
+    } {
+      # Window
+      window_current_number_color = "#{@thm_green}";
+
+      window_status_style = "basic";
+
+      window_text = " #W ";
+      window_current_text = " #W ";
+
+      # Status
+      status_left_separator = " ";
+      status_right_separator = "";
+      status_connect_separator = "yes";
+
+      date_time_text = " %H:%M ";
+      load_text = " #(${lib.getExe pkgs.tmux-mem-cpu-load} --interval 2) ";
+      session_text = " #S ";
+    };
   };
 }
