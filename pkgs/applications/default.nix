@@ -76,6 +76,7 @@ in rec {
   };
   gleam = callPackage ./compilers/gleam { };
   glow = callPackage ./editors/glow { };
+  hd = callPackage ./development/tools/hd { };
   hexyl = callPackage ./tools/misc/hexyl { };
   hyfetch = callPackage ./tools/misc/hyfetch { };
   jellyfin-media-player = libsForQt5.callPackage ./misc/jellyfin-media-player { };
