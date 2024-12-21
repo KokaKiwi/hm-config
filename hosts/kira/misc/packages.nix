@@ -54,7 +54,7 @@ in {
     patool nix-prefetch kx-aspe-cli shellcheck
     bun consul uv b3sum b2sum
     amber-lang fastly npins
-    pre-commit sq oxipng
+    pre-commit sequoia-sq oxipng
     oha drill hd
     ziggy gitnr binaryen
     just sqlx-cli sea-orm-cli
