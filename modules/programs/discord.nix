@@ -40,8 +40,7 @@ in {
 
         catppuccin = ctp.mkCatppuccinOption {
           name = "vencord";
-        } // {
-          accent = ctp.mkAccentOpt "vencord";
+          accentSupport = true;
         };
 
         settings = mkOption {

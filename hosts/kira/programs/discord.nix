@@ -5,9 +5,9 @@ in {
   programs.discord = {
     enable = true;
 
-    flavour = "dorion";
+    flavour = "vesktop";
     package = let
-      discord = pkgs.dorion;
+      discord = pkgs.vesktop;
     in opengl.wrapPackage discord { };
 
     vesktop = {
