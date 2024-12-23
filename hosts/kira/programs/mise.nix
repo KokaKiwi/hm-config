@@ -5,16 +5,9 @@
 
     globalConfig = {
       tools = {
-        cmake = "system";
         crystal = "latest";
         deno = "latest";
-        golang = "system";
         gradle = "latest";
-        java = "system";
-        kotlin = "system";
-        node = [ "system" "lts" "16" "18" "20" "21" ];
-        pnpm = "system";
-        python = [ "system" "3.12" ];
       };
     };
 
