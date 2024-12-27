@@ -17,12 +17,6 @@ let
     inherit (config.lib) opengl package;
   in {
     cool-retro-term = opengl.wrapPackage pkgs.cool-retro-term { };
-    imhex = let
-      package = pkgs.nur.repos.kokakiwi.imhex.override {
-        inherit (pkgs.kiwiPackages) llvmPackages;
-        python3 = pkgs.python312;
-      };
-    in opengl.wrapPackage package { };
     jellyfin-media-player = opengl.wrapPackage pkgs.jellyfin-media-player { };
     minio-client = package.wrapPackage pkgs.minio-client {
       suffix = "-arch";
