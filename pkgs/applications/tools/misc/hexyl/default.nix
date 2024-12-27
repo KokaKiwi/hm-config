@@ -6,16 +6,16 @@
 }:
 rustPlatform.buildRustPackage rec {
   pname = "hexyl";
-  version = "0.15.0";
+  version = "0.16.0";
 
   src = fetchFromGitHub {
     owner = "sharkdp";
     repo = pname;
     rev = "refs/tags/v${version}";
-    hash = "sha256-v/mB0W/AyoJSoK00pqxpfMGZR/4DkkTCnPU6eorl/GI=";
+    hash = "sha256-TmFvv+jzOSM8kKCxBbUoDsUjKRPTplhWheVfIjS5nsY=";
   };
 
-  cargoHash = "sha256-QaOp7dCXfkIpxAJ+J+Pt9op3uj+LYoYvR78BmHBgnqE=";
+  cargoHash = "sha256-nfz5tpqJSPJvYDvzsl0tQHv0olLOi1d1PTo3lFDmIkI=";
 
   meta = with lib; {
     description = "Command-line hex viewer";
