@@ -1,4 +1,5 @@
 { lib
+, callPackage
 
 , fetchFromGitHub
 
@@ -6,8 +7,9 @@
 
 , nix
 , nix-prefetch-git
-, nixfmt
 , nixpkgs-review
+
+, nix-update
 }:
 python3.pkgs.buildPythonApplication rec {
   pname = "nix-update";
@@ -17,28 +19,38 @@ python3.pkgs.buildPythonApplication rec {
   src = fetchFromGitHub {
     owner = "Mic92";
     repo = "nix-update";
-    rev = version;
+    rev = "refs/tags/${version}";
     hash = "sha256-IPvXsthQfwzUhC76xMYx4FUHtAJ3DzIkNWFe2MWO+eQ=";
   };
 
-  nativeBuildInputs = [
+  build-system = [
     python3.pkgs.setuptools
   ];
 
   makeWrapperArgs = [
-    "--prefix" "PATH" ":" (lib.makeBinPath [ nix nix-prefetch-git nixfmt nixpkgs-review ])
+    "--prefix" "PATH" ":" (lib.makeBinPath [ nix nix-prefetch-git nixpkgs-review ])
   ];
 
   checkPhase = ''
+    runHook preCheck
+
     $out/bin/nix-update --help >/dev/null
+
+    runHook postCheck
   '';
+
+  passthru = {
+    nix-update-script = callPackage ./nix-update-script.nix {
+      inherit nix-update;
+    };
+  };
 
   meta = with lib; {
     description = "Swiss-knife for updating nix packages";
     inherit (src.meta) homepage;
     changelog = "https://github.com/Mic92/nix-update/releases/tag/${version}";
     license = licenses.mit;
-    maintainers = with maintainers; [ figsoda mic92 zowoq ];
+    maintainers = with maintainers; [ figsoda mic92 ];
     mainProgram = "nix-update";
     platforms = platforms.all;
   };
