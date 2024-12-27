@@ -69,6 +69,19 @@ in {
 
   programs.beets = {
     enable = true;
+    package = pkgs.beetsPackages.beets-minimal.override {
+      pluginOverrides = {
+        chroma.enable = true;
+        convert.enable = true;
+        fetchart.enable = true;
+        fromfilename.enable = true;
+        info.enable = true;
+        ipfs.enable = true;
+        lastgenre.enable = true;
+        mbsync.enable = true;
+        thumbnails.enable = true;
+      };
+    };
 
     settings = {
       asciify_paths = true;
