@@ -136,6 +136,11 @@ in pkgs.nur.repos.kokakiwi.lib.mkUpdateChecker {
       gitlab = "man-db/man-db";
       use_max_tag = true;
     };
+    sequoia-sq = {
+      source = "gitlab";
+      gitlab = "sequoia-pgp/sequoia-sq";
+      use_max_tag = true;
+    };
   };
   overrides = {
     aura.exclude_regex = "^$";
