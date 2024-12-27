@@ -19,7 +19,7 @@ let
     cool-retro-term = opengl.wrapPackage pkgs.cool-retro-term { };
     imhex = let
       package = pkgs.nur.repos.kokakiwi.imhex.override {
-        inherit (pkgs.kiwiPackages) llvm;
+        inherit (pkgs.kiwiPackages) llvmPackages;
         python3 = pkgs.python312;
       };
     in opengl.wrapPackage package { };
