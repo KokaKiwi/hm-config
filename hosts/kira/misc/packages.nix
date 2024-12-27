@@ -51,7 +51,7 @@ in {
     ponysay xinspect
     trashy minisign mkcert doggo
     nix-binutils git-absorb miniserve
-    patool nix-prefetch kx-aspe-cli shellcheck
+    nix-prefetch kx-aspe-cli shellcheck
     bun consul uv b3sum b2sum
     amber-lang fastly npins
     pre-commit sequoia-sq oxipng
