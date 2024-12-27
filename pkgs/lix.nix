@@ -60,7 +60,7 @@ in {
   };
   nixos-module = fetchSource {
     repo = "nixos-module";
-    version = "${lixVersion}-1";
-    hash = "sha256-6U0CyPycIBc04hbYy2hBINnVso58n/ZyywY2BD3hu+s=";
+    version = "${lixVersion}-2";
+    hash = "sha256-DN5/166jhiiAW0Uw6nueXaGTueVxhfZISAkoxasmz/g=";
   };
 }
