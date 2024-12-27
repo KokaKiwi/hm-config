@@ -1,6 +1,7 @@
-{ config, pkgs, ... }:
+{ config, pkgs, lib, ... }:
 let
   mpdCfg = config.services.mpd;
+  beetsCfg = config.programs.beets;
 
   inherit (config) xdg;
 in {
@@ -103,17 +104,9 @@ in {
         terminal_width = 120;
       };
 
-      plugins = [
-        "chroma"
-        "convert"
-        "fetchart"
-        "fromfilename"
-        "info"
-        "ipfs"
-        "lastgenre"
-        "mbsync"
-        "thumbnails"
-      ];
+      plugins = let
+        enabledPlugins = lib.filterAttrs (_: p: p.enable) beetsCfg.package.plugins;
+      in lib.attrNames enabledPlugins;
     };
 
     mpdIntegration = {
