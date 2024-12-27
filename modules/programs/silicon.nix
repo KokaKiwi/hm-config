@@ -70,7 +70,7 @@ in {
 
       themes.${themeName} = {
         src = config.catppuccin.sources.bat;
-        file = "themes/Catppuccin ${ctp.mkUpper cfg.catppuccin.flavor}.tmTheme";
+        file = "Catppuccin ${ctp.mkUpper cfg.catppuccin.flavor}.tmTheme";
       };
     };
 
