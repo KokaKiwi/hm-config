@@ -124,7 +124,7 @@ in (neovim-unwrapped.override {
     inherit unibilium libuv wasmtime-c-api;
   };
 
-  meta = super.meta // {
+  meta = (lib.removeAttrs super.meta [ "changelog" ]) // {
     description = "${super.meta.description} (Kiwi Edition)";
   };
 })
