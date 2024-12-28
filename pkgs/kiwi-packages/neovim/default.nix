@@ -31,7 +31,11 @@ let
     };
   };
 
-  utf8proc' = utf8proc.overrideAttrs {
+  utf8proc' = let
+    base = utf8proc.override {
+      inherit stdenv;
+    };
+  in base.overrideAttrs {
     version = "2.9.0-unstable";
 
     src = fetchFromGitHub {
