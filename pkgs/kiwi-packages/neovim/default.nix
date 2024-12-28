@@ -115,9 +115,8 @@ in (neovim-unwrapped.override {
   '';
 
   cmakeFlags = super.cmakeFlags ++ [
-    "-DENABLE_LTO=OFF"
-  ] ++ lib.optionals withWasm [
-    "-DENABLE_WASMTIME=ON"
+    (lib.cmakeBool "ENABLE_LTO" false)
+    (lib.cmakeBool "ENABLE_WASMTIME" withWasm)
   ];
 
   passthru = {
