@@ -39,7 +39,7 @@ in {
     eza hexyl pdm
     cargo-shell opentofu gleam mergerfs
     nix-info nurl nixos-option nixfmt-rfc-style
-    nix-output-monitor nixd
+    nix-output-monitor nixd nvd
     procs skopeo dust rage
     onefetch tokei ast-grep trunk
     ponysay xinspect
