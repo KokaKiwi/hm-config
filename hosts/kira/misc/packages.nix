@@ -51,7 +51,7 @@ in {
     pre-commit sequoia-sq oxipng
     oha drill hd
     ziggy gitnr binaryen
-    just sqlx-cli sea-orm-cli
+    just sqlx-cli sea-orm-cli sqls
     nitrokey-app2 pynitrokey wasm-bindgen-cli
     catppuccin-catwalk catppuccin-whiskers
     nixgl.nixGLIntel
