@@ -128,6 +128,7 @@ in rec {
   pueue = callPackage ./misc/pueue { };
   rage = callPackage ./tools/crypto/rage { };
   sea-orm-cli = callPackage ./development/tools/sea-orm-cli { };
+  sequoia-sq = callPackage ./tools/security/sequoia-sq { };
   silicon = callPackage ./misc/silicon { };
   skopeo = callPackage ./tools/misc/skopeo { };
   sq = callPackage ./development/tools/sq { };
