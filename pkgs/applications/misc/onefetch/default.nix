@@ -12,16 +12,16 @@
 }:
 rustPlatform.buildRustPackage rec {
   pname = "onefetch";
-  version = "2.22.0";
+  version = "2.23.1";
 
   src = fetchFromGitHub {
     owner = "o2sh";
     repo = "onefetch";
     rev = version;
-    hash = "sha256-Gk1hoC6qsLYm7DbbaRSur6GdC9yXQe+mYLUJklXIwZ4=";
+    hash = "sha256-lQxv2gwZOGtxJrXjxvjBnbl225ppSs3cVNCfePFeqEE=";
   };
 
-  cargoHash = "sha256-iaC7iGRRy/QQQbpWjXUoS9Qx7L8ECG9y6qWJ6f7cqm4=";
+  cargoHash = "sha256-DBZW/DKRPiV29OZLvUG8ls4kPuuw14FEDQfYn7pTSrs=";
 
   nativeBuildInputs = [ cmake installShellFiles pkg-config ];
 
