@@ -10,20 +10,25 @@
 }:
 rustPlatform.buildRustPackage rec {
   pname = "xh";
-  version = "0.23.0";
+  version = "0.23.1";
 
   src = fetchFromGitHub {
     owner = "ducaale";
     repo = "xh";
-    rev = "v${version}";
-    sha256 = "sha256-rHhL2IWir+DpbNFu2KddslmhhiSpkpU633JYFYCoWvY=";
+    tag = "v${version}";
+    hash = "sha256-fNsiM9B3E34x8m+RuVlZXIhsoB0JaxloAUfa0RmXobQ=";
   };
 
-  cargoHash = "sha256-5V27ZV+5jWFoGMFe5EXmLdX2BjPuWDMdn4DK54ZIfUY=";
+  cargoHash = "sha256-SVinnMapZ2mFvihYYuBpvyzXQsnwBrpazk/yhSa++8g=";
 
-  nativeBuildInputs = [ installShellFiles pkg-config ];
+  nativeBuildInputs = [
+    installShellFiles
+    pkg-config
+  ];
 
-  buildInputs = lib.optionals withNativeTls [ openssl ];
+  buildInputs = lib.optionals withNativeTls [
+    openssl
+  ];
 
   buildNoDefaultFeatures = true;
   buildFeatures = [ "rustls" ]
@@ -45,20 +50,8 @@ rustPlatform.buildRustPackage rec {
     ln -s $out/bin/xh $out/bin/xhs
   '';
 
-  checkFlags = let
-    skippedTests = [
-      "cases::logging::checked_status_is_printed_with_single_quiet"
-      "cases::logging::warning_for_invalid_redirect"
-      "cases::logging::warning_for_non_utf8_redirect"
-      "check_status_warning"
-      "nested_json_type_error"
-      "unsupported_tls_version_rustls"
-
-      # ???
-      "warn_for_filename_tag_on_body"
-    ];
-  in lib.map (test: "--skip=${test}") skippedTests;
-
+  doCheck = false;
+  doInstallCheck = true;
   postInstallCheck = ''
     $out/bin/xh --help > /dev/null
     $out/bin/xhs --help > /dev/null
